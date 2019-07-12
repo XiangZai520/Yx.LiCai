@@ -1,0 +1,116 @@
+﻿@model YxLiCai.Admin.Models.KendoTextBoxViewModel
+
+<div class="cleanfix" style="margin:15px 15px 15px 15px">
+    <div class="tbstyle">
+        <div id="@Model.Id"></div>
+    </div>
+</div>
+<script type="text/javascript">
+    require(['CRM/common.assets', 'CRM/product.assets'], function(common, product) {
+
+        var id = '@Model.Id',
+            status = '@Model.Content',
+            param = {
+                ProductName: "",
+                ProductCategory: -1,
+                ProductStatus: status
+            };
+        //data source
+        var productDs = product.productDs(param);
+        //grid
+        var grid = $('#' + id + '').kendoGrid({
+            sortable: true,
+            pageable: true,
+            editable: {
+                mode: "popup",
+                window: {
+                    title: "详情"
+                },
+            },
+            edit: function(e) {
+                //var editWindow = e.container.data("kendoWindow");
+                //e.container.data("kendoWindow").title('详情');
+                $(".k-grid-update").hide();
+            }
+        }).data("kendoGrid");
+        //columns
+        var columns = [
+            { field: "Id", title: "产品ID", sortable: true },
+            { field: "PCategory", title: "产品类型", sortable: true },
+            { field: "ProductName", title: "产品名称", sortable: true },
+            { field: "ProductAmount", title: "产品金额(万元)", sortable: true },
+            { field: "ExpectedEnableDate", title: "预期上线时间", sortable: true },
+            { field: "ProductOrder", title: "产品排序", sortable: true },
+            { field: "AutoEnable", title: "是否自动上线", sortable: true },
+            { field: "CreateDate", title: "创建时间", sortable: true }
+        ];
+        if (status == "0") {
+            //待审核
+            columns.push({
+                command: [
+                    { name: "edit", text: { edit: "详情", cancel: "取消", update: "更新" } },
+                    { text: "审核", click: function(e) { common.showDetails(this, e, "/Product/Audit/"); } },
+                    { text: "修改", click: function(e) { common.showDetails(this, e, "/Product/Edit/"); } },
+                ],
+                title: "操作",
+                width: 250
+            });
+        } else
+        {
+            columns.push({ field: "AuditDate", title: "审核时间", sortable: true });
+
+            if (status == "2") {
+                //审核未通过
+                columns.push({ field: "Remark", title: "备注" });
+                columns.push({ command: { text: "修改", click: function(e) { common.showDetails(this, e, "/Product/Edit/"); } }, title: "操作" });
+            }
+            else if (status == "1")
+            {
+                //待上线
+                //columns.push({ field: "IsSellPdt", template: kendo.template($("#myTemplate").html()), title: "操作"});
+                columns.push({
+                    command: [
+                       // { text: "上架", click: function(e) { setProductAvailable(this, e); } },
+                        { text: "修改", click: function(e) { common.showDetails(this, e, "/Product/Edit/"); } }
+                    ],
+                    title: "操作"
+                });
+            }
+        }
+
+        grid.setOptions({
+            dataSource: productDs,
+            columns: columns
+        });
+    });
+</script>
+<script id="myTemplate" type="text/x-kendo-template">
+
+    #if(IsSellPdt == '1'){#
+    <a class="k-button k-button-icontext" id="#= Id #" href="javascript:void(0)" onclick="setProductAvailable(this)">上架</a>
+    <a class="k-button k-button-icontext " href="/Product/Edit"><span class=" "></span>修改</a>
+    #}else{#
+    <a class="k-button k-button-icontext " href="/Product/Edit/"><span class=" "></span>修改</a>
+    #}#
+    
+
+</script>
+
+<script>
+    function setProductAvailable(obj) {
+        var pid = obj.id;
+        $.ajax({
+            type: "POST",
+            url: "/Product/EnableProduct",
+            data: { pid: pid },
+            success: function (result) {
+                if (result) {
+                    popNotification.show("产品上架成功", "info");
+                    ds.remove(dataItem);
+                } else {
+                    popNotification.show("产品上架失败：可能存在同类型售卖中产品", "error");
+                }
+            }
+        });
+    }
+</script>

@@ -1,0 +1,383 @@
+.mod-main{
+	padding: 35px 20px;
+}
+.dope{
+	position: relative;
+}
+.detail-title {
+	overflow: hidden;
+}
+.detail-title dl{
+	width: 45%;
+	color: #fff;
+	text-align: center;
+	border-radius: 5px;
+	position: relative;
+}
+.detail-title dl.detail-blue{
+	background: #00b7ee;
+	float: left;
+}
+.detail-title dl.detail-red{
+	background: #fe7c88;
+	float: right;
+	position: relative;
+}
+.detail-title dl.detail-red i{
+	background:url(../../images/bottom_datail.png) no-repeat;
+	display: block;
+	width: 40px;
+	height: 40px;
+	position: absolute;
+	background-size: 100%;
+	bottom:0;
+	right: 0;
+	padding: 16px 0 0 15px;
+}
+.detail-title dl dt{
+	font-size: 20px;
+	padding:15px 0 15px 0;
+	border-bottom:1px dashed #fff;
+}
+.detail-title dl dt span{
+	font-size: 16px;
+}
+.detail-title dl dd{
+	padding:15px 0 15px 0;
+	font-size: 16px;
+}
+.datail-main{
+	background: #fafafa;
+	border-radius: 5px;
+	padding:20px 0;
+	margin-top: 20px;
+	min-height: 270px;
+}
+.datail-line-word{
+	overflow: hidden;
+	padding-bottom: 10px;
+}
+.datail-line-left{
+	border-bottom: 1px solid #b4b4b4;
+	float: left;
+	width: 20%;
+	padding-top: 14px;
+}
+.datail_line-center{
+	color: #b4b4b4;
+	font-size: 16px;
+	float: left;
+	width: 60%;
+}
+.datail_line-center p{
+	width: 140px;
+	margin:0 auto;
+	overflow: hidden;
+}
+.datail_line-center i{
+	background:url(../../images/burse.png) no-repeat;
+	display:block;
+	float: left;
+	width: 28px;
+	height: 29px;
+    background-size: 100%;
+}
+.datail_line-center b{
+	display:block;
+	float: left;
+	padding:2px 0 0 10px;
+}
+.datail-line-right{
+	border-bottom: 1px solid #b4b4b4;
+	float: right;
+	width: 20%;
+	padding-top: 14px;
+}
+.datail-ul{
+	overflow: hidden;
+	margin: 0 10px;
+}
+.datail-ul li{
+	padding:10px 10px 10px 2px;
+	border-bottom: 1px dashed #b4b4b4;
+	overflow: hidden;
+}
+.datail-ul li i{
+    background:url(../../images/yixiu_man.png) no-repeat;
+	display:block;
+	float: left;
+	width: 40px;
+	height: 40px;
+    background-size: 100%;
+}
+.datail-ul-word{
+	float: left;
+	color: #b4b4b4;
+	font-size: 14px;
+	padding-left: 10px;
+}
+.datail-ul-word b{
+	font-weight: normal;
+}
+.datail-ul li span.datail-span{
+	color: #0cb9ee;
+	font-size: 14px;
+	float: right;
+	padding-top: 12px
+}
+@media (max-width: 320px) {
+.datail-ul-word{
+	padding-top: 7px;
+	font-size: 12px;
+}
+}
+.datail-rule{
+	display: block;
+	color: #0dbbef;
+	font-size: 16px;
+	text-align: center;
+	margin:20px 0 10px 0;
+}
+/*尚未获得加息券*/
+.noticket-pic{
+	width: 150px;
+	height: 258px;
+	margin:0 auto;
+	background: url(../../images/samil.png) no-repeat;
+	background-size: 100%;
+	margin-top:60px;
+}
+.noticket p{
+	color: #aaaaaa;
+	font-size: 16px;
+	text-align: center;
+	padding-top: 20px;
+}
+.ticket-a{
+	padding:70px 0 20px 0;
+	overflow: hidden;
+	width: 206px;
+	margin: 0 auto;
+}
+.ticket-a a{
+	color: #0dbbef;
+	font-size: 14px;
+	float: left;
+}
+.add-ticket{
+	padding-left: 30px;
+}
+/*消息点击详情*/
+.dope-pic{
+	width: 80px;
+	height:95px;
+	background: url(../../images/gx_man.png) no-repeat center;
+	-webkit-background-size: contain;
+	background-size: contain;
+	overflow: hidden;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+.dope-word{
+	overflow: hidden;
+	padding-top: 95px;
+}
+.dope-word li{
+	background: #f0f0f0;
+	border-radius: 5px;
+	padding:10px;
+	overflow: hidden;
+	margin-bottom: 10px;
+}
+.dope-word li.hover{
+	background: #fafafa;
+}
+.dope-word li h2{
+	overflow: hidden;
+	width: 80%;
+	float: left;
+}
+.dope-word li h2 b{
+	color: #969696;
+	font-size: 14px;
+	font-weight: bold;
+	display: block;
+	float: left;
+	line-height: 22px;
+}
+.dope-word li h2 span{
+	color: #c8c8c8;
+	font-size: 12px;
+	display: block;
+	line-height: 22px;
+	float: right;
+}
+.dope-word li h2 span i{
+	padding-left:10px;
+}
+.dope-word li h2 p{
+	color: #b4b4b4;
+	font-size: 12px;
+	clear: both;
+	height: 36px;
+	line-height: 18px;
+}
+.dope-word li h2 p i{
+	color: #fe7c88;
+}
+.dope-word li h3{
+	float: right;
+	text-align: center;
+}
+.dope-word li h3 i{
+	display: inline-block;
+	width: 35px;
+	height: 35px;
+	background:rgba(222,222,222,.9) url(../../images/right-s.png) no-repeat center;
+	background-size: 30%;
+	margin:12px 0 0 0;
+	border-radius: 50%;
+}
+.dope-word li h3 i.hover{
+	background:#4bcbf2 url(../../images/right-s.png) no-repeat center;
+	background-size: 30%;
+}
+.dope-word li h3 i img{
+	padding:14px 0 0 22px;
+	width: 70%;
+}
+
+/*买入成功*/
+.dope-pup{
+	background: #f8f8f8;
+	border-radius: 5px;
+	padding:40px 20px;
+	overflow: hidden;
+}
+.dope-pup  h2{
+	overflow: hidden;
+	float: left;
+}
+.dope-pup h2 b{
+	color: #969696;
+	font-size: 16px;
+	font-weight: bold;
+	display: block;
+	float: left;
+	line-height: 25px;
+}
+.dope-pup h2 span{
+	color: #c8c8c8;
+	font-size: 14px;
+	display: block;
+	float: right;
+	line-height: 25px;
+}
+.dope-pup h2 span i{
+	padding-left:10px;
+}
+.dope-pup h2 p{
+	color: #b4b4b4;
+	font-size: 12px;
+	clear: both;
+}
+.dope-pup h2 p i{
+	color: #fe7c88;
+}
+.dope-pup h2 p strong{
+	color: #4bcbf2;
+}
+/*银行卡*/
+.uc_bank_s{
+	padding-bottom: 20px;
+}
+.uc_bank_pic{
+	width: 100px;
+	height: 100px;
+	background: url(../../images/uc_setting_bank.png) no-repeat;
+	background-size: 100%;
+	margin: 0 auto;
+}
+.uc_bank_num{
+	font-size: 16px;
+	color: #b4b4b4;
+	border:1px solid #f0f0f0;
+	line-height: 46px;
+	text-align: center;
+	margin-top: 10px;
+}
+.uc_bank_num span{
+	color: #808080;
+}
+.uc_bank_main{
+	background: #fafafa;
+	padding:20px;
+	margin-top: 10px;
+}
+.uc_bank_main h2{
+	font-size: 14px;
+	font-weight: bold;
+	color: #b4b4b4;
+	padding-bottom: 10px;
+}
+.uc_bank_main dl{
+	margin-top: 5px;
+	overflow: hidden;
+}
+.uc_bank_main dt{
+	width: 30px;
+	height: 30px;
+	background-size: 100%;
+	float: left;
+	margin-right: 15px;
+}
+.uc-bank-dt1{
+    background: url(../../images/uc_s_bank.png) no-repeat;
+}
+.uc-bank-dt2{
+    background: url(../../images/uc_s_bank1.png) no-repeat;
+}
+.uc-bank-dt3{
+    background: url(../../images/uc_s_bank2.png) no-repeat;
+}
+.uc-bank-dt4{
+    background: url(../../images/uc_s_bank3.png) no-repeat;
+}
+.uc_bank_main dd{
+	float: left;
+	width: 75%;
+}
+.uc_bank_main dd p{
+	color: #b4b4b4;
+	font-size: 12px;
+	line-height: 20px;
+}
+.uc_bank_main dd p span{
+	color: #00b7ee;
+}
+
+/*404页面*/
+.wrong-pic{
+	width: 150px;
+	height: 220px;
+	margin:0 auto;
+	background: url(../../images/wrongPic.jpg) no-repeat;
+	background-size: 100%;
+	margin-top:60px;
+}
+.wrong-word{
+	margin-left: -3px;
+}
+.wrong-word a{
+	text-align: center;
+	width:140px;
+	height: 40px;
+	display: block;
+	background: #f0f0f0;
+	border-radius: 5px;
+	color: #00b7ee;
+	font-size: 14px;
+	line-height: 40px;
+	margin:20px auto 0;
+}

@@ -1,0 +1,1 @@
+define(function(o,n,d){var e=o("mod/mod1");console.log(e)});

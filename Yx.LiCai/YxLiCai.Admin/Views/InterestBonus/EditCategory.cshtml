@@ -1,0 +1,77 @@
+﻿@model YxLiCai.Model.InterestBonus.InterestBonusCategoryModel
+
+<div class="zpManage zpSh">
+    <h2 class="crumbs">
+        您所在位置：加息券管理 > 修改加息券类型
+    </h2>
+
+    <div class="control-group form-horizontal">
+        @Html.Partial("EditorTemplates/KendoTextBox",
+        new YxLiCai.Admin.Models.KendoTextBoxViewModel
+        {
+            Content = "类型名称",
+            Id = "CategoryName",
+            Value = @Model.CategoryName
+        })
+        @Html.Partial("EditorTemplates/KendoNumericTextBox",
+        new YxLiCai.Admin.Models.KendoNumericTextBoxViewModel
+        {
+            Content = "加息券面额",
+            Id = "Amount",
+            Format = "n4",
+            Decimals = "4",
+            Value = @Model.Amount
+        })
+        @Html.Partial("EditorTemplates/KendoNumericTextBox",
+        new YxLiCai.Admin.Models.KendoNumericTextBoxViewModel
+        {
+            Content = "有效期(天)",
+            Id = "ActiveDuration",
+            Value = @Model.ActiveDuration
+        })
+        @Html.Partial("EditorTemplates/KendoTextArea",
+        new YxLiCai.Admin.Models.KendoTextAreaViewModel
+        {
+            Content = "备注",
+            Id = "Remark",
+            Value = @Model.Remark
+        })
+    </div>
+
+    <div class="SearchMd">
+        <input type="hidden" id="categoryID" value="@Model.Id" />
+        <input id="btnSave" type="button" value="保存" class="searchBtn" />
+        <input type="button" value="返回" class="searchBtn" onclick="javascript: window.location.href = '/InterestBonus/CategoryList'" />
+    </div>
+</div>
+
+<script>
+    require(['CRM/common.assets'], function (common) {
+
+        //button event
+        $("#btnSave").bind("click", function () {
+            var data = {
+                CategoryName: $("#CategoryName").val(),
+                Amount: $("#Amount").val(),
+                ActiveDuration: $("#ActiveDuration").val(),
+                Remark: $("#Remark").val(),
+                Id: $("#categoryID").val()
+            };
+            sentAjax(data);
+        });
+
+        function sentAjax(data) {
+            $.ajax({
+                url: "/InterestBonus/UpdateCategory",
+                data: data,
+                success: function (e) {
+                    common.popupNotification.show("修改成功", "info");
+                    window.location.href = "CategoryList";
+                },
+                error: function (e) {
+                    common.popupNotification.show(e.responseText);
+                }
+            });
+        }
+    });
+</script>

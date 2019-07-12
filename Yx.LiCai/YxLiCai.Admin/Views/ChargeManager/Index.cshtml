@@ -1,0 +1,161 @@
+﻿@section styles {
+    <style>
+        .k-grid-header th.k-header a, .k-filter-row th a {
+            text-align: center;
+        }
+         th a, .k-link, th {
+            text-align: center;
+        }
+
+        .tbstyle tr td {
+            height: 25px;
+            text-align: center;
+        }
+
+            .tbstyle tr td a {
+                text-align: center;
+            }
+    </style>
+}
+<div class="zpManage zpSh">
+    <h2 class="crumbs">
+        您所在位置：财务管理 > 充值 > 充值提醒
+    </h2>
+    <div class="gx-textitem">
+        <div class="form-group">
+            <label class="gx-texttitle">
+                账户名：
+            </label>
+            <input id="name" type="text" class="gx-textbox search-txt" placeholder="请输入内容...">
+            <label class="gx-texttitle">
+                账户类型：
+            </label>
+            @Html.Partial("EditorTemplates/KendoDropdown",
+        new YxLiCai.Admin.Models.KendoDropdownlistViewModel
+        {
+            Id = "u_type",
+            SourceUrl = "/ChargeManager/GetConfig?configName=Charge|element=AccountType"
+        })
+        </div>
+        <div class="form-group">
+            <label class="gx-texttitle">
+                待付金额：
+            </label>
+            @Html.Partial("EditorTemplates/KendoNumeric",
+        new YxLiCai.Admin.Models.KendoNumericTextBoxViewModel
+        {
+            Id = "amount_min",
+            Format = "n2",
+            Decimals = "2",
+            Min = "0"
+        })
+            <label class="gx-texttitle">
+                至：
+            </label>
+            @Html.Partial("EditorTemplates/KendoNumeric",
+        new YxLiCai.Admin.Models.KendoNumericTextBoxViewModel
+        {
+            Id = "amount_max",
+            Format = "n2",
+            Decimals = "2",
+            Min = "0"
+        })
+            <button id="btnSearch" class="gx-button gx-button-info search-btn" style="float:right;margin-right:300px;">查询</button>
+        </div>
+    </div>
+    <div class="cleanfix" style="margin:15px 15px 15px 15px">
+        <div class="tbstyle">
+            <div id="grid"></div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    require(['CRM/common.assets', 'CRM/charge.assets'], function (common, charge) {
+
+        //initial
+        var grid = $("#grid").kendoGrid({
+            sortable: true,
+            pageable: true,
+        }).data("kendoGrid");
+
+        //get data
+        getData();
+
+        //Query Filter
+        $("#btnSearch").bind("click", getData);
+
+        //get data and show on page
+        function getData() {
+            //query conditions
+            var name = $("#name").val(), //账户名
+                uType = $("#u_type").val() || -1, //账户类型
+                amount_min = $("#amount_min").val() || -1, //申请时间
+                amount_max = $("#amount_max").val() || -1, //申请时间
+                param = { name: name, uType: uType, amount_min: amount_min, amount_max: amount_max };
+
+            //datasource
+            var ds = charge.getReminderList(param);
+
+            //columns
+            var columns = [
+                 { field: "id", title: "ID", sortable: true },
+                 { field: "Name", title: "账户名称", sortable: true },
+                 { field: "Phone", title: "手机号", sortable: true },
+                 { field: "Type", title: "账户类型", sortable: true },
+                 { field: "Balance", title: "账户可用余额", sortable: true },
+                 { field: "Amount", title: "待付金额", sortable: true },
+                 { field: "AlertValue", title: "预警值", sortable: true }
+            ];
+            columns.push({
+                command: {
+                    text: "提醒",
+                    click: function (e) { sendMessage(this, e, ds, "/ChargeManager/SendMessage"); }
+                }, title: "操作"
+            });
+
+            //set options
+            grid.setOptions({
+                dataSource: ds,
+                columns: columns
+            });
+        }
+
+        //提醒充值
+        function sendMessage(grid, e, ds, action) {
+            e.preventDefault();
+            var dataItem = grid.dataItem($(e.currentTarget).closest("tr")),
+                type = dataItem.Type,
+                phone = dataItem.Phone, //手机
+                amount = dataItem.Amount, //待付金额
+                balance = dataItem.Balance; //账户余额
+
+            //手机号不能为空
+            if (phone == "") {
+                common.popupNotification.show("手机号不能为空", "error");
+                return;
+            }
+            //余额>0 且 余额大于应付金额，不提醒
+            if (parseFloat(balance) >= 10000 && parseFloat(balance) >= parseFloat(amount)) {
+                common.popupNotification.show("当前账户余额充足，不需要提醒充值", "error");
+                return;
+            }
+
+            var param = {
+                phone: phone, amount: amount, balance: balance, type: type
+            };
+
+            $.ajax({
+                url: action,
+                data: param,
+                success: function (result) {
+                    if (result) {
+                        common.popupNotification.show("发送短信成功", "info");
+                    }
+                    else {
+                        common.popupNotification.show("发送短信失败", "error");
+                    }
+                }
+            });
+        }
+    });
+</script>

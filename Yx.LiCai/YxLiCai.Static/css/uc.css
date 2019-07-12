@@ -1,0 +1,304 @@
+.mod-main{
+	padding: 35px 20px 20px 20px;
+}
+/*暂无收益*/
+.yesterday-title{
+	position: fixed;
+	width: 100%;
+	background: #ff6573;
+	padding: 5px 20px 0px 20px;
+}
+.yesterday-title h4{
+	font-size: 14px;
+	font-weight: bold;
+	color: #fff;
+}
+.yesterday-title h3{
+	font-size: 12px;
+	color: #fff;
+	padding:0 0 8px 0;
+	line-height: 22px;
+}
+.yesterday-title h3 .mount{
+	display: block;
+	float: right;
+	font-size: 12px;
+	color: #ff6573;
+	background: #fff;
+	padding: 0 5px;
+	border-radius: 5px;
+}
+.income-append-left h2 b{
+	display: block;
+	width: 18px;
+	height: 18px;
+	margin:5px 5px 0 5px;
+	background: url(../images/rush_icon1.png) no-repeat;
+	background-size: 96%;
+	float: left;
+}
+.gx-aim{
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	/*border-top: 1px solid #fff;*/
+}
+.gx-aim a{
+    display: block;
+    width: 50%;
+    text-align: center;
+    /*padding-bottom: 5px;*/
+    float: left;
+    overflow: hidden;
+    border-top: 1px solid #fff;
+	height: 55px;
+	line-height: 55px;
+	color: #FFF;
+	font-size: 20px;
+	/*font-weight: 700;*/
+}
+.gx-aim a:visited,
+.gx-aim a:active{
+    color: #FFF;
+}
+.gx-aim-left{
+	  /*border-bottom:5px solid #e95260;*/
+	  background: #fe7b87;
+}
+.gx-aim-right{
+	  /*border-bottom:5px solid #009dcc;*/
+	  background: #00b7ee;
+}
+
+/*使用加息券*/
+.add-moner{
+	position: relative;
+	overflow: hidden;
+	margin-bottom: 10px;
+}
+.pastAndUse{
+	margin-bottom: 10px;
+}
+.ui-checkbox{
+	position: absolute;
+	left: 0px;
+	width: 27px;
+	height: 27px;
+	float: left;
+	margin-top:40px;
+}
+
+.ui-checkbox input {
+	display: inline-block;
+	position: relative;
+	overflow: visible;
+	width: 27px;
+	height: 27px;
+	border:none;
+	background: none;
+	-webkit-appearance: none;
+	outline: none;
+	vertical-align: middle;
+}
+
+.ui-checkbox input:before {
+	border:1px solid #dfdfdf;
+	border-radius: 5px;
+	content: "";
+	display: block;
+	width: 25px;
+	height: 25px;
+	position: absolute;
+	left: 0px;
+}
+
+.ui-checkbox input:checked:before {
+	background: url(../images/add-money.jpg) no-repeat;
+	-webkit-background-size: contain;
+	background-size: contain;
+	border-color: #FFF;
+}
+.atong-false{
+	background: #dedede;
+	border-radius: 5px;
+	width: 27px;
+	height: 27px;
+	margin-top:40px;
+	float: left;
+}
+.atong-false input{
+	border: none;
+	background: #dedede;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	margin-left: -50%;
+}
+.add-money-right{
+	background: #fe7c88;
+	border-radius: 5px;
+	margin-left:37px;
+	position: relative;
+}
+.add-money-right h2{
+	overflow: hidden;
+}
+.add-money-right h2 i{
+	display: block;
+	width: 18px;
+	height: 18px;
+	margin:5px 5px 0 5px;
+	background: url(../images/append.png) no-repeat;
+	background-size: 96%;
+	float: left;
+}
+.add-money-right h2 span{
+	color: #fff;
+	font-size: 14px;
+	display: block;
+	float: left;
+	margin-top:4px;
+	font-weight: bold;
+}
+.add-money-num{
+	border-bottom:1px dashed #fff;
+	overflow: hidden;
+}
+.add-money-num b{
+	display: block;
+	float: left;
+	width: 50%;
+	padding: 0 3%;
+	color: #fff;
+	font-size: 38px;
+	text-align: center;
+	font-weight: bold;
+}
+.add-money-num b span{
+	color: #fff;
+	font-size: 20px;
+}
+.add-moner-word{
+	float: left;
+	width: 50%;
+	padding-right: 5%;
+}
+.add-moner-word h3{
+	color: #fff;
+	font-size: 10px;
+}
+.add-moner-word p{
+	color: #fff;
+	font-size: 10px;
+	line-height: 16px;
+}
+.add-money-time{
+    text-align: center;
+    padding:5px 0;
+}
+.add-money-time span{
+	color: #b12431;
+	font-size: 10px;
+	padding-left: 10px;
+}
+.add-money-time span b{
+	color: #fff;
+}
+@media (max-width: 320px) {
+    .add-money-num b{
+		font-size: 36px;
+    }
+    .add-money-time span{
+		font-size: 10px;
+    }
+    .add-moner-word p {
+	   font-size: 10px;
+   }
+}
+.add-moner-pass{
+	background: #dedede;
+}
+.addCoupon{
+	padding-bottom: 60px;
+}
+.add-money-time1{
+    text-align: center;
+    padding:5px 0;
+}
+.add-money-time1 span{
+	color: #fff;
+	font-size: 10px;
+}
+.add-money-time1 span:last-child{
+	padding-left: 15px;
+}
+.add-money-time1 span b{
+	color: #fff;
+}
+@media (max-width: 320px) {
+    .add-money-time1 span{
+		font-size: 12px;
+    }
+}
+.add-money-pic{
+	position: absolute;
+	top: 5%;
+	left: 10%;
+}
+.add-money-pic img{
+	width: 65%;
+}
+.add-money{
+	height: 46px;
+	line-height: 46px;
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	background: #FAFAFA;
+	padding: 0 0 0 20px;
+	/*box-shadow: 0 1px 10px rgba(0,0,0,.2);*/
+}
+.add-money p{
+	color: #b4b4b4;
+	font-size: 16px;
+	width: 70%;
+	float: left;
+}
+.add-money p b{
+	color: #fe7c88;
+}
+.add-money a{
+	display: block;
+	width: 30%;
+	float: left;
+	color: #fff;
+	font-size: 20px;
+	font-weight: bold;
+	background: #00b7ee;
+	text-align: center;
+}
+.datail-rule{
+	display: block;
+	color: #0dbbef;
+	font-size: 16px;
+	text-align: center;
+	margin:50px 0 10px 0;
+}
+.gx-fxft{
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	background: #FAFAFA;
+	padding: 0 0 0 20px;
+}
+
+
+
+
+
+
+
+
+

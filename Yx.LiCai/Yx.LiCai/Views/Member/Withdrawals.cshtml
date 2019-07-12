@@ -1,0 +1,106 @@
+﻿@using YxLiCai
+@using YxLiCai.Model.User;
+@using Yx.LiCai.App_Start
+@using YxLiCai.Tools.Const
+@model YxLiCai.Model.UserRaise.UserCountModel
+@{
+    ViewBag.Title = "提现";
+}
+<link href="@HttpPageHelper.GetRemoteNetURL(SystemSiteEnum.StaticResourceMallWeb, "css/buy.css")" rel="stylesheet">
+
+
+<div class="money-box">
+    <a href="javascript:void(0)">
+        <h3>可提取金额（元）</h3>
+        <p>@ViewBag.Money</p>
+    </a>
+    <i></i>
+</div>
+<div class="input-money">
+    <div class="reg-list form-list">
+        <dl>
+            @if (ViewBag.IsBindBank == 0)
+            {
+                <dt class="right-style">
+                    <a href="/UserSetting/add_bank">选择银行卡</a>
+                </dt>
+            }
+            else
+            {<!-- 绑定完成状态 -->
+                var bank = ViewBag.BankInfo as UserBankCardModel;
+                <dt class="right-style bank-infor">
+                    <img class="bank-logo" src="@HttpPageHelper.GetRemoteNetURL(SystemSiteEnum.StaticResourceMallWeb, string.Format("images/SysBankImg/{0}.jpg", bank.BankCode))" alt="@bank.BankName">
+                    <strong>@bank.LastNum</strong>
+                </dt>
+            }
+            <dd>
+                @if (ViewBag.IsBindBank == 0)
+                {
+                    <input type="text" class="input-txt money-num" id="moneyNum" name="moneyNum" readonly="readonly">
+                }
+                else
+                {
+                    if (ViewBag.Money < 100 && ViewBag.Money > 0)
+                    {
+                        <input type="text" class="input-txt money-num" id="moneyNum" name="moneyNum" readonly="readonly" value="@ViewBag.Money" />
+                    }
+                    else
+                    {
+                        <input type="text" class="input-txt money-num" id="moneyNum" name="moneyNum" placeholder="请输入提现金额" value="@ViewBag.buyMoney" />
+                    }
+                }
+            </dd>
+            <dd class="warm-tips Validedate_check"></dd>
+        </dl>
+
+    </div>
+    <!--新增-->
+    <p class="money-word"><i></i><span>当日还可提现<b>@ViewBag.WithdrawalsCount</b>次</span></p>
+    <!--end新增-->
+    <div class="next-btn">
+        <input type="hidden" value="@ViewBag.Money" id="smoney" />
+        <input type="hidden" value="@ViewBag.WithdrawalsCount" id="WithdrawalsCount" />
+        <a href="javascript:void(0)" class="ui-btn" id="regBtn">提现</a>
+    </div>
+    <div class="gm-tips">
+        <h2>温馨提示：</h2>
+        <ul>
+            <li>特享金满<span>15</span>天后，系统自动收回，收益可取现；</li>
+            <li>取现顺序：奖励收益->投资产品已付利息和本金->投资时间最短的月月盈本金；
+            </li>
+            <li>当前可取现本金<span>@ViewBag.Principal</span>元，已付本息及奖励<span>@ViewBag.Interest</span>元；</li>
+            <li>特别提醒：取现后再买入月月盈产品，收益将从<span>7%</span>重新起步。</li>
+        </ul>
+    </div>
+</div>
+
+
+
+<!-- 密码交易弹窗 -->
+<div id="J_buyPwd" class="input-password">
+    <h2>请输入交易密码</h2>
+    <p id="sallmoney"></p>
+    <div class="in-password">
+        <input type="password" id="sallpwd" class="in-txt">
+    </div>
+
+    @if (UserContext.simpleUserInfoModel.IsJiaoYIPW == 0)
+    {
+        @*<a href="/UserSetting/fetch_pwd_setting/">去设置</a>*@
+        <a href="javascript:void(0)" id="fetch_pwd_setting">去设置</a>
+    }
+    else
+    {
+        @*<a href="/UserSetting/forget_SPFist_pwd/">忘记密码</a>*@
+        <a href="javascript:void(0)" id="forget_SPFist_pwd">忘记密码</a>
+    }
+
+    <div class="gx-passwoed-btn">
+        @*<input type="submit" class="gx-passwprd-sub" id="okbuy" value="确认">*@
+        <a href="javascript:void(0)" class="gx-passwprd-sub" id="okbuy">确认</a>
+    </div>
+</div>
+
+<script>
+    seajs.use('User/UC/withdrawals.js')
+</script>

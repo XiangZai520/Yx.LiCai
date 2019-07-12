@@ -1,0 +1,317 @@
+﻿<div class="zpManage zpSh">
+    <h2 class="crumbs">
+        您所在位置：项目管理 > 添加项目
+    </h2>
+    <div class="SearchMd">
+        添加项目<div id="Message" style="color: red"></div>
+    </div>
+    <div class="control-group form-horizontal">
+        @Html.Partial("EditorTemplates/PKendoTextBox",
+        new YxLiCai.Admin.Models.KendoTextBoxViewModel
+        {
+            Content = "项目名称",
+            Id = "ProjectName"
+        })
+        @Html.Partial("EditorTemplates/KendoDropdownlist",
+        new YxLiCai.Admin.Models.KendoDropdownlistViewModel
+        {
+            Content = "项目类型",
+            Id = "ProjectType",
+            SourceUrl = "/Product/GetConfig?configName=Project|element=ProjectType"
+        })
+        @Html.Partial("EditorTemplates/PKendoDropdownlist",
+        new YxLiCai.Admin.Models.KendoDropdownlistViewModel
+        {
+            Content = "融资方",
+            Id = "account_id"
+        })
+        @Html.Partial("EditorTemplates/PKendoTextBox",
+        new YxLiCai.Admin.Models.KendoTextBoxViewModel
+        {
+            Content = "借款人(单位)",
+            Id = "Borrower"
+        })
+        @Html.Partial("EditorTemplates/PKendoTextBox",
+        new YxLiCai.Admin.Models.KendoTextBoxViewModel
+        {
+            Content = "合同编号",
+            Id = "OrderNumber"
+        })
+        @Html.Partial("EditorTemplates/PPKendoTextBox",
+        new YxLiCai.Admin.Models.KendoTextBoxViewModel
+        {
+            Content = "还款方式",
+            Id = "RepaymentMode"
+        })
+        @Html.Partial("EditorTemplates/PKendoNumericTextBox",
+        new YxLiCai.Admin.Models.KendoNumericTextBoxViewModel
+        {
+            Content = "项目金额",
+            Id = "Amount",
+            Format = "n2",
+            Decimals = "2",
+            Value = "0"
+        })
+        @Html.Partial("EditorTemplates/PKendoNumericTextBox",
+        new YxLiCai.Admin.Models.KendoNumericTextBoxViewModel
+        {
+            Content = "权值",
+            Id = "Weight",
+            Format = "n0",
+            Decimals = "0",
+            Value = "0"
+        })
+        @* @Html.Partial("EditorTemplates/KendoNumericTextBox",
+            new YxLiCai.Admin.Models.KendoNumericTextBoxViewModel
+            {
+                Content = "已售金额",
+                Id = "AmountSold",
+                Format = "n2",
+                Decimals = "2",
+                Value = "0",
+                 Readonly = "true"
+
+            })
+            @Html.Partial("EditorTemplates/KendoNumericTextBox",
+            new YxLiCai.Admin.Models.KendoNumericTextBoxViewModel
+            {
+                Content = "可售金额",
+                Id = "AvailableAmount",
+                Format = "n2",
+                Decimals = "2",
+                Value = "0",
+                 Readonly = "true"
+            })*@
+        @Html.Partial("EditorTemplates/KendoNumericTextBox",
+        new YxLiCai.Admin.Models.KendoNumericTextBoxViewModel
+        {
+            Content = "借款利率",
+            Id = "BorrowingRate",
+            Format = "n4",
+            Decimals = "4",
+            Value = "0"
+        })
+        @Html.Partial("EditorTemplates/PKendoNumericTextBox",
+        new YxLiCai.Admin.Models.KendoNumericTextBoxViewModel
+        {
+            Content = "还款期限（月）",
+            Id = "LoanPeriod"
+        })
+        @Html.Partial("EditorTemplates/PsKendoDate",
+        new YxLiCai.Admin.Models.KendoDateTimeViewModel
+        {
+            Content = "发起时间",
+            Id = "LaunchTime",
+            Format = "yyyy-MM-dd"
+        })
+        @Html.Partial("EditorTemplates/PeKendoDate",
+        new YxLiCai.Admin.Models.KendoDateTimeViewModel
+        {
+            Content = "截止时间",
+            Id = "EndTime",
+            Format = "yyyy-MM-dd"
+        })
+        @*        @Html.Partial("EditorTemplates/KendoTextArea",
+            new YxLiCai.Admin.Models.KendoTextAreaViewModel
+            {
+                Content = "备注",
+                Id = "Remark"
+            })*@
+        <div class="form-group">
+            <label class="control-label col-sm-6">
+                适合产品类型
+            </label>
+            <div class="col-sm-6 col-md-6">
+                <label><input type="checkbox" name="usecondition" id="pt1">月月盈</label>
+                <label><input type="checkbox" name="usecondition" id="pt2">季季享-3个月</label><span style="color: red; margin-left: 15px;">*至少选择一项，可多选</span>
+                <br />
+                <label><input type="checkbox" name="usecondition" id="pt4">年年丰</label>
+                <label><input type="checkbox" name="usecondition" id="pt3">季季享-6个月</label>
+                <br />
+            </div>
+        </div>
+    </div>
+
+    <div class="SearchMd">
+        @*        @{if (YxLiCai.Admin.UserContext.HasAuthority(9))
+            {
+              <input id="btnSave" type="button" value="保存" class="searchBtn" />
+            }}*@
+        <input id="btnSave" type="button" value="保存" class="searchBtn" />
+        @*<input type="button" value="返回" class="searchBtn" onclick="javascript: window.location.href = 'Index'" />*@
+    </div>
+</div>
+
+<script>
+    require(['CRM/common.assets'], function (common) {
+        //str 融资方信息展示
+        $(function () {
+            $("#account_id").kendoDropDownList({
+                autoBind: false,
+                optionLabel: "--请选择融资方--",
+                dataTextField: "financier_name",
+                dataValueField: "financier_id",
+                dataSource: {
+                    transport: {
+                        read: {
+                            dataType: "json",
+                            url: "/Project/GetUserFinancing"
+                        }
+                    }
+                }
+            });
+        });
+        //end
+
+        //$("#Weight").blur(function () {
+        //    var b = parseInt($("#Weight").val().replace(/[ ]/g, ""));
+        //    if (!(b >= 1 && b <= 100)) {
+        //        alert("请输入1-100的整数");
+        //    }
+        //});
+        $("#btnSave").bind("click", function () {
+            if ($("#ProjectName").val().replace(/[ ]/g, "") == "") {
+                $("#Message").html("项目名称不能为空!");
+                return;
+            }
+            var pName = strlen($("#ProjectName").val().replace(/[ ]/g, ""));
+            if (pName < 6 || pName > 60) { $("#Message").html("项目名称长度在6-60之间!"); return; }
+
+            var account_id = $("#account_id").val();
+            if (account_id == "") { $("#Message").html("请选择融资方!"); return; }
+
+            if ($("#Borrower").val().replace(/[ ]/g, "") == "") {
+                $("#Message").html("借款人不能为空!");
+                return;
+            }
+            var Bower = strlen($("#Borrower").val().replace(/[ ]/g, ""));
+            if (Bower < 4 || Bower > 60) { $("#Message").html("借款人应限制在4-60个字符！"); return; }
+            if ($("#OrderNumber").val().replace(/[ ]/g, "") == "") {
+                $("#Message").html("合同编号不能为空!");
+                return;
+            }
+            var a = strlen($("#OrderNumber").val().replace(/[ ]/g, ""));
+            var bb = /^[0-9a-zA-Z]*$/g;
+            if (a > 16 || a < 6) {
+                $("#Message").html("合同编号长度在6-16位之间!");
+                return;
+            } else { if (!bb.test(a)) { $("#Message").html("合同编号建议为数字和字母组合!"); return; }; }
+
+            var re = /^[0-9]+.?[0-9]*$/;   //判断字符串是否为数字
+            //var v = $("#Weight").val().replace(/[ ]/g, "");
+            //if (!re.test(v)) {
+            //    $("#Message").html("权值是1-100的整数!");
+            //    return;
+            //}
+
+            var RepaymentMode = $("#RepaymentMode").val();
+            var Ra = $("#RepaymentMode").val().length;
+            if (RepaymentMode == "") {
+                $("#Message").html("还款方式不能为空!");
+                return;
+            } else {
+                if (Ra > 50) {
+                    $("#Message").html("还款方式长度不能大于50个字!");
+                    return;
+                }
+            }
+
+            var nubmer = $("#Amount").val();
+            if (!re.test(nubmer) || nubmer == "" || nubmer <= 0) { $("#Message").html("项目金额是大于零的数字"); return; }
+            var b = parseInt($("#Weight").val().replace(/[ ]/g, ""));
+            if (!(b >= 1 && b <= 100)) { $("#Message").html("权值是1-100的整数!"); return; }
+
+            var LoanPeriod = $("#LoanPeriod").val();
+            if (LoanPeriod == "" || LoanPeriod <= 0) {
+                $("#Message").html("请填写还款期限!"); return;
+            }
+            var strDate = $("#LaunchTime").val().replace(/[ ]/g, "");
+            if (strDate != "") {
+                if (!strDateTime(strDate)) {
+                    $("#Message").html("项目发起时间格式不正确!"); return;
+                } else { $("#Message").empty(); }
+
+            } else { $("#Message").html("项目发起时间不能为空!"); return; }
+            var EndDate = $("#EndTime").val().replace(/[ ]/g, "");
+            if (EndDate != "") {
+                if (!strDateTime(strDate)) {
+                    $("#Message").html("项目截止时间格式不正确!"); return;
+                } else { $("#Message").empty(); }
+
+            } else { $("#Message").html("项目截止时间不能为空!"); return; }
+            var beginDate = $("#LaunchTime").val();
+            var endDate = $("#EndTime").val();
+            var d1 = new Date(beginDate.replace(/\-/g, "\/"));
+            var d2 = new Date(endDate.replace(/\-/g, "\/"));
+
+            if (beginDate != "" && endDate != "" && d1 > d2) {
+                $("#Message").html("发起日期不能大于截止上线日期!");
+                return false;
+            }
+
+            var usecondition = "";
+
+            $("input[name='usecondition']").each(function () {
+                if ($(this).is(":checked")) {
+                    var id = $(this).attr("id");
+                    id = id.replace("pt", "");
+                    usecondition = usecondition + (usecondition == "" ? "" : ",") + id;
+                }
+            });
+            if (usecondition == "") {
+                $("#Message").html("请选择适合产品类型！");
+                return false;
+            }
+
+
+            $("#Message").empty();
+            data = { ProjectName: $("#ProjectName").val(), Borrower: $("#Borrower").val(), OrderNumber: $("#OrderNumber").val(), Amount: $("#Amount").val(), AmountSold: 0, AvailableAmount: $("#Amount").val(), BorrowingRate: $("#BorrowingRate").val(), LaunchTime: $("#LaunchTime").val(), EndTime: $("#EndTime").val(), Weight: b, BorrowingRate: $("#BorrowingRate").val(), RepaymentMode: $("#RepaymentMode").val(), LoanPeriod: $("#LoanPeriod").val(), ProjectType: $("#ProjectType").val(), account_id: account_id, pdt_collection: usecondition };
+            //data = { ProjectName: $("#ProjectName").val(), Borrower: $("#Borrower").val(), OrderNumber: $("#OrderNumber").val(), Amount: $("#Amount").val(), AmountSold: $("#AmountSold").val(), AvailableAmount: $("#AvailableAmount").val(), BorrowingRate: $("#BorrowingRate").val(), LaunchTime: $("#LaunchTime").val(), EndTime: $("#EndTime").val(), Remark: $("#Remark").val(), Weight: $("#Weight").val() };
+            sentAjax(data);
+        });
+
+        function sentAjax(data) {
+            $.ajax({
+                url: "/Project/AddProject",
+                data: data,
+                success: function (data) {
+                    if (data.IsSuccess) {
+                        common.popupNotification.show("添加成功", "info");
+                        window.location.href = "Index";
+                    } else {
+                        alert(data.Message);
+                        return;
+                    }
+                },
+                error: function (e) {
+                    common.popupNotification.show(e.responseText);
+                }
+            });
+        }
+        function getDate() {
+            var d = new Date();
+            var str = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();//获取当前时间;
+            return str;
+        }
+        function strDateTime(str) {
+            var r = str.match(/^(\d{1,4})(-|\/)(\d{1,2})\2(\d{1,2})$/);
+            if (r == null) return false;
+            var d = new Date(r[1], r[3] - 1, r[4]);
+            return (d.getFullYear() == r[1] && (d.getMonth() + 1) == r[3] && d.getDate() == r[4]);
+        }
+    });
+    function strlen(str) {
+        var len = 0;
+        for (var i = 0; i < str.length; i++) {
+            var c = str.charCodeAt(i);
+            //单字节加1
+            if ((c >= 0x0001 && c <= 0x007e) || (0xff60 <= c && c <= 0xff9f)) {
+                len++;
+            }
+            else {
+                len += 2;
+            }
+        }
+        return len;
+    }
+</script>

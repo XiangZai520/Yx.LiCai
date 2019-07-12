@@ -1,0 +1,79 @@
+﻿<div class="zpManage zpSh">
+    <h2 class="crumbs">
+        您所在位置：财务管理->还款管理->还款失败
+    </h2>
+</div>
+<div class="gx-textitem">
+    <label class="gx-texttitle">
+        融资方：
+    </label>
+    <input id="LoginName" type="text" class="gx-textbox" placeholder="请输入内容...">
+    <label class="gx-texttitle">
+        项目期限：
+    </label>
+    <input id="MyRealName" type="text" class="gx-textbox" placeholder="请输入内容...">
+    <br />
+    <label class="gx-texttitle">
+        还款金额：
+    </label>
+    @Html.Partial("EditorTemplates/KendoNumeric",
+    new YxLiCai.Admin.Models.KendoNumericTextBoxViewModel
+    {
+        Id = "amount_min",
+        Format = "n2",
+        Decimals = "2",
+        Value = "0",
+        Min = "0"
+    })
+    <label class="gx-texttitle">
+        至：
+    </label>
+    @Html.Partial("EditorTemplates/KendoNumeric",
+    new YxLiCai.Admin.Models.KendoNumericTextBoxViewModel
+    {
+        Id = "amount_max",
+        Format = "n2",
+        Decimals = "2",
+        Value = "0",
+        Min = "0"
+    })
+    <button id="search" class="gx-button gx-button-info" style="float:right;margin-right:300px;">查询</button>
+</div>
+<div class="cleanfix" style="margin:15px 15px 15px 15px">
+    <div id="tabstrip">
+        <ul>
+            <li id="tab1">
+                利息
+            </li>
+            <li>
+                本金
+            </li>
+        </ul>
+        @Html.Partial("_InterestListView",
+        new YxLiCai.Admin.Models.KendoTextBoxViewModel
+        {
+            Content = "1",
+            Id = "grid1"
+        })
+        @Html.Partial("_PrincipalListView",
+        new YxLiCai.Admin.Models.KendoTextBoxViewModel
+        {
+            Content = "2",
+            Id = "grid2"
+        })
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#tabstrip").kendoTabStrip({
+            animation: {
+                close: {
+                    effects: "fadeOut"
+                }
+            }
+        });
+        var tabToActivate = $("#tab1");
+        $("#tabstrip").kendoTabStrip().data("kendoTabStrip").activateTab(tabToActivate);
+    });
+</script>

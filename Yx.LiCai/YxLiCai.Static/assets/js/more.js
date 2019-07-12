@@ -1,0 +1,1 @@
+define("more",["jquery","fastclick","loadmore"],function(e,o,r){{var a=jQuery=e("jquery");e("fastclick"),e("loadmore")}a(".loadmore").loadMore({})}),seajs.use("more");

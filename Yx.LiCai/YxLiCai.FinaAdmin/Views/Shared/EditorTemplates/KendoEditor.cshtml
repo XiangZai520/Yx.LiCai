@@ -1,0 +1,15 @@
+﻿@model YxLiCai.Admin.Models.UEditorViewModel
+
+<textarea id="@Model.Id"></textarea>
+
+<script>
+    var id = '@Model.Id';
+    var value = '@Model.Value';
+
+    $("#" + id + "").kendoEditor({
+        //value: "<p>foo</p>",
+        encoded: true
+    });
+    var editor = $("#" + id + "").data("kendoEditor");
+    editor.value(value);
+</script>

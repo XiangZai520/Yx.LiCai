@@ -1,0 +1,68 @@
+﻿@model List<YxLiCai.Model.User.UserSpecialAssetsModel>
+@using YxLiCai
+@{
+    ViewBag.Title = "个人金券包";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="@HttpPageHelper.GetRemoteNetURL(SystemSiteEnum.StaticResourceMallWeb, "css/uc/setting_detail.css")" rel="stylesheet">
+<div class="detail">
+    <div class="detail-title">
+        <dl class="detail-blue">
+            <dt>@ViewBag.ALlSpecialAssets<span>元</span></dt>
+            <dd>累计特享金</dd>
+        </dl>
+        <a href="/userSetting/uc_setting_ticket">
+            <dl class="detail-red">
+                <dt>@ViewBag.AddInterest<span>%</span></dt>
+                <dd>加息券<i>@ViewBag.AddInterestCount</i></dd>
+            </dl>
+        </a>
+    </div>
+    <div class="datail-main">
+        <div class="datail-line-word">
+            <div class="datail-line-left"></div>
+            <div class="datail_line-center"><p><i></i><b>特享收益明细</b></p></div>
+            <div class="datail-line-right"></div>
+        </div>
+        @{
+            if (Model != null && Model.Count > 0)
+            {
+                <ul class="datail-ul">
+                    @foreach (var mod in Model)
+                    {
+                        
+                        <li>
+                            <i></i>
+                            <div class="datail-ul-word">
+                                <span>@mod.u_time</span>
+                                @if (mod.invited_user_id > 0)
+                                {
+                                <p>您的好友 @YxLiCai.Tools.Const.SystemConst.PhoneCut(mod.invited_user_name) 注册为您贡献</p>
+                                 }
+                                else
+                                {
+                                    <p>注册获取</p>
+                                }
+                            </div>
+                            <span class="datail-span">+@YxLiCai.Tools.Const.SystemConst.MoenyConvertString(mod.amount)</span>
+                        </li>
+                   
+                    }
+                </ul>
+
+            }
+        }
+    </div>
+    <div class="gxBtn-box">
+        <a href="/UserSetting/RuleIncome" class="datail-rule">特享收益规则</a>
+        <a href="/Activity/invite/" class="ui-btn">邀请好友</a>
+    </div>
+</div>
+<!-- 浮动栏 -->
+<div class="yx-fixedBar">
+    <a class="yx-back" href="javasrcipt:void(0);">返回</a>
+    <a class="yx-home" href="/">首页</a>
+</div>
+<script>
+    seajs.use('fixed_bar');  
+</script>

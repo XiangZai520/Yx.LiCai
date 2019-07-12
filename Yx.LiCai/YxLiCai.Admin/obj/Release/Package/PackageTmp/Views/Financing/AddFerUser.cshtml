@@ -1,0 +1,83 @@
+﻿<div class="zpManage zpSh">
+    <h2 class="crumbs">您所在位置：第三方管理 >第三方管理> 开户
+    </h2>
+    <div class="control-group form-horizontal">
+
+        <table>
+            <tr>
+                <td><label class="gx-texttitle">单位名称:</label></td>
+                <td>
+                    <input class="gx-textbox" id="financier_name" style="width: 220px" />
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><label class="gx-texttitle">单位地址:</label></td>
+                <td>
+                    <input class="gx-textbox" id="company_address" style="width: 220px" />
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><label class="gx-texttitle">登录名:</label></td>
+                <td>
+                    <input class="gx-textbox" id="Lname" style="width: 220px" />
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><label class="gx-texttitle">登录密码:</label></td>
+                <td>
+                    <input class="gx-textbox" id="Pwd" placeholder="请输入6-16位数字、字母或下划线" style="width: 220px" />
+                </td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+    <div class="SearchMd form-horizontal">
+        <input type="button" value="确定" class="searchBtn" id="btnUpdate" />
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#btnUpdate").click(function () {
+            var financier_name = $("#financier_name").val().replace(/[ ]/g, "");
+            var company_address = $("#company_address").val().replace(/[ ]/g, "");
+            var Lname = $("#Lname").val().replace(/[ ]/g, "");
+            var Pwd = $("#Pwd").val().replace(/[ ]/g, "");
+            if (financier_name == "") { alert("请输入单位名称"); return; }
+            if (company_address == "") { alert("请输入单位地址"); return; }
+            if (Lname == "") { alert("请输入登录名"); return; }
+            if (Pwd == "") { alert("请输入密码"); return; }
+            if (!pcheckPassword(Pwd)) { alert("密码格式有误"); return; }
+            $.ajax({
+                type: "POST",
+                async: false,
+                url: "/Financing/AddUserInfo",
+                data: { Cname: financier_name, PWD: Pwd, Caddress: company_address, LGname: Lname },
+                success: function (data) {
+                    if (data.Status == 1) {
+                        alert("开户成功");
+                        window.location.href = "AddFerUser";
+                    } else {
+                        alert(data.Message);
+                    }
+
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                },
+            });
+        });
+        ///检测密码（）
+        function pcheckPassword(str) {
+            var reg = /^[0-9a-zA-Z_/]{6,16}$/;
+            if (!reg.test(str)) {
+                return false;
+            } else {
+                return true;
+            }
+        };
+    });
+</script>
+

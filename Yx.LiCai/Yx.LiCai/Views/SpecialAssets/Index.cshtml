@@ -1,0 +1,73 @@
+﻿@model List<YxLiCai.Model.User.UserSpecialAssetsModel>
+@{
+    ViewBag.Title = "特享资产";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="item-month" class="assets_s">
+    <div class="assets-special">
+        <div class="cats-special">
+            <span class="cats-icon">特</span>
+            账户资产（元）
+        </div>
+        <p>@ViewBag.ALlSpecialAssets</p>
+    </div>
+    <div id="List">
+        @{
+            if (Model != null && Model.Count > 0)
+            {
+
+                foreach (var mod in Model)
+                {
+                    <div class="assets-item">
+                        <p>@mod.u_time.ToString("yyyy-MM-dd")</p>
+                        <dl class="assets-box">
+                            <dt>
+                                <span>@(YxLiCai.Tools.Const.SystemConst.RateConvert((mod.rate_added + mod.rate) * 100))%</span>
+                            </dt>
+                            <dd>
+                                <div class="assets-rate">
+                                    当前收益率@(YxLiCai.Tools.Const.SystemConst.RateConvert(mod.rate * 100))%
+                                    @*<span>+@(YxLiCai.Tools.Const.SystemConst.RateConvert(mod.rate_added * 100))%</span>*@
+                                </div>
+                                <ul class="assets-get clearfix">
+                                    <li>
+                                        <strong>特享金</strong>
+                                        <span><i>@Math.Round(mod.amount)</i>元</span>
+                                    </li>
+                                    <li>
+                                        <strong>产生收益</strong>
+                                        <span><i class="color-r">@mod.interest_added</i>元</span>
+                                    </li>
+                                </ul>
+                            </dd>
+                        </dl>
+                    </div>
+                }
+            }
+        }
+    </div>
+    @if (ViewBag.PageCount > 10)
+    {
+        <div class="loadmore">
+            <a href="javascript:void(0);"></a>
+        </div>
+    }
+    <div class="operation-btn clearfix">
+        <input type="hidden" id="IsRealCard_s" value="@Yx.LiCai.App_Start.UserContext.simpleUserInfoModel.IsRealCard" />
+        <input type="hidden" id="IsBindBank_s" value="@Yx.LiCai.App_Start.UserContext.simpleUserInfoModel.IsBindBank" />
+        <a class="ui-btn ui-btn-s1" href="javascript:void(0);" id="WithdrawalUrl_s">提现</a>
+        <a class="ui-btn ui-btn-s2" href="/Home/Index">买入</a>
+    </div>
+    <input type="hidden" name="CurrentPage" id="CurrentPage" autocomplete="off" value="1" />
+</div>
+<script>
+    seajs.use('user/uc/special_assets')
+</script>
+<!-- 浮动栏 -->
+<div class="yx-fixedBar">
+    <a class="yx-back" href="javasrcipt:void(0);">返回</a>
+    <a class="yx-home" href="/">首页</a>
+</div>
+<script>
+    seajs.use('fixed_bar');
+</script>

@@ -1,0 +1,128 @@
+.safety{
+    padding: 30px 20px 20px;
+    background: #f0f0f0;
+}
+.safetyMan{
+    width: 30%;
+    margin: 0 auto;
+}
+.safetyMan img{
+    width: 100%;
+}
+.safety-title,
+.safety-lock{
+    width: 100%;
+    background: #fff;
+    padding: 20px;
+    position: relative;
+    margin-top: 20px;
+}
+.safety-title h2{
+    background: url(../images/safetyone.png) no-repeat;
+    width: 184px;
+    height: 30px;
+    line-height: 24px;
+    background-size: 100%;
+    color: #fff;
+    font-size: 14px;
+    padding-left: 10px;
+    position: absolute;
+    left: -5px;
+}
+.safetyOne{
+    padding-top: 20px;
+}
+.safety-title dl{
+    padding-top: 10px;
+    overflow: hidden;
+    border-bottom: 1px solid #e5e5e5;
+}
+.safety-title dl:last-child{
+    border-bottom: none;
+}
+.safety-title dt{
+    float: left;
+    width: 22%;
+    max-width: 40px;
+    height: 49px;
+    background: url(../images/safety-lock.png) no-repeat;
+    background-size: 100%;
+    font-size: 12px;
+    color: #2bb9e0;
+}
+.safety-title dt b{
+    padding-left: 17px;
+}
+.safety-title dt span{
+    display: block;
+    padding: 1px 0 0 7px;
+    font-weight: bold;
+    color: #fff;
+}
+.safety-title dd{
+    width: 78%;
+    float: left;
+    min-height: 60px;
+    color: #b4b4b4;
+    font-size: 14px;
+    line-height: 15px;
+    padding: 17px 0 10px 10px;
+}
+.safety-lock h2,
+.safety-lock h3{
+    background: url(../images/safetyone.png) no-repeat;
+    height: 30px;
+    background-size: 100% 100%;
+    color: #fff;
+    font-size: 14px;
+    padding-left: 10px;
+    line-height: 24px;
+    position: absolute;
+    left: -6px;
+}
+.safety-lock h2{
+    width: 184px;
+    left: -5px;
+}
+.safety-lock h3{
+    width: 228px;
+}
+.safety-lock dl{
+    padding: 20px 0 10px 0;
+    border-bottom: 1px solid #e5e5e5;
+}
+.safety-lock dl:last-child{
+    border-bottom: none;
+}
+.safety-lock dt{
+    color: #b4b4b4;
+    font-size: 14px;
+}
+.safety-lock dt span{
+    color: #53bee4;
+    font-size: 14px;
+}
+.safety-lock dd{
+    padding-top: 10px;
+}
+.safety-lock dd img{
+    width: 100%;
+}
+.safety-lock li{
+    padding: 20px 0 10px 0;
+    border-bottom: 1px solid #e5e5e5;
+}
+.safety-lock li:last-child{
+    border-bottom: none;
+}
+.safety-lock li span{
+    color: #53bee4;
+    font-size: 14px;
+    display: block;
+}
+.safety-lock li p{
+    font-size: 14px;
+    color: #b4b4b4;
+}
+
+

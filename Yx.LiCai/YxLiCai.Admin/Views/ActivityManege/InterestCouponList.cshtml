@@ -1,0 +1,154 @@
+﻿@section styles
+{
+    <link href="~/Resource/css/font-awesome.min.css" rel="stylesheet" />
+    <script src="~/Resource/js/My97DatePicker/WdatePicker.js"></script>
+    <style>
+        .gx-table th,.gx-table td {
+            text-align: center;
+            padding: 5px;
+        }
+    </style>
+}
+<div class="zpManage zpSh">
+    <h2 class="crumbs">
+        您所在位置：活动管理->加息券->加息券 
+    </h2>
+</div>
+<div class="gx-textitem">
+    <label class="gx-texttitle">
+        加息券名称：
+    </label>
+    <input id="name" type="text" class="gx-textbox" placeholder="请输入内容..." >
+    <label class="gx-texttitle">
+        面值：
+    </label>
+    <input id="amount" type="text" class="gx-textbox" placeholder="请输入内容...">
+    <label class="gx-texttitle">
+        状态：
+    </label>
+    <select id="status" class="gx-textbox">
+        <option value="-1">全部</option>
+        <option value="0">待审核</option>
+        <option value="1">审核通过</option>
+        <option value="2">审核未通过</option>
+    </select>
+    <br/>
+    <label class="gx-texttitle">
+        创建时间：
+    </label>
+    <input type="text" id="s_ctime" class="Wdate gx-textbox" style="height:34px;" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd' })">
+    <label class="gx-texttitle">
+        至：
+    </label>
+    <input type="text" id="e_ctime" class="Wdate gx-textbox" style="height:34px;" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd' })" />
+    <button id="search" class="gx-button gx-button-info search-btn" style="float:right;margin-right:300px;">查询</button>
+</div>
+<div class="cleanfix" style="margin:15px 15px 15px 15px">
+    <table class="gx-table gx-table-striped" >
+        <thead>
+            <tr>
+                <th>加息券ID</th>
+                <th>加息券名称</th>
+                <th>面值/%</th>
+                <th>使用条件</th>               
+                <th>创建时间</th>
+                <th>已使用数量</th>
+                <th>有效期/天</th>
+                <th>状态</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody id="tdata">
+
+        </tbody>
+    </table>
+</div>
+<!--分页控件-->
+<div class="clearfix">
+    <nav class="gx-pager" id="pager">
+        
+    </nav>
+</div>
+
+<script type="text/javascript">
+    //固定查询方法 方法名必须叫Search
+    function Search(CurrentPage) {
+        var name = $("#name").val();
+        var amount = $("#amount").val();
+        var status = $("#status").val();
+        var s_ctime = $("#s_ctime").val();
+        var e_ctime = $("#e_ctime").val();
+
+        $.ajax({
+            type: "POST",
+            url: "/ActivityManege/InterestCouponList_ajax",
+            data: { name: name, amount: amount, status: status, s_ctime: s_ctime, e_ctime: e_ctime, PageIndex: CurrentPage, PageSize: 10 },
+            async: false,
+            success: function (data) {
+                if (data != null) {
+
+                    $("#pager").html(data.PageHTML);
+                    var Rows = data.Rows;
+                    if (Rows != null) {
+                        var strHTML = "";
+                        for (var i = 0; i < Rows.length; i++) {
+                            var row = Rows[i];
+
+                            strHTML = strHTML + "<tr>";
+                            strHTML = strHTML + "<td>" + row.id + "</td>";
+                            strHTML = strHTML + "<td>" + row.name + "</td>";
+                            strHTML = strHTML + "<td>" + row.interest_rate + "</td>";
+                            strHTML = strHTML + "<td>" + row.use_condition + "</td>";
+                            strHTML = strHTML + "<td>" + row.c_time + "</td>";
+                            strHTML = strHTML + "<td>" + row.usecount + "</td>";
+                            strHTML = strHTML + "<td>" + row.enable_day + "</td>";
+                            if (row.status == "0") {
+                                strHTML = strHTML + "<td>待审核</td>";
+                                strHTML = strHTML + "<td><a style='margin:5px' href='/ActivityManege/AuditInterestCoupon?id=" + row.id + "'>审核</a><a style='margin:5px' href='/ActivityManege/ModifyInterestCoupon?id=" + row.id + "'>修改</a><a style='margin:5px' id='Del_" + row.id + "' name='Del'>删除</a></td>";
+                            }
+                            else if (row.status == "1") {
+                                strHTML = strHTML + "<td>审核通过</td>";
+                                strHTML = strHTML + "<td></td>";
+                            }
+                            else if (row.status == "2") {
+                                strHTML = strHTML + "<td>审核未通过</td>";
+                                strHTML = strHTML + "<td><a style='margin:5px' href='/ActivityManege/ModifyInterestCoupon?id=" + row.id + "'>修改</a><a style='margin:5px' id='Del_" + row.id + "' name='Del'>删除</a></td>";
+                            }
+                            strHTML = strHTML + "</tr>";
+                        }
+                        $("#tdata").html(strHTML);
+                    }
+                }
+            }
+        })
+    }
+    $("#search").on("click", function () {
+        Search(1);
+    })
+    $(function () {
+        Search(1);
+    })
+    $("#tdata").on("click", "a[name='Del']", function () {
+        if (confirm("确定要删除吗？")) {
+            var id = $(this).attr("id");
+            id = id.replace("Del_", "");
+            $.ajax({
+                type: "POST",
+                url: "/ActivityManege/DelInterestCoupon",
+                data: { id: id },
+                async: false,
+                success: function (data) {
+                    if (data != null) {
+                        if (data == "ok") {
+                            alert("删除成功！");
+                            Search(1);
+                        }
+                        else {
+                            alert(data.Message);
+                        }
+                    }
+                }
+            })
+        }
+    })
+</script>

@@ -1,0 +1,62 @@
+﻿@model YxLiCai.Admin.Models.KendoTextBoxViewModel
+
+<div class="control-group">
+    <div class="tbstyle">
+        <div id="@Model.Id"></div>
+    </div>
+</div>
+<script type="text/javascript">
+    require(['CRM/common.assets', 'CRM/product.assets'], function (common, product) {
+
+        //initial
+        var id = '@Model.Id',
+            category = '@Model.Content',
+            param = { ProductCategory: category };
+        var productDs = product.alertList(param, "/Product/GetAlertList"),
+            statusDs = product.statusDs,
+            categoryDs = product.categoryDs;
+        statusDs.fetch();
+        categoryDs.fetch();
+
+        var grid = $('#' + id + '').kendoGrid({
+            sortable: true,
+            pageable: true
+        }).data("kendoGrid");
+        //columns
+        var columns = [
+             { field: "Id", title: "产品ID", sortable: true },
+             { field: "ProductName", title: "产品名称", sortable: true },
+             { field: "ProductAmount", title: "产品金额", sortable: true },
+             { field: "AvailableAmount", title: "可投金额", sortable: true },
+             { field: "ProductDuration", title: "产品期限(月)", sortable: true },
+             { field: "ProductOrder", title: "产品排序", sortable: true },
+             { field: "ProductStatus", title: "产品状态", sortable: true },
+             { field: "EnableDate", title: "启用时间", sortable: true },
+             { command: { text: "下架", click: function (e) { common.deleteRecord(this, e, productDs, "/Product/DisableProduct/"); } } }
+        ];
+        //format
+        grid.bind("dataBinding", function (e) {
+            if (productDs.Binding) return;
+            for (var i = 0; i < productDs.data().length; i++) {
+                if (productDs.at(i).EnableDate != null) {
+                    var date1 = new Date(parseInt(productDs.at(i).EnableDate.substr(6)));
+                    productDs.at(i).EnableDate = date1.format("yyyy/MM/dd hh:mm:ss");
+                }               
+                if (productDs.at(i).ProductStatus != null) {
+                    var status = common.findTextInDs(statusDs, productDs.at(i).ProductStatus);
+                    productDs.at(i).ProductStatus = status;
+                }
+                if (productDs.at(i).ProductCategory != null) {
+                    var category = common.findTextInDs(categoryDs, productDs.at(i).ProductCategory);
+                    productDs.at(i).ProductCategory = category;
+                }
+            }
+            productDs.Binding = true;
+        });
+        // bind data
+        grid.setOptions({
+            dataSource: productDs,
+            columns: columns
+        });
+    });
+</script>

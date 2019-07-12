@@ -1,0 +1,293 @@
+2015-08-04 09:35:43.0640 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/8/4 9:35:42
+异常发生地址:http://localhost:10986/Login/forget_pwd?phone=MTMxNDEwNDU1ODQ=
+请求类型:GET
+异常:System.FormatException: Base-64 字符数组或字符串的长度无效。
+   在 System.Convert.FromBase64_Decode(Char* startInputPtr, Int32 inputLength, Byte* startDestPtr, Int32 destLength)
+   在 System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   在 System.Convert.FromBase64String(String s)
+   在 ETS.Util.EncodeAndDecode.DecodeBase64(Encoding encode, String result) 位置 c:\YiXiu\Yx.LiCai\YxLica.Tools\Util\EncodeAndDecode.cs:行号 51
+   在 ETS.Util.EncodeAndDecode.DecodeBase64(String result) 位置 c:\YiXiu\Yx.LiCai\YxLica.Tools\Util\EncodeAndDecode.cs:行号 70
+   在 YxLiCai.Tools.Const.SystemConst.ConvertPhoneNum2(String phone) 位置 c:\YiXiu\Yx.LiCai\YxLica.Tools\Const\SystemConst.cs:行号 507
+   在 Yx.LiCai.Controllers.LoginController.forget_pwd(String phone) 位置 c:\YiXiu\Yx.LiCai\Yx.LiCai\Controllers\LoginController.cs:行号 67
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   在 System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+IP:::1
+--------------------end---------------------
+ 
+2015-08-04 10:54:25.5078 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/8/4 10:54:25
+异常发生地址:http://localhost:10986/Login/CaptchaImage
+请求类型:GET
+异常:System.IO.IOException: 无法从传输连接中读取数据: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。。 ---> System.Net.Sockets.SocketException: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   在 System.Net.Sockets.Socket.Receive(Byte[] buffer, Int32 offset, Int32 size, SocketFlags socketFlags)
+   在 System.Net.Sockets.NetworkStream.Read(Byte[] buffer, Int32 offset, Int32 size)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.Sockets.NetworkStream.Read(Byte[] buffer, Int32 offset, Int32 size)
+   在 System.IO.BufferedStream.ReadByte()
+   在 NServiceKit.Redis.RedisNativeClient.SafeReadByte()
+   在 NServiceKit.Redis.RedisNativeClient.ReadLong()
+   在 NServiceKit.Redis.RedisNativeClient.SendExpectLong(Byte[][] cmdWithBinaryArgs)
+   在 NServiceKit.Redis.RedisNativeClient.Exists(String key)
+   在 NServiceKit.Redis.RedisClient.ContainsKey(String key)
+   在 YxLiCai.Tools.NoSql.RedisCache.RedisCache.Add(String key, Object value, DateTime expiredTime) 位置 c:\YiXiu\Yx.LiCai\YxLica.Tools\NoSql\RedisCache\RedisCache.cs:行号 96
+   在 Yx.LiCai.Controllers.LoginController.CaptchaImage() 位置 c:\YiXiu\Yx.LiCai\Yx.LiCai\Controllers\LoginController.cs:行号 575
+IP:::1
+--------------------end---------------------
+ 
+2015-08-04 13:28:37.2270 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/8/4 13:28:36
+异常发生地址:http://localhost:10986/UserAssets/User_record
+请求类型:GET
+异常:NServiceKit.Redis.RedisException: Unable to Connect: sPort: 12842 ---> System.Net.Sockets.SocketException: 远程主机强迫关闭了一个现有的连接。
+   在 System.Net.Sockets.Socket.Send(IList`1 buffers, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Send(IList`1 buffers)
+   在 NServiceKit.Redis.RedisNativeClient.FlushSendBuffer()
+   在 NServiceKit.Redis.RedisNativeClient.SendCommand(Byte[][] cmdWithBinaryArgs)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 NServiceKit.Redis.RedisNativeClient.CreateConnectionError()
+   在 NServiceKit.Redis.RedisNativeClient.SendExpectLong(Byte[][] cmdWithBinaryArgs)
+   在 NServiceKit.Redis.RedisNativeClient.Exists(String key)
+   在 NServiceKit.Redis.RedisClient.ContainsKey(String key)
+   在 YxLiCai.Tools.NoSql.RedisCache.RedisCache.Add(String key, Object value, DateTime expiredTime) 位置 c:\YiXiu\Yx.LiCai\YxLica.Tools\NoSql\RedisCache\RedisCache.cs:行号 96
+   在 Yx.LiCai.App_Start.UserContext.get_simpleUserInfoModel() 位置 c:\YiXiu\Yx.LiCai\Yx.LiCai\App_Start\UserContent.cs:行号 64
+   在 Yx.LiCai.Controllers.UserAssetsController.Get_User_record(Int32 ProductType) 位置 c:\YiXiu\Yx.LiCai\Yx.LiCai\Controllers\UserAssetsController.cs:行号 48
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   在 System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+IP:::1
+--------------------end---------------------
+ 
+2015-08-04 13:28:37.7947 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/8/4 13:28:37
+异常发生地址:http://localhost:10986/UserAssets/User_record
+请求类型:GET
+异常:System.Web.HttpException (0x80004005): 执行处理程序“System.Web.Mvc.HttpHandlerUtil+ServerExecuteHttpHandlerAsyncWrapper”的子请求时出错。 ---> NServiceKit.Redis.RedisException: Unable to Connect: sPort: 12842 ---> System.Net.Sockets.SocketException: 远程主机强迫关闭了一个现有的连接。
+   在 System.Net.Sockets.Socket.Send(IList`1 buffers, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Send(IList`1 buffers)
+   在 NServiceKit.Redis.RedisNativeClient.FlushSendBuffer()
+   在 NServiceKit.Redis.RedisNativeClient.SendCommand(Byte[][] cmdWithBinaryArgs)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 NServiceKit.Redis.RedisNativeClient.CreateConnectionError()
+   在 NServiceKit.Redis.RedisNativeClient.SendExpectLong(Byte[][] cmdWithBinaryArgs)
+   在 NServiceKit.Redis.RedisNativeClient.Exists(String key)
+   在 NServiceKit.Redis.RedisClient.ContainsKey(String key)
+   在 YxLiCai.Tools.NoSql.RedisCache.RedisCache.Add(String key, Object value, DateTime expiredTime) 位置 c:\YiXiu\Yx.LiCai\YxLica.Tools\NoSql\RedisCache\RedisCache.cs:行号 96
+   在 Yx.LiCai.App_Start.UserContext.get_simpleUserInfoModel() 位置 c:\YiXiu\Yx.LiCai\Yx.LiCai\App_Start\UserContent.cs:行号 64
+   在 Yx.LiCai.Controllers.UserAssetsController.Get_User_record(Int32 ProductType) 位置 c:\YiXiu\Yx.LiCai\Yx.LiCai\Controllers\UserAssetsController.cs:行号 48
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   在 System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Controller.<>c__DisplayClass1d.<BeginExecuteCore>b__18(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+   在 System.Web.Mvc.MvcHandler.<>c__DisplayClass8.<BeginProcessRequest>b__3(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+   在 System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+   在 System.Web.Mvc.HttpHandlerUtil.ServerExecuteHttpHandlerAsyncWrapper.<>c__DisplayClassa.<EndProcessRequest>b__9()
+   在 System.Web.Mvc.HttpHandlerUtil.ServerExecuteHttpHandlerWrapper.<>c__DisplayClass4.<Wrap>b__3()
+   在 System.Web.Mvc.HttpHandlerUtil.ServerExecuteHttpHandlerWrapper.Wrap[TResult](Func`1 func)
+   在 System.Web.Mvc.HttpHandlerUtil.ServerExecuteHttpHandlerWrapper.Wrap(Action action)
+   在 System.Web.Mvc.HttpHandlerUtil.ServerExecuteHttpHandlerAsyncWrapper.EndProcessRequest(IAsyncResult result)
+   在 System.Web.HttpServerUtility.ExecuteInternal(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage, VirtualPath path, VirtualPath filePath, String physPath, Exception error, String queryStringOverride)
+   在 System.Web.HttpServerUtility.ExecuteInternal(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage, VirtualPath path, VirtualPath filePath, String physPath, Exception error, String queryStringOverride)
+   在 System.Web.HttpServerUtility.Execute(IHttpHandler handler, TextWriter writer, Boolean preserveForm, Boolean setPreviousPage)
+   在 System.Web.HttpServerUtility.Execute(IHttpHandler handler, TextWriter writer, Boolean preserveForm)
+   在 System.Web.HttpServerUtilityWrapper.Execute(IHttpHandler handler, TextWriter writer, Boolean preserveForm)
+   在 System.Web.Mvc.Html.ChildActionExtensions.ActionHelper(HtmlHelper htmlHelper, String actionName, String controllerName, RouteValueDictionary routeValues, TextWriter textWriter)
+   在 System.Web.Mvc.Html.ChildActionExtensions.Action(HtmlHelper htmlHelper, String actionName, String controllerName, RouteValueDictionary routeValues)
+   在 System.Web.Mvc.Html.ChildActionExtensions.Action(HtmlHelper htmlHelper, String actionName, Object routeValues)
+   在 ASP._Page_Views_UserAssets_User_record_cshtml.Execute() 位置 c:\YiXiu\Yx.LiCai\Yx.LiCai\Views\UserAssets\User_record.cshtml:行号 40
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.StartPage.RunPage()
+   在 System.Web.WebPages.StartPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.Mvc.RazorView.RenderView(ViewContext viewContext, TextWriter writer, Object instance)
+   在 System.Web.Mvc.BuildManagerCompiledView.Render(ViewContext viewContext, TextWriter writer)
+   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+IP:::1
+--------------------end---------------------
+ 
+2015-08-04 15:44:19.6108 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/8/4 15:44:18
+异常发生地址:http://localhost:10986/Login/Registered?phone=MTMxMjU3MDA1ODY=
+请求类型:GET
+异常:System.FormatException: Base-64 字符数组或字符串的长度无效。
+   在 System.Convert.FromBase64_Decode(Char* startInputPtr, Int32 inputLength, Byte* startDestPtr, Int32 destLength)
+   在 System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   在 System.Convert.FromBase64String(String s)
+   在 ETS.Util.EncodeAndDecode.DecodeBase64(Encoding encode, String result) 位置 c:\YiXiu\Yx.LiCai\YxLica.Tools\Util\EncodeAndDecode.cs:行号 51
+   在 ETS.Util.EncodeAndDecode.DecodeBase64(String result) 位置 c:\YiXiu\Yx.LiCai\YxLica.Tools\Util\EncodeAndDecode.cs:行号 70
+   在 YxLiCai.Tools.Const.SystemConst.ConvertPhoneNum2(String phone) 位置 c:\YiXiu\Yx.LiCai\YxLica.Tools\Const\SystemConst.cs:行号 507
+   在 System.Dynamic.UpdateDelegates.UpdateAndExecute2[T0,T1,TRet](CallSite site, T0 arg0, T1 arg1)
+   在 ASP._Page_Views_Login_Registered_cshtml.Execute() 位置 c:\YiXiu\Yx.LiCai\Yx.LiCai\Views\Login\Registered.cshtml:行号 35
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.StartPage.RunPage()
+   在 System.Web.WebPages.StartPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.Mvc.RazorView.RenderView(ViewContext viewContext, TextWriter writer, Object instance)
+   在 System.Web.Mvc.BuildManagerCompiledView.Render(ViewContext viewContext, TextWriter writer)
+   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+IP:::1
+--------------------end---------------------
+ 
+2015-08-04 15:44:31.9057 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/8/4 15:44:31
+异常发生地址:http://localhost:10986/Login/Registered?phone=MTMxMjU3MDA1ODY=
+请求类型:GET
+异常:System.FormatException: Base-64 字符数组或字符串的长度无效。
+   在 System.Convert.FromBase64_Decode(Char* startInputPtr, Int32 inputLength, Byte* startDestPtr, Int32 destLength)
+   在 System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   在 System.Convert.FromBase64String(String s)
+   在 ETS.Util.EncodeAndDecode.DecodeBase64(Encoding encode, String result) 位置 c:\YiXiu\Yx.LiCai\YxLica.Tools\Util\EncodeAndDecode.cs:行号 51
+   在 ETS.Util.EncodeAndDecode.DecodeBase64(String result) 位置 c:\YiXiu\Yx.LiCai\YxLica.Tools\Util\EncodeAndDecode.cs:行号 70
+   在 YxLiCai.Tools.Const.SystemConst.ConvertPhoneNum2(String phone) 位置 c:\YiXiu\Yx.LiCai\YxLica.Tools\Const\SystemConst.cs:行号 507
+   在 ASP._Page_Views_Login_Registered_cshtml.Execute() 位置 c:\YiXiu\Yx.LiCai\Yx.LiCai\Views\Login\Registered.cshtml:行号 35
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.StartPage.RunPage()
+   在 System.Web.WebPages.StartPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.Mvc.RazorView.RenderView(ViewContext viewContext, TextWriter writer, Object instance)
+   在 System.Web.Mvc.BuildManagerCompiledView.Render(ViewContext viewContext, TextWriter writer)
+   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+IP:::1
+--------------------end---------------------
+ 
+2015-08-04 15:46:00.6566 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/8/4 15:46:00
+异常发生地址:http://localhost:10986/Login/Registered?phone=MTMxMjU3MDA1ODY=
+请求类型:GET
+异常:System.FormatException: Base-64 字符数组或字符串的长度无效。
+   在 System.Convert.FromBase64_Decode(Char* startInputPtr, Int32 inputLength, Byte* startDestPtr, Int32 destLength)
+   在 System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   在 System.Convert.FromBase64String(String s)
+   在 ETS.Util.EncodeAndDecode.DecodeBase64(Encoding encode, String result) 位置 c:\YiXiu\Yx.LiCai\YxLica.Tools\Util\EncodeAndDecode.cs:行号 51
+   在 ETS.Util.EncodeAndDecode.DecodeBase64(String result) 位置 c:\YiXiu\Yx.LiCai\YxLica.Tools\Util\EncodeAndDecode.cs:行号 70
+   在 YxLiCai.Tools.Const.SystemConst.ConvertPhoneNum2(String phone) 位置 c:\YiXiu\Yx.LiCai\YxLica.Tools\Const\SystemConst.cs:行号 507
+   在 ASP._Page_Views_Login_Registered_cshtml.Execute() 位置 c:\YiXiu\Yx.LiCai\Yx.LiCai\Views\Login\Registered.cshtml:行号 35
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.StartPage.RunPage()
+   在 System.Web.WebPages.StartPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.Mvc.RazorView.RenderView(ViewContext viewContext, TextWriter writer, Object instance)
+   在 System.Web.Mvc.BuildManagerCompiledView.Render(ViewContext viewContext, TextWriter writer)
+   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+IP:::1
+--------------------end---------------------
+ 
+2015-08-04 15:46:52.7334 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/8/4 15:46:52
+异常发生地址:http://localhost:10986/Login/Registered?phone=MTMxMjU3MDA1ODY=
+请求类型:GET
+异常:System.FormatException: Base-64 字符数组或字符串的长度无效。
+   在 System.Convert.FromBase64_Decode(Char* startInputPtr, Int32 inputLength, Byte* startDestPtr, Int32 destLength)
+   在 System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   在 System.Convert.FromBase64String(String s)
+   在 ETS.Util.EncodeAndDecode.DecodeBase64(Encoding encode, String result) 位置 c:\YiXiu\Yx.LiCai\YxLica.Tools\Util\EncodeAndDecode.cs:行号 51
+   在 ETS.Util.EncodeAndDecode.DecodeBase64(String result) 位置 c:\YiXiu\Yx.LiCai\YxLica.Tools\Util\EncodeAndDecode.cs:行号 70
+   在 YxLiCai.Tools.Const.SystemConst.ConvertPhoneNum2(String phone) 位置 c:\YiXiu\Yx.LiCai\YxLica.Tools\Const\SystemConst.cs:行号 507
+   在 ASP._Page_Views_Login_Registered_cshtml.Execute() 位置 c:\YiXiu\Yx.LiCai\Yx.LiCai\Views\Login\Registered.cshtml:行号 35
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.StartPage.RunPage()
+   在 System.Web.WebPages.StartPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.Mvc.RazorView.RenderView(ViewContext viewContext, TextWriter writer, Object instance)
+   在 System.Web.Mvc.BuildManagerCompiledView.Render(ViewContext viewContext, TextWriter writer)
+   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+IP:::1
+--------------------end---------------------
+ 

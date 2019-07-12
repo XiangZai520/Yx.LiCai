@@ -1,0 +1,116 @@
+﻿@section styles {
+    <style>
+        .k-state-active, .k-state-active:hover, .k-active-filter, .k-tabstrip .k-state-active {
+            border-color: #c5c5c5;
+        }
+    </style>
+}
+<div class="zpManage zpSh">
+    <h2 class="crumbs">
+        您所在位置：财务管理->还款管理->待处理
+    </h2>
+</div>
+<div class="gx-textitem">
+    <div class="form-group">
+        <label class="gx-texttitle">
+            融资方：
+        </label>
+        <input id="m_name" type="text" class="gx-textbox search-txt" placeholder="请输入内容...">
+        <label class="gx-texttitle">
+            项目期限(月)：
+        </label>
+        @Html.Partial("EditorTemplates/KendoNumeric",
+    new YxLiCai.Admin.Models.KendoNumericTextBoxViewModel
+    {
+        Id = "pj_duration",
+        Min = "0"
+    })
+    </div>
+    <div class="form-group">
+        <label class="gx-texttitle">
+            待付金额：
+        </label>
+        @Html.Partial("EditorTemplates/KendoNumeric",
+    new YxLiCai.Admin.Models.KendoNumericTextBoxViewModel
+    {
+        Id = "amount_min",
+        Format = "n2",
+        Decimals = "2",
+        Min = "0"
+    })
+        <label class="gx-texttitle">
+            至：
+        </label>
+        @Html.Partial("EditorTemplates/KendoNumeric",
+    new YxLiCai.Admin.Models.KendoNumericTextBoxViewModel
+    {
+        Id = "amount_max",
+        Format = "n2",
+        Decimals = "2",
+        Min = "0"
+    })
+        <button id="btnSearch" class="gx-button gx-button-info search-btn" style="float:right;margin-right:300px;">查询</button>
+    </div>
+</div>
+<div class="cleanfix" style="margin:15px 15px 15px 15px">
+    <div id="tabstrip">
+        <ul>
+            <li id="tab1">
+                利息
+            </li>
+            <li>
+                本金
+            </li>
+        </ul>
+        @Html.Partial("_InterestListView")
+        @Html.Partial("_PrincipalListView")
+    </div>
+</div>
+<script type="text/javascript">
+    //tab
+    $("#tabstrip").kendoTabStrip({
+        animation: {
+            close: {
+                effects: "fadeOut"
+            }
+        }
+    });
+    var tabToActivate = $("#tab1");
+    $("#tabstrip").kendoTabStrip().data("kendoTabStrip").activateTab(tabToActivate);
+
+    //提示框
+    var popNotification = $("#popupNotification").kendoNotification({
+        position: {
+            pinned: true,
+            top: 30,
+            right: 80
+        },
+        autoHideAfter: 5000,
+        stacking: "down"
+    }).data("kendoNotification");
+
+    require(['CRM/refund.assets'], function (refund) {
+
+        //initial data
+        var param_init = { merchantName: "", loanPeriod: -1, amount_min: -1, amount_max: -1 };
+        getData(param_init);
+
+        //查询按钮事件
+        $("#btnSearch").bind("click", function () {
+            var mName = $("#m_name").val(), //融资方名称
+                loanPeriod = $("#pj_duration").val() || -1, //项目期限
+                amount_min = $("#amount_min").val() || -1,
+                amount_max = $("#amount_max").val() || -1,
+                param = { merchantName: mName, loanPeriod: loanPeriod, amount_min: amount_min, amount_max: amount_max };
+            getData(param);
+        });
+
+        //getdata
+        function getData(param) {
+            var ds_interest = refund.getInterestList(param);
+            var ds_principal = refund.getPrincipalList(param);
+            getInterestList(ds_interest);
+            getPrincipalList(ds_principal);
+        }
+    });
+</script>

@@ -1,0 +1,35 @@
+﻿@model List<YxLiCai.Model.ExtendModel.InvestmentDetailEx>
+@section styles
+{
+    <link href="~/Resource/css/font-awesome.min.css" rel="stylesheet" />
+}
+<div class="zpManage zpSh">
+    <h2 class="crumbs">
+        您所在位置：第三方管理->保理机构->债权明细
+    </h2>
+</div>
+<div class="cleanfix" style="margin:15px 15px 15px 15px">
+    <table class="gx-table gx-table-striped">
+        <thead>
+            <tr>
+                <th>项目ID</th>
+                <th>项目名称</th>
+                <th>债权金额</th>
+            </tr>
+        </thead>
+        <tbody id="tdata">
+            @if (Model != null && Model.Count > 0)
+            {
+                foreach (YxLiCai.Model.ExtendModel.InvestmentDetailEx item in Model)
+                {
+                    <tr>
+                        <td>@item.pjt_id</td>
+                        <td>@item.pjt_name</td>
+                        <td>@YxLiCai.Tools.Const.SystemConst.MoenyConvert(item.amount)</td>
+                    </tr>
+                }
+            }
+
+        </tbody>
+    </table>
+</div>

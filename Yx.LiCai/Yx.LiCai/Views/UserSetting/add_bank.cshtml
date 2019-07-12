@@ -1,0 +1,231 @@
+﻿@{
+    ViewBag.Title = "添加银行卡";
+}
+<link href="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "css/buy.css")" rel="stylesheet">
+<div class="buy-input">
+    <dl class="gx-money">
+        <dt><i class="icon-word">姓名</i></dt>
+        <dd>
+            <input type="text" class="gx-text" placeholder="请输入真实姓名" id="MyRealName" value="@ViewBag.MyRealName" />
+        </dd>
+    </dl>
+    <dl class="gx-money">
+        <dt><i class="icon-word">身份证</i></dt>
+        <dd>
+            <input type="tel" class="gx-text" placeholder="请输入身份证" id="MyRealCard" value="@ViewBag.MyRealCard" />
+        </dd>
+    </dl>
+    <dl class="buy-bank-position">
+        <dt><i class="icon-word">银行</i></dt>
+        <dd>
+            <div id="J_bankInfor" class="bank-select bank-infor">
+                <a href="javascript:///">
+                    <b>请选择银行卡</b>
+                    <img src="">
+                    <span id="BankName"></span>
+                </a>
+            </div>
+        </dd>
+    </dl>
+    <dl class="gx-money">
+        <dt><i class="icon-word">卡号</i></dt>
+        <dd>
+            <input type="tel" class="gx-text" placeholder="请输入银行卡号" id="BankCard"/></dd>
+    </dl>
+    <dl class="gx-money">
+        <dt><i class="icon-word">手机</i></dt>
+        <dd>
+            <input type="tel" class="gx-text" placeholder="请输入银行预留手机号" id="Phone" maxlength="11"/></dd>
+    </dl>
+
+    <div class="reg-list">
+        <dl>
+            <dt class="right-style gray-status" id="repOld" style="display: none">
+                <span id="btnSend"><b id="TimeMove">60</b>秒后重新发送</span>
+            </dt>
+            <dt class="right-style" id="repNew">
+                @*<span id="repNewMsg">发送验证码</span>*@
+                发送验证码
+            </dt>
+            <dd>
+                <input type="tel" class="input-txt phone-code" id="phoneCode" name="phoneCode" placeholder="机器人才不输验证码" maxlength="6"/>
+            </dd>
+            <dd class="yx-tips">
+            </dd>
+        </dl>
+    </div>
+    <div class="sub margin_top"><a id="ok-bank" class="ui-btn">确认</a>
+    </div>
+    <div class="gm-tipT">
+        <div class="gm-tips">
+            <h2>提示：</h2>
+            <ul>
+                <li>手机号必须为所选银行的预留手机号；</li>
+                <li>
+                    姓名、身份证信息必须为所选银行卡办理时填写信息。
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- 选择银行卡弹窗 -->
+<div id="selectBank" class="gx-hide">
+    <div class="elect-bank">
+        <h2>选择银行</h2>
+        <ul class="J_selectBank">
+            <li>
+                <label>
+                <i>
+                    <img src="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "images/SysBankImg/boc.jpg")"></i>
+                <p>
+                    <b>中国银行</b>
+                    <span>限额：<em>5</em>万/笔 <em>20</em>万/日</span>
+                </p>
+                <input type="radio" name="a" class="gx-radio-bank" />
+                </label>
+            </li>
+            <li>
+                <i>
+                    <img src="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "images/SysBankImg/icbc.jpg")"></i>
+                <p>
+                    <b>中国工商银行</b>
+                    <span>限额：<em>1</em>万/笔 <em>1</em>万/日</span>
+                </p>
+                <input type="radio" name="a" class="gx-radio-bank" />
+            </li>
+            <li>
+                <i>
+                    <img src="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "images/SysBankImg/ccb.jpg")"></i>
+                <p>
+                    <b>中国建设银行</b>
+                    <span>限额：<em>5</em>万/笔 <em>20</em>万/日</span>
+                </p>
+                <input type="radio" name="a" class="gx-radio-bank" />
+            </li>
+            <li>
+                <i>
+                    <img src="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "images/SysBankImg/abc.jpg")"></i>
+                <p>
+                    <b>中国农业银行</b>
+                    <span>限额：<em>5</em>万/笔 <em>20</em>万/日</span>
+                </p>
+                <input type="radio" name="a" class="gx-radio-bank" />
+            </li>
+            <li>
+                <i>
+                    <img src="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "images/SysBankImg/ceb.jpg")"></i>
+                <p>
+                    <b>光大银行</b>
+                    <span>限额：<em>5</em>万/笔 <em>20</em>万/日</span>
+                </p>
+                <input type="radio" name="a" class="gx-radio-bank" />
+            </li>
+            <li>
+                <i>
+                    <img src="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "images/SysBankImg/cmb.jpg")"></i>
+                <p>
+                    <b>招商银行</b>
+                    <span>限额：<em>5</em>万/笔 <em>20</em>万/日</span>
+                </p>
+                <input type="radio" name="a" class="gx-radio-bank" />
+            </li>
+            <li>
+                <i>
+                    <img src="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "images/SysBankImg/bcm.jpg")"></i>
+                <p>
+                    <b>交通银行</b>
+                    <span>限额：<em>5</em>万/笔 <em>20</em>万/日</span>
+                </p>
+                <input type="radio" name="a" class="gx-radio-bank" />
+            </li>
+            <li>
+                <i>
+                    <img src="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "images/SysBankImg/cmbc.jpg")"></i>
+                <p>
+                    <b>中国民生银行</b>
+                    <span>限额：<em>5</em>万/笔 <em>20</em>万/日</span>
+                </p>
+                <input type="radio" name="a" class="gx-radio-bank" />
+            </li>
+            <li>
+                <i>
+                    <img src="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "images/SysBankImg/cib.jpg")"></i>
+                <p>
+                    <b>兴业银行</b>
+                    <span>限额：<em>5</em>万/笔 <em>20</em>万/日</span>
+                </p>
+                <input type="radio" name="a" class="gx-radio-bank" />
+            </li>
+
+            <li>
+                <i>
+                    <img src="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "images/SysBankImg/gdb.jpg")"></i>
+                <p>
+                    <b>广东发展银行</b>
+                    <span>限额：<em>5</em>万/笔 <em>20</em>万/日</span>
+                </p>
+                <input type="radio" name="a" class="gx-radio-bank" />
+            </li>
+            @*<li>
+                <i>
+                    <img src="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "images/SysBankImg/gcb.jpg")"></i>
+                <p>
+                    <b>广州银行</b>
+                    <span>限额：<em>5</em>万/笔 <em>20</em>万/日</span>
+                </p>
+                <input type="radio" name="a" class="gx-radio-bank" />
+            </li>*@
+            <li>
+                <i>
+                    <img src="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "images/SysBankImg/hxb.jpg")"></i>
+                <p>
+                    <b>华夏银行</b>
+                    <span>限额：<em>5</em>万/笔 <em>20</em>万/日</span>
+                </p>
+                <input type="radio" name="a" class="gx-radio-bank" />
+            </li>
+            <li>
+                <i>
+                    <img src="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "images/SysBankImg/picc.jpg")"></i>
+                <p>
+                    <b>平安银行</b>
+                    <span>限额：<em>5</em>万/笔 <em>20</em>万/日</span>
+                </p>
+                <input type="radio" name="a" class="gx-radio-bank" />
+            </li>
+            <li>
+                <i>
+                    <img src="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "images/SysBankImg/spdb.jpg")"></i>
+                <p>
+                    <b>上海浦东发展银行</b>
+                    <span>限额：<em>5</em>万/笔 <em>20</em>万/日</span>
+                </p>
+                <input type="radio" name="a" class="gx-radio-bank" />
+            </li>
+            <li>
+                <i>
+                    <img src="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "images/SysBankImg/post.jpg")"></i>
+                <p>
+                    <b>邮政银行</b>
+                    <span>限额：<em>5</em>万/笔 <em>20</em>万/日</span>
+                </p>
+                <input type="radio" name="a" class="gx-radio-bank" />
+            </li>
+            <li>
+                <label>
+                <i>
+                    <img src="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "images/SysBankImg/citic.jpg")"></i>
+                <p>
+                    <b>中信银行</b>
+                    <span>限额：<em>5</em>万/笔 <em>20</em>万/日</span>
+                </p>
+                <input type="radio" name="a" class="gx-radio-bank" />
+                </label>
+            </li>
+        </ul>
+    </div>
+</div>
+<input type="hidden" id="returnUrl" value="@ViewBag.returnUrl" />
+<script>
+    seajs.use('User/UserSetting/add_bank');  
+</script>

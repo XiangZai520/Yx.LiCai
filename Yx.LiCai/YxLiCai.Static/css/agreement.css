@@ -1,0 +1,118 @@
+/* 用户协议 */
+.agreement-wrap{
+    background: #CCC;
+    width: 100%;
+    padding: 10px 0;
+    font-size: 14px;
+}
+.agreement-box{
+    width: 800px;
+    min-height: 600px;
+    background: #FFF url(../images/bg_agm.png) repeat-y center top;
+    padding: 30px 40px;
+    margin: 0 auto;
+}
+.agm-num{
+    border-bottom: 1px solid #555;
+    text-align: right;
+    font-size: 18px;
+    padding-bottom: 5px;
+    margin-bottom: 40px;
+}
+.agm-title{
+    text-align: center;
+    margin-bottom: 60px;
+}
+.agm-title h2{
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+.agm-text{
+    padding: 20px 0 60px;
+    position: relative;
+}
+.agm-text dl{
+    overflow: hidden;
+    width: 60%;
+    margin-bottom: 5px;
+    line-height: 20px;
+}
+.agm-text dt{
+    width: 120px;
+    float: left;
+}
+.agm-text dd{
+    overflow: hidden;
+    zoom: 1;
+    border-bottom: 1px solid #555;
+    padding-left: 10px;
+    padding-bottom: 10px;
+}
+.yx-signet{
+    height: 176px;
+    width: 180px;
+    background: url(../images/yx_signet.png) no-repeat;
+    position: absolute;
+    top: -22%;
+    left: 20%;
+}
+.agm-content{
+    line-height: 27px;
+}
+.agm-content h4{
+    margin-bottom: 10px;
+    margin-top: 30px;
+    font-weight:900;
+}
+.agm-content h3{
+    margin-bottom: 10px;
+    margin-top: 30px;
+    font-weight:900;
+    text-align: center;
+    font-size: 16px;
+}
+.agm-content p{
+    margin-bottom: 10px;
+}
+.protocolWord p{
+    text-indent: 2em;
+}
+.agm-table{
+    margin-bottom: 30px;
+}
+.agm-table td{
+    font-weight: normal;
+    border: 1px solid #555;
+    padding: 8px;
+}
+.serve-text p{
+    margin-bottom: 15px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

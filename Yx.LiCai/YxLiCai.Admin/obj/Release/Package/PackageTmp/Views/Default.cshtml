@@ -1,0 +1,157 @@
+﻿@model YxLiCai.Admin.Models.AccountMenuOutModel
+@{
+    List<YxLiCai.Model.ExtendModel.AccountMenuEx> list_temp=null;
+    Layout = null;
+    }
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+    <meta charset="UTF-8">
+    <title>e休理财后台管理</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="Globak-x">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <link rel="stylesheet" href="~/Resource/css/admin.css"/>
+    <link rel="stylesheet" href="~/Resource/css/font-awesome.min.css"/>
+
+    <script src="~/Resource/js/jquery.min.js"></script>
+    <script src="~/Resource/js/admin_yx.js"></script>
+
+</head>
+<body onscroll="no">
+<header>
+    <div class="header clearfix">
+        <h1 class="yx-logo">
+            <a href="/">e休理财管理后台</a>
+        </h1>
+        <a href="javascript:;" class="sidebar-toggle">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </a>
+        <div class="yx-nav">
+            <ul>
+                <li>
+                    <a href="">
+                        <!--<i class="type-icon-1"></i>-->
+                        <i class="fa fa-home"></i>
+                        <span>首页</span>
+                    </a>
+                </li>
+                @if (Model.list_AllMenu_Fir != null && Model.list_AllMenu_Fir.Count > 0)
+                {
+                    foreach (YxLiCai.Model.Authority.AuthorityMenuModel item in Model.list_AllMenu_Fir)
+                    {
+                        list_temp=Model.list_AccountMenu.Where(a=>a.FirD==item.Id).ToList();
+                        if (list_temp != null && list_temp.Count>0)
+                        {
+                            <li>
+                                <a href="javascript:void(0);" name="FirMenu" id="FirMenu_@(item.Id)">
+                                    <!--<i class="type-icon-2"></i>-->
+                                    <i class="@(item.Img==null||item.Img==""?"fa fa-users":item.Img)"></i>
+                                    <span>@(item.MenuName)</span>
+                                </a>
+                            </li>
+                        }
+                    }
+                }
+            </ul>
+        </div>
+        <div class="login-user">
+            <i class="fa fa-user"></i>
+            <a href="javascript:;">
+                管理员：<span>@(YxLiCai.Admin.UserContext.simpleUserInfoModel.LoginName)</span>
+            </a>
+            <a href="/Account/LogOff">[ 退出 ]</a>
+        </div>
+    </div>
+</header>
+<div class="yx-wrapper clearfix">
+    <aside class="left-side">
+        <section class="sidebar">
+            <!-- 侧边菜单 begin -->
+            <ul class="sidebar-menu">
+                @if(Model.list_AllMenu_Sec!=null&&Model.list_AllMenu_Sec.Count>0)
+                {
+                    foreach(YxLiCai.Model.Authority.AuthorityMenuModel item in Model.list_AllMenu_Sec)
+                    {
+                        list_temp = Model.list_AccountMenu.Where(a => a.SecID == item.Id).ToList();
+                        if(list_temp!=null&&list_temp.Count>0)
+                        {                           
+                            <li class="treeview" style="display:none" MenuType="2" name="SecMenu_@(list_temp[0].FirD)">
+                                <a href="javascript:void(0);">
+                                    <i class="fa fa-bar-chart-o"></i>
+                                    <span>@(item.MenuName)</span>
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </a>
+                                <ul class="treeview-menu">
+                                @foreach (YxLiCai.Model.ExtendModel.AccountMenuEx am in list_temp)
+                                {                                    
+                                    List<YxLiCai.Model.Authority.AuthorityMenuModel> list_temp_Tir = Model.list_AllMenu_Tir.Where(a => a.Id == am.TirID).ToList();                                              if(list_temp_Tir!=null&&list_temp_Tir.Count>0)
+                                    {                                    
+                                        <li><a name="TirMenu" url="@(list_temp_Tir[0].Url)" href="javascript:void(0);"><i class="fa fa-angle-double-right"></i>@(list_temp_Tir[0].MenuName)</a></li>
+                                    }
+                                }
+                                </ul>
+                            </li>
+                        }
+                    }
+                }
+            </ul>
+            <!-- 侧边菜单 end -->
+        </section>
+    </aside>
+
+    <aside class="right-side">
+
+        <section class="content iframe-wrap">
+            <!-- 数据内容 begin -->
+            <iframe src="/sys/Welcome" frameborder="0" id="ifr" width="100%" height="600"></iframe>
+            <!-- 数据内容 end -->
+        </section>
+    </aside>
+</div>
+
+@*<footer>
+    <div class="footer">
+        <p>e休理财管理 ©2015 yixiu.com 京ICP备888888号</p>
+        <p>登录IP:192.168.1.1 2015-5-30 上次登录IP:192.168.1.1 2015-6-23</p>
+    </div>
+</footer>*@
+    <script type="text/javascript">
+        $("a[name='FirMenu']").on("click", function () {
+            $("a[name='FirMenu']").each(function () {
+                $(this).removeClass("curr");
+            })
+            $(this).addClass("curr");
+            var FirID = $(this).attr("id");
+            FirID = FirID.replace("FirMenu_", "");
+            var SecMenu = "SecMenu_" + FirID;
+            $("li[MenuType=2]").each(function () {
+                var li_name = $(this).attr("name");
+                if (li_name == SecMenu) {
+                    $(this).show();
+                }
+                else {
+                    $(this).hide();
+                }
+            })
+        })
+        $("a[name='TirMenu']").on("click", function () {
+            var url = $(this).attr("url");
+            url=url;
+            $("#ifr").attr("src", url);
+        })
+
+    </script>
+</body>
+    <script type="text/javascript">
+        $(function () {
+            //var mainheight = $(this).contents().find("body").height()+100;
+            //$("#ifr").height(mainheight);
+            $("#ifr").attr("src", "/sys/Welcome");
+        })
+    </script>
+</html>

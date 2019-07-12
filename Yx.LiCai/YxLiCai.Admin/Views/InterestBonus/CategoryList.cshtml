@@ -1,0 +1,52 @@
+﻿<div class="zpManage zpSh">
+    <h2 class="crumbs">
+        您所在位置：加息券管理 > 加息券类型列表
+    </h2>
+
+    <div class="control-group form-horizontal">
+        <div class="control-group"> 
+            <div class="tbstyle">
+                <div id="categoryGrid"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    require(['CRM/common.assets', 'CRM/interestBonus.assets'], function (common, interestBonus) {
+
+        var grid = $("#categoryGrid").kendoGrid({
+            sortable: true,
+            pageable: true
+        }).data("kendoGrid");
+
+        var categoryDs = interestBonus.categoryDs();
+       
+        grid.bind("dataBinding", function (e) {
+            if (categoryDs.Binding) return;
+            for (var i = 0; i < categoryDs.data().length; i++) {
+                if (categoryDs.at(i).CreateDate != null) {
+                    var date1 = new Date(parseInt(categoryDs.at(i).CreateDate.substr(6)));
+                    categoryDs.at(i).CreateDate = date1.format("yyyy/MM/dd");
+                }
+            }
+            categoryDs.Binding = true;
+        });
+
+        var columns = [
+            { field: "Id", title: "类型ID", sortable: true },
+            { field: "CategoryName", title: "类型名称", sortable: true },
+            { field: "Amount", title: "类型金额", sortable: true },
+            { field: "ActiveDuration", title: "有效期(天)", sortable: true },
+            { field: "CreatorID", title: "创建人ID", sortable: true },
+            { field: "CreateDate", title: "创建日期", sortable: true },
+            { field: "Remark", title: "备注" },
+            { field: "Status", title: "状态", sortable: true }
+        ];
+        columns.push({title:"操作", command: { text: "修改", click: function (e) { common.showDetails(this, e, "/InterestBonus/EditCategory/"); } } });
+
+        grid.setOptions({
+            dataSource: categoryDs,
+            columns: columns
+        });
+    });
+</script>

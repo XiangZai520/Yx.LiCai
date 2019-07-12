@@ -1,0 +1,439 @@
+﻿@section styles
+{
+    <link href="~/Resource/css/font-awesome.min.css" rel="stylesheet" />
+    <script src="~/Resource/js/My97DatePicker/WdatePicker.js"></script>
+    }
+<style type="text/css">
+    .k-grid-header th.k-header > .k-link {
+        text-align: center;
+    }
+
+    .k-widget, .k-widget * {
+        text-align: left;
+    }
+
+    .k-grid tbody .k-button, .k-ie8 .k-grid tbody button.k-button {
+        min-width: 42px;
+        text-align: center;
+    }
+
+    .k-grid-header th.k-header {
+        text-align: center;
+    }
+
+    * {
+        padding: 0;
+        margin: 0;
+        line-height: 25px;
+        font-size: 12px;
+        list-style: none;
+    }
+
+    #tabContainer {
+        margin: 30px;
+    }
+
+        #tabContainer li {
+            float: left;
+            width: 80px;
+            margin: 0 3px;
+            background: #efefef;
+            text-align: center;
+        }
+
+        #tabContainer a {
+            display: block;
+        }
+
+            #tabContainer a.on {
+                background: pink;
+            }
+
+    .gx-texttitle {
+        font-size: 14px;
+        color: #666;
+        width: 142px;
+        text-align: right;
+        display: inline-block;
+    }
+</style>
+<div id="tabContainer">
+       <h2 class="crumbs">您所在位置：业务管理 > 交易记录
+    </h2>
+    <ul>
+        <li id="tab1"><a href="#" class="on" onclick="switchTab('tab1', 'con1');this.blur();return false;">购买记录</a></li>
+        <li id="tab2"><a href="#" onclick="switchTab('tab2', 'con2');this.blur();return false;">提现记录</a></li>
+        <li id="tab3"><a href="#" onclick="switchTab('tab3', 'con3');this.blur();return false;">赎回记录</a></li>
+    </ul>
+    <div style="clear: both">
+    </div>
+    <div id="con1">
+        <div class="SearchMd form-horizontal">
+            <!--购买记录-->
+            用户名：<input id="UserName"/>
+            &nbsp; &nbsp; &nbsp;
+            投资产品： &nbsp; &nbsp; &nbsp;<select id="SelPrd">
+                <option value="-1">全部</option>
+                <option value="1">月月盈</option>
+                <option value="2">季季享3个月</option>
+                <option value="3">季季享6个月</option>
+                <option value="4">年年丰</option>
+            </select>
+            投资日期：
+            <input type="text" id="S_Time" class="Wdate gx-textbox" style="height: 28px; width: 110px" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd' })"/>至
+            <input type="text" id="E_Time" class="Wdate gx-textbox" style="height: 28px; width: 110px" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd' })"/>
+            <input type="button" id="btnSearch" value="查询" class="searchBtn"/>
+        </div>
+        <div class="control-group form-horizontal">
+            <div class="control-group">
+                <x style="color: red"> </x>
+                <div class="tbstyle">
+                    <div id="productGrid"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="con2" style="display: none">
+        <!--提现记录-->
+        <div class="SearchMd form-horizontal">
+            用户名：<input id="TUserName"/>
+            提现日期：
+            <input type="text" id="TS_Time" class="Wdate gx-textbox" style="height: 28px; width: 110px" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd' })"/>至
+            <input type="text" id="TE_Time" class="Wdate gx-textbox" style="height: 28px; width: 110px" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd' })"/>
+            <input type="button" id="btnSearch_T" value="查询" class="searchBtn"/>
+        </div>
+        <div class="control-group form-horizontal">
+            <div class="control-group">
+                <x style="color: red"> </x>
+                <div class="tbstyle">
+                    <div id="productGrid_T"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="con3" style="display: none">
+        <!--赎回记录-->
+        <div class="SearchMd form-horizontal">
+            用户名：<input id="SUserName"/>
+            赎回日期：
+            <input type="text" id="SS_Time" class="Wdate gx-textbox" style="height: 28px; width: 110px" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd' })"/>至
+            <input type="text" id="SE_Time" class="Wdate gx-textbox" style="height: 28px; width: 110px" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd' })"/>
+            <input type="button" id="btnSearch_S" value="查询" class="searchBtn"/>
+        </div>
+        <div class="control-group form-horizontal">
+            <div class="control-group">
+                <x style="color: red"> </x>
+                <div class="tbstyle">
+                    <div id="productGrid_S"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="display: none; width: 500px; background-color: #a5D771;" id="JoinBlacklistDiv" class="add-openbox add-form">
+    <div style="text-align: center;">
+        <p>请输入还款金额：<i id="tt" style="color: red"></i></p>
+        <input id="RepMoney" />
+        <p>
+            <input style="margin: 5px" type="button" value="提交申请" id="ConfirmApp" /><input style="margin: 5px" type="button" value="取消" id="CancleApp" />
+        </p>
+    </div>
+</div>
+<script type="text/javascript">
+    function switchTab(ProTag, ProBox) {
+        for (i = 1; i < 4; i++) {
+            if ("tab" + i == ProTag) {
+                document.getElementById(ProTag).getElementsByTagName("a")[0].className = "on";
+            } else {
+                document.getElementById("tab" + i).getElementsByTagName("a")[0].className = "";
+            }
+            if ("con" + i == ProBox) {
+                document.getElementById(ProBox).style.display = "";
+            } else {
+                document.getElementById("con" + i).style.display = "none";
+            }
+        }
+    }
+
+    require(['CRM/common.assets'], function (common) {
+        //购买记录-start
+        $("#btnSearch").bind("click", function () {
+            var Panme = $("#UserName").val(),
+                recharge_timeStar = $("#S_Time").val(),
+                recharge_timeEnd = $("#E_Time").val();
+            var beginDate = $("#S_Time").val();
+            var endDate = $("#E_Time").val();
+            var d1 = new Date(beginDate.replace(/\-/g, "\/"));
+            var d2 = new Date(endDate.replace(/\-/g, "\/"));
+            if (beginDate != "" && endDate != "" && d1 > d2) {
+                alert("投资日期(起)不能大于投资日期(终)!");
+                return false;
+            }
+            var Panme = $("#UserName").val() || -1,
+                InvestmentProducts = $("#SelPrd").val() || -1,
+                time_min = $("#S_Time").val() || '0001/1/1 0:00:00',
+                time_max = $("#E_Time").val() || '0001/1/1 0:00:00';
+            param = { Panme: Panme, InvestmentProducts: InvestmentProducts, time_min: time_min, time_max: time_max };
+            getData(param);
+        });
+        //购买记录
+        function getData(param) {
+            //datasource
+            var productDs = new kendo.data.DataSource({
+                type: "json",
+                serverPaging: true,
+                pageSize: 15,
+                transport: {
+                    read: {
+                        url: "/Records/GetRefundLog",
+                        dataType: "json",
+                        data: param
+                    }
+                },
+                parameterMap: function (options) {
+                    return JSON.stringify(options);
+                },
+                schema: {
+                    model: {
+                        id: "id"
+                    },
+                    data: "DataResult",
+                    total: "TotalCount"
+                }
+            });
+            //columns
+            var columns = [
+                //{ field: "id", title: "序号", sortable: true },
+                { field: "Order", title: "订单号", sortable: true },
+                { field: "Phone", title: "用户名", sortable: true },
+                { field: "ProductName", title: "投资产品", sortable: true },
+                { field: "Amount", title: "投资金额", sortable: true },
+                { field: "YerRate", title: "年化收益率", sortable: true },
+                { field: "InterestRate", title: "加息券", sortable: true },
+                { field: "c_time", title: "投资时间", sortable: true }
+
+            ];
+            //grid
+            var grid_productGridd = $('#productGrid').kendoGrid({
+                sortable: true,
+                pageable: true,
+                dataSource: productDs,
+                columns: columns,
+            }).data("kendoGrid");
+            //format data
+            grid_productGridd.bind("dataBinding", function (e) {
+                for (var i = 0; i < productDs.data().length; i++) {
+                    if (productDs.at(i).YerRate != null) {
+                        a = productDs.at(i).YerRate;
+                        productDs.at(i).YerRate = toPercent(a);
+                    }
+                    if (productDs.at(i).InterestRate != null) {
+                        a = productDs.at(i).InterestRate;
+                        productDs.at(i).InterestRate = toPercent(a);
+                    }
+                    if (productDs.at(i).c_time != null) {
+                        //var date = new Date(parseInt(productDs.at(i).c_time.substr(6)));
+                        //productDs.at(i).c_time = date.format("yyyy-MM-dd");
+                        var date = new Date(parseInt(productDs.at(i).c_time.substr(6)));
+                        productDs.at(i).c_time = date.format("yyyy-MM-dd hh:mm:ss");
+                        
+                    }
+                    if (productDs.at(i).ProductName != null) {
+                        if (productDs.at(i).ProductName == 1) { productDs.at(i).ProductName = "月月盈"; } else if (productDs.at(i).ProductName == 2) { productDs.at(i).ProductName = "季季享3个月"; } else if (productDs.at(i).ProductName == 3) { productDs.at(i).ProductName = "季季享6个月"; } else { productDs.at(i).ProductName = "年年丰"; }
+
+                    }
+                }
+            });
+            grid_productGridd.setOptions({
+                dataSource: productDs,
+                columns: columns,
+                selectable: "multiple, row"
+            })
+        }
+        //购买记录结束-end
+
+
+        //提现记录-start
+        $("#btnSearch_T").bind("click", function () {
+            var recharge_timeStar = $("#TS_Time").val(),
+                recharge_timeEnd = $("#TE_Time").val();
+            var beginDate = $("#TS_Time").val();
+            var endDate = $("#TE_Time").val();
+            var d1 = new Date(beginDate.replace(/\-/g, "\/"));
+            var d2 = new Date(endDate.replace(/\-/g, "\/"));
+            if (beginDate != "" && endDate != "" && d1 > d2) {
+                alert("提现时间(起)不能大于提现时间(终)!");
+                return false;
+            }
+            var Panme = $("#TUserName").val() || -1,
+                time_min = $("#TS_Time").val() || '0001/1/1 0:00:00',
+                time_max = $("#TE_Time").val() || '0001/1/1 0:00:00';
+            param = { Panme: Panme, time_min: time_min, time_max: time_max };
+            getDataT(param);
+        });
+        //购买记录
+        function getDataT(param) {
+            //datasource
+            var productDsT = new kendo.data.DataSource({
+                type: "json",
+                serverPaging: true,
+                pageSize: 15,
+                transport: {
+                    read: {
+                        url: "/Records/GetTiXianLog",
+                        dataType: "json",
+                        data: param
+                    }
+                },
+                parameterMap: function (options) {
+                    return JSON.stringify(options);
+                },
+                schema: {
+                    model: {
+                        id: "id"
+                    },
+                    data: "DataResult",
+                    total: "TotalCount"
+                }
+            });
+            //columns
+            var columns = [
+                { field: "id", title: "订单号", sortable: true },                
+                { field: "Phone", title: "用户名", sortable: true },
+                { field: "Money", title: "提现金额", sortable: true },
+                { field: "c_time", title: "提现时间", sortable: true }
+            ];
+            //grid
+            var grid_T = $('#productGrid_T').kendoGrid({
+                sortable: true,
+                pageable: true,
+                dataSource: productDsT,
+                columns: columns,
+            }).data("kendoGrid");
+            //format data
+            grid_T.bind("dataBinding", function (e) {
+                for (var i = 0; i < productDsT.data().length; i++) {
+
+                    if (productDsT.at(i).c_time != null) {
+                        var date = new Date(parseInt(productDsT.at(i).c_time.substr(6)));
+                        productDsT.at(i).c_time = date.format("yyyy-MM-dd hh:mm:ss");
+                    }
+                }
+            });
+            grid_T.setOptions({
+                dataSource: productDsT,
+                columns: columns,
+                selectable: "multiple, row"
+            })
+        }
+        //提现记录结束-end
+
+
+
+
+        //赎回记录-start
+        $("#btnSearch_S").bind("click", function () {
+            var recharge_timeStar = $("#SS_Time").val(),
+                recharge_timeEnd = $("#SE_Time").val();
+            var beginDate = $("#SS_Time").val();
+            var endDate = $("#SE_Time").val();
+            var d1 = new Date(beginDate.replace(/\-/g, "\/"));
+            var d2 = new Date(endDate.replace(/\-/g, "\/"));
+            if (beginDate != "" && endDate != "" && d1 > d2) {
+                alert("赎回时间(起)不能大于赎回时间(终)!");
+                return false;
+            }
+            var Panme = $("#SUserName").val() || -1,
+                time_min = $("#SS_Time").val() || '0001/1/1 0:00:00',
+                time_max = $("#SE_Time").val() || '0001/1/1 0:00:00';
+            param = { Panme: Panme, time_min: time_min, time_max: time_max };
+            getDataS(param);
+        });
+        //购买记录
+        function getDataS(param) {
+            //datasource
+            var productDsS = new kendo.data.DataSource({
+                type: "json",
+                serverPaging: true,
+                pageSize: 15,
+                transport: {
+                    read: {
+                        url: "/Records/GetSLog",
+                        dataType: "json",
+                        data: param
+                    }
+                },
+                parameterMap: function (options) {
+                    return JSON.stringify(options);
+                },
+                schema: {
+                    model: {
+                        id: "id"
+                    },
+                    data: "DataResult",
+                    total: "TotalCount"
+                }
+            });
+            //columns
+            var columns = [
+                { field: "id", title: "序号", sortable: true },
+                { field: "Order", title: "订单号", sortable: true },
+                { field: "Phone", title: "用户名", sortable: true },
+                { field: "Amount", title: "赎回金额", sortable: true },
+                { field: "LiquidatedDamages", title: "违约金", sortable: true },
+                { field: "ActualAmount", title: "实到金额", sortable: true },
+                { field: "c_time", title: "赎回时间", sortable: true }
+            ];
+            //grid
+            var grid_S = $('#productGrid_S').kendoGrid({
+                sortable: true,
+                pageable: true,
+                dataSource: productDsS,
+                columns: columns,
+            }).data("kendoGrid");
+            //format data
+            grid_S.bind("dataBinding", function (e) {
+                for (var i = 0; i < productDsS.data().length; i++) {
+
+                    if (productDsS.at(i).c_time != null) {
+                        var date = new Date(parseInt(productDsS.at(i).c_time.substr(6)));
+                        productDsS.at(i).c_time = date.format("yyyy-MM-dd hh:mm:ss");
+                    }
+                }
+            });
+            grid_S.setOptions({
+                dataSource: productDsS,
+                columns: columns,
+                selectable: "multiple, row"
+            })
+        }
+        //赎回记录结束-end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    });
+    function toPercent(data) {
+        
+        var strData = parseFloat(data) * 100;
+        strData = parseFloat(strData.toFixed(8));
+        //strData = strData.substring(0, strData.indexOf(".") + 3);
+        var ret = strData.toString() + "%";
+        return ret;
+    }
+</script>

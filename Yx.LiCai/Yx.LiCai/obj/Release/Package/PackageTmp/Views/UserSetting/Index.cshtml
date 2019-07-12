@@ -1,0 +1,100 @@
+﻿@{
+    ViewBag.Title = "个人设置";
+}
+        <div class="user-hd">
+           	<a href="/Member/"> <img class="user-img" src="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "images/yixiu_man.png")" alt=""></a>
+
+            <div class="user-mPhone">
+               <a href="/Member/">  <span>@(YxLiCai.Tools.Const.SystemConst.PhoneCut(Yx.LiCai.App_Start.UserContext.simpleUserInfoModel.Account))</span></a>
+            </div>
+        </div>
+        <div class="setting-menu">
+            <div class="setting-item">
+                @if (Yx.LiCai.App_Start.UserContext.simpleUserInfoModel.IsRealCard == 1)
+                {
+                    <div class="clearfix">
+                        <strong class="gx-left"><b class="icon-man"></b>身份认证</strong>
+                        <span class="status-yes gx-right">@(YxLiCai.Tools.Const.SystemConst.NameCut(Yx.LiCai.App_Start.UserContext.simpleUserInfoModel.MyRealName))</span>
+                    </div>
+                }
+                else
+                {
+                    <a class="clearfix" href="/UserSetting/uc_setting_status">
+                        <strong class="gx-left"><b class="icon-man"></b>身份认证</strong>
+                        <span class="gx-right">点击认证<b class="icon-lins"></b></span>
+                        <span class="status-yes gx-right"></span>
+                    </a>
+                }
+            </div>
+                   <div class="setting-item clearfix">
+                <a class="clearfix" href="/usersetting/get_money/">
+                    <strong class="gx-left"><b class="icon-money"></b>金券包</strong>
+                    <span class="gx-right"><b class="icon-lins"></b></span> 
+                </a>
+            </div>
+            <div class="setting-item clearfix">
+                <a class="clearfix" href="/usersetting/uc_message/">
+                    <strong class="gx-left"><b class="icon-msg"></b>我的消息</strong>
+                    <span class="gx-right"><b class="icon-lins"></b></span>
+                    @if(ViewBag.MessageCount > 0)
+                    {
+                       <div class="icon-tips">
+                        <span>@ViewBag.MessageCount</span>
+                    </div>
+                    }
+                </a>
+            </div>  
+            <div class="setting-pwd">
+                <div class="setting-item clearfix">
+                    @if (Yx.LiCai.App_Start.UserContext.simpleUserInfoModel.IsJiaoYIPW == 1)
+                    {   <a class="clearfix" href="/UserSetting/fetch_pwd_modify">
+                        <strong class="gx-left"><b class="icon-pwd1"></b>交易密码</strong>
+                        <span class="gx-right" id="UpdateSPW">修改<b class="icon-lins"></b></span>
+                    </a>}
+                    else
+                    {    <a class="clearfix" href="/UserSetting/fetch_pwd_setting">
+                        <strong class="gx-left"><b class="icon-pwd1"></b>交易密码</strong>
+                        <span class="gx-right" id="SetSPW">去设置<b class="icon-lins"></b></span>
+                    </a>}
+
+
+
+                </div>
+                <div class="setting-item clearfix">
+                    <a class="clearfix" href="/UserSetting/user_setting_pwd">
+                        <strong class="gx-left"><b class="icon-pwd2"></b>登录密码</strong>
+                        <span class="gx-right" id="UpdatePW">修改<b class="icon-lins"></b></span>
+                    </a>
+                </div>
+                <div class="setting-item clearfix">
+                    @if (Yx.LiCai.App_Start.UserContext.simpleUserInfoModel.IsBindBank == 1)
+                    {
+                        <a class="clearfix" href="/UserSetting/uc_setting_bank">
+                            <strong class="gx-left"><b class="icon-bank"></b>我的银行卡</strong>
+                            <span class="gx-right"><b class="icon-lins"></b></span>
+                        </a>
+                    }
+                    else
+                    {
+                        <a class="clearfix" id="addBink">
+                            <strong class="gx-left"><b class="icon-bank"></b>我的银行卡</strong>
+                            <span class="gx-right"><b class="icon-lins"></b></span>
+                        </a>
+                    }
+
+                </div>
+            </div>
+        </div>
+        <div class="exit-btn">
+            <a class="ui-btn ui-btn-warn" href="LoginOut">退出登录</a>
+        </div>
+<!-- 浮动栏 -->
+<div class="yx-fixedBar">
+    <a class="yx-back" href="javasrcipt:void(0);">返回</a>
+    <a class="yx-home" href="/">首页</a>
+</div>
+<script>
+    seajs.use('fixed_bar'); 
+    var IsRealCard = '@Yx.LiCai.App_Start.UserContext.simpleUserInfoModel.IsRealCard';
+    seajs.use('User/UserSetting/Index');
+</script>

@@ -1,0 +1,247 @@
+/*绑定银行卡*/
+.gx-money{
+	overflow: hidden;
+	margin-top: 20px;
+	position: relative;
+}
+.gx-money dd{
+	padding:10px 20px;
+	height: 46px;
+	border-radius: 5px;
+	border:1px solid #c8c8c8;
+	width: 100%;
+	float: left;
+	padding-left: 11px;
+}
+.icon-word{
+	position: absolute;
+	left: 0;
+	top: 0;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	display: block;
+	width: 70px;
+	height: 46px;
+	text-align: center;
+	line-height: 46px;
+	background: #4cccf3;
+	background-size: 100%;
+	color: #fff;
+	font-size: 16px;
+}
+.gx-money dd .gx-text{
+	padding-left: 70px;
+	font-size: 16px;
+	height: 24px;
+	color: #aaa;
+	width: 100%;
+}
+.moner_num{
+	padding-top: 10px;
+}
+.elect-bank{
+	width: 100%;
+	padding:20px 0;
+	margin: 0 auto;
+}
+.elect-bank h2{
+	color: #b4b4b4;
+	font-size: 18px;
+	font-weight: bold;
+	text-align: center;
+	padding-bottom: 20px;
+}
+.elect-bank ul{
+	height: 235px;
+	overflow-y: scroll;
+}
+.elect-bank ul li{
+	overflow: hidden;
+	border-top:1px solid #dfdfdf;
+	padding: 5px 0;
+	cursor: pointer;
+}
+.elect-bank ul li i{
+	display: block;
+	width: 40px;
+	height: 40px;
+	float: left;
+	margin:4px 0 0 20px;
+}
+.elect-bank ul li i img{
+	width: 100%;
+}
+.elect-bank ul li p{
+	float: left;
+	padding-left: 15px;
+}
+.elect-bank ul li p b{
+	font-size: 16px;
+	color: #646464;
+	display: block;
+}
+.elect-bank ul li p span{
+	font-size: 14px;
+	color: #b4b4b4;
+	display: block;
+}
+
+.gx-radio-bank{
+	float: right;
+	display: inline-block;
+    width: 24px;
+    height: 1px;
+    position: relative;
+    overflow: visible;
+    border: none;
+    background: none;
+    -webkit-appearance: none;
+    outline: none;
+    margin:24px 12px 0 0;
+    vertical-align: middle;
+}
+.gx-radio-bank:before {
+	content: '';
+	display: block;
+	width: 24px;
+	height: 24px;
+	border: 1px solid #dfe0e1;
+	border-radius: 15px;
+	-webkit-background-clip: padding-box;
+	background-clip: padding-box;
+	position: absolute;
+	left: 0px;
+	top: -14px;
+}
+.checked .gx-radio-bank:before{
+	background: url(../images/ui_btn_s.png) no-repeat center;
+	-webkit-background-size: contain;
+	background-size: contain;
+	border:none;
+}
+.margin_top{
+	margin-top: 35px;
+}
+/*6.6新增*/
+.buy-bank-position{
+	position: relative;
+}
+.bank-infor a img,
+.bank-infor a span{
+	display: none;
+}
+.bank-infor img{
+	width: 20px;
+	height: 20px;
+	display: inline-block;
+	margin-left: 10px;
+	vertical-align: middle;
+}
+.bank-infor span{
+	font-size: 16px;
+	margin-left: 5px;
+	color: #b4b4b4;
+	line-height: 46px;
+	display: inline-block;
+	vertical-align: middle;
+}
+.buy-input .reg-list{
+	margin-top: 20px;
+}
+
+.ui-btn{
+    display: block;
+    width: 100%;
+    height: 55px;
+    line-height: 55px;
+    box-shadow: 0 5px 0 0 #009dcc;
+    border-radius: 5px;
+    background: #00b7ee;
+    color: #FFF;
+    font-size: 24px;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+}
+
+/* register */
+.reg-box{
+    padding:0 20px;
+}
+.reg-list{
+    padding-bottom: 60px;
+}
+.reg-list dl{
+    position: relative;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+.reg-list dt{
+    width: 70px;
+    height: 46px;
+    line-height: 46px;
+    text-align: center;
+    overflow: hidden;
+    border-radius: 5px 0 0 5px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #00b7ee;
+    opacity: 0.9;
+    color: #FFF;
+}
+.reg-list .right-style{
+    border-radius: 0 5px 5px 0;
+    width: 140px;
+    left: inherit;
+    right: 0;
+}
+.reg-list .right-style a{
+    color: #FFF;
+    display: block;
+}
+.reg-list .left-style{
+    width: 110px;
+}
+.reg-list .gray-status{
+    background: #e1e1e1;
+    color: #FFF;
+}
+.reg-list dd{
+    width: 100%;
+}
+.reg-list .input-txt{
+    padding:5px 10px 5px 90px;
+    width:100%;
+    height: 46px;
+    border-radius: 5px;
+    border: 1px solid #dfdfdf;
+    font-family: "Microsoft Yahei";
+}
+.reg-list .phone-code{
+    padding:5px 10px 5px 10px;
+}
+.reg-list .reg-pwd{
+    padding:5px 10px 5px 130px;
+}
+.yx-tips{
+    padding-top: 10px;
+    padding-left: 10px;
+    color: #999;
+    font-size: 16px;
+}
+.bank-select{
+    display: block;
+    width: 100%;
+    height: 46px;
+    border-radius: 5px;
+    padding: 0 10px 0 70px;
+    border: 1px solid #dfdfdf;
+}
+.bank-select a{
+    display: block;
+    height: 46px;
+    background: url(bank_s.png) no-repeat right center;
+    -webkit-background-size: 10px auto;
+    background-size: 10px auto;
+}

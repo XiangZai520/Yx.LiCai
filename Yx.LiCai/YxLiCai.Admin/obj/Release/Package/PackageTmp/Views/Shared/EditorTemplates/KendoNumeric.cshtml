@@ -1,0 +1,36 @@
+﻿@model YxLiCai.Admin.Models.KendoNumericTextBoxViewModel
+
+<input type="text" id="@Model.Id" value="@Model.Value" />
+
+
+<script type="text/javascript">
+    var textBoxFormat = '@Model.Format',
+        id = '@Model.Id',
+        decimals = '@Model.Decimals',
+        readOnly = '@Model.Readonly',
+        min = '@Model.Min',
+        max = '@Model.Max';
+
+    if (max.trim() != "") {
+        $("#" + id + "").kendoNumericTextBox({
+            decimals: decimals,
+            format: textBoxFormat,
+            min: min,
+            max: max
+        });
+    }
+    else {
+        $("#" + id + "").kendoNumericTextBox({
+            decimals: decimals,
+            format: textBoxFormat,
+            min: min
+        });
+    }
+
+    var numerictextbox = $("#" + id + "").data("kendoNumericTextBox");
+    numerictextbox.wrapper.width("182px");
+
+    if (readOnly == "true") {
+        numerictextbox.readonly();
+    }
+</script>

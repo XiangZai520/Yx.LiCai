@@ -1,0 +1,31 @@
+.sidebar-list{
+	padding-top: 10px;
+	width: 400px;
+}
+.sidebar-list li.sidebar-bottom a{
+    border-top:none;
+	border-bottom: 1px solid #dbdbdb;
+}
+.sidebar-list li a{
+	display: block;
+	border-top: 1px solid #fff;
+    border-bottom: 1px solid #dbdbdb;
+    padding:5px 5px 5px 15px;
+    color: #222;
+    font-size: 12px;
+}
+.sidebar-list .sidebar-list-two li a{
+    padding-left: 30px;
+}
+.sidebar-list .sidebar-list-three li a{
+    padding-left: 60px;
+}
+.sidebar-list .sidebar-list-four li a{
+    padding-left: 90px;
+}
+.sidebar-list .sidebar-list-five li a{
+    padding-left: 120px;
+}
+.sidebar-list span{
+    padding-left: 3px;
+}

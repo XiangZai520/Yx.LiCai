@@ -1,0 +1,149 @@
+﻿@section styles
+{
+    <link href="~/Resource/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Resource/css/admin-ui.css?v=1.1" rel="stylesheet" />
+    <script src="~/Resource/js/My97DatePicker/WdatePicker.js"></script>
+    <style>
+        #tdata td {
+            padding: 5px;
+            text-align: center;
+        }
+
+        .gx-table thead th {
+            padding: 5px;
+            text-align: center;
+        }
+
+        #search {
+            height: 30px;
+            width: 100px;
+        }
+    </style>
+}
+<div class="zpManage zpSh">
+    <h2 class="crumbs">
+        您所在位置：会员管理->用户管理->黑名单
+    </h2>
+</div>
+<div class="gx-textitem">
+    <label class="gx-texttitle">
+        用户名：
+    </label>
+    <input id="LoginName" type="text" class="gx-textbox" placeholder="请输入内容..." >
+    <label class="gx-texttitle">
+        真实姓名：
+    </label>
+    <input id="MyRealName" type="text" class="gx-textbox" placeholder="请输入内容...">
+    <label class="gx-texttitle">
+        操作人：
+    </label>
+    <input id="OprateName" type="text" class="gx-textbox" placeholder="请输入内容...">
+    <br/>
+    <label class="gx-texttitle">
+        拉黑时间：
+    </label>
+    <input type="text" id="S_RegTime" class="Wdate gx-textbox" style="height:34px;" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd' })">
+    <label class="gx-texttitle">
+        至：
+    </label>
+    <input type="text" id="E_RegTime" class="Wdate gx-textbox" style="height:34px;" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd' })" />
+    <button id="search" class="gx-button gx-button-info" style="float:right;margin-right:300px;">查询</button>
+</div>
+<div class="cleanfix" style="margin:15px 15px 15px 15px">
+    <table class="gx-table gx-table-striped" >
+        <thead>
+            <tr>
+                <th width="10%">用户名</th>
+                <th width="10%">真实姓名</th>
+                <th width="10%">手机号</th>
+                <th width="10%">拉黑时间</th>               
+                <th width="10%">操作人</th>
+                <th width="40%">拉黑备注</th>
+                <th width="10%">操作</th>
+            </tr>
+        </thead>
+        <tbody id="tdata">
+
+        </tbody>
+    </table>
+</div>
+<!--分页控件-->
+<div class="clearfix">
+    <nav class="gx-pager" id="pager">
+        
+    </nav>
+</div>
+
+<script type="text/javascript">
+    //固定查询方法 方法名必须叫Search
+    function Search(CurrentPage) {
+        var LoginName = $("#LoginName").val();
+        var MyRealName = $("#MyRealName").val();
+        var S_RegTime = $("#S_RegTime").val();
+        var E_RegTime = $("#E_RegTime").val();
+        var OprateName = $("#OprateName").val();
+        $.ajax({
+            type: "POST",
+            url: "/Member/BlackList_ajax",
+            data: { LoginName: LoginName, MyRealName: MyRealName, S_RegTime: S_RegTime, E_RegTime: E_RegTime, OprateName: OprateName, PageIndex: CurrentPage, PageSize: 10 },
+            async: false,
+            success: function (data) {
+                if (data != null) {
+
+                    $("#pager").html(data.PageHTML);
+                    var Rows = data.Rows;
+                    
+                    if (Rows != null) {
+                        var strHTML = "";
+                        for (var i = 0; i < Rows.length; i++) {
+                            var row = Rows[i];
+                            strHTML = strHTML + "<tr>";
+                            strHTML = strHTML + "<td>" + row.login_name + "</td>";
+                            strHTML = strHTML + "<td>" + row.my_realname + "</td>";
+                            strHTML = strHTML + "<td>" + row.phone + "</td>";
+                            strHTML = strHTML + "<td>" + row.create_time_s + "</td>";
+                            strHTML = strHTML + "<td>" + row.oprate_man_name + "</td>";
+                            strHTML = strHTML + "<td>" + row.remark + "</td>";
+                            strHTML = strHTML + ("<td><a id='uid_" + row.user_id + "' name='CancleBlackList'>取消拉黑</a></td>");
+                            strHTML = strHTML + "</tr>";
+                        }
+                        $("#tdata").html(strHTML);
+                    }
+                }
+            }
+        })
+    }
+    $("#search").on("click", function () {
+        Search(1);
+    })
+    $(function () {
+        Search(1);
+    })
+
+    $("#tdata").on("click", "a[name='CancleBlackList']", function () {
+        if (confirm("确定要取消拉黑吗？")) {
+            var userid = $(this).attr("id");
+            userid = userid.replace("uid_", "");
+            $.ajax({
+                type: "POST",
+                url: "/Member/CancleBlackList_ajax",
+                data: { userid: userid },
+                async: false,
+                success: function (data) {
+                    if (data != null) {
+                        if (data == "ok") {
+                            alert("取消成功！");
+                            Search(1);
+                        }
+                        else {
+                            alert(data.Message);
+                        }
+                    }
+                }
+            })
+        }
+        else {
+            return false;
+        }
+   })
+</script>

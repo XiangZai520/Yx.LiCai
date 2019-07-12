@@ -1,0 +1,281 @@
+﻿@using YxLiCai
+@using YxLiCai.Model.User;
+@using Yx.LiCai.App_Start
+@{
+    ViewBag.Title = "购买产品";
+}
+<link href="@HttpPageHelper.GetRemoteNetURL(SystemSiteEnum.StaticResourceMallWeb, "css/buy.css")" rel="stylesheet">
+
+<div class="buy-input">
+    <dl class="gx-money">
+        <dt><i class="icon-word">买入</i></dt>
+        <dd><input type="text" class="gx-text" id="raisemoney" placeholder="最低买入金额为100元" value="@ViewBag.buyMoney"></dd>
+    </dl>
+    <p class="moner_num"><b> @ViewBag.ptypeDp</b> 可购买金额为<b id="AvailableAmount"> @ViewBag.AvailableAmount </b></p>
+    
+    @if (ViewBag.IsBindBank == 1)
+    {
+        <ul class="ul-balance J_payWay" id="ul-bal">
+        <li>账户可用余额</li>
+        <li style="float:right;">
+            <span><b>@ViewBag.Money</b>元</span>
+            @if (ViewBag.IsBindBank == 1)
+            {
+                if (ViewBag.buytype == "1")
+                {
+
+            <input type="radio" value="1" name="rbuy" checked="checked" class="ui-checkbox-s checked" />
+                }
+                else
+                {
+            <input type="radio" value="1" name="rbuy" class="ui-checkbox-s" />
+                }
+            }
+            else
+            {
+                if (ViewBag.buytype == "1")
+                {
+
+            <input type="radio" value="1" name="rbuy" checked="checked" class="ui-checkbox-s checked" />
+                }
+                else
+                {
+            <input type="radio" value="1" name="rbuy" class="ui-checkbox-s" />
+                }
+            }
+        </li>
+    </ul>
+             <!-- 绑定完成状态 -->
+        var bank = ViewBag.BankInfo as UserBankCardModel;
+        <ul class="ul-balance J_payWay">
+            <li><i><img src="@HttpPageHelper.GetRemoteNetURL(SystemSiteEnum.StaticResourceMallWeb,string.Format("images/SysBankImg/{0}.jpg",bank.BankCode))"></i></li>
+            <li>
+                <span id="bank-s"> @bank.BankName（<em>@bank.LastNum </em>）</span>
+
+            </li>
+            <li style="float: right;">
+                @if (ViewBag.buytype == "2")
+                {
+                    <input type="radio" checked="checked" name="rbuy" value="2" class="ui-checkbox-s checked" />
+                }
+                else
+                {
+                    <input type="radio" name="rbuy" value="2" class="ui-checkbox-s" />
+                }
+
+            </li>
+        </ul>
+    }
+    else
+    {
+        <dl class="gx-money item-input">
+            <dt><i class="icon-word">卡号</i></dt>
+            <dd><input type="text" id="bankCardNum" class="gx-text" value="@ViewBag.BankCard" placeholder="请输入本人持有的银行卡号"></dd>
+        </dl>
+        <div id="J_bankInfor" class="look-Bank"><a href="javascript:void(0);">查看支持的14家银行</a></div>
+    }
+    <a id="AddInterestCount" href="javascript:void(0)">
+        <ul class="ul-balance" id="ul-margin">
+            <li>使用加息劵</li>
+            <li style="float:right;"> 
+                @if (ViewBag.AddRate == 0m)
+                {
+                    <span><b>@ViewBag.AddInterestCount</b>张可用</span>
+                }
+                else
+                {
+                    <span><b>@ViewBag.AddRate</b>%</span>
+                }
+
+                <em class="bank_conrner"></em>
+            </li>
+        </ul>
+    </a>
+    <div class="gx-protocol">
+        <a href="/Buy/invest_serveAgreement">《投资咨询及管理服务协议》</a>
+    </div>
+    <input type="hidden" value="@ViewBag.Ptype" id="ptype" />
+    <input type="hidden" value="@ViewBag.ProductId" id="productid" />
+    <input type="hidden" value="@ViewBag.Money" id="balance" />
+    <input type="hidden" value="@ViewBag.IsBindBank" id="isBindBank" />
+    <input type="hidden" value="@ViewBag.IsRealCard" id="isRealCard" />
+    <input type="hidden" value="@ViewBag.Addinterests" id="addrateids" />
+    <input type="hidden" value="@ViewBag.buyMoney" id="buyMoney" />
+    <input type="hidden" value="@ViewBag.Ids" id="ids"/>
+    <input type="hidden" value="@ViewBag.BankCard" id="BankCardNum" />
+    <div class="margin_top"><a href="javascript:void(0);" class="ui-btn" id="buyit">确认买入</a></div>
+</div>
+
+<!-- 密码交易弹窗 -->
+<div id="J_buyPwd" class="input-password" name="p1">
+    <h2>请输入交易密码</h2>
+    <p id="sallmoney"><span>500</span>元</p>
+    <div class="in-password">
+        <input type="password" id="sallpwd" class="in-txt">
+    </div>
+    @if (UserContext.simpleUserInfoModel.IsJiaoYIPW == 0)
+    {
+    <a href="javascript:void(0)" id="fetch_pwd_setting">去设置</a>
+    <div class="gx-passwoed-btn">
+        <a href="javascript:void(0)" class="gx-passwprd-sub gx-passwprd-gray">确认</a>
+    </div>
+    }
+    else
+    {
+    <a href="javascript:void(0)" id="forget_SPFist_pwd">忘记密码?</a>
+    <div class="gx-passwoed-btn">
+        <a href="javascript:void(0)" class="gx-passwprd-sub" id="okbuy">确认</a>
+    </div>
+    }
+    <div id="buyLoading"></div>
+</div>
+
+<!-- 选择银行卡弹窗 -->
+<div id="selectBank" class="gx-hide">
+    <div class="elect-bank">
+        <h2>支持的银行</h2>
+        <ul class="J_selectBank">
+            <li>
+                <i>
+                    <img src="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "images/SysBankImg/boc.jpg")">
+                </i>
+                <p>
+                    <b>中国银行</b>
+                    <span>限额：<em>5</em>万/笔 <em>20</em>万/日</span>
+                </p>
+            </li>
+            <li>
+                <i>
+                    <img src="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "images/SysBankImg/icbc.jpg")">
+                </i>
+                <p>
+                    <b>中国工商银行</b>
+                    <span>限额：<em>1</em>万/笔 <em>1</em>万/日</span>
+                </p>
+            </li>
+            <li>
+                <i>
+                    <img src="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "images/SysBankImg/ccb.jpg")">
+                </i>
+                <p>
+                    <b>中国建设银行</b>
+                    <span>限额：<em>5</em>万/笔 <em>20</em>万/日</span>
+                </p>
+            </li>
+            <li>
+                <i>
+                    <img src="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "images/SysBankImg/abc.jpg")">
+                </i>
+                <p>
+                    <b>中国农业银行</b>
+                    <span>限额：<em>5</em>万/笔 <em>20</em>万/日</span>
+                </p>
+            </li>
+            <li>
+                <i>
+                    <img src="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "images/SysBankImg/ceb.jpg")">
+                </i>
+                <p>
+                    <b>光大银行</b>
+                    <span>限额：<em>5</em>万/笔 <em>20</em>万/日</span>
+                </p>
+            </li>
+            <li>
+                <i>
+                    <img src="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "images/SysBankImg/cmb.jpg")">
+                </i>
+                <p>
+                    <b>招商银行</b>
+                    <span>限额：<em>5</em>万/笔 <em>20</em>万/日</span>
+                </p>
+            </li>
+            @*<li>
+                <i>
+                    <img src="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "images/SysBankImg/bcm.jpg")">
+                </i>
+                <p>
+                    <b>交通银行</b>
+                    <span>限额：<em>5</em>万/笔 <em>20</em>万/日</span>
+                </p>
+            </li>*@
+            <li>
+                <i>
+                    <img src="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "images/SysBankImg/cmbc.jpg")">
+                </i>
+                <p>
+                    <b>中国民生银行</b>
+                    <span>限额：<em>5</em>万/笔 <em>20</em>万/日</span>
+                </p>
+            </li>
+            <li>
+                <i>
+                    <img src="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "images/SysBankImg/cib.jpg")">
+                </i>
+                <p>
+                    <b>兴业银行</b>
+                    <span>限额：<em>5</em>万/笔 <em>20</em>万/日</span>
+                </p>
+            </li>
+
+            <li>
+                <i>
+                    <img src="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "images/SysBankImg/gdb.jpg")">
+                </i>
+                <p>
+                    <b>广东发展银行</b>
+                    <span>限额：<em>5</em>万/笔 <em>20</em>万/日</span>
+                </p>
+            </li>
+            <li>
+                <i>
+                    <img src="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "images/SysBankImg/hxb.jpg")">
+                </i>
+                <p>
+                    <b>华夏银行</b>
+                    <span>限额：<em>5</em>万/笔 <em>20</em>万/日</span>
+                </p>
+            </li>
+            <li>
+                <i>
+                    <img src="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "images/SysBankImg/picc.jpg")">
+                </i>
+                <p>
+                    <b>平安银行</b>
+                    <span>限额：<em>5</em>万/笔 <em>20</em>万/日</span>
+                </p>
+            </li>
+            <li>
+                <i>
+                    <img src="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "images/SysBankImg/spdb.jpg")">
+                </i>
+                <p>
+                    <b>上海浦东发展银行</b>
+                    <span>限额：<em>5</em>万/笔 <em>20</em>万/日</span>
+                </p>
+            </li>
+            <li>
+                <i>
+                    <img src="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "images/SysBankImg/post.jpg")">
+                </i>
+                <p>
+                    <b>邮政银行</b>
+                    <span>限额：<em>5</em>万/笔 <em>20</em>万/日</span>
+                </p>
+            </li>
+            <li>
+                <i>
+                    <img src="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "images/SysBankImg/citic.jpg")">
+                </i>
+                <p>
+                    <b>中信银行</b>
+                    <span>限额：<em>5</em>万/笔 <em>20</em>万/日</span>
+                </p>
+            </li>
+        </ul>
+    </div>
+</div>
+<script>
+    var buy_type = "@ViewBag.buytype";
+    var isBindBank = "@ViewBag.IsBindBank";
+    seajs.use('User/UC/buy_product.js');
+</script>

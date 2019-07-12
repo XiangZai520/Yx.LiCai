@@ -1,0 +1,410 @@
+﻿@section styles
+{
+    <link href="~/Resource/css/font-awesome.min.css" rel="stylesheet" />
+    <script src="~/Resource/js/My97DatePicker/WdatePicker.js"></script>
+}
+<div class="zpManage zpSh">
+    <h2 class="crumbs">
+        您所在位置：财务管理->提现->保理提现
+    </h2>
+</div>
+<div class="gx-textitem">
+    <label class="gx-texttitle">
+        用户名：
+    </label>
+    <input id="LoginName" type="text" class="gx-textbox" placeholder="请输入内容...">
+    <label class="gx-texttitle">
+        真实姓名：
+    </label>
+    <input id="MyRealName" type="text" class="gx-textbox" placeholder="请输入内容...">
+    <label class="gx-texttitle">
+        状态：
+    </label>
+    <select id="status" class="gx-textbox">
+        <option value="-1">全部</option>
+        <option value="0">待审核</option>
+        <option value="1">待放款</option>
+        <option value="2">已提现</option>
+        <option value="3">审核未通过</option>
+        <option value="4">支付失败</option>
+    </select>
+    <br />
+    <label class="gx-texttitle">
+        申请时间：
+    </label>
+    <input type="text" id="s_ctime" class="Wdate gx-textbox" style="height:34px;" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})">
+    <label class="gx-texttitle">
+        至：
+    </label>
+    <input type="text" id="e_ctime" class="Wdate gx-textbox" style="height:34px;" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd' })" />
+    <button id="search" class="gx-button gx-button-info search-btn" style="float:right;margin-right:300px;">查询</button>
+    <div>
+        <button id="PassAll" class="gx-button gx-button-info" style="margin: 15px 15px; display: none;">全部通过</button>
+        <button id="LoanAll" class="gx-button gx-button-info" style="margin: 15px 15px; display: none; ">全部放款</button>
+        <button id="PassChoose" class="gx-button gx-button-info" style="margin: 15px 15px;display:none;">批量通过</button>
+        <button id="LoanChoose" class="gx-button gx-button-info" style="margin: 15px 15px;display: none;">批量放款</button>
+    </div>
+</div>
+<div class="cleanfix" style="margin:15px">
+    <table class="gx-table gx-table-striped table-center" style="text-align: center; border: solid 1px #add9c0; ">
+        <thead>
+            <tr>
+                <th width="5%"><input id='all_cheb' type='checkbox'><label for="all_cheb">全选</label></th>
+                <th width="10%">用户名</th>
+                <th width="7%">真实姓名</th>
+                <th width="8%">银行</th>
+                <th width="15%">卡号</th>
+                <th width="5%">预留手机号</th>
+                <th width="5%">提现金额</th>
+                <th width="5%">申请时间</th>
+                <th width="5%">审核人</th>
+                <th width="5%">审核时间</th>
+                <th width="5%">放款人</th>
+                <th width="5%">放款时间</th>
+                <th width="10%">状态</th>
+                <th width="10%">操作</th>
+            </tr>
+        </thead>
+        <tbody id="tdata"></tbody>
+    </table>
+</div>
+<!--分页控件-->
+<div class="clearfix">
+    <nav class="gx-pager" id="pager">
+
+    </nav>
+</div>
+<div class="add-openbox add-form" id="denyDiv" style="display:none">
+    <fieldset>
+        <input type="hidden" value="" id="deny_id" />
+        <div class="control-group" style="width: 250px;margin: 0 auto;">
+            <label>备注：</label><br /><textarea id="remark"></textarea>
+            <br /><br />
+            <button id="deny_status" class="gx-button gx-button-info" style="margin: 15px">拒绝</button><button id="closeDiv" class="gx-button gx-button-info" style="margin:15px">关闭</button>
+        </div>
+    </fieldset>
+</div>
+
+
+
+<script type="text/javascript">
+    var adminjs = new adminglass(); //实例化后台类
+    $("#closeDiv").on("click", function () {
+        adminjs.closewinbox('.add-openbox');
+    })
+    //固定查询方法 方法名必须叫Search
+    function Search(CurrentPage) {
+        var LoginName = $("#LoginName").val();
+        var MyRealName = $("#MyRealName").val();
+        var s_ctime = $("#s_ctime").val();
+        var e_ctime = $("#e_ctime").val();
+        var status = $("#status").val();
+        $("#PassChoose").hide();
+        $("#LoanChoose").hide();
+        $("#PassAll").hide();
+        $("#LoanAll").hide();
+        if (status == 0) {
+            $("#PassChoose").show();
+            $("#PassAll").show();
+        }
+        else if (status == 1) {
+            $("#LoanChoose").show();
+            $("#LoanAll").show();
+        }
+        $.ajax({
+            type: "POST",
+            url: "/NewWithdraw/FactoringWithdraw_ajax",
+            data: { LoginName: LoginName, MyRealName: MyRealName, s_ctime: s_ctime, e_ctime: e_ctime, status: status, PageIndex: CurrentPage, PageSize: 10 },
+            async: false,
+            success: function (data) {
+                if (data != null) {
+
+                    $("#pager").html(data.PageHTML);
+                    var Rows = data.Rows;
+                    if (Rows != null) {
+                        var strHTML = "";
+                        for (var i = 0; i < Rows.length; i++) {
+                            var row = Rows[i];
+
+                            strHTML = strHTML + "<tr id='r_" + row.id + "'>";
+                            strHTML = strHTML + "<td><input name='s_cheb' type='checkbox' ></td>";
+                            strHTML = strHTML + "<td>" + row.login_name + "</td>";
+                            strHTML = strHTML + "<td>" + row.real_name + "</td>";
+                            strHTML = strHTML + "<td>" + row.bank_name + "</td>";
+                            strHTML = strHTML + "<td style='color:red'>" + row.bank_card + "</td>";
+                            strHTML = strHTML + "<td>" + row.bank_phone + "</td>";
+                            strHTML = strHTML + "<td style='color:red'>" + row.amount + "</td>";
+                            strHTML = strHTML + "<td>" + row.c_time + "</td>";
+                            strHTML = strHTML + "<td>" + row.auditor_name + "</td>";
+                            strHTML = strHTML + "<td>" + row.audit_time + "</td>";
+                            strHTML = strHTML + "<td>" + row.loan_name + "</td>";
+                            strHTML = strHTML + "<td>" + row.loan_time + "</td>";
+                            if (row.status == 0) {
+                                strHTML = strHTML + "<td>待审核</td>";
+                                strHTML = strHTML + "<td><a name='pass' style='margin:5px;cursor:pointer' >通过</a><a style='margin:5px;cursor:pointer' name='deny'>拒绝</a></td>";
+                            }
+                            else if (row.status == 1) {
+                                strHTML = strHTML + "<td>待放款</td>";
+                                strHTML = strHTML + "<td><a style='margin:5px;cursor:pointer' name='loan'>放款</a></td>";
+                            }
+                            else if (row.status == 2) {
+                                strHTML = strHTML + "<td>已提现</td>";
+                                strHTML = strHTML + "<td></td>";
+                            }
+                            else if (row.status == 3) {
+                                strHTML = strHTML + "<td>审核未通过</td>";
+                                strHTML = strHTML + "<td><a style='margin:5px;cursor:pointer' name='look'>查看原因</a></td>";
+                            }
+                            else if (row.status == 4) {
+                                strHTML = strHTML + "<td>支付失败</td>";
+                                strHTML = strHTML + "<td><a style='margin:5px;cursor:pointer' name='reloan'>重新放款</a></td>";
+                            }
+
+
+                            strHTML = strHTML + "</tr>";
+                        }
+                        $("#tdata").html(strHTML);
+                    }
+                }
+            }
+        })
+    }
+    $("#search").on("click", function () {
+        Search(1);
+    })
+    $(function () {
+        Search(1);
+    })
+    $("#all_cheb").change(function () {
+        if ($(this).is(":checked")) {
+            $("input[name='s_cheb']").prop("checked", true);
+        }
+        else {
+            $("input[name='s_cheb']").prop("checked", false);
+        }
+    })
+    function UpdateWithdrawStatus(id, status, remark) {
+        if (status == 3 && $.trim(remark) == "") {
+            alert("备注为必填！");
+            return false;
+        }
+        $.ajax({
+            type: "POST",
+            url: "/NewWithdraw/UpdateFactoringWithdrawStatus",
+            data: { id: id, status: status, remark: remark },
+            async: false,
+            success: function (data) {
+                if (data != null) {
+                    if (data == "ok") {
+                        alert("操作成功！");
+                        if (status == 3) {
+                            adminjs.closewinbox('.add-openbox');
+                        }
+                        Search(1);
+                    }
+                    else {
+                        alert(data.Message);
+                    }
+                }
+            }
+        })
+    }
+    $("#tdata").on("click", "a[name='pass']", function () {
+        if (confirm("确定要审核通过吗？")) {
+            var id = $(this).parent().parent().attr("id");
+            id = id.replace("r_", "");
+            UpdateWithdrawStatus(id, 1, "");
+        }
+    })
+    $("#tdata").on("click", "a[name='deny']", function () {
+        var id = $(this).parent().parent().attr("id");
+        id = id.replace("r_", "");
+        $("#deny_id").val(id);
+        adminjs.openwinbox('#denyDiv');
+    })
+    $("#deny_status").on("click", function () {
+
+        var id = $("#deny_id").val();
+        var remark = $("#remark").val();
+        UpdateWithdrawStatus(id, 3, remark);
+    })
+    function WithdrawLoan(id) {
+        $.ajax({
+            type: "POST",
+            url: "/NewWithdraw/FactoringWithdrawLoan",
+            data: { id: id },
+            async: false,
+            success: function (data) {
+                if (data != null) {
+                    if (data == "ok") {
+                        alert("操作成功！");
+                        Search(1);
+                    }
+                    else {
+                        alert(data.Message);
+                        Search(1);
+                    }
+                }
+            }
+        })
+    }
+    function WithdrawReLoan(id) {
+        $.ajax({
+            type: "POST",
+            url: "/NewWithdraw/FactoringWithdrawReLoan",
+            data: { id: id },
+            async: false,
+            success: function (data) {
+                if (data != null) {
+                    if (data == "ok") {
+                        alert("操作成功！");
+                        Search(1);
+                    }
+                    else {
+                        alert(data.Message);
+                        Search(1);
+                    }
+                }
+            }
+        })
+    }
+    $("#tdata").on("click", "a[name='loan']", function () {
+        if (confirm("确定要放款吗？")) {
+            var id = $(this).parent().parent().attr("id");
+            id = id.replace("r_", "");
+            WithdrawLoan(id);
+        }
+    })
+    $("#tdata").on("click", "a[name='reloan']", function () {
+        if (confirm("确定要重新放款吗？")) {
+            var id = $(this).parent().parent().attr("id");
+            id = id.replace("r_", "");
+            WithdrawReLoan(id);
+        }
+    })
+    $("#PassAll").on("click", function () {
+        $.ajax({
+            type: "POST",
+            url: "/NewWithdraw/PassAllFactoringWithdraw",
+            data: {},
+            async: false,
+            success: function (data) {
+                if (data != null) {
+                    if (data == "ok") {
+                        alert("操作成功！");
+                        Search(1);
+                    }
+                    else {
+                        alert(data.Message);
+                        Search(1);
+                    }
+                }
+            }
+        })
+    })
+    $("#LoanAll").on("click", function () {
+        $.ajax({
+            type: "POST",
+            url: "/NewWithdraw/LoanAllFactoringWithdraw",
+            data: {},
+            async: false,
+            success: function (data) {
+                if (data != null) {
+                    if (data == "ok") {
+                        alert("操作成功！");
+                        Search(1);
+                    }
+                    else {
+                        alert(data.Message);
+                        Search(1);
+                    }
+                }
+            }
+        })
+    })
+    $("#PassChoose").on("click", function () {
+        var ids = "";
+        $("input[name='s_cheb']").each(function () {
+            if ($(this).is(":checked")) {
+                var id = $(this).parent().parent().attr("id");
+                id = id.replace("r_", "");
+                ids = ids + (ids == "" ? "" : ",") + id;
+            }
+        })
+        if (ids == "") {
+            alert("请选择要操作的数据！");
+            return false;
+        }
+        else {
+            $.ajax({
+                type: "POST",
+                url: "/NewWithdraw/PassChooseFactoringWithdraw",
+                data: { ids: ids },
+                async: false,
+                success: function (data) {
+                    if (data != null) {
+                        if (data == "ok") {
+                            alert("操作成功！");
+                            Search(1);
+                        }
+                        else {
+                            alert(data.Message);
+                            Search(1);
+                        }
+                    }
+                }
+            })
+        }
+    })
+    $("#LoanChoose").on("click", function () {
+        var ids = "";
+        $("input[name='s_cheb']").each(function () {
+            if ($(this).is(":checked")) {
+                var id = $(this).parent().parent().attr("id");
+                id = id.replace("r_", "");
+                ids = ids + (ids == "" ? "" : ",") + id;
+            }
+        })
+        if (ids == "") {
+            alert("请选择要操作的数据！");
+            return false;
+        }
+        else {
+            $.ajax({
+                type: "POST",
+                url: "/NewWithdraw/LoanChooseFactoringWithdraw",
+                data: { ids: ids },
+                async: false,
+                success: function (data) {
+                    if (data != null) {
+                        if (data == "ok") {
+                            alert("操作成功！");
+                            Search(1);
+                        }
+                        else {
+                            alert(data.Message);
+                            Search(1);
+                        }
+                    }
+                }
+            })
+        }
+    })
+    $("#tdata").on("click", "a[name='look']", function () {
+        var id = $(this).parent().parent().attr("id");
+        id = id.replace("r_", "");
+        $.ajax({
+            type: "POST",
+            url: "/NewWithdraw/LookFactoringWithdrawDenyRemark",
+            data: { id: id },
+            async: false,
+            success: function (data) {
+                if (data != null) {
+                    alert(data);
+                }
+            }
+        })
+    })
+</script>
+
+

@@ -1,0 +1,34 @@
+﻿@using YxLiCai 
+@using Yx.LiCai.App_Start
+@using YxLiCai.Tools.Const
+@model YxLiCai.Model.UserRaise.UserCountModel
+  @{
+    ViewBag.Title = "提现成功";
+} 
+    <link href="@HttpPageHelper.GetRemoteNetURL(SystemSiteEnum.StaticResourceMallWeb, "css/buy.css")" rel="stylesheet">  
+ 
+	<div class="yixiu_man"><span></span></div>
+    <div class="main-buy">
+    	<dl>
+    		<dt class="hover"><img src="@HttpPageHelper.GetRemoteNetURL(SystemSiteEnum.StaticResourceMallWeb, "images/buy_right.png")"></dt>
+    		<dd>
+    		    <b>您已成功发起金额<span>@ViewBag.money</span>元的提现操作</b>
+    		</dd>
+    	</dl>
+    	<dl>
+    		<dt><img src="@HttpPageHelper.GetRemoteNetURL(SystemSiteEnum.StaticResourceMallWeb, "images/buy_time.png")"></dt>
+    		<dd>
+    		    <b>提现申请已确认，请您耐心等待，系统将于5个工作日内提现至您的绑定银行卡</b>
+    		</dd>
+    	</dl>
+        <dl>
+    		<dt><img src="@HttpPageHelper.GetRemoteNetURL(SystemSiteEnum.StaticResourceMallWeb, "images/buy_day.png")"></dt>
+    		<dd>
+    		    <b>感谢您信任并投资一休理财</b>
+    		</dd>
+    	</dl>
+    </div>
+    <div class="margin_top">
+        <a href="/member/" class="ui-btn">确认</a>
+    </div>
+ 

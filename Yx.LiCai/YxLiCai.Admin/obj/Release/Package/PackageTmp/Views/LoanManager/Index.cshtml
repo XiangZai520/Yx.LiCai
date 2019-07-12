@@ -1,0 +1,224 @@
+﻿<div class="zpManage zpSh">
+    <h2 class="crumbs">
+        您所在位置：放款管理 > 待放款
+    </h2>
+    <div class="gx-textitem">
+        <label class="gx-texttitle">
+            融资方：
+        </label>
+        <input id="f_name" type="text" class="gx-textbox" placeholder="请输入内容...">
+        <label class="gx-texttitle">
+            项目期限(月)：
+        </label>
+        @Html.Partial("EditorTemplates/KendoNumeric",
+        new YxLiCai.Admin.Models.KendoNumericTextBoxViewModel
+        {
+            Id = "pj_duration",
+            Min = "0"
+        })
+        <br />
+        <label class="gx-texttitle">
+            项目金额：
+        </label>
+        @Html.Partial("EditorTemplates/KendoNumeric",
+        new YxLiCai.Admin.Models.KendoNumericTextBoxViewModel
+        {
+            Id = "amount_min",
+            Format = "n2",
+            Decimals = "2",
+            Min = "0"
+        })
+        <label class="gx-texttitle">
+            至：
+        </label>
+        @Html.Partial("EditorTemplates/KendoNumeric",
+        new YxLiCai.Admin.Models.KendoNumericTextBoxViewModel
+        {
+            Id = "amount_max",
+            Format = "n2",
+            Decimals = "2",
+            Min = "0"
+        })
+    </div>
+    <div class="SearchMd form-horizontal">
+        <input type="button" id="btnSearch" value="查询" class="searchBtn" />
+        <input type="button" id="btnAll" value="全部放款" class="searchBtn" />
+        <input type="button" id="btnPartial" value="批量放款" class="searchBtn" />
+        <input type="button" id="btnExcel" value="导出Excel" class="searchBtn" />
+    </div>
+
+    <div class="cleanfix" style="margin:15px 15px 15px 15px">
+        <div class="control-group">
+            <a style="color:red">*按住Ctrl键或Shift键、拖拽鼠标可以多选</a>
+            <div class="tbstyle">
+                <div id="grid"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    require(['CRM/common.assets', 'CRM/loan.assets'], function (common, loan) {
+
+        //initial
+        var ds = null,
+            dataItem = null,
+            grid = $("#grid").kendoGrid({
+                sortable: true,
+                pageable: true,
+                selectable: "multiple, row"
+            }).data("kendoGrid");
+        //columns project.LoanPeriod
+        var columns = [
+              { field: "id", title: "ID", sortable: true },
+              { field: "pj_id", title: "项目ID", sortable: true },
+              { field: "pj_name", title: "项目名称", sortable: true },
+              { field: "period", title: "项目期限(月)", sortable: true },
+              { field: "pj_amount", title: "项目金额", sortable: true },
+              { field: "amount_lent", title: "已放款", sortable: true },
+              { field: "amount", title: "待放款", sortable: true },
+              { field: "account_id", title: "融资方账户ID", sortable: true },
+              { field: "m_name", title: "融资方名称", sortable: true },
+              { field: "r_name", title: "真实姓名", sortable: true },
+              { field: "phone", title: "手机号", sortable: true },
+              { field: "bank", title: "银行", sortable: true },
+              { field: "bank_card", title: "银行卡号", sortable: true },
+              {
+                  command: [{ text: "放款", click: function (e) { pay_loan(this, e) } },
+                  { text: "线下已放款", click: function (e) { pay_offline(this, e) } }],
+                  width:150,title: "操作"
+              }
+        ];
+
+        getData();
+        //get loan data
+        function getData() {
+            var mName = $("#f_name").val(),
+                loanPeriod = $("#pj_duration").val() || -1,
+                amount_min = $("#amount_min").val() || -1,
+                amount_max = $("#amount_max").val() || -1,
+                param = { mName: mName, loanPeriod: loanPeriod, amount_min: amount_min, amount_max: amount_max, status: 0 };
+            //datasource
+            ds = loan.getPageList(param);
+            //set options
+            grid.setOptions({
+                dataSource: ds,
+                columns: columns
+            });
+        }
+
+        //查询事件
+        $("#btnSearch").bind("click", function () {
+            getData();
+        });
+        //放款
+        function pay_loan(grid, e) {
+            var param = loan.pay(grid, e);
+            dataItem = grid.dataItem($(e.currentTarget).closest("tr"));
+
+            $.ajax({
+                url: "/LoanManager/PayMerchant",
+                data: param,
+                success: function (result) {
+                    if (result) {
+                        common.popupNotification.show("放款成功", "info");
+                    }
+                    else {
+                        common.popupNotification.show("放款失败", "error");
+                    }
+                    ds.remove(dataItem);
+                }
+            });
+        }
+        //线下已放款
+        function pay_offline(grid, e) {
+            if (confirm("确认线下已放款?")) {
+                var param = loan.pay(grid, e);
+                dataItem = grid.dataItem($(e.currentTarget).closest("tr"));
+
+                $.ajax({
+                    url: "/LoanManager/PayMerchantOffline",
+                    data: param,
+                    success: function (result) {
+                        if (result) {
+                            common.popupNotification.show("放款成功", "info");
+                        }
+                        else {
+                            common.popupNotification.show("放款失败", "error");
+                        }
+                        ds.remove(dataItem);
+                    }
+                });
+            }
+        }
+        //全部放款
+        $("#btnAll").bind("click", function (e) {
+            $.ajax({
+                url: "/LoanManager/PayAll",
+                error: function (err) {
+                    common.popupNotification.show(err.responseText, "error");
+                },
+                success: function (result) {
+                    if (result) {
+                        window.location.href = window.location.href;
+                    }
+                    else {
+                        common.popupNotification.show("全部放款失败", "error");
+                        return;
+                    }
+                }
+            });
+        });
+        //批量放款
+        $("#btnPartial").bind("click", function (e) {
+            audit(3);
+        });
+        //导出Excel
+        $("#btnExcel").bind("click", function (e) {
+            param = { mName: "", loanPeriod: -1, amount_min: -1, amount_max: -1, status: 0 };
+            $.ajax({
+                url: "/LoanManager/ExportLoanReport",
+                data: param,
+                success: function (e) {
+                },
+                error: function (e) {
+                    alert("err : " + e.error);
+                }
+            });
+        });
+        //批量放款
+        function audit(status) {
+            var selectedID = "";
+            var row = grid.select();
+            for (var i = 0; i < row.length; i++) {
+                var data = grid.dataItem(row[i]);
+                selectedID += data.id + ",";
+            }
+            selectedID = selectedID.substr(0, selectedID.lastIndexOf(','));
+
+            //未选择， return
+            if (selectedID.length == 0)
+                return;
+
+            var param = { IdList: selectedID };
+            $.ajax({
+                url: "/LoanManager/PayPartial",
+                data: param,
+                error: function (err) {
+                    common.popupNotification.show(err.responseText, "error");
+                },
+                success: function (result) {
+                    if (result) {
+                        for (var i = 0; i < row.length; i++) {
+                            grid.removeRow(row[i]);
+                        }
+                        common.popupNotification.show("放款成功", "info");
+                    }
+                    else {
+                        common.popupNotification.show("放款失败", "error");
+                        return;
+                    }
+                }
+            });
+        }
+    });
+</script>

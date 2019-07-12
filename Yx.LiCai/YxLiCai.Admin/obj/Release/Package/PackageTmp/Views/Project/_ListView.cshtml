@@ -1,0 +1,84 @@
+﻿@model YxLiCai.Admin.Models.KendoTextBoxViewModel
+<style>
+    #grid0 {
+        width: 962px;
+    }
+</style>
+<div class="control-group">
+    <div class="tbstyle">
+        <div id="@Model.Id"></div>
+    </div>
+</div>
+<script type="text/javascript">
+    require(['CRM/common.assets'], function (common) {
+        var id = '@Model.Id';
+        var status = '@Model.Content',
+            param = { ProjectStatus: status };
+        var productDs = new kendo.data.DataSource({
+            pageSize: 15,
+            transport: {
+                read: {
+                    url: "/Project/GetProjectList",
+                    dataType: "json",
+                    data: param
+                }
+            },
+            schema: {
+                model: {
+                    id: "Id"
+                }
+            }
+        });
+        var grid = $('#' + id + '').kendoGrid({
+            sortable: true,
+            pageable: true
+        }).data("kendoGrid");
+        var columns = [
+                { field: "id", title: "序号", sortable: true, width: 50 },
+                { field: "ProjectName", title: "项目名称", sortable: true, width: 100 },
+                { field: "Amount", title: "项目金额", sortable: true, width: 100 },
+                { field: "Weight", title: "权值", sortable: true, width: 100 },
+                { field: "Borrower", title: "借款人(单位)", sortable: true, width: 100 },
+                { field: "LoanPeriod", title: "还款期限(月)", sortable: true, width: 100 },
+                { field: "account_id_name", title: "融资方", sortable: true, width: 100 },
+                { field: "OrderNumber", title: "合同编号", sortable: true, width: 100 },
+                { field: "AddTime", title: "创建时间", sortable: true, width: 100 },
+                { field: "Remark", title: "备注", sortable: true, width: 100 },
+        ];
+        if (status == "1") {
+            columns.push({
+                title: "操作", width: 130,
+                command: [{ text: "修改", click: function (e) { common.showDetails(this, e, "/Project/AD_Edit/"); } },
+                    {
+                        text: "重新提交", click: function (e) {
+                            common.showDetails(this, e, "/Project/AD_AuditProject/");
+                        }
+                    }]
+            });
+        }
+        if (status == "0") {
+            columns.push({ title: "操作", width: 100, command: { text: "审核", click: function (e) { common.showDetails(this, e, "/Project/AuditProject/"); } } });
+        }
+        grid.bind("dataBinding", function (e) {
+            if (productDs.Binding) return;
+            for (var i = 0; i < productDs.data().length; i++) {
+                if (productDs.at(i).EndTime != null) {
+                    var date2 = new Date(parseInt(productDs.at(i).EndTime.substr(6)));
+                    productDs.at(i).EndTime = date2.format("yyyy-MM-dd");
+                }
+
+                if (productDs.at(i).AddTime != null) {
+                    var date2 = new Date(parseInt(productDs.at(i).AddTime.substr(6)));
+                    productDs.at(i).AddTime = date2.format("yyyy-MM-dd");
+                }
+            }
+            productDs.Binding = true;
+        });
+        grid.setOptions({
+            dataSource: productDs,
+            columns: columns,
+            selectable: "multiple, row"
+        });
+        if (status == "0") { grid.hideColumn("Remark"); }
+    });
+</script>

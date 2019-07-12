@@ -1,0 +1,86 @@
+﻿@using YxLiCai
+@model List<YxLiCai.Model.User.UserRateCouponModel>
+@{
+    ViewBag.Title = "加息券";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="@HttpPageHelper.GetRemoteNetURL(SystemSiteEnum.StaticResourceMallWeb, "css/uc.css")" rel="stylesheet">
+<link href="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "css/uc/setting_detail.css")" rel="stylesheet">
+<div class="addCoupon">
+    @{
+
+        if (Model != null && Model.Count > 0)
+        {
+            foreach (var mod in Model)
+            {
+                if (mod.use_status == 0 && YxLiCai.Tools.DateOper.DateDays(mod.e_time, DateTime.Now) > 0)
+                {
+                    <div class="add-moner">
+                        <div class="ui-checkbox">
+                            <input id="@mod.id" type="checkbox" name="ckbox" value="@mod.id" num="@(YxLiCai.Tools.Const.SystemConst.RateConvert(mod.interest_rate*100))" class="atong-left hover">
+                        </div>
+                        <div class="add-money-right">
+                            <h2><i></i><span>加息券</span></h2>
+                            <div class="add-money-num">
+                                <b>@(YxLiCai.Tools.Const.SystemConst.RateConvert(mod.interest_rate * 100))<span>%</span></b>
+                                <div class="add-moner-word">
+                                    <h3>使用条件：</h3>
+                                    <p>在有效期内可用于任意理财产品的加息</p>
+                                </div>
+                            </div>
+                            <div class="add-money-time">
+                                <span>还有<b>@(YxLiCai.Tools.DateOper.DateDays(mod.e_time,DateTime.Now)+1)</b>天过期</span>
+                                <span>有效期至：<b>@mod.e_time.ToString("yyyy-MM-dd")</b></span>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="add-moner pastAndUse">
+                        <div class="atong-false">
+                            <input type="checkbox" value="@mod.id" class="atong-left">
+                        </div>
+                        <div class="add-money-right add-moner-pass">
+                            <h2><i></i><span>加息券</span></h2>
+                            <div class="add-money-num">
+                                <b>@(YxLiCai.Tools.Const.SystemConst.RateConvert(mod.interest_rate * 100))<span>%</span></b>
+                                <div class="add-moner-word">
+                                    <h3>使用条件：</h3>
+                                    <p>在有效期内可用于任意理财产品的加息</p>
+                                </div>
+                            </div>
+                            <div class="add-money-time1">
+                                @if (mod.use_status == 1)
+                            {<span>已使用</span>}
+                            else
+                            {
+                            <span>已过期</span>
+                            }
+                                <span>有效期至：<b>@mod.e_time.ToString("yyyy-MM-dd")</b></span>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        }
+        else
+        {
+            <div class="noticket">
+                <div class="noticket-pic"></div>
+                <p>很遗憾！您暂无加息券可用！</p>
+            </div>
+        }
+    }
+    <input type="hidden" id="add_interest" value="@ViewBag.Ids" />
+    <input type="hidden" id="interest" value="0" />
+    <input type="hidden" id="ptype" value="@ViewBag.ptype" />
+    <input type="hidden" id="buyMoney" value="@ViewBag.buyMoney" />
+</div>
+<div class="add-money gx-fxft">
+    <p>使用共<b id="use_itt">0%</b>的加息券</p>
+    <a href="javascript:void(0);" id="ok">确定</a>
+</div>
+<script>
+    seajs.use('User/UC/add_interest.js')
+</script>

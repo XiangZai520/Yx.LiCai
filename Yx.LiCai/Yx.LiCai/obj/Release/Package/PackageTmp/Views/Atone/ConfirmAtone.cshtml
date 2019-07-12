@@ -1,0 +1,74 @@
+﻿@using Yx.LiCai.App_Start
+@model Yx.LiCai.Models.ConfirmAtoneOutModel
+@section styles{
+    <link href="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "css/buy.css")" rel="stylesheet">
+
+    }
+@{
+    ViewBag.Title = "赎回";
+}
+<input type="hidden" value="@(ViewBag.oiids)" id="oiids" />
+    	<ul class="atone_detail">
+            <li>
+                <dl>
+                    <dt>赎回产品</dt>
+                    <dd class="gx-ell">@(Model.ProjectNames)</dd>
+                </dl>
+            </li>
+            <li>
+                <dl>
+                    <dt>赎回本金</dt>
+                    <dd class="gx-ell">￥@(YxLiCai.Tools.Const.SystemConst.MoenyConvert( Model.AtoneBenJin))</dd>
+                </dl>
+            </li>
+            <li>
+                <dl>
+                    <dt>未付利息</dt>
+                    <dd class="gx-ell">￥@(YxLiCai.Tools.Const.SystemConst.MoenyConvert( Model.AtoneLiXi))</dd>
+                </dl>
+            </li>
+            <li>
+                <dl>
+                    <dt>违约金</dt>
+                    <dd class="gx-ell">￥@(YxLiCai.Tools.Const.SystemConst.MoenyConvert( Model.AtoneWeiYueJin))</dd>
+                </dl>
+                <p>(违约金为本金的2%)</p>
+            </li>
+        </ul>
+        <div class="margin_top1"><a href="javascript:void(0);" id="ConfirmAtone" class="ui-btn">确认</a></div>
+        <div class="gm-tips">
+            <h2>温馨提示：</h2>
+            <ul>
+                <li>赎回为本金赎回，未付利息将自动转至账户余额中；</li>
+                <li>
+                    提前赎回平台将收取违约金，赎回实际到账金额=本金*（1-2%）。
+                </li>
+            </ul>
+        </div>
+        <!-- 密码交易弹窗 -->
+<div id="J_buyPwd" class="input-password">
+    <h2>请输入交易密码</h2>
+    <p id="sallmoney"><span id="AtoneTotalMoney">@(ViewBag.AtoneTotalMoney)</span>元
+    </p>
+    <div class="in-password">
+        <input type="password" id="sallpwd" autocomplete="off" class="in-txt">
+    </div>
+    @if (UserContext.simpleUserInfoModel.IsJiaoYIPW == 0)
+    {
+                @*<a href="/UserSetting/fetch_pwd_setting/">去设置</a>*@
+        <a href="javascript:void(0)" id="fetch_pwd_setting">去设置</a>
+    }
+    else
+    {
+                @*<a href="/UserSetting/forget_SPFist_pwd/">忘记密码</a>*@
+        <a href="javascript:void(0)" id="forget_SPFist_pwd">忘记密码</a>
+    }
+    <div class="gx-passwoed-btn">
+        <input type="submit" class="gx-passwprd-sub" id="okbuy" value="确认">
+    </div>
+</div>
+<input type="hidden" id="OrderInfoIDS" value="@ViewBag.OrderInfoIDS" />
+<script>
+    seajs.use('gx-input-click');
+    seajs.use('Atone')
+</script>

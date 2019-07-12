@@ -1,0 +1,71 @@
+﻿<div class="zpManage zpSh">
+    <h2 class="crumbs">您所在位置：融资机构->个人中心->设置公司名称
+    </h2>
+</div>
+<div class="gx-textitem">
+    <table>
+        <tr>
+            <td>
+                <label class="gx-texttitle">公司名称：</label></td>
+            <td>
+                <input id="CName" placeholder="公司名称50个字符长度" style="width: 200px" /></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td colspan="3" style="text-align: center; color: red; font-size: larger">
+                <p id="message"></p>
+        </tr>
+
+        <tr>
+            <td colspan="3">
+                <div class="SearchMd">
+                    <input type="button" id="updatepw" value="确定" class="searchBtn" />&nbsp;&nbsp;&nbsp;
+                    <input type="button" value="取消" class="searchBtn" onclick="javascript: window.location.href = 'Index'" />
+                </div>
+                <td>
+        </tr>
+    </table>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#updatepw").click(function () {
+
+            var CName = $("#CName").val().replace(/[ ]/g, "");
+            var CNameLen = strlen($("#CName").val().replace(/[ ]/g, ""));
+
+            if (CName == "") { $("#message").html("请输入公司名称"); return; } else { $("#message").empty(); } if (CNameLen > 50) { $("#message").html("输入公司名称过长"); return; } else { $("#message").empty(); }
+            var falg = false;
+            $.ajax({
+                type: "POST",
+                async: false,
+                url: "/Financing/SetCompanyName",
+                data: { CName: CName },
+                success: function (data) {
+                    if (data.Status == 1) {
+                        alert(data.Message);
+                        window.location.href = "Index";
+                    } else {
+                        $("#message").html(data.Message);
+                        return;
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                },
+            });
+        });
+    });
+    function strlen(str) {
+        var len = 0;
+        for (var i = 0; i < str.length; i++) {
+            var c = str.charCodeAt(i);
+            //单字节加1 
+            if ((c >= 0x0001 && c <= 0x007e) || (0xff60 <= c && c <= 0xff9f)) {
+                len++;
+            }
+            else {
+                len += 2;
+            }
+        }
+        return len;
+    }
+</script>

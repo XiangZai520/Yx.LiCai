@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>设置密码</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="Globak-x">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+
+    <link href="../css/m_base.css" rel="stylesheet">
+    <link href="../css/global_x.css" rel="stylesheet">
+    <link href="../css/dialog_ui.css" rel="stylesheet">
+
+    <script src="../js/loader/sea.js"></script>
+    <script src="../js/loader/sea-config.js"></script>
+
+
+</head>
+<body>
+<header id="header"></header>
+
+<div id="gx-touch" class="m-wrap">
+    <div class="gx-container">
+        <form id="settingForm" name="settingForm" method="post" action="" autocomplete="off" novalidate="novalidate">
+            <div class="reg-list login-list">
+                <dl>
+                    <dt class="left-style">设置密码</dt>
+                    <dd>
+                        <input type="password" class="input-txt reg-pwd" id="regPassword" name="regPassword" placeholder="请输入密码">
+                        <b class="show-pwd yes-pwd"></b>
+                    </dd>
+                    <dd class="warm-tips Validedate_check"></dd>
+                </dl>
+            </div>
+            <div class="do-btn">
+                <button type="submit" class="ui-btn" id="nextBtn">确认</button>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+
+
+
+<footer id="footer"></footer>
+
+<script>
+    seajs.use('../js/register')
+</script>
+
+</body>
+</html>

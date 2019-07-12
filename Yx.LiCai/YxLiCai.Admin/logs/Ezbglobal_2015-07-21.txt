@@ -1,0 +1,807 @@
+2015-07-21 12:02:17.1917 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/7/21 12:02:17
+异常发生地址:http://localhost:50143/account/CaptchaImage
+请求类型:GET
+异常:NServiceKit.Redis.RedisException: could not connect to redis Instance at 172.16.16..253:6379 ---> System.Net.Sockets.SocketException: 不知道这样的主机。
+   在 System.Net.Dns.GetAddrInfo(String name)
+   在 System.Net.Dns.InternalGetHostByName(String hostName, Boolean includeIPv6)
+   在 System.Net.Dns.GetHostAddresses(String hostNameOrAddress)
+   在 System.Net.Sockets.Socket.Connect(String host, Int32 port)
+   在 NServiceKit.Redis.RedisNativeClient.Connect()
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 NServiceKit.Redis.RedisNativeClient.Connect()
+   在 NServiceKit.Redis.RedisNativeClient.AssertConnectedSocket()
+   在 NServiceKit.Redis.RedisNativeClient.SendCommand(Byte[][] cmdWithBinaryArgs)
+   在 NServiceKit.Redis.RedisNativeClient.SendExpectLong(Byte[][] cmdWithBinaryArgs)
+   在 NServiceKit.Redis.RedisNativeClient.Exists(String key)
+   在 NServiceKit.Redis.RedisClient.ContainsKey(String key)
+   在 YxLiCai.Tools.NoSql.RedisCache.RedisCache.Add(String key, Object value, DateTime expiredTime) 位置 c:\YiXiu\Yx.LiCai\YxLica.Tools\NoSql\RedisCache\RedisCache.cs:行号 96
+   在 YxLiCai.Admin.Controllers.AccountController.CaptchaImage() 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Admin\Controllers\AccountController.cs:行号 135
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   在 System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+IP:::1
+--------------------end---------------------
+ 
+2015-07-21 14:51:46.6214 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/7/21 14:51:46
+异常发生地址:http://localhost:50143/Records/GetSLog?Panme=-1&time_min=0001%2F1%2F1+0%3A00%3A00&time_max=0001%2F1%2F1+0%3A00%3A00&take=15&skip=0&page=1&pageSize=15
+请求类型:GET
+异常:MySql.Data.MySqlClient.MySqlException (0x80004005): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE  oid.op_status=2 and ('-1'=-1 OR u.phone = '-1')    ;#赎回记录' at line 5
+   在 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   在 MySql.Data.MySqlClient.NativeDriver.ReadResult(UInt64& affectedRows, Int64& lastInsertId)
+   在 MySql.Data.MySqlClient.MySqlDataReader.GetResultSet()
+   在 MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   在 System.Data.ProviderBase.DataReaderContainer.NextResult()
+   在 System.Data.Common.DataAdapter.FillNextResult(DataReaderContainer dataReader)
+   在 System.Data.Common.DataAdapter.FillFromReader(DataSet dataset, DataTable datatable, String srcTable, DataReaderContainer dataReader, Int32 startRecord, Int32 maxRecords, DataColumn parentChapterColumn, Object parentChapterValue)
+   在 System.Data.Common.DataAdapter.Fill(DataSet dataSet, String srcTable, IDataReader dataReader, Int32 startRecord, Int32 maxRecords)
+   在 System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, CommandType ComType, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 464
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, String notes, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 494
+   在 YxLiCai.Dao.TransactionRecords.TransactionRecordsDAO.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\TransactionRecords\TransactionRecordsDAO.cs:行号 205
+   在 YxLiCai.Server.TransactionRecords.TransactionRecordsService.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize, Int32& totalCount) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\TransactionRecords\TransactionRecordsService.cs:行号 77
+IP:::1
+--------------------end---------------------
+ 
+2015-07-21 14:51:46.7185 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/7/21 14:51:46
+异常发生地址:http://localhost:50143/Records/GetSLog?Panme=-1&time_min=0001%2F1%2F1+0%3A00%3A00&time_max=0001%2F1%2F1+0%3A00%3A00&take=15&skip=0&page=1&pageSize=15
+请求类型:GET
+异常:MySql.Data.MySqlClient.MySqlException (0x80004005): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE  oid.op_status=2 and ('-1'=-1 OR u.phone = '-1')    ;#赎回记录' at line 5
+   在 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   在 MySql.Data.MySqlClient.NativeDriver.ReadResult(UInt64& affectedRows, Int64& lastInsertId)
+   在 MySql.Data.MySqlClient.MySqlDataReader.GetResultSet()
+   在 MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   在 System.Data.ProviderBase.DataReaderContainer.NextResult()
+   在 System.Data.Common.DataAdapter.FillNextResult(DataReaderContainer dataReader)
+   在 System.Data.Common.DataAdapter.FillFromReader(DataSet dataset, DataTable datatable, String srcTable, DataReaderContainer dataReader, Int32 startRecord, Int32 maxRecords, DataColumn parentChapterColumn, Object parentChapterValue)
+   在 System.Data.Common.DataAdapter.Fill(DataSet dataSet, String srcTable, IDataReader dataReader, Int32 startRecord, Int32 maxRecords)
+   在 System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, CommandType ComType, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 464
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, String notes, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 494
+   在 YxLiCai.Dao.TransactionRecords.TransactionRecordsDAO.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\TransactionRecords\TransactionRecordsDAO.cs:行号 205
+   在 YxLiCai.Server.TransactionRecords.TransactionRecordsService.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize, Int32& totalCount) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\TransactionRecords\TransactionRecordsService.cs:行号 77
+IP:::1
+--------------------end---------------------
+ 
+2015-07-21 14:53:05.7861 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/7/21 14:53:05
+异常发生地址:http://localhost:50143/Records/GetSLog?Panme=-1&time_min=0001%2F1%2F1+0%3A00%3A00&time_max=0001%2F1%2F1+0%3A00%3A00&take=15&skip=0&page=1&pageSize=15
+请求类型:GET
+异常:MySql.Data.MySqlClient.MySqlException (0x80004005): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE  oid.op_status=2 and ('-1'=-1 OR u.phone = '-1')    ;#赎回记录' at line 5
+   在 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   在 MySql.Data.MySqlClient.NativeDriver.ReadResult(UInt64& affectedRows, Int64& lastInsertId)
+   在 MySql.Data.MySqlClient.MySqlDataReader.GetResultSet()
+   在 MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   在 System.Data.ProviderBase.DataReaderContainer.NextResult()
+   在 System.Data.Common.DataAdapter.FillNextResult(DataReaderContainer dataReader)
+   在 System.Data.Common.DataAdapter.FillFromReader(DataSet dataset, DataTable datatable, String srcTable, DataReaderContainer dataReader, Int32 startRecord, Int32 maxRecords, DataColumn parentChapterColumn, Object parentChapterValue)
+   在 System.Data.Common.DataAdapter.Fill(DataSet dataSet, String srcTable, IDataReader dataReader, Int32 startRecord, Int32 maxRecords)
+   在 System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, CommandType ComType, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 464
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, String notes, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 494
+   在 YxLiCai.Dao.TransactionRecords.TransactionRecordsDAO.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\TransactionRecords\TransactionRecordsDAO.cs:行号 205
+   在 YxLiCai.Server.TransactionRecords.TransactionRecordsService.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize, Int32& totalCount) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\TransactionRecords\TransactionRecordsService.cs:行号 77
+IP:::1
+--------------------end---------------------
+ 
+2015-07-21 14:53:05.9342 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/7/21 14:53:05
+异常发生地址:http://localhost:50143/Records/GetSLog?Panme=-1&time_min=0001%2F1%2F1+0%3A00%3A00&time_max=0001%2F1%2F1+0%3A00%3A00&take=15&skip=0&page=1&pageSize=15
+请求类型:GET
+异常:MySql.Data.MySqlClient.MySqlException (0x80004005): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE  oid.op_status=2 and ('-1'=-1 OR u.phone = '-1')    ;#赎回记录' at line 5
+   在 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   在 MySql.Data.MySqlClient.NativeDriver.ReadResult(UInt64& affectedRows, Int64& lastInsertId)
+   在 MySql.Data.MySqlClient.MySqlDataReader.GetResultSet()
+   在 MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   在 System.Data.ProviderBase.DataReaderContainer.NextResult()
+   在 System.Data.Common.DataAdapter.FillNextResult(DataReaderContainer dataReader)
+   在 System.Data.Common.DataAdapter.FillFromReader(DataSet dataset, DataTable datatable, String srcTable, DataReaderContainer dataReader, Int32 startRecord, Int32 maxRecords, DataColumn parentChapterColumn, Object parentChapterValue)
+   在 System.Data.Common.DataAdapter.Fill(DataSet dataSet, String srcTable, IDataReader dataReader, Int32 startRecord, Int32 maxRecords)
+   在 System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, CommandType ComType, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 464
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, String notes, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 494
+   在 YxLiCai.Dao.TransactionRecords.TransactionRecordsDAO.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\TransactionRecords\TransactionRecordsDAO.cs:行号 205
+   在 YxLiCai.Server.TransactionRecords.TransactionRecordsService.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize, Int32& totalCount) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\TransactionRecords\TransactionRecordsService.cs:行号 77
+IP:::1
+--------------------end---------------------
+ 
+2015-07-21 14:53:06.4856 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/7/21 14:53:06
+异常发生地址:http://localhost:50143/Records/GetSLog?Panme=-1&time_min=0001%2F1%2F1+0%3A00%3A00&time_max=0001%2F1%2F1+0%3A00%3A00&take=15&skip=0&page=1&pageSize=15
+请求类型:GET
+异常:MySql.Data.MySqlClient.MySqlException (0x80004005): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE  oid.op_status=2 and ('-1'=-1 OR u.phone = '-1')    ;#赎回记录' at line 5
+   在 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   在 MySql.Data.MySqlClient.NativeDriver.ReadResult(UInt64& affectedRows, Int64& lastInsertId)
+   在 MySql.Data.MySqlClient.MySqlDataReader.GetResultSet()
+   在 MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   在 System.Data.ProviderBase.DataReaderContainer.NextResult()
+   在 System.Data.Common.DataAdapter.FillNextResult(DataReaderContainer dataReader)
+   在 System.Data.Common.DataAdapter.FillFromReader(DataSet dataset, DataTable datatable, String srcTable, DataReaderContainer dataReader, Int32 startRecord, Int32 maxRecords, DataColumn parentChapterColumn, Object parentChapterValue)
+   在 System.Data.Common.DataAdapter.Fill(DataSet dataSet, String srcTable, IDataReader dataReader, Int32 startRecord, Int32 maxRecords)
+   在 System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, CommandType ComType, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 464
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, String notes, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 494
+   在 YxLiCai.Dao.TransactionRecords.TransactionRecordsDAO.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\TransactionRecords\TransactionRecordsDAO.cs:行号 205
+   在 YxLiCai.Server.TransactionRecords.TransactionRecordsService.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize, Int32& totalCount) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\TransactionRecords\TransactionRecordsService.cs:行号 77
+IP:::1
+--------------------end---------------------
+ 
+2015-07-21 14:53:06.5157 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/7/21 14:53:06
+异常发生地址:http://localhost:50143/Records/GetSLog?Panme=-1&time_min=0001%2F1%2F1+0%3A00%3A00&time_max=0001%2F1%2F1+0%3A00%3A00&take=15&skip=0&page=1&pageSize=15
+请求类型:GET
+异常:MySql.Data.MySqlClient.MySqlException (0x80004005): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE  oid.op_status=2 and ('-1'=-1 OR u.phone = '-1')    ;#赎回记录' at line 5
+   在 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   在 MySql.Data.MySqlClient.NativeDriver.ReadResult(UInt64& affectedRows, Int64& lastInsertId)
+   在 MySql.Data.MySqlClient.MySqlDataReader.GetResultSet()
+   在 MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   在 System.Data.ProviderBase.DataReaderContainer.NextResult()
+   在 System.Data.Common.DataAdapter.FillNextResult(DataReaderContainer dataReader)
+   在 System.Data.Common.DataAdapter.FillFromReader(DataSet dataset, DataTable datatable, String srcTable, DataReaderContainer dataReader, Int32 startRecord, Int32 maxRecords, DataColumn parentChapterColumn, Object parentChapterValue)
+   在 System.Data.Common.DataAdapter.Fill(DataSet dataSet, String srcTable, IDataReader dataReader, Int32 startRecord, Int32 maxRecords)
+   在 System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, CommandType ComType, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 464
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, String notes, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 494
+   在 YxLiCai.Dao.TransactionRecords.TransactionRecordsDAO.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\TransactionRecords\TransactionRecordsDAO.cs:行号 205
+   在 YxLiCai.Server.TransactionRecords.TransactionRecordsService.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize, Int32& totalCount) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\TransactionRecords\TransactionRecordsService.cs:行号 77
+IP:::1
+--------------------end---------------------
+ 
+2015-07-21 14:53:06.7120 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/7/21 14:53:06
+异常发生地址:http://localhost:50143/Records/GetSLog?Panme=-1&time_min=0001%2F1%2F1+0%3A00%3A00&time_max=0001%2F1%2F1+0%3A00%3A00&take=15&skip=0&page=1&pageSize=15
+请求类型:GET
+异常:MySql.Data.MySqlClient.MySqlException (0x80004005): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE  oid.op_status=2 and ('-1'=-1 OR u.phone = '-1')    ;#赎回记录' at line 5
+   在 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   在 MySql.Data.MySqlClient.NativeDriver.ReadResult(UInt64& affectedRows, Int64& lastInsertId)
+   在 MySql.Data.MySqlClient.MySqlDataReader.GetResultSet()
+   在 MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   在 System.Data.ProviderBase.DataReaderContainer.NextResult()
+   在 System.Data.Common.DataAdapter.FillNextResult(DataReaderContainer dataReader)
+   在 System.Data.Common.DataAdapter.FillFromReader(DataSet dataset, DataTable datatable, String srcTable, DataReaderContainer dataReader, Int32 startRecord, Int32 maxRecords, DataColumn parentChapterColumn, Object parentChapterValue)
+   在 System.Data.Common.DataAdapter.Fill(DataSet dataSet, String srcTable, IDataReader dataReader, Int32 startRecord, Int32 maxRecords)
+   在 System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, CommandType ComType, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 464
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, String notes, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 494
+   在 YxLiCai.Dao.TransactionRecords.TransactionRecordsDAO.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\TransactionRecords\TransactionRecordsDAO.cs:行号 205
+   在 YxLiCai.Server.TransactionRecords.TransactionRecordsService.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize, Int32& totalCount) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\TransactionRecords\TransactionRecordsService.cs:行号 77
+IP:::1
+--------------------end---------------------
+ 
+2015-07-21 14:53:06.7421 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/7/21 14:53:06
+异常发生地址:http://localhost:50143/Records/GetSLog?Panme=-1&time_min=0001%2F1%2F1+0%3A00%3A00&time_max=0001%2F1%2F1+0%3A00%3A00&take=15&skip=0&page=1&pageSize=15
+请求类型:GET
+异常:MySql.Data.MySqlClient.MySqlException (0x80004005): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE  oid.op_status=2 and ('-1'=-1 OR u.phone = '-1')    ;#赎回记录' at line 5
+   在 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   在 MySql.Data.MySqlClient.NativeDriver.ReadResult(UInt64& affectedRows, Int64& lastInsertId)
+   在 MySql.Data.MySqlClient.MySqlDataReader.GetResultSet()
+   在 MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   在 System.Data.ProviderBase.DataReaderContainer.NextResult()
+   在 System.Data.Common.DataAdapter.FillNextResult(DataReaderContainer dataReader)
+   在 System.Data.Common.DataAdapter.FillFromReader(DataSet dataset, DataTable datatable, String srcTable, DataReaderContainer dataReader, Int32 startRecord, Int32 maxRecords, DataColumn parentChapterColumn, Object parentChapterValue)
+   在 System.Data.Common.DataAdapter.Fill(DataSet dataSet, String srcTable, IDataReader dataReader, Int32 startRecord, Int32 maxRecords)
+   在 System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, CommandType ComType, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 464
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, String notes, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 494
+   在 YxLiCai.Dao.TransactionRecords.TransactionRecordsDAO.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\TransactionRecords\TransactionRecordsDAO.cs:行号 205
+   在 YxLiCai.Server.TransactionRecords.TransactionRecordsService.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize, Int32& totalCount) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\TransactionRecords\TransactionRecordsService.cs:行号 77
+IP:::1
+--------------------end---------------------
+ 
+2015-07-21 14:53:06.9702 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/7/21 14:53:06
+异常发生地址:http://localhost:50143/Records/GetSLog?Panme=-1&time_min=0001%2F1%2F1+0%3A00%3A00&time_max=0001%2F1%2F1+0%3A00%3A00&take=15&skip=0&page=1&pageSize=15
+请求类型:GET
+异常:MySql.Data.MySqlClient.MySqlException (0x80004005): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE  oid.op_status=2 and ('-1'=-1 OR u.phone = '-1')    ;#赎回记录' at line 5
+   在 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   在 MySql.Data.MySqlClient.NativeDriver.ReadResult(UInt64& affectedRows, Int64& lastInsertId)
+   在 MySql.Data.MySqlClient.MySqlDataReader.GetResultSet()
+   在 MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   在 System.Data.ProviderBase.DataReaderContainer.NextResult()
+   在 System.Data.Common.DataAdapter.FillNextResult(DataReaderContainer dataReader)
+   在 System.Data.Common.DataAdapter.FillFromReader(DataSet dataset, DataTable datatable, String srcTable, DataReaderContainer dataReader, Int32 startRecord, Int32 maxRecords, DataColumn parentChapterColumn, Object parentChapterValue)
+   在 System.Data.Common.DataAdapter.Fill(DataSet dataSet, String srcTable, IDataReader dataReader, Int32 startRecord, Int32 maxRecords)
+   在 System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, CommandType ComType, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 464
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, String notes, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 494
+   在 YxLiCai.Dao.TransactionRecords.TransactionRecordsDAO.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\TransactionRecords\TransactionRecordsDAO.cs:行号 205
+   在 YxLiCai.Server.TransactionRecords.TransactionRecordsService.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize, Int32& totalCount) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\TransactionRecords\TransactionRecordsService.cs:行号 77
+IP:::1
+--------------------end---------------------
+ 
+2015-07-21 14:53:06.9962 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/7/21 14:53:06
+异常发生地址:http://localhost:50143/Records/GetSLog?Panme=-1&time_min=0001%2F1%2F1+0%3A00%3A00&time_max=0001%2F1%2F1+0%3A00%3A00&take=15&skip=0&page=1&pageSize=15
+请求类型:GET
+异常:MySql.Data.MySqlClient.MySqlException (0x80004005): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE  oid.op_status=2 and ('-1'=-1 OR u.phone = '-1')    ;#赎回记录' at line 5
+   在 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   在 MySql.Data.MySqlClient.NativeDriver.ReadResult(UInt64& affectedRows, Int64& lastInsertId)
+   在 MySql.Data.MySqlClient.MySqlDataReader.GetResultSet()
+   在 MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   在 System.Data.ProviderBase.DataReaderContainer.NextResult()
+   在 System.Data.Common.DataAdapter.FillNextResult(DataReaderContainer dataReader)
+   在 System.Data.Common.DataAdapter.FillFromReader(DataSet dataset, DataTable datatable, String srcTable, DataReaderContainer dataReader, Int32 startRecord, Int32 maxRecords, DataColumn parentChapterColumn, Object parentChapterValue)
+   在 System.Data.Common.DataAdapter.Fill(DataSet dataSet, String srcTable, IDataReader dataReader, Int32 startRecord, Int32 maxRecords)
+   在 System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, CommandType ComType, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 464
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, String notes, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 494
+   在 YxLiCai.Dao.TransactionRecords.TransactionRecordsDAO.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\TransactionRecords\TransactionRecordsDAO.cs:行号 205
+   在 YxLiCai.Server.TransactionRecords.TransactionRecordsService.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize, Int32& totalCount) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\TransactionRecords\TransactionRecordsService.cs:行号 77
+IP:::1
+--------------------end---------------------
+ 
+2015-07-21 14:53:07.9859 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/7/21 14:53:07
+异常发生地址:http://localhost:50143/Records/GetSLog?Panme=-1&time_min=0001%2F1%2F1+0%3A00%3A00&time_max=0001%2F1%2F1+0%3A00%3A00&take=15&skip=0&page=1&pageSize=15
+请求类型:GET
+异常:MySql.Data.MySqlClient.MySqlException (0x80004005): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE  oid.op_status=2 and ('-1'=-1 OR u.phone = '-1')    ;#赎回记录' at line 5
+   在 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   在 MySql.Data.MySqlClient.NativeDriver.ReadResult(UInt64& affectedRows, Int64& lastInsertId)
+   在 MySql.Data.MySqlClient.MySqlDataReader.GetResultSet()
+   在 MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   在 System.Data.ProviderBase.DataReaderContainer.NextResult()
+   在 System.Data.Common.DataAdapter.FillNextResult(DataReaderContainer dataReader)
+   在 System.Data.Common.DataAdapter.FillFromReader(DataSet dataset, DataTable datatable, String srcTable, DataReaderContainer dataReader, Int32 startRecord, Int32 maxRecords, DataColumn parentChapterColumn, Object parentChapterValue)
+   在 System.Data.Common.DataAdapter.Fill(DataSet dataSet, String srcTable, IDataReader dataReader, Int32 startRecord, Int32 maxRecords)
+   在 System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, CommandType ComType, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 464
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, String notes, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 494
+   在 YxLiCai.Dao.TransactionRecords.TransactionRecordsDAO.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\TransactionRecords\TransactionRecordsDAO.cs:行号 205
+   在 YxLiCai.Server.TransactionRecords.TransactionRecordsService.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize, Int32& totalCount) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\TransactionRecords\TransactionRecordsService.cs:行号 77
+IP:::1
+--------------------end---------------------
+ 
+2015-07-21 14:53:08.0130 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/7/21 14:53:08
+异常发生地址:http://localhost:50143/Records/GetSLog?Panme=-1&time_min=0001%2F1%2F1+0%3A00%3A00&time_max=0001%2F1%2F1+0%3A00%3A00&take=15&skip=0&page=1&pageSize=15
+请求类型:GET
+异常:MySql.Data.MySqlClient.MySqlException (0x80004005): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE  oid.op_status=2 and ('-1'=-1 OR u.phone = '-1')    ;#赎回记录' at line 5
+   在 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   在 MySql.Data.MySqlClient.NativeDriver.ReadResult(UInt64& affectedRows, Int64& lastInsertId)
+   在 MySql.Data.MySqlClient.MySqlDataReader.GetResultSet()
+   在 MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   在 System.Data.ProviderBase.DataReaderContainer.NextResult()
+   在 System.Data.Common.DataAdapter.FillNextResult(DataReaderContainer dataReader)
+   在 System.Data.Common.DataAdapter.FillFromReader(DataSet dataset, DataTable datatable, String srcTable, DataReaderContainer dataReader, Int32 startRecord, Int32 maxRecords, DataColumn parentChapterColumn, Object parentChapterValue)
+   在 System.Data.Common.DataAdapter.Fill(DataSet dataSet, String srcTable, IDataReader dataReader, Int32 startRecord, Int32 maxRecords)
+   在 System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, CommandType ComType, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 464
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, String notes, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 494
+   在 YxLiCai.Dao.TransactionRecords.TransactionRecordsDAO.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\TransactionRecords\TransactionRecordsDAO.cs:行号 205
+   在 YxLiCai.Server.TransactionRecords.TransactionRecordsService.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize, Int32& totalCount) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\TransactionRecords\TransactionRecordsService.cs:行号 77
+IP:::1
+--------------------end---------------------
+ 
+2015-07-21 14:53:08.3031 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/7/21 14:53:08
+异常发生地址:http://localhost:50143/Records/GetSLog?Panme=-1&time_min=0001%2F1%2F1+0%3A00%3A00&time_max=0001%2F1%2F1+0%3A00%3A00&take=15&skip=0&page=1&pageSize=15
+请求类型:GET
+异常:MySql.Data.MySqlClient.MySqlException (0x80004005): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE  oid.op_status=2 and ('-1'=-1 OR u.phone = '-1')    ;#赎回记录' at line 5
+   在 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   在 MySql.Data.MySqlClient.NativeDriver.ReadResult(UInt64& affectedRows, Int64& lastInsertId)
+   在 MySql.Data.MySqlClient.MySqlDataReader.GetResultSet()
+   在 MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   在 System.Data.ProviderBase.DataReaderContainer.NextResult()
+   在 System.Data.Common.DataAdapter.FillNextResult(DataReaderContainer dataReader)
+   在 System.Data.Common.DataAdapter.FillFromReader(DataSet dataset, DataTable datatable, String srcTable, DataReaderContainer dataReader, Int32 startRecord, Int32 maxRecords, DataColumn parentChapterColumn, Object parentChapterValue)
+   在 System.Data.Common.DataAdapter.Fill(DataSet dataSet, String srcTable, IDataReader dataReader, Int32 startRecord, Int32 maxRecords)
+   在 System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, CommandType ComType, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 464
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, String notes, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 494
+   在 YxLiCai.Dao.TransactionRecords.TransactionRecordsDAO.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\TransactionRecords\TransactionRecordsDAO.cs:行号 205
+   在 YxLiCai.Server.TransactionRecords.TransactionRecordsService.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize, Int32& totalCount) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\TransactionRecords\TransactionRecordsService.cs:行号 77
+IP:::1
+--------------------end---------------------
+ 
+2015-07-21 14:53:08.3312 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/7/21 14:53:08
+异常发生地址:http://localhost:50143/Records/GetSLog?Panme=-1&time_min=0001%2F1%2F1+0%3A00%3A00&time_max=0001%2F1%2F1+0%3A00%3A00&take=15&skip=0&page=1&pageSize=15
+请求类型:GET
+异常:MySql.Data.MySqlClient.MySqlException (0x80004005): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE  oid.op_status=2 and ('-1'=-1 OR u.phone = '-1')    ;#赎回记录' at line 5
+   在 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   在 MySql.Data.MySqlClient.NativeDriver.ReadResult(UInt64& affectedRows, Int64& lastInsertId)
+   在 MySql.Data.MySqlClient.MySqlDataReader.GetResultSet()
+   在 MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   在 System.Data.ProviderBase.DataReaderContainer.NextResult()
+   在 System.Data.Common.DataAdapter.FillNextResult(DataReaderContainer dataReader)
+   在 System.Data.Common.DataAdapter.FillFromReader(DataSet dataset, DataTable datatable, String srcTable, DataReaderContainer dataReader, Int32 startRecord, Int32 maxRecords, DataColumn parentChapterColumn, Object parentChapterValue)
+   在 System.Data.Common.DataAdapter.Fill(DataSet dataSet, String srcTable, IDataReader dataReader, Int32 startRecord, Int32 maxRecords)
+   在 System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, CommandType ComType, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 464
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, String notes, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 494
+   在 YxLiCai.Dao.TransactionRecords.TransactionRecordsDAO.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\TransactionRecords\TransactionRecordsDAO.cs:行号 205
+   在 YxLiCai.Server.TransactionRecords.TransactionRecordsService.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize, Int32& totalCount) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\TransactionRecords\TransactionRecordsService.cs:行号 77
+IP:::1
+--------------------end---------------------
+ 
+2015-07-21 14:53:08.5043 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/7/21 14:53:08
+异常发生地址:http://localhost:50143/Records/GetSLog?Panme=-1&time_min=0001%2F1%2F1+0%3A00%3A00&time_max=0001%2F1%2F1+0%3A00%3A00&take=15&skip=0&page=1&pageSize=15
+请求类型:GET
+异常:MySql.Data.MySqlClient.MySqlException (0x80004005): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE  oid.op_status=2 and ('-1'=-1 OR u.phone = '-1')    ;#赎回记录' at line 5
+   在 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   在 MySql.Data.MySqlClient.NativeDriver.ReadResult(UInt64& affectedRows, Int64& lastInsertId)
+   在 MySql.Data.MySqlClient.MySqlDataReader.GetResultSet()
+   在 MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   在 System.Data.ProviderBase.DataReaderContainer.NextResult()
+   在 System.Data.Common.DataAdapter.FillNextResult(DataReaderContainer dataReader)
+   在 System.Data.Common.DataAdapter.FillFromReader(DataSet dataset, DataTable datatable, String srcTable, DataReaderContainer dataReader, Int32 startRecord, Int32 maxRecords, DataColumn parentChapterColumn, Object parentChapterValue)
+   在 System.Data.Common.DataAdapter.Fill(DataSet dataSet, String srcTable, IDataReader dataReader, Int32 startRecord, Int32 maxRecords)
+   在 System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, CommandType ComType, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 464
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, String notes, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 494
+   在 YxLiCai.Dao.TransactionRecords.TransactionRecordsDAO.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\TransactionRecords\TransactionRecordsDAO.cs:行号 205
+   在 YxLiCai.Server.TransactionRecords.TransactionRecordsService.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize, Int32& totalCount) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\TransactionRecords\TransactionRecordsService.cs:行号 77
+IP:::1
+--------------------end---------------------
+ 
+2015-07-21 14:53:08.5323 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/7/21 14:53:08
+异常发生地址:http://localhost:50143/Records/GetSLog?Panme=-1&time_min=0001%2F1%2F1+0%3A00%3A00&time_max=0001%2F1%2F1+0%3A00%3A00&take=15&skip=0&page=1&pageSize=15
+请求类型:GET
+异常:MySql.Data.MySqlClient.MySqlException (0x80004005): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE  oid.op_status=2 and ('-1'=-1 OR u.phone = '-1')    ;#赎回记录' at line 5
+   在 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   在 MySql.Data.MySqlClient.NativeDriver.ReadResult(UInt64& affectedRows, Int64& lastInsertId)
+   在 MySql.Data.MySqlClient.MySqlDataReader.GetResultSet()
+   在 MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   在 System.Data.ProviderBase.DataReaderContainer.NextResult()
+   在 System.Data.Common.DataAdapter.FillNextResult(DataReaderContainer dataReader)
+   在 System.Data.Common.DataAdapter.FillFromReader(DataSet dataset, DataTable datatable, String srcTable, DataReaderContainer dataReader, Int32 startRecord, Int32 maxRecords, DataColumn parentChapterColumn, Object parentChapterValue)
+   在 System.Data.Common.DataAdapter.Fill(DataSet dataSet, String srcTable, IDataReader dataReader, Int32 startRecord, Int32 maxRecords)
+   在 System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, CommandType ComType, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 464
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, String notes, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 494
+   在 YxLiCai.Dao.TransactionRecords.TransactionRecordsDAO.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\TransactionRecords\TransactionRecordsDAO.cs:行号 205
+   在 YxLiCai.Server.TransactionRecords.TransactionRecordsService.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize, Int32& totalCount) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\TransactionRecords\TransactionRecordsService.cs:行号 77
+IP:::1
+--------------------end---------------------
+ 
+2015-07-21 14:53:11.7749 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/7/21 14:53:11
+异常发生地址:http://localhost:50143/Records/GetSLog?Panme=-1&time_min=0001%2F1%2F1+0%3A00%3A00&time_max=0001%2F1%2F1+0%3A00%3A00&take=15&skip=0&page=1&pageSize=15
+请求类型:GET
+异常:MySql.Data.MySqlClient.MySqlException (0x80004005): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE  oid.op_status=2 and ('-1'=-1 OR u.phone = '-1')    ;#赎回记录' at line 5
+   在 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   在 MySql.Data.MySqlClient.NativeDriver.ReadResult(UInt64& affectedRows, Int64& lastInsertId)
+   在 MySql.Data.MySqlClient.MySqlDataReader.GetResultSet()
+   在 MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   在 System.Data.ProviderBase.DataReaderContainer.NextResult()
+   在 System.Data.Common.DataAdapter.FillNextResult(DataReaderContainer dataReader)
+   在 System.Data.Common.DataAdapter.FillFromReader(DataSet dataset, DataTable datatable, String srcTable, DataReaderContainer dataReader, Int32 startRecord, Int32 maxRecords, DataColumn parentChapterColumn, Object parentChapterValue)
+   在 System.Data.Common.DataAdapter.Fill(DataSet dataSet, String srcTable, IDataReader dataReader, Int32 startRecord, Int32 maxRecords)
+   在 System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, CommandType ComType, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 464
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, String notes, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 494
+   在 YxLiCai.Dao.TransactionRecords.TransactionRecordsDAO.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\TransactionRecords\TransactionRecordsDAO.cs:行号 205
+   在 YxLiCai.Server.TransactionRecords.TransactionRecordsService.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize, Int32& totalCount) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\TransactionRecords\TransactionRecordsService.cs:行号 77
+IP:::1
+--------------------end---------------------
+ 
+2015-07-21 14:53:11.8009 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/7/21 14:53:11
+异常发生地址:http://localhost:50143/Records/GetSLog?Panme=-1&time_min=0001%2F1%2F1+0%3A00%3A00&time_max=0001%2F1%2F1+0%3A00%3A00&take=15&skip=0&page=1&pageSize=15
+请求类型:GET
+异常:MySql.Data.MySqlClient.MySqlException (0x80004005): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE  oid.op_status=2 and ('-1'=-1 OR u.phone = '-1')    ;#赎回记录' at line 5
+   在 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   在 MySql.Data.MySqlClient.NativeDriver.ReadResult(UInt64& affectedRows, Int64& lastInsertId)
+   在 MySql.Data.MySqlClient.MySqlDataReader.GetResultSet()
+   在 MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   在 System.Data.ProviderBase.DataReaderContainer.NextResult()
+   在 System.Data.Common.DataAdapter.FillNextResult(DataReaderContainer dataReader)
+   在 System.Data.Common.DataAdapter.FillFromReader(DataSet dataset, DataTable datatable, String srcTable, DataReaderContainer dataReader, Int32 startRecord, Int32 maxRecords, DataColumn parentChapterColumn, Object parentChapterValue)
+   在 System.Data.Common.DataAdapter.Fill(DataSet dataSet, String srcTable, IDataReader dataReader, Int32 startRecord, Int32 maxRecords)
+   在 System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, CommandType ComType, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 464
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, String notes, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 494
+   在 YxLiCai.Dao.TransactionRecords.TransactionRecordsDAO.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\TransactionRecords\TransactionRecordsDAO.cs:行号 205
+   在 YxLiCai.Server.TransactionRecords.TransactionRecordsService.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize, Int32& totalCount) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\TransactionRecords\TransactionRecordsService.cs:行号 77
+IP:::1
+--------------------end---------------------
+ 
+2015-07-21 14:53:12.5607 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/7/21 14:53:12
+异常发生地址:http://localhost:50143/Records/GetSLog?Panme=-1&time_min=0001%2F1%2F1+0%3A00%3A00&time_max=0001%2F1%2F1+0%3A00%3A00&take=15&skip=0&page=1&pageSize=15
+请求类型:GET
+异常:MySql.Data.MySqlClient.MySqlException (0x80004005): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE  oid.op_status=2 and ('-1'=-1 OR u.phone = '-1')    ;#赎回记录' at line 5
+   在 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   在 MySql.Data.MySqlClient.NativeDriver.ReadResult(UInt64& affectedRows, Int64& lastInsertId)
+   在 MySql.Data.MySqlClient.MySqlDataReader.GetResultSet()
+   在 MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   在 System.Data.ProviderBase.DataReaderContainer.NextResult()
+   在 System.Data.Common.DataAdapter.FillNextResult(DataReaderContainer dataReader)
+   在 System.Data.Common.DataAdapter.FillFromReader(DataSet dataset, DataTable datatable, String srcTable, DataReaderContainer dataReader, Int32 startRecord, Int32 maxRecords, DataColumn parentChapterColumn, Object parentChapterValue)
+   在 System.Data.Common.DataAdapter.Fill(DataSet dataSet, String srcTable, IDataReader dataReader, Int32 startRecord, Int32 maxRecords)
+   在 System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, CommandType ComType, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 464
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, String notes, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 494
+   在 YxLiCai.Dao.TransactionRecords.TransactionRecordsDAO.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\TransactionRecords\TransactionRecordsDAO.cs:行号 205
+   在 YxLiCai.Server.TransactionRecords.TransactionRecordsService.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize, Int32& totalCount) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\TransactionRecords\TransactionRecordsService.cs:行号 77
+IP:::1
+--------------------end---------------------
+ 
+2015-07-21 14:53:12.5857 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/7/21 14:53:12
+异常发生地址:http://localhost:50143/Records/GetSLog?Panme=-1&time_min=0001%2F1%2F1+0%3A00%3A00&time_max=0001%2F1%2F1+0%3A00%3A00&take=15&skip=0&page=1&pageSize=15
+请求类型:GET
+异常:MySql.Data.MySqlClient.MySqlException (0x80004005): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE  oid.op_status=2 and ('-1'=-1 OR u.phone = '-1')    ;#赎回记录' at line 5
+   在 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   在 MySql.Data.MySqlClient.NativeDriver.ReadResult(UInt64& affectedRows, Int64& lastInsertId)
+   在 MySql.Data.MySqlClient.MySqlDataReader.GetResultSet()
+   在 MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   在 System.Data.ProviderBase.DataReaderContainer.NextResult()
+   在 System.Data.Common.DataAdapter.FillNextResult(DataReaderContainer dataReader)
+   在 System.Data.Common.DataAdapter.FillFromReader(DataSet dataset, DataTable datatable, String srcTable, DataReaderContainer dataReader, Int32 startRecord, Int32 maxRecords, DataColumn parentChapterColumn, Object parentChapterValue)
+   在 System.Data.Common.DataAdapter.Fill(DataSet dataSet, String srcTable, IDataReader dataReader, Int32 startRecord, Int32 maxRecords)
+   在 System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, CommandType ComType, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 464
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, String notes, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 494
+   在 YxLiCai.Dao.TransactionRecords.TransactionRecordsDAO.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\TransactionRecords\TransactionRecordsDAO.cs:行号 205
+   在 YxLiCai.Server.TransactionRecords.TransactionRecordsService.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize, Int32& totalCount) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\TransactionRecords\TransactionRecordsService.cs:行号 77
+IP:::1
+--------------------end---------------------
+ 
+2015-07-21 14:53:12.7258 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/7/21 14:53:12
+异常发生地址:http://localhost:50143/Records/GetSLog?Panme=-1&time_min=0001%2F1%2F1+0%3A00%3A00&time_max=0001%2F1%2F1+0%3A00%3A00&take=15&skip=0&page=1&pageSize=15
+请求类型:GET
+异常:MySql.Data.MySqlClient.MySqlException (0x80004005): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE  oid.op_status=2 and ('-1'=-1 OR u.phone = '-1')    ;#赎回记录' at line 5
+   在 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   在 MySql.Data.MySqlClient.NativeDriver.ReadResult(UInt64& affectedRows, Int64& lastInsertId)
+   在 MySql.Data.MySqlClient.MySqlDataReader.GetResultSet()
+   在 MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   在 System.Data.ProviderBase.DataReaderContainer.NextResult()
+   在 System.Data.Common.DataAdapter.FillNextResult(DataReaderContainer dataReader)
+   在 System.Data.Common.DataAdapter.FillFromReader(DataSet dataset, DataTable datatable, String srcTable, DataReaderContainer dataReader, Int32 startRecord, Int32 maxRecords, DataColumn parentChapterColumn, Object parentChapterValue)
+   在 System.Data.Common.DataAdapter.Fill(DataSet dataSet, String srcTable, IDataReader dataReader, Int32 startRecord, Int32 maxRecords)
+   在 System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, CommandType ComType, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 464
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, String notes, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 494
+   在 YxLiCai.Dao.TransactionRecords.TransactionRecordsDAO.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\TransactionRecords\TransactionRecordsDAO.cs:行号 205
+   在 YxLiCai.Server.TransactionRecords.TransactionRecordsService.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize, Int32& totalCount) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\TransactionRecords\TransactionRecordsService.cs:行号 77
+IP:::1
+--------------------end---------------------
+ 
+2015-07-21 14:53:12.7519 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/7/21 14:53:12
+异常发生地址:http://localhost:50143/Records/GetSLog?Panme=-1&time_min=0001%2F1%2F1+0%3A00%3A00&time_max=0001%2F1%2F1+0%3A00%3A00&take=15&skip=0&page=1&pageSize=15
+请求类型:GET
+异常:MySql.Data.MySqlClient.MySqlException (0x80004005): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE  oid.op_status=2 and ('-1'=-1 OR u.phone = '-1')    ;#赎回记录' at line 5
+   在 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   在 MySql.Data.MySqlClient.NativeDriver.ReadResult(UInt64& affectedRows, Int64& lastInsertId)
+   在 MySql.Data.MySqlClient.MySqlDataReader.GetResultSet()
+   在 MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   在 System.Data.ProviderBase.DataReaderContainer.NextResult()
+   在 System.Data.Common.DataAdapter.FillNextResult(DataReaderContainer dataReader)
+   在 System.Data.Common.DataAdapter.FillFromReader(DataSet dataset, DataTable datatable, String srcTable, DataReaderContainer dataReader, Int32 startRecord, Int32 maxRecords, DataColumn parentChapterColumn, Object parentChapterValue)
+   在 System.Data.Common.DataAdapter.Fill(DataSet dataSet, String srcTable, IDataReader dataReader, Int32 startRecord, Int32 maxRecords)
+   在 System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, CommandType ComType, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 464
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, String notes, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 494
+   在 YxLiCai.Dao.TransactionRecords.TransactionRecordsDAO.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\TransactionRecords\TransactionRecordsDAO.cs:行号 205
+   在 YxLiCai.Server.TransactionRecords.TransactionRecordsService.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize, Int32& totalCount) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\TransactionRecords\TransactionRecordsService.cs:行号 77
+IP:::1
+--------------------end---------------------
+ 
+2015-07-21 14:53:12.8880 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/7/21 14:53:12
+异常发生地址:http://localhost:50143/Records/GetSLog?Panme=-1&time_min=0001%2F1%2F1+0%3A00%3A00&time_max=0001%2F1%2F1+0%3A00%3A00&take=15&skip=0&page=1&pageSize=15
+请求类型:GET
+异常:MySql.Data.MySqlClient.MySqlException (0x80004005): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE  oid.op_status=2 and ('-1'=-1 OR u.phone = '-1')    ;#赎回记录' at line 5
+   在 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   在 MySql.Data.MySqlClient.NativeDriver.ReadResult(UInt64& affectedRows, Int64& lastInsertId)
+   在 MySql.Data.MySqlClient.MySqlDataReader.GetResultSet()
+   在 MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   在 System.Data.ProviderBase.DataReaderContainer.NextResult()
+   在 System.Data.Common.DataAdapter.FillNextResult(DataReaderContainer dataReader)
+   在 System.Data.Common.DataAdapter.FillFromReader(DataSet dataset, DataTable datatable, String srcTable, DataReaderContainer dataReader, Int32 startRecord, Int32 maxRecords, DataColumn parentChapterColumn, Object parentChapterValue)
+   在 System.Data.Common.DataAdapter.Fill(DataSet dataSet, String srcTable, IDataReader dataReader, Int32 startRecord, Int32 maxRecords)
+   在 System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, CommandType ComType, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 464
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, String notes, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 494
+   在 YxLiCai.Dao.TransactionRecords.TransactionRecordsDAO.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\TransactionRecords\TransactionRecordsDAO.cs:行号 205
+   在 YxLiCai.Server.TransactionRecords.TransactionRecordsService.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize, Int32& totalCount) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\TransactionRecords\TransactionRecordsService.cs:行号 77
+IP:::1
+--------------------end---------------------
+ 
+2015-07-21 14:53:12.9110 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/7/21 14:53:12
+异常发生地址:http://localhost:50143/Records/GetSLog?Panme=-1&time_min=0001%2F1%2F1+0%3A00%3A00&time_max=0001%2F1%2F1+0%3A00%3A00&take=15&skip=0&page=1&pageSize=15
+请求类型:GET
+异常:MySql.Data.MySqlClient.MySqlException (0x80004005): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE  oid.op_status=2 and ('-1'=-1 OR u.phone = '-1')    ;#赎回记录' at line 5
+   在 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   在 MySql.Data.MySqlClient.NativeDriver.ReadResult(UInt64& affectedRows, Int64& lastInsertId)
+   在 MySql.Data.MySqlClient.MySqlDataReader.GetResultSet()
+   在 MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   在 System.Data.ProviderBase.DataReaderContainer.NextResult()
+   在 System.Data.Common.DataAdapter.FillNextResult(DataReaderContainer dataReader)
+   在 System.Data.Common.DataAdapter.FillFromReader(DataSet dataset, DataTable datatable, String srcTable, DataReaderContainer dataReader, Int32 startRecord, Int32 maxRecords, DataColumn parentChapterColumn, Object parentChapterValue)
+   在 System.Data.Common.DataAdapter.Fill(DataSet dataSet, String srcTable, IDataReader dataReader, Int32 startRecord, Int32 maxRecords)
+   在 System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, CommandType ComType, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 464
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, String notes, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 494
+   在 YxLiCai.Dao.TransactionRecords.TransactionRecordsDAO.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\TransactionRecords\TransactionRecordsDAO.cs:行号 205
+   在 YxLiCai.Server.TransactionRecords.TransactionRecordsService.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize, Int32& totalCount) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\TransactionRecords\TransactionRecordsService.cs:行号 77
+IP:::1
+--------------------end---------------------
+ 
+2015-07-21 14:53:21.1975 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/7/21 14:53:21
+异常发生地址:http://localhost:50143/Records/GetSLog?Panme=-1&time_min=0001%2F1%2F1+0%3A00%3A00&time_max=0001%2F1%2F1+0%3A00%3A00&take=15&skip=0&page=1&pageSize=15
+请求类型:GET
+异常:MySql.Data.MySqlClient.MySqlException (0x80004005): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE  oid.op_status=2 and ('-1'=-1 OR u.phone = '-1')    ;#赎回记录' at line 5
+   在 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   在 MySql.Data.MySqlClient.NativeDriver.ReadResult(UInt64& affectedRows, Int64& lastInsertId)
+   在 MySql.Data.MySqlClient.MySqlDataReader.GetResultSet()
+   在 MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   在 System.Data.ProviderBase.DataReaderContainer.NextResult()
+   在 System.Data.Common.DataAdapter.FillNextResult(DataReaderContainer dataReader)
+   在 System.Data.Common.DataAdapter.FillFromReader(DataSet dataset, DataTable datatable, String srcTable, DataReaderContainer dataReader, Int32 startRecord, Int32 maxRecords, DataColumn parentChapterColumn, Object parentChapterValue)
+   在 System.Data.Common.DataAdapter.Fill(DataSet dataSet, String srcTable, IDataReader dataReader, Int32 startRecord, Int32 maxRecords)
+   在 System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, CommandType ComType, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 464
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, String notes, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 494
+   在 YxLiCai.Dao.TransactionRecords.TransactionRecordsDAO.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\TransactionRecords\TransactionRecordsDAO.cs:行号 205
+   在 YxLiCai.Server.TransactionRecords.TransactionRecordsService.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize, Int32& totalCount) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\TransactionRecords\TransactionRecordsService.cs:行号 77
+IP:::1
+--------------------end---------------------
+ 
+2015-07-21 14:53:21.2355 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/7/21 14:53:21
+异常发生地址:http://localhost:50143/Records/GetSLog?Panme=-1&time_min=0001%2F1%2F1+0%3A00%3A00&time_max=0001%2F1%2F1+0%3A00%3A00&take=15&skip=0&page=1&pageSize=15
+请求类型:GET
+异常:MySql.Data.MySqlClient.MySqlException (0x80004005): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE  oid.op_status=2 and ('-1'=-1 OR u.phone = '-1')    ;#赎回记录' at line 5
+   在 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   在 MySql.Data.MySqlClient.NativeDriver.ReadResult(UInt64& affectedRows, Int64& lastInsertId)
+   在 MySql.Data.MySqlClient.MySqlDataReader.GetResultSet()
+   在 MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   在 System.Data.ProviderBase.DataReaderContainer.NextResult()
+   在 System.Data.Common.DataAdapter.FillNextResult(DataReaderContainer dataReader)
+   在 System.Data.Common.DataAdapter.FillFromReader(DataSet dataset, DataTable datatable, String srcTable, DataReaderContainer dataReader, Int32 startRecord, Int32 maxRecords, DataColumn parentChapterColumn, Object parentChapterValue)
+   在 System.Data.Common.DataAdapter.Fill(DataSet dataSet, String srcTable, IDataReader dataReader, Int32 startRecord, Int32 maxRecords)
+   在 System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, CommandType ComType, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 464
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, String notes, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 494
+   在 YxLiCai.Dao.TransactionRecords.TransactionRecordsDAO.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\TransactionRecords\TransactionRecordsDAO.cs:行号 205
+   在 YxLiCai.Server.TransactionRecords.TransactionRecordsService.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize, Int32& totalCount) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\TransactionRecords\TransactionRecordsService.cs:行号 77
+IP:::1
+--------------------end---------------------
+ 
+2015-07-21 14:53:22.0476 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/7/21 14:53:22
+异常发生地址:http://localhost:50143/Records/GetSLog?Panme=-1&time_min=0001%2F1%2F1+0%3A00%3A00&time_max=0001%2F1%2F1+0%3A00%3A00&take=15&skip=0&page=1&pageSize=15
+请求类型:GET
+异常:MySql.Data.MySqlClient.MySqlException (0x80004005): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE  oid.op_status=2 and ('-1'=-1 OR u.phone = '-1')    ;#赎回记录' at line 5
+   在 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   在 MySql.Data.MySqlClient.NativeDriver.ReadResult(UInt64& affectedRows, Int64& lastInsertId)
+   在 MySql.Data.MySqlClient.MySqlDataReader.GetResultSet()
+   在 MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   在 System.Data.ProviderBase.DataReaderContainer.NextResult()
+   在 System.Data.Common.DataAdapter.FillNextResult(DataReaderContainer dataReader)
+   在 System.Data.Common.DataAdapter.FillFromReader(DataSet dataset, DataTable datatable, String srcTable, DataReaderContainer dataReader, Int32 startRecord, Int32 maxRecords, DataColumn parentChapterColumn, Object parentChapterValue)
+   在 System.Data.Common.DataAdapter.Fill(DataSet dataSet, String srcTable, IDataReader dataReader, Int32 startRecord, Int32 maxRecords)
+   在 System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, CommandType ComType, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 464
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, String notes, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 494
+   在 YxLiCai.Dao.TransactionRecords.TransactionRecordsDAO.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\TransactionRecords\TransactionRecordsDAO.cs:行号 205
+   在 YxLiCai.Server.TransactionRecords.TransactionRecordsService.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize, Int32& totalCount) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\TransactionRecords\TransactionRecordsService.cs:行号 77
+IP:::1
+--------------------end---------------------
+ 
+2015-07-21 14:53:22.0756 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/7/21 14:53:22
+异常发生地址:http://localhost:50143/Records/GetSLog?Panme=-1&time_min=0001%2F1%2F1+0%3A00%3A00&time_max=0001%2F1%2F1+0%3A00%3A00&take=15&skip=0&page=1&pageSize=15
+请求类型:GET
+异常:MySql.Data.MySqlClient.MySqlException (0x80004005): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE  oid.op_status=2 and ('-1'=-1 OR u.phone = '-1')    ;#赎回记录' at line 5
+   在 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   在 MySql.Data.MySqlClient.NativeDriver.ReadResult(UInt64& affectedRows, Int64& lastInsertId)
+   在 MySql.Data.MySqlClient.MySqlDataReader.GetResultSet()
+   在 MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   在 System.Data.ProviderBase.DataReaderContainer.NextResult()
+   在 System.Data.Common.DataAdapter.FillNextResult(DataReaderContainer dataReader)
+   在 System.Data.Common.DataAdapter.FillFromReader(DataSet dataset, DataTable datatable, String srcTable, DataReaderContainer dataReader, Int32 startRecord, Int32 maxRecords, DataColumn parentChapterColumn, Object parentChapterValue)
+   在 System.Data.Common.DataAdapter.Fill(DataSet dataSet, String srcTable, IDataReader dataReader, Int32 startRecord, Int32 maxRecords)
+   在 System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, CommandType ComType, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 464
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, String notes, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 494
+   在 YxLiCai.Dao.TransactionRecords.TransactionRecordsDAO.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\TransactionRecords\TransactionRecordsDAO.cs:行号 205
+   在 YxLiCai.Server.TransactionRecords.TransactionRecordsService.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize, Int32& totalCount) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\TransactionRecords\TransactionRecordsService.cs:行号 77
+IP:::1
+--------------------end---------------------
+ 
+2015-07-21 14:53:22.2097 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/7/21 14:53:22
+异常发生地址:http://localhost:50143/Records/GetSLog?Panme=-1&time_min=0001%2F1%2F1+0%3A00%3A00&time_max=0001%2F1%2F1+0%3A00%3A00&take=15&skip=0&page=1&pageSize=15
+请求类型:GET
+异常:MySql.Data.MySqlClient.MySqlException (0x80004005): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE  oid.op_status=2 and ('-1'=-1 OR u.phone = '-1')    ;#赎回记录' at line 5
+   在 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   在 MySql.Data.MySqlClient.NativeDriver.ReadResult(UInt64& affectedRows, Int64& lastInsertId)
+   在 MySql.Data.MySqlClient.MySqlDataReader.GetResultSet()
+   在 MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   在 System.Data.ProviderBase.DataReaderContainer.NextResult()
+   在 System.Data.Common.DataAdapter.FillNextResult(DataReaderContainer dataReader)
+   在 System.Data.Common.DataAdapter.FillFromReader(DataSet dataset, DataTable datatable, String srcTable, DataReaderContainer dataReader, Int32 startRecord, Int32 maxRecords, DataColumn parentChapterColumn, Object parentChapterValue)
+   在 System.Data.Common.DataAdapter.Fill(DataSet dataSet, String srcTable, IDataReader dataReader, Int32 startRecord, Int32 maxRecords)
+   在 System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, CommandType ComType, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 464
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, String notes, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 494
+   在 YxLiCai.Dao.TransactionRecords.TransactionRecordsDAO.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\TransactionRecords\TransactionRecordsDAO.cs:行号 205
+   在 YxLiCai.Server.TransactionRecords.TransactionRecordsService.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize, Int32& totalCount) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\TransactionRecords\TransactionRecordsService.cs:行号 77
+IP:::1
+--------------------end---------------------
+ 
+2015-07-21 14:53:22.2347 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/7/21 14:53:22
+异常发生地址:http://localhost:50143/Records/GetSLog?Panme=-1&time_min=0001%2F1%2F1+0%3A00%3A00&time_max=0001%2F1%2F1+0%3A00%3A00&take=15&skip=0&page=1&pageSize=15
+请求类型:GET
+异常:MySql.Data.MySqlClient.MySqlException (0x80004005): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE  oid.op_status=2 and ('-1'=-1 OR u.phone = '-1')    ;#赎回记录' at line 5
+   在 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   在 MySql.Data.MySqlClient.NativeDriver.ReadResult(UInt64& affectedRows, Int64& lastInsertId)
+   在 MySql.Data.MySqlClient.MySqlDataReader.GetResultSet()
+   在 MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   在 System.Data.ProviderBase.DataReaderContainer.NextResult()
+   在 System.Data.Common.DataAdapter.FillNextResult(DataReaderContainer dataReader)
+   在 System.Data.Common.DataAdapter.FillFromReader(DataSet dataset, DataTable datatable, String srcTable, DataReaderContainer dataReader, Int32 startRecord, Int32 maxRecords, DataColumn parentChapterColumn, Object parentChapterValue)
+   在 System.Data.Common.DataAdapter.Fill(DataSet dataSet, String srcTable, IDataReader dataReader, Int32 startRecord, Int32 maxRecords)
+   在 System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, CommandType ComType, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 464
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, String notes, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 494
+   在 YxLiCai.Dao.TransactionRecords.TransactionRecordsDAO.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\TransactionRecords\TransactionRecordsDAO.cs:行号 205
+   在 YxLiCai.Server.TransactionRecords.TransactionRecordsService.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize, Int32& totalCount) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\TransactionRecords\TransactionRecordsService.cs:行号 77
+IP:::1
+--------------------end---------------------
+ 
+2015-07-21 14:53:22.3588 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/7/21 14:53:22
+异常发生地址:http://localhost:50143/Records/GetSLog?Panme=-1&time_min=0001%2F1%2F1+0%3A00%3A00&time_max=0001%2F1%2F1+0%3A00%3A00&take=15&skip=0&page=1&pageSize=15
+请求类型:GET
+异常:MySql.Data.MySqlClient.MySqlException (0x80004005): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE  oid.op_status=2 and ('-1'=-1 OR u.phone = '-1')    ;#赎回记录' at line 5
+   在 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   在 MySql.Data.MySqlClient.NativeDriver.ReadResult(UInt64& affectedRows, Int64& lastInsertId)
+   在 MySql.Data.MySqlClient.MySqlDataReader.GetResultSet()
+   在 MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   在 System.Data.ProviderBase.DataReaderContainer.NextResult()
+   在 System.Data.Common.DataAdapter.FillNextResult(DataReaderContainer dataReader)
+   在 System.Data.Common.DataAdapter.FillFromReader(DataSet dataset, DataTable datatable, String srcTable, DataReaderContainer dataReader, Int32 startRecord, Int32 maxRecords, DataColumn parentChapterColumn, Object parentChapterValue)
+   在 System.Data.Common.DataAdapter.Fill(DataSet dataSet, String srcTable, IDataReader dataReader, Int32 startRecord, Int32 maxRecords)
+   在 System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, CommandType ComType, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 464
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, String notes, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 494
+   在 YxLiCai.Dao.TransactionRecords.TransactionRecordsDAO.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\TransactionRecords\TransactionRecordsDAO.cs:行号 205
+   在 YxLiCai.Server.TransactionRecords.TransactionRecordsService.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize, Int32& totalCount) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\TransactionRecords\TransactionRecordsService.cs:行号 77
+IP:::1
+--------------------end---------------------
+ 
+2015-07-21 14:53:22.3859 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/7/21 14:53:22
+异常发生地址:http://localhost:50143/Records/GetSLog?Panme=-1&time_min=0001%2F1%2F1+0%3A00%3A00&time_max=0001%2F1%2F1+0%3A00%3A00&take=15&skip=0&page=1&pageSize=15
+请求类型:GET
+异常:MySql.Data.MySqlClient.MySqlException (0x80004005): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE  oid.op_status=2 and ('-1'=-1 OR u.phone = '-1')    ;#赎回记录' at line 5
+   在 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   在 MySql.Data.MySqlClient.NativeDriver.ReadResult(UInt64& affectedRows, Int64& lastInsertId)
+   在 MySql.Data.MySqlClient.MySqlDataReader.GetResultSet()
+   在 MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   在 System.Data.ProviderBase.DataReaderContainer.NextResult()
+   在 System.Data.Common.DataAdapter.FillNextResult(DataReaderContainer dataReader)
+   在 System.Data.Common.DataAdapter.FillFromReader(DataSet dataset, DataTable datatable, String srcTable, DataReaderContainer dataReader, Int32 startRecord, Int32 maxRecords, DataColumn parentChapterColumn, Object parentChapterValue)
+   在 System.Data.Common.DataAdapter.Fill(DataSet dataSet, String srcTable, IDataReader dataReader, Int32 startRecord, Int32 maxRecords)
+   在 System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, CommandType ComType, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 464
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, String notes, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 494
+   在 YxLiCai.Dao.TransactionRecords.TransactionRecordsDAO.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\TransactionRecords\TransactionRecordsDAO.cs:行号 205
+   在 YxLiCai.Server.TransactionRecords.TransactionRecordsService.Getuser_redemptionLog(String UserName, DateTime time_min, DateTime time_max, Int32 startIndex, Int32 pageSize, Int32& totalCount) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\TransactionRecords\TransactionRecordsService.cs:行号 77
+IP:::1
+--------------------end---------------------
+ 

@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "输入身份证";
+}
+<div class="setting-box">
+    <div class="reg-list fetch-list">
+        <dl>
+            <dd>
+                <input type="text" class="input-txt man-num" maxlength="18" id="manCode" name="manCode" placeholder="请输入身份证号" onkeyup="value=value.replace(/[^\d|X|x]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))">
+            </dd>
+            @*<dd class="yx-tips">别着急，小宝正飞速帮您找回
+                </dd>*@
+        </dl>
+
+    </div>
+    <div class="next-btn">
+        <a class="ui-btn ui-btn-gray" id="btnNext">下一步</a>
+        <a class="ui-btn" id="btnNextok" style="display: none">下一步</a>
+    </div>
+</div>
+<input type="hidden" id="returnUrl" value="@ViewBag.returnUrl" />
+<footer id="footer"></footer>
+<script> seajs.use('User/UserSetting/forget_SPFist_pwd.js') </script>

@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "忘记交易密码";
+}
+<div class="reg-list login-list">
+    <dl>
+        <dt class="right-style gray-status" id="repOld">
+            <span><b id="TimeMove">60</b>秒后重新发送</span>
+        </dt>
+        <dt class="right-style" id="repNew" style="display:none">
+            <span id="repNewMsg">重新发送</span>
+        </dt>
+        <dd>
+            <input type="tel" class="input-txt phone-code" id="phoneCode" name="phoneCode" placeholder="想你，快回来" maxlength="6" onkeyup="value=value.replace(/[^\d]/g,'') " onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))">
+        </dd>
+        @if (!string.IsNullOrEmpty(Yx.LiCai.App_Start.UserContext.simpleUserInfoModel.Account))
+        {
+            string phone = Yx.LiCai.App_Start.UserContext.simpleUserInfoModel.Account;
+            string lastphone = phone.Substring(phone.Length - 4);
+            <dd class="yx-tips">
+                验证码已发送至您**** @lastphone 手机，请耐心等待
+            </dd>
+        }
+        else
+        {
+            <dd class="yx-tips">
+                验证码已发送至您的手机，请耐心等待
+            </dd>
+        }
+
+        <dd class="warm-tips Validedate_check"></dd>
+    </dl>
+    <dl>
+        <dt class="left-style">设置密码</dt>
+        <dd>
+            @*<span id="pwspn">*@ <input type="password" class="input-txt reg-pwd" id="regPassword" name="regPassword" placeholder="请输入6位数字"/>@*</span>*@
+            <b class="show-pwd" id="ShowPasswerd"></b>
+        </dd>
+    </dl>
+</div>
+<div class="do-btn">
+    <a class="ui-btn" id="btnOK">修改</a>
+</div>
+
+<input type="hidden" id="returnUrl" value="@ViewBag.returnUrl" />
+<script>
+    var userPhone = '@YxLiCai.Tools.Const.SystemConst.ConvertPhoneNum(Yx.LiCai.App_Start.UserContext.simpleUserInfoModel.Account)';
+    seajs.use('User/UserSetting/forget_SP_pwd');
+</script>

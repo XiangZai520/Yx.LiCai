@@ -1,0 +1,1 @@
+define(function(e,n,o){var d=e("jquery"),t={};t.dom=d("document"),"undefined"!=typeof o&&o.exports&&(o.exports=t)});

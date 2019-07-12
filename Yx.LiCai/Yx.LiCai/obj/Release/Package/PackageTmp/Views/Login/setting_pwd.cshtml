@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "设置密码";
+} 
+      
+            <div class="reg-list login-list">
+                <dl>
+                    <dt class="left-style">设置密码</dt>
+                    <dd>
+                        <span id="pwspn">
+                       <input type="password" class="input-txt reg-pwd" id="regPassword" name="regPassword" placeholder="请设置密码"  maxlength="16" ></span>
+                        <b class="show-pwd" id="ShowPasswerd"></b>
+                    </dd>
+                    <dd class="warm-tips Validedate_check"></dd>
+                </dl>
+            </div>
+            <div class="do-btn">
+                <button type="button" class="ui-btn" id="nextBtn">确认</button>
+            </div>        
+
+<script>var dianhua = '@YxLiCai.Tools.Const.SystemConst.ConvertPhoneNum(ViewBag.Phone)';
+    var Code = '@ViewBag.Code';
+    seajs.use('User/LoginOrRegister/setting_pwd.js'); </script>

@@ -1,0 +1,85 @@
+﻿@model YxLiCai.Model.ActivityManage.ActSpecialAssets
+@section styles
+{
+    <link href="~/Resource/css/font-awesome.min.css" rel="stylesheet" />
+}
+<div class="zpManage zpSh">
+    <h2 class="crumbs">
+        您所在位置：活动管理->特享金->审核特享金
+    </h2>
+</div>
+<div class="gx-textitem">
+    <label class="gx-texttitle">
+        特享金名称：
+    </label>
+    <input id="name" type="text" disabled="disabled" value="@Model.name" class="gx-textbox" placeholder="请输入内容..."><span style="color:red">*名称唯一</span>
+    <br />
+    <label class="gx-texttitle">
+        面值（元）：
+    </label>
+    <input id="amount" type="text" disabled="disabled" value="@(YxLiCai.Tools.Const.SystemConst.MoenyConvert(Model.amount))" class="gx-textbox" placeholder="请输入内容...">
+    <span style="color:red">*精确到小数点后两位</span>
+    <br />
+    <label class="gx-texttitle">
+        收益(%)：
+    </label>
+    <input id="rate" type="text" disabled="disabled" value="@(YxLiCai.Tools.Const.SystemConst.MoenyConvert(Model.rate))" class="gx-textbox" placeholder="请输入内容...">
+    <br />
+    <label class="gx-texttitle">
+        使用期限(天)：
+    </label>
+    <input id="enableday" type="text" disabled="disabled" value="@(Model.enable_day)" class="gx-textbox" placeholder="请输入内容...">
+    <span style="color:red">*使用期限是拿到特享金自动投入月月盈产品活动收益的时间</span>
+    <br />
+    <label class="gx-texttitle">
+        收益增幅(%)：
+    </label>
+    <input id="rate_increase" type="text" disabled="disabled" value="@(YxLiCai.Tools.Const.SystemConst.MoenyConvert(Model.rate_increase))" class="gx-textbox" placeholder="请输入内容...">
+    <span style="color:red">*输入0代表没有增幅</span>
+    <br />
+    <label class="gx-texttitle">
+        审核备注：
+    </label>
+    <textarea id="remark">@Model.remark</textarea><br/>
+    <button id="pass" class="gx-button gx-button-info" style="margin:30px;">审核通过</button>
+    <button id="refuse" class="gx-button gx-button-info" style="margin:30px">拒绝通过</button>
+    <button id="cancle" class="gx-button gx-button-info" style="margin:30px">取消</button>
+
+</div>
+<script type="text/javascript">
+    $("#cancle").on("click", function () {
+        window.location = "/ActivityManege/SpecialAssetsList";
+    })
+    function UpdateStatus(status) {
+        var id = "@Model.id";
+        var remark = $("#remark").val();
+        if (status == 2 && remark == "")
+        {
+            alert("备注不能为空！");
+            return false;
+        }
+        $.ajax({
+            type: "POST",
+            url: "/ActivityManege/UpdateSpecialAssetsStatus",
+            data: { id: id, status: status, remark: remark },
+            async: false,
+            success: function (data) {
+                if (data != null) {
+                    if (data == "ok") {
+                        alert("操作成功！");
+                        window.location = "/ActivityManege/SpecialAssetsList";
+                    }
+                    else {
+                        alert(data.Message);
+                    }
+                }
+            }
+        })
+    }
+    $("#pass").on("click", function () {
+        UpdateStatus(1);
+    })
+    $("#refuse").on("click", function () {
+        UpdateStatus(2);
+    })
+</script>

@@ -1,0 +1,144 @@
+﻿@model YxLiCai.Admin.Models.FactoringUserInfoOut
+@section styles
+{
+    <link href="~/Resource/css/font-awesome.min.css" rel="stylesheet" />
+    <script src="~/Resource/js/My97DatePicker/WdatePicker.js"></script>
+    <style>
+        .gx-table th,.gx-table td {
+            text-align: center;
+            padding: 5px;
+        }
+    </style>
+}
+<div class="zpManage zpSh">
+    <h2 class="crumbs">
+        您所在位置：第三方管理->保理机构->个人中心
+    </h2>
+</div>
+<h2 class="crumbs">
+    用户信息
+</h2>
+<div class="gx-textitem">
+    <label class="gx-texttitle">
+        真实姓名：
+    </label>
+    <label>
+        @(Model.RealName)
+    </label>   
+    <label class="gx-texttitle">
+        手机号：
+    </label>
+    <label>
+        @(Model.Phone)
+    </label>
+    <label class="gx-texttitle">
+        银行卡：
+    </label>
+    <label>
+        @(Model.BankCardNo)
+    </label>
+</div>
+<h2 class="crumbs">
+    资产信息
+</h2>
+<div class="gx-textitem">
+    <label class="gx-texttitle">
+        账户总额(元)：
+    </label>
+    <label>
+        @(Model.TotalMoney)
+    </label>
+
+    <label class="gx-texttitle">
+        可用余额(元)：
+    </label>
+    <label>
+        @(Model.KeYongMoney)
+    </label>
+    <label class="gx-texttitle">
+        债权金额(元)：
+    </label>
+    <label>
+        @(Model.ZhaiQuanMoney)
+    </label>
+    <button id="MX" class="gx-button gx-button-info">明细</button>
+    <label class="gx-texttitle">
+        欠款金额(元)：
+    </label>
+    <label>
+        @(Model.QianKuanMoney)
+    </label>
+</div>
+<h2 class="crumbs">
+    债权交易记录
+</h2>
+<div>
+    <label class="gx-texttitle">
+        交易日期：
+    </label>
+    <input type="text" id="Today" value="@Model.Today" class="Wdate gx-textbox" style="height:34px;" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd' })" />
+    <button id="search" class="gx-button gx-button-info search-btn" style="float:right;margin-right:300px;">查询</button>
+</div>
+<div class="cleanfix" style="margin:15px 15px 15px 15px">
+    <table class="gx-table gx-table-striped">
+        <thead>
+            <tr>
+                <th>序号</th>
+                <th>项目ID</th>
+                <th>项目名称</th>
+                <th>项目金额</th>
+                <th>债权金额</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody id="tdata"></tbody>
+    </table>
+</div>
+<script type="text/javascript">
+    //固定查询方法 方法名必须叫Search
+    function Search(CurrentPage) {
+        var user_id = "@Model.user_id";
+        var Today = $("#Today").val();
+        if ($.trim(Today) == "")
+        {
+            alert("交易日期不能为空！");
+            return false;
+        }
+        $.ajax({
+            type: "POST",
+            url: "/FactoringManage/GetTradeByDate_ajax",
+            data: { user_id: user_id, Today: Today },
+            async: false,
+            success: function (data) {
+                if (data != null) {
+                    var Rows = data.Rows;
+                    if (Rows != null) {
+                        var strHTML = "";
+                        for (var i = 0; i < Rows.length; i++) {
+                            var row = Rows[i];
+
+                            strHTML = strHTML + "<tr>";
+                            strHTML = strHTML + "<td>" + (parseInt(i)+1) + "</td>";
+                            strHTML = strHTML + "<td>" + row.pjt_id + "</td>";
+                            strHTML = strHTML + "<td>" + row.pjt_name + "</td>";
+                            strHTML = strHTML + "<td>" + row.pjt_amount + "</td>";
+                            strHTML = strHTML + "<td>" + row.change_amount + "</td>";
+                            strHTML = strHTML + "<td>" + row.type + "</td>";
+                            strHTML = strHTML + "</tr>";
+                        }
+                        $("#tdata").html(strHTML);
+                    }
+                }
+            }
+        })
+    }
+    $("#search").on("click", function () {
+        Search(1);
+    })
+    $(function () {
+        Search(1);
+    })
+    $("#MX").on("click", function () {
+        window.location = "/FactoringManage/InvestmentDetail";
+    })
+</script>

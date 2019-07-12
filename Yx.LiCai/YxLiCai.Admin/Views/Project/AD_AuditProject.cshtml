@@ -1,0 +1,255 @@
+﻿@model YxLiCai.Model.Project.ProjectModel
+
+<div class="zpManage zpSh">
+    <h2 class="crumbs">您所在位置：项目管理 > 审核项目
+    </h2>
+    <div class="SearchMd">
+        审核项目
+    </div>
+    <div class="control-group form-horizontal">
+        <div class="control-group">
+            <label class="control-label">
+                项目名称
+            </label>
+            <div class="controls">
+                @Model.ProjectName
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">
+                借款人
+            </label>
+            <div class="controls">
+                @Model.Borrower
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">
+                还款方式
+            </label>
+            <div class="controls">
+                @Model.RepaymentMode
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">
+                还款期限(月)
+            </label>
+            <div class="controls">
+                @Model.LoanPeriod
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">
+                合同编号
+            </label>
+            <div class="controls">
+                @Model.OrderNumber
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">
+                项目金额
+            </label>
+            <div class="controls">
+                @Model.Amount
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">
+                权值
+            </label>
+            <div class="controls">
+                @Model.Weight
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">
+                已售金额
+            </label>
+            <div class="controls">
+                @Model.AmountSold
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">
+                可售金额
+            </label>
+            <div class="controls">
+                @Model.AvailableAmount
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">
+                借款利率
+            </label>
+            <div class="controls">
+                @Model.BorrowingRate
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">
+                发起时间
+            </label>
+            <div class="controls">
+                @Model.LaunchTime.ToString("yyyy-MM-dd")
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">
+                截止时间
+            </label>
+            <div class="controls">
+                @Model.EndTime.ToString("yyyy-MM-dd")
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">
+                适合产品类型
+            </label>
+            <div class="controls">
+                <label><input type="checkbox" disabled="disabled" name="usecondition" id="pt1">月月盈</label>
+                <label><input type="checkbox" disabled="disabled" name="usecondition" id="pt2">季季享-3个月</label>
+                <label><input type="checkbox" disabled="disabled" name="usecondition" id="pt3">季季享-6个月</label>
+                <label><input type="checkbox" disabled="disabled" name="usecondition" id="pt4">年年丰</label>
+            </div>
+        </div>
+        @*<table>
+            <tr>
+                <td>项目名称:</td>
+                <td>@Model.ProjectName</td>
+            </tr>
+            <tr>
+                <td>借款人:</td>
+                <td>@Model.Borrower</td>
+            </tr>
+            <tr>
+                <td>还款方式:</td>
+                <td>@Model.RepaymentMode</td>
+            </tr>
+            <tr>
+                <td>还款期限(月):</td>
+                <td>@Model.LoanPeriod</td>
+            </tr>
+            <tr>
+                <td>合同编号:</td>
+                <td>@Model.OrderNumber</td>
+            </tr>
+            <tr>
+                <td>项目金额:</td>
+                <td>@Model.Amount</td>
+            </tr>
+            <tr>
+                <td>权值:</td>
+                <td>@Model.Weight</td>
+            </tr>
+            <tr>
+                <td>已售金额:</td>
+                <td>@Model.AmountSold</td>
+            </tr>
+            <tr>
+                <td>可售金额:</td>
+                <td>@Model.AvailableAmount</td>
+            </tr>
+            <tr>
+                <td>借款利率:</td>
+                <td>@Model.BorrowingRate</td>
+            </tr>
+            <tr>
+                <td>发起时间:</td>
+                <td>@Model.LaunchTime.ToString("yyyy-MM-dd")</td>
+            </tr>
+            <tr>
+                <td>截止时间:</td>
+                <td>@Model.EndTime.ToString("yyyy-MM-dd")</td>
+            </tr>
+        </table>*@
+
+        @Html.Partial("EditorTemplates/PKendoTextArea",
+            new YxLiCai.Admin.Models.KendoTextAreaViewModel
+            {
+                Content = "备注(审核通过或不通过)",
+                Id = "Remark",
+                Value = @Model.Remark
+            })
+    </div>
+
+    <div class="SearchMd">
+        <input type="hidden" id="AuditorID" value="0" />
+        <input type="hidden" id="ProductID" value="@Model.Id" />
+        <input type="hidden" id="Fer_acount" value="@Model.account_id" />
+        <input id="btnSave" type="button" value="审核通过" class="searchBtn" />
+        <input id="btnFreeze" type="button" value="拒绝通过" class="searchBtn" />
+        <input type="button" value="返回" class="searchBtn" onclick="javascript: window.location.href = '/Project/AuditDenied'" />
+    </div>
+</div>
+
+<script>
+    $(function () {
+        var usecondition = "@Model.pdt_collection";
+        var uca = usecondition.split(',');
+        for (var i = 0; i < uca.length; i++) {
+            var ptstr = "pt" + uca[i];
+            $("#" + ptstr).attr("checked", "checked");
+        }
+    });
+    require(['CRM/common.assets', 'CRM/project.assets'], function (common, project) {
+        $("#Remark").blur(function () {
+            if (strlen($("#Remark").val()) > 300) { alert("字数操过300！"); }
+        });
+        //audit progress
+        var productID = $("#ProductID").val();
+        var Fer_acount = $("#Fer_acount").val();
+        $("#btnSave").bind("click", function () {
+            if ($("#Remark").val() != "")
+            { if (strlen($("#Remark").val()) > 300) { alert("字数操过300！"); return; } }
+            var Remark = $("#Remark").val();
+            data = { Id: productID, ProjectStatus: 2, Remark: Remark, account_id: Fer_acount, Amount_able_fz: '@Model.Amount_able_fz', AmountSold: '@Model.AmountSold', AvailableAmount: '@Model.AvailableAmount' };//审核通过
+            sentAjax(data);
+        });
+        $("#btnFreeze").bind("click", function () {
+            var Remark = $("#Remark").val();
+            if (Remark == "") {
+                alert("备注信息必填（未通过原因）");
+                return;
+            }
+            if (strlen($("#Remark").val()) > 300) { alert("字数操过300！"); return; }
+            data = { Id: productID, ProjectStatus: 1, Remark: Remark, Amount_able_fz: '@Model.Amount_able_fz', AmountSold: '@Model.AmountSold', AvailableAmount: '@Model.AvailableAmount' };//审核不通过
+            sentAjax(data);
+        });
+
+        function sentAjax(data) {
+            $.ajax({
+                url: "/Project/UpdateProjectStatus",
+                data: data,
+                success: function (e) {
+                    if (e.IsSuccess) {
+                        common.popupNotification.show("更新成功", "info");
+                        window.location.href = "/Project/AuditDenied";
+                    } else {
+                        alert(e.Message);
+                        return;
+                    }
+                },
+                error: function (e) {
+                    common.popupNotification.show(e.responseText);
+                }
+            });
+        }
+        //字符长度
+        function strlen(str) {
+            var len = 0;
+            for (var i = 0; i < str.length; i++) {
+                var c = str.charCodeAt(i);
+                //单字节加1 
+                if ((c >= 0x0001 && c <= 0x007e) || (0xff60 <= c && c <= 0xff9f)) {
+                    len++;
+                }
+                else {
+                    len += 2;
+                }
+            }
+            return len;
+        }
+    });
+</script>

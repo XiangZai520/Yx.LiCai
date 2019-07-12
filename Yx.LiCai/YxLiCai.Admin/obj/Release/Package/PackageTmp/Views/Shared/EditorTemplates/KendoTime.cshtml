@@ -1,0 +1,22 @@
+﻿@model YxLiCai.Admin.Models.KendoDateTimeViewModel
+
+<input type="text" id="@Model.Id" readonly="@Model.Readonly" value="@Model.Value" />
+
+
+<script type="text/javascript">
+    var id = '@Model.Id',
+        format = '@Model.Format',
+        readOnly = '@Model.Readonly';
+
+    var datetimepicker = $("#" + id + "").kendoDateTimePicker({
+        timeFormat: "HH:mm",
+        format: "yyyy-MM-dd HH:mm:ss",
+        parseFormats: ["MM/dd/yyyy hh:mmtt", "MM/dd/yyyy HH:mm", "MM/dd/yyyy", "HH:mm"]
+    }).data("kendoDateTimePicker");
+
+    datetimepicker.wrapper.width("182px");
+
+    if (readOnly == "true") {
+        datetimepicker.readonly();
+    }
+</script>

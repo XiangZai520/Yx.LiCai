@@ -1,0 +1,44 @@
+﻿<div class="zpManage zpSh">
+    <h2 class="crumbs">
+        您所在位置：产品管理 > 已售罄
+    </h2>
+</div>
+<div class="cleanfix" style="margin:15px 15px 15px 15px">
+    <div class="tbstyle">
+        <div id="grid"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    require(['CRM/common.assets', 'CRM/product.assets'], function (common, product) {
+
+        //parameters
+        var status = 4, //状态：已售罄
+            param = {
+               ProductName: "",
+               ProductCategory: -1,
+               ProductStatus: status
+           };
+        //data source
+        var ds = product.productDs(param);
+        //columns
+        var columns = [
+             { field: "Id", title: "产品ID", sortable: true },
+             { field: "ProductName", title: "产品名称", sortable: true },
+             { field: "PCategory", title: "产品类型", sortable: true },
+             { field: "ProductAmount", title: "产品金额(万元)", sortable: true },
+             { field: "RaisedAmount", title: "已投金额(万元)", sortable: true },
+             { field: "AvailableAmount", title: "可投金额(万元)", sortable: true },
+             { field: "CreateDate", title: "创建时间", sortable: true },
+             { field: "EnableDate", title: "上线时间", sortable: true },
+             { field: "EndDate", title: "售罄时间", sortable: true },
+        ];
+        //grid
+        $("#grid").kendoGrid({
+            sortable: true,
+            pageable: true,
+            dataSource: ds,
+            columns: columns
+        });       
+    });
+</script>

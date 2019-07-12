@@ -1,0 +1,175 @@
+﻿<div class="zpManage zpSh">
+    <h2 class="crumbs">
+        您所在位置：赎回管理 > 待审核
+    </h2>
+    <div class="gx-textitem">
+        <label class="gx-texttitle">
+            用户名：
+        </label>
+        <input id="u_lname" type="text" class="gx-textbox" placeholder="请输入内容...">
+        <label class="gx-texttitle">
+            真实姓名：
+        </label>
+        <input id="u_rname" type="text" class="gx-textbox" placeholder="请输入内容...">
+        <br />
+        <label class="gx-texttitle">
+            银行：
+        </label>
+        <input id="bank_name" type="text" class="gx-textbox" placeholder="请输入内容...">
+        <label class="gx-texttitle">
+            申请时间：
+        </label>
+        @Html.Partial("EditorTemplates/KendoTime",
+        new YxLiCai.Admin.Models.KendoDateTimeViewModel
+        {
+            Id = "SDate",
+            Format = "yyyy-MM-dd hh:mm:ss"
+        })
+        <label class="gx-texttitle">
+            至：
+        </label>
+        @Html.Partial("EditorTemplates/KendoTime",
+        new YxLiCai.Admin.Models.KendoDateTimeViewModel
+        {
+            Id = "EDate",
+            Format = "yyyy-MM-dd hh:mm:ss"
+        })
+    </div>
+    <div class="SearchMd form-horizontal">
+        <button id="btnSearch" class="searchBtn">查询</button>
+        <input type="button" id="btnPass" value="全部通过" class="searchBtn" />
+        <input type="button" id="btnDeny" value="批量拒绝" class="searchBtn" />
+        <input type="button" id="btnExcel" value="导出Excel" class="searchBtn" />
+    </div>
+
+    <div class="cleanfix" style="margin:15px 15px 15px 15px">
+        <div class="control-group">
+            <a style="color:red">*按住Ctrl键或Shift键、拖拽鼠标可以多选</a>
+            <div class="tbstyle">
+                <div id="grid"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    require(['CRM/common.assets', 'CRM/withdraw.assets'], function (common, withdraw) {
+
+        //initial
+        var grid = $("#grid").kendoGrid({
+            sortable: true,
+            pageable: true,
+            editable: "popup",
+            selectable: "multiple, row"
+        }).data("kendoGrid");
+
+        //get data
+        getData();
+
+        //Query Filter
+        $("#btnSearch").bind("click", getData);
+
+        //get data and show on page
+        function getData() {
+            //query conditions
+            var lName = $("#u_lname").val(), //登录名
+                rName = $("#u_rname").val(), //真实姓名
+                bkName = $("#bank_name").val(), //银行
+                sDate = $("#SDate").val(), //申请时间
+                eDate = $("#EDate").val(), //申请时间
+                param = { lName: lName, rName: rName, bkName: bkName, sDate: sDate, eDate: eDate, status: 0, sysStatus: 3 };
+
+            //datasource
+            var ds = withdraw.redemptionDs(param);
+
+            //columns
+            var columns = [
+             { field: "id", title: "ID", sortable: true },
+             { field: "UserInfo.LoginName", title: "用户名", sortable: true },
+             { field: "UserInfo.MyRealName", title: "真实姓名", sortable: true },
+             { field: "UserInfo.Phone", title: "手机号", sortable: true },
+             { field: "BankCardInfo.BankName", title: "银行", sortable: true },
+             { field: "BankCardInfo.BankCard", title: "银行卡号", sortable: true },
+             { field: "amount", title: "申请赎回金额", sortable: true },
+             { field: "amount_balance", title: "余额", sortable: true },
+             { field: "amount_principal", title: "本金", sortable: true },
+             { field: "status", title: "申请状态", sortable: true },
+             { field: "sys_status", title: "处理状态", sortable: true },
+             { field: "create_time", title: "申请时间", sortable: true },
+             { command: ["edit"], title: "详情" }
+            ];
+            columns.push({ command: { text: "拒绝", click: function (e) { common.deleteRecord(this, e, ds, "/RedemptionManager/AuditRedemption/", 2); } } });
+
+            //set options
+            grid.setOptions({
+                dataSource: ds,
+                columns: columns
+            });
+        }
+
+        //全部审核通过
+        $("#btnPass").bind("click", function (e) {
+            $.ajax({
+                url: "/RedemptionManager/PassAll",
+                error: function (err) {
+                    common.popupNotification.show(err.responseText, "error");
+                },
+                success: function (result) {
+                    if (result) {
+                        window.location.href = window.location.href;
+                    }
+                }
+            });
+        });
+
+        //批量拒绝
+        $("#btnDeny").bind("click", function (e) {
+            audit(2);
+        });
+
+        //导出Excel
+        $("#btnExcel").bind("click", function (e) {
+            $.ajax({
+                url: "/RedemptionManager/ExporRedemptionToExcel",
+                //data: { status: 0, sysStatus: 3 },
+                success: function (e) {
+                },
+                error: function (e) {
+                    common.popupNotification.show("err : " + e, "error");
+                }
+            });
+        });
+
+        //审核
+        //status : 1通过、2审核未通过
+        function audit(status) {
+            var selectedID = "";
+            var row = grid.select();
+            for (var i = 0; i < row.length; i++) {
+                var data = grid.dataItem(row[i]);
+                selectedID += data.id + ",";
+            }
+            selectedID = selectedID.substr(0, selectedID.lastIndexOf(','));
+
+            //未选择不能删除
+            if (selectedID.length == 0)
+                return;
+
+            var param = { IdList: selectedID, status: status };
+            $.ajax({
+                url: "/RedemptionManager/AuditRedemption",
+                data: param,
+                error: function (err) {
+                    common.popupNotification.show(err.xhr.responseText, "error");
+                },
+                success: function (result) {
+                    if (result) {
+                        for (var i = 0; i < row.length; i++) {
+                            grid.removeRow(row[i]);
+                        }
+                        common.popupNotification.show("成功", "info");
+                    }
+                }
+            });
+        }
+    });
+</script>

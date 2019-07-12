@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="author" content="Globak-x">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+	<meta content="yes" name="apple-mobile-web-app-capable" />
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+	<title>绑定银行卡</title>
+	<link rel="stylesheet" href="../css/m_base.css">
+	<link rel="stylesheet" href="../css/buy.css">
+    <link rel="stylesheet" href="../css/global_x.css">
+    <link rel="stylesheet" href="../css/dialog_ui.css">
+	<script src="../js/loader/sea.js"></script>
+    <script src="../js/loader/sea-config.js"></script>
+</head>
+<body>
+<div class="m-wrap">
+    <div class="gx-container">
+    	<div class="buy-input">
+            <dl class="gx-money">
+                <dt><i class="icon-word">买入</i></dt>
+                <dd><input type="text" class="gx-text" placeholder="请输入您的金额"></dd>
+            </dl>
+            <p class="moner_num">最低买入金额为100元</p>
+            <ul class="ul-balance">
+            	<li>账户可用余额</li>
+            	<li style="float:right;">
+            		<span><b>17.18</b>元</span>
+    				<input type="checkbox" name="a" class="ui-checkbox-s" />
+            	</li>
+            </ul>
+            <a href="">
+                <ul class="ul-balance">
+                	<li>使用加息券</li>
+                	<li style="float:right;">
+                		<span><b>3</b>张可用</span>
+        				<em class="bank_conrner"></em>
+                	</li>
+                </ul>
+            </a>
+            <div class="margin_top"><a id="ok-buy" href="#" class="ui-btn">确认买入</a></div>
+        </div>
+    </div>
+</div>
+<!-- 密码交易弹窗 -->
+<div id="aa" class="input-password">
+    <h2>请输入交易密码</h2>
+    <p><span>500</span>元（实付<span>0.00</span>+账户可用余额<span>0.00</span>）</p>
+    <div class="in-password">
+        <input type="text" class="in-txt">
+        <input type="text" class="in-txt">
+        <input type="text" class="in-txt">
+        <input type="text" class="in-txt">
+        <input type="text" class="in-txt">
+        <input type="text" class="in-txt">
+    </div>
+    <a href="#">获取临时交易密码</a>
+    <div class="gx-passwoed-btn">
+        <button type="button" class="gx-passwprd-but">修改</button>
+        <input type="submit" class="gx-passwprd-sub" value="确认">
+    </div>
+</div>
+<script>
+    seajs.use('../js/test')
+</script>
+</body>
+</html>

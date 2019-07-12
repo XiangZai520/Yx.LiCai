@@ -1,0 +1,224 @@
+﻿@model YxLiCai.Model.Product.ProductModel
+
+<div class="zpManage zpSh">
+    <h2 class="crumbs">
+        您所在位置：产品管理 > 审核产品
+    </h2>
+    <div class="control-group form-horizontal">
+        @Html.Partial("EditorTemplates/KendoTextBox",
+        new YxLiCai.Admin.Models.KendoTextBoxViewModel
+        {
+            Content = "产品名称",
+            Id = "ProductName",
+            Value = @Model.ProductName,
+            Readonly = "Readonly"
+        })
+        @Html.Partial("EditorTemplates/KendoDropdownlist",
+        new YxLiCai.Admin.Models.KendoDropdownlistViewModel
+        {
+            Content = "产品类型",
+            Id = "ProductCategory",
+            SourceUrl = "/Product/GetConfig?configName=Product|element=ProductCategory",
+            Value = @Model.ProductCategory,
+            Readonly = "true"
+        })
+        @Html.Partial("EditorTemplates/KendoNumericTextBox",
+        new YxLiCai.Admin.Models.KendoNumericTextBoxViewModel
+        {
+            Content = "产品金额(万元)",
+            Id = "ProductAmount",
+            Format = "n4",
+            Decimals = "4",
+            Value = @Model.ProductAmount,
+            Readonly = "true"
+        })
+        <div id="div_YieldBase">
+            @Html.Partial("EditorTemplates/KendoNumericTextBox",
+        new YxLiCai.Admin.Models.KendoNumericTextBoxViewModel
+        {
+            Content = "起始利率",
+            Id = "YieldBase",
+            Format = "n4",
+            Decimals = "4",
+            Value = @Model.YieldBase,
+            Readonly = "true"
+        })
+        </div>
+        <div id="div_YieldIncrease">
+            @Html.Partial("EditorTemplates/KendoNumericTextBox",
+        new YxLiCai.Admin.Models.KendoNumericTextBoxViewModel
+        {
+            Content = "月递增利率",
+            Id = "YieldIncrease",
+            Format = "n4",
+            Decimals = "4",
+            Value = @Model.YieldIncrease,
+            Readonly = "true"
+        })
+        </div>
+        @Html.Partial("EditorTemplates/KendoNumericTextBox",
+        new YxLiCai.Admin.Models.KendoNumericTextBoxViewModel
+        {
+            Content = "最高利率",
+            Id = "YieldTop",
+            Format = "n4",
+            Decimals = "4",
+            Value = @Model.YieldTop,
+            Readonly = "true"
+        })
+        @Html.Partial("EditorTemplates/KendoNumericTextBox",
+        new YxLiCai.Admin.Models.KendoNumericTextBoxViewModel
+        {
+            Content = "产品期限(天)",
+            Id = "ProductDuration",
+            Value = @Model.ProductDuration,
+            Readonly = "true"
+        })
+        @Html.Partial("EditorTemplates/KendoMultiSelect",
+        new YxLiCai.Admin.Models.KendoTextBoxViewModel
+        {
+            Content = "匹配项目列表",
+            Id = "ProductList",
+            Readonly = "true"
+        })
+        @Html.Partial("EditorTemplates/KendoDateTime",
+        new YxLiCai.Admin.Models.KendoDateTimeViewModel
+        {
+            Content = "预期上线时间",
+            Id = "ExpectedEnableDate",
+            Format = "yyyy-MM-dd hh:mm:ss",
+            Value = @Model.ExpectedEnableDate,
+            Readonly = "true"
+        })
+        @Html.Partial("EditorTemplates/KendoNumericTextBox",
+        new YxLiCai.Admin.Models.KendoNumericTextBoxViewModel
+        {
+            Content = "产品排序",
+            Id = "ProductOrder",
+            Value = @Model.ProductOrder,
+            Readonly = "true"
+        })
+        <div class="form-group">
+            <label class="control-label col-sm-6">是否自动上线</label>
+            @Html.Partial("EditorTemplates/_RadioView",
+            new YxLiCai.Admin.Models.KendoTextBoxViewModel
+            {
+                Id = "Radio_False",
+                Content = "否",
+                Value = "0",
+                Readonly = "readonly"
+            })
+            @Html.Partial("EditorTemplates/_RadioView",
+            new YxLiCai.Admin.Models.KendoTextBoxViewModel
+            {
+                Id = "Radio_True",
+                Content = "是",
+                Value = "1",
+                Readonly = "readonly"
+            })
+        </div>
+        @Html.Partial("EditorTemplates/KendoTextArea",
+        new YxLiCai.Admin.Models.KendoTextAreaViewModel
+        {
+            Content = "备注",
+            Id = "Remark",
+            Value = @Model.Remark
+        })
+    </div>
+
+    <div class="SearchMd">
+        <input type="hidden" id="AuditorID" value="@YxLiCai.Admin.UserContext.simpleUserInfoModel.Id" />
+        <input type="hidden" id="ProductID" value="@Model.Id" />
+
+        <input id="btnSave" type="button" value="通过" class="searchBtn" />
+        <input id="btnFreeze" type="button" value="拒绝" class="searchBtn" />
+        <input type="button" value="返回" class="searchBtn" onclick="javascript: window.location.href = '/Product/AuditList'" />
+    </div>
+</div>
+
+<script>
+    require(['CRM/common.assets', 'CRM/project.assets', 'CRM/product.assets'], function (common, project, product) {
+
+        //init category
+        var category_id = $("#ProductCategory").val(); //category id
+         
+        //set selected projects
+        setMatchedProjectList(category_id);
+
+        //匹配项目列表
+        function setMatchedProjectList(categoryID) {
+            //change matched projects
+            if (categoryID == -1) {
+                multiselect.value([]);
+                return;
+            }
+            var param = { categoryID: categoryID },
+                projectDs = project.projectDs(param);
+
+            multiselect.setDataSource(projectDs);
+
+            projectDs.fetch(function (e) {
+                var data = projectDs.data(),
+                    array = [];
+                for (var i = 0; i < data.length; i++) {
+                    array.push(data[i].Id);
+                }
+
+                multiselect.value(array);
+            });
+        }
+
+        //initial dropdownlist
+        if ($("#ProductCategory").val() > 1) {
+            $("#div_YieldBase").hide();
+            $("#div_YieldIncrease").hide();
+        }
+
+        //set radio value
+        var radioValue = '@Model.IsAutoEnable';
+        if (radioValue == "1") {
+            $("#Radio_True").prop("checked", true);
+        }
+        else {
+            $("#Radio_False").prop("checked", true);
+        }
+        $("#Radio_True").attr("disabled", true);
+        $("#Radio_False").attr("disabled", true);
+
+        //audit progress
+        var productID = $("#ProductID").val();
+        $("#btnSave").bind("click", function () {
+            data = project.jsonModel(productID, 1);//审核通过
+            sentAjax(data);
+        });
+        $("#btnFreeze").bind("click", function () {
+            if ($("#Remark").val().trim() == "") {
+                common.popupNotification.show("请填写备注", "error");
+                return;
+            }
+            data = project.jsonModel(productID, 2);//审核不通过
+            sentAjax(data);
+        });
+
+        function sentAjax(data) {
+            $.ajax({
+                type: "POST",
+                async: false,
+                url: "/Product/UpdateProduct",
+                data: data,
+                success: function (e) {
+                    if (e) {
+                        common.popupNotification.show("审核成功", "info");
+                        window.location.href = "/Product/AuditList";
+                    }
+                    else {
+                        common.popupNotification.show("审核失败", "error");
+                    }
+                },
+                error: function (e) {
+                    common.popupNotification.show(e.responseText);
+                }
+            });
+        }
+    });
+</script>

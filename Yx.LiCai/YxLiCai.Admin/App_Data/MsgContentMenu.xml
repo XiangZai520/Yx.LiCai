@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<MsgContentMenu>
+	<Msg>
+		<Type>1</Type>
+		<Title>充值提醒</Title>
+		<Content>您好，您在e休理财的账户余额已不足(建议账户余额10000元)，当前余额：{1}，待支付金额{2}。请您及时登录 {0} 充值，以免影响您的正常业务，谢谢。</Content>
+	</Msg>
+</MsgContentMenu> 

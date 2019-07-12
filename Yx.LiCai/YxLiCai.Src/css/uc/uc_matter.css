@@ -1,0 +1,248 @@
+.show-container{
+	background: #f0f0f0;
+	padding: 20px;
+}
+.uc-matter{
+	padding-bottom: 30px;
+}
+.uc-matter-title{
+	 background: #00b7ee;
+	 overflow: hidden;
+	 border-radius: 5px;
+	 line-height: 46px;
+	 padding: 0 20px;
+}
+.uc-matter-title b{
+	display: block;
+	width: 35%;
+}
+.uc-matter-title b img{
+	width: 100%;
+}
+.uc-matter-title .uc-matter-left{
+	float: left;
+}
+.uc-matter-title h2{
+	float: left;
+	color: #fff;
+	font-size: 18px;
+	font-weight: bold;
+	text-align: center;
+	width: 30%;
+}
+.uc-matter-title .uc-matter-right{
+	float: right;
+}
+.uc-matter-list{
+	border-radius: 5px;
+	border: 1px solid #dfdfdf;
+	padding:20px 20px 0 20px;
+	overflow: hidden;
+	margin-top: 20px;
+}
+.uc-matter-word{
+	color: #b4b4b4;
+	font-size: 16px;
+	line-height: 24px;
+	padding-bottom: 20px;
+	text-indent: 2em;
+}
+.uc-matter-list h2{
+	font-size: 16px;
+	color: #828282;
+	float: left;
+	padding-bottom: 20px;
+}
+.uc-matter-list i{
+	display: block;
+	float: right;
+	width: 16px;
+	height: 16px;
+	background: url(../../images/bank_s.png) no-repeat;
+	background-size: 100%;
+}
+.uc-matter .hover i{
+	display: block;
+	float: right;
+	width: 16px;
+	height: 16px;
+	background: url(../../images/bank_h.png) no-repeat;
+	background-size: 100%;
+}
+.uc-matter-list p.uc-matter-menu{
+	display: none;
+	font-size: 16px;
+	color: #b4b4b4;
+	clear: both;
+	padding:20px 0px;
+	border-top: 1px solid #dedede;
+}
+.uc-sy{
+	padding:0 20px 30px 20px;
+}
+.uc-sy-list{
+	position: relative;
+	border-left: 1px dashed #00b7ee;
+}
+.uc-sy-list:nth-child(5){
+	border-left: none;
+}
+.uc-sy-list span{
+	position: absolute;
+	left: -12px;
+	display: block;
+	width: 24px;
+	height: 24px;
+	border-radius: 12px;
+	background: #00b7ee;
+	color: #fff;
+	text-align: center;
+	line-height: 24px;
+	font-size: 14px;
+}
+.uc-sy-list h2{
+	color: #00b7ee;
+	font-size: 16px;
+	padding:0 0 30px 24px;
+}
+.uc-sy-list p{
+	color: #b4b4b4;
+	font-size: 14px;
+	padding:0px 0 40px 24px;
+}
+.uc-sy-list p b{
+	color: #b4b4b4;
+	font-weight: normal;
+	display: block;
+	padding-top: 10px;
+}
+.uc-sy-list p b{
+	color: #b4b4b4;
+	font-weight: normal;
+	display: block;
+	padding-top: 10px;
+}
+.uc-sy-list p i{
+	color: #00b7ee;
+	padding-right: 5px;
+}
+.uc-sy-list p strong{
+	color: #b4b4b4;
+	font-weight: bold;
+	display: block;
+	margin-top: 10px;
+}
+/*月月盈产品详情*/
+.uc-show-list{
+	width: 100%;
+	background:#fff;
+	border-radius: 5px;
+	position: relative;
+	padding:60px 20px 30px 20px;
+	margin-top:22px;
+}
+.uc-show-list h2{
+	font-size: 16px;
+	background: url(../../images/uc_datail.png) no-repeat;
+	width: 160px;
+	height: 35px;
+	background-size:100%;
+	color: #fff;
+	text-align: center;
+	line-height: 35px;
+	position: absolute;
+	top: -6px;
+	left: 50%;
+	margin-left: -80px;
+}
+.uc-show-list p{
+	font-size: 14px;
+	color: #b4b4b4;
+}
+.uc-show-list li:nth-child(1){
+	margin-top: 0;
+}
+.uc-show-list li{
+	font-size: 14px;
+	color: #b4b4b4;
+	overflow: hidden;
+	margin-top: 10px;
+	position: relative;
+}
+.uc-show-list li span{
+	display: block;
+	float: left;
+	width: 15px;
+	position: absolute;
+}
+.uc-show-list li p{
+	float: left;
+	width: 100%;
+	padding-left: 15px;
+}
+.uc-show-list li b{
+	color: #fe7c88;
+	font-weight: normal;
+}
+.uc-show-tab{
+	width: 100%;
+	border: 1px solid #f0f0f0;
+}
+.uc-show-tab tr{
+	height: 30px;
+	border-bottom: 1px solid #f0f0f0;
+}
+.uc-show-tab td{
+	text-align: center;
+	font-size: 16px;
+	color: #646464;
+	border-right: 1px solid #f0f0f0;
+}
+.uc-show-tab .uc-show-tr{
+	background: #f0f0f0;
+	height: 38px;
+}
+.uc-show-tab .uc-show-tr td{
+	border-right: 1px solid #ffffff;
+	font-weight: bold;
+	color: #969696;
+}
+.uc-show-tab .uc-show-tr td:nth-child(4){
+	border-right:none;
+}
+@media (max-width: 320px) {
+	.uc-matter-title h2{
+		font-size: 14px;
+	}
+	.uc-matter-word{
+		font-size: 14px;
+	}
+	.uc-matter-list h2{
+		font-size: 14px;
+	}
+	.uc-matter-list p.uc-matter-menu{
+		font-size: 14px;
+	}
+	.uc-sy-list span{
+		font-size: 12px;
+	}
+	.uc-sy-list h2{
+		font-size: 14px;
+	}
+	.uc-sy-list p{
+		font-size: 12px;
+	}
+	.uc-show-list h2{
+		font-size: 14px;
+	}
+	.uc-show-list p{
+		font-size: 12px;
+	}
+	.uc-show-list li{
+		font-size: 12px;
+	}
+	.uc-show-tab td{
+		font-size: 12px;
+	}
+}
+

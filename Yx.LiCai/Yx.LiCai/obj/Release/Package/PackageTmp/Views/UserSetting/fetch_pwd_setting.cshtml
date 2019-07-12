@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "设置交易密码";
+} 
+
+        <div class="setting-box">
+            <div class="reg-list fetch-list">
+                <dl>
+                    <dt class="left-style">交易密码</dt>
+                    <dd>
+                        <input type="password" class="input-txt fetch-pwd" id="fetchPassword" name="fetchPassword" maxlength="6" placeholder="设置6位数字交易密码"/>@*</span>*@
+                        <b class="show-pwd" id="ShowPasswerd"></b>
+                    </dd>
+                </dl>
+
+            </div>
+            <div class="ok-btn">
+                <a class="ui-btn"  id="btnOK">确认</a>
+            </div>
+        </div>
+<input type="hidden" id="returnUrl" value="@ViewBag.returnUrl" />
+<script>
+    seajs.use('User/UserSetting/fetch_pwd_setting')
+</script>

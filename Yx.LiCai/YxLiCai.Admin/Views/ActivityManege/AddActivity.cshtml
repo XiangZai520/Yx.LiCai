@@ -1,0 +1,238 @@
+﻿@model List<YxLiCai.Model.ActivityManage.ActPromotionItem>
+@section styles
+{
+    <link href="~/Resource/css/font-awesome.min.css" rel="stylesheet" />
+    <script src="~/Resource/js/My97DatePicker/WdatePicker.js"></script>
+    <style>
+        .list-wrap {
+            margin-left: 120px;
+            border: 1px solid #C3C1C1;
+            width: 670px;
+            padding: 0 15px;
+            margin-top: -21px;
+        }
+        .list-wrap .list-item {
+            
+        }
+    </style>
+}
+<div class="zpManage zpSh">
+    <h2 class="crumbs">
+        您所在位置：活动管理->活动->新建活动
+    </h2>
+</div>
+<div class="gx-textitem">
+    <label class="gx-texttitle">
+        活动名称：
+    </label>
+    <input id="name" type="text" class="gx-textbox" placeholder="请输入内容..."><span style="color:red">*活动名称唯一</span>
+    <br />
+    <label class="gx-texttitle">
+        活动类型：
+    </label>
+    <select id="type" class="gx-textbox">
+        <option value="0">注册</option>
+        <option value="1">邀请</option>
+        <option value="2">购买</option>
+    </select><span style="color:red">*</span>
+    <br />
+    <label class="gx-texttitle">
+        参与人上限：
+    </label>
+    <input id="max_user_num" type="text" class="gx-textbox" placeholder="0代表无上限"><span style="color:red">*活动参与最高人数</span>
+    <br />
+    <label class="gx-texttitle">
+        赠送上限：
+    </label>
+    <input id="limit_num" type="text" class="gx-textbox" placeholder="0代表无上限"><span style="color:red">*单个用户参与该活动的次数</span>
+    <br />
+    <label class="gx-texttitle">
+        预算（元）：
+    </label>
+    <input id="budget" type="text" class="gx-textbox" placeholder="请输入内容..."><span style="color:red">*</span>
+    <br />
+    <label class="gx-texttitle">
+        活动广告语：
+    </label>
+    <input id="ad_content" type="text" class="gx-textbox" placeholder="请输入内容...">
+    <br />
+    <label class="gx-texttitle">
+        活动开始时间：
+    </label>
+    <input type="text" id="s_time" class="Wdate gx-textbox" style="height:34px;" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm' })" /><span style="color:red">*</span>
+    <br />
+    <label class="gx-texttitle">
+        活动结束时间：
+    </label>
+    <input type="text" id="e_time" class="Wdate gx-textbox" style="height:34px;" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm' })" /><span style="color:red">*</span>
+    <br />
+    <label class="gx-texttitle">
+        链接：
+    </label>
+    <input id="url" type="text" class="gx-textbox" placeholder="请输入内容...">
+    <br />
+    <label class="gx-texttitle">
+        赠送项：
+    </label>
+    <div class="list-wrap">
+        @if (Model != null && Model.Count > 0)
+        {
+            foreach (YxLiCai.Model.ActivityManage.ActPromotionItem item in Model)
+            {
+                <div class="list-item">
+                    <label style="width: 15%"><input type="checkbox" name="item_type" id="@(item.item_type.ToString() + "_" + item.item_id.ToString())">@item.item_name</label>
+                    <label style="width: 15%">面值：@(item.Amount)</label>
+                    <label class="gx-texttitle">
+                        数量：
+                    </label>
+                    <input name="item_qty" type="text" class="gx-textbox" placeholder="请输入内容..."><span style="color:red">*单次给用户赠品的数量</span>
+                </div>
+            }
+        }
+      </div>
+
+    <button id="submit" class="gx-button gx-button-info search-btn" style="margin:30px;">提交审核</button>
+    <button id="cancle" class="gx-button search-btn" style="margin:30px">取消</button>
+
+</div>
+<div style="border:solid 1px;width:53%;color:red;padding:15px; " class="margin">
+    注意事项：
+    <br />
+    1、注册类型的活动在同一时间段内只能有一个在上线中
+    <br />
+    2、赠送上限对赠送项的所有内容同时有效，当赠送项的限制不一致时不能放在同一活动中
+</div>
+    <script type="text/javascript">
+        $("#cancle").on("click", function () {
+            window.location = "/ActivityManege/ActivityList";
+        })
+        $("#submit").on("click", function () {
+            $("#submit").attr("disabled", "disabled");
+            var name = $("#name").val();
+            if ($.trim(name) == "") {
+                alert("活动名称不能为空！");
+                $("#submit").removeAttr("disabled");
+                return false;
+            }
+            var max_user_num = $("#max_user_num").val();
+
+            if (isNaN(parseInt(max_user_num))) {
+                alert("参与人上限格式不正确，请重新输入！");
+                $("#submit").removeAttr("disabled");
+                $("#max_user_num").val("");
+                return false;
+            }
+            if (parseInt(max_user_num) < 0) {
+                alert("参与人上限应为非负数！");
+                $("#submit").removeAttr("disabled");
+                $("#max_user_num").val("");
+                return false;
+            }
+            var limit_num = $("#limit_num").val();
+
+            if (isNaN(parseInt(limit_num))) {
+                alert("赠送上限格式不正确，请重新输入！");
+                $("#submit").removeAttr("disabled");
+                $("#limit_num").val("");
+                return false;
+            }
+            var budget = $("#budget").val();
+            if (isNaN(parseFloat(budget))) {
+                alert("预算格式不正确，请重新输入！");
+                $("#submit").removeAttr("disabled");
+                $("#budget").val("");
+                return false;
+            }
+
+            var s_time = $("#s_time").val();
+            if ($.trim(s_time) == "") {
+                alert("开始时间不能为空！");
+                $("#submit").removeAttr("disabled");
+                return false;
+            }
+            var e_time = $("#e_time").val();
+            if ($.trim(e_time) == "") {
+                alert("结束时间不能为空！");
+                $("#submit").removeAttr("disabled");
+                return false;
+            }
+            var ad_content = $("#ad_content").val();
+            var url = $("#url").val();
+
+            var item_array = "";
+            var IsTrueQty = true;
+            $("input[name='item_type']").each(function () {
+                if ($(this).is(":checked")) {
+                    var id = $(this).attr("id");
+                    var parEle = $(this).parent().parent();
+                    var qtyEle = parEle.find("input[name='item_qty']").eq(0);
+                    var qty = qtyEle.val();
+                    if (isNaN(parseInt(qty))) {
+                        IsTrueQty = false;
+                        return false;
+                    }
+                    id = id + "_" + qty;
+                    item_array = item_array + (item_array == "" ? "" : ",") + id;
+                }
+            })
+            if (!IsTrueQty) {
+                alert("赠送项数量格式不正确！");
+                $("#submit").removeAttr("disabled");
+                return false;
+            }
+            if (item_array == "") {
+                alert("赠送项不能为空！");
+                $("#submit").removeAttr("disabled");
+                return false;
+            }
+            var type = $("#type").val();
+            var IsExistsByTime = 0;
+            var IsExcu = 1;
+            $.ajax({
+                type: "POST",
+                url: "/ActivityManege/IsExistsByTime",
+                data: { s_time: s_time, e_time: e_time, type: type },
+                async: false,
+                success: function (data) {
+                    if (data != null) {
+                        if (data == "1")
+                        {
+                            IsExistsByTime = 1;
+                            IsExcu = 0;
+                        }
+                    }
+                }
+            })
+            if (IsExistsByTime == "1")
+            {
+                if (confirm("该时间段内已有一个该类活动，确定要继续创建吗？"))
+                {
+                    IsExcu = 1;
+                }
+            }
+            if (IsExcu == 0)
+            {
+                $("#submit").removeAttr("disabled");
+                return false;
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "/ActivityManege/AddActivity_ajax",
+                data: { name: name, max_user_num: max_user_num, limit_num: limit_num, budget: budget, s_time: s_time, e_time: e_time, ad_content: ad_content, url: url, item_array: item_array, type: type },
+                async: false,
+                success: function (data) {
+                    if (data != null) {
+                        if (data == "ok") {
+                            alert("新增成功！");
+                            window.location = window.location.href;
+                        }
+                        else {
+                            alert(data.Message);
+                            $("#submit").removeAttr("disabled");
+                        }
+                    }
+                }
+            })
+        })
+    </script>

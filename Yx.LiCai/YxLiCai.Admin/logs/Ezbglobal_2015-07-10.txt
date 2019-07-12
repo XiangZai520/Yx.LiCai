@@ -1,0 +1,24 @@
+2015-07-10 10:49:29.3252 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/7/10 10:49:29
+异常发生地址:http://localhost:50143/Project/AddProject?ProjectName=A%E8%82%A1%E5%B8%82%E6%80%A5%E6%95%91&Borrower=%E4%BE%AF%E8%A3%95%E7%A5%A5&OrderNumber=98989565&Amount=100000&AmountSold=0&AvailableAmount=100000&BorrowingRate=0.36&LaunchTime=2015-07-01&EndTime=2015-07-31&Weight=25&RepaymentMode=%E7%BA%BF%E4%B8%8A%E6%94%AF%E4%BB%98&LoanPeriod=12&ProjectType=1&account_id=2
+请求类型:GET
+异常:MySql.Data.MySqlClient.MySqlException (0x80004005): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where name ='A股市急救' and is_deleted !=1 and id !=Pid ;#2015年6月16日 1' at line 1
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteScalar(String Sql, CommandType ComType, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 414
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteScalar(String Sql, String notes, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 386
+   在 YxLiCai.Dao.Project.ProjectDao.ISProtExist(String ProjectName, Int32 Pid) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\Project\ProjectDao.cs:行号 879
+   在 YxLiCai.Server.Project.ProjectService.ISProtExist(String ProjectName, Int32 Pid) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\Project\ProjectService.cs:行号 301
+--------------------end---------------------
+ 
+2015-07-10 11:40:29.8837 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/7/10 11:40:29
+异常发生地址:http://localhost:50143/Project/UpdateProject?Id=374&ProjectName=%E4%BD%A0%E5%A5%BD%E6%88%91%E5%B0%B1%E5%A5%BD&Borrower=234234&OrderNumber=234243&Amount=34&AmountSold=0&AvailableAmount=34&BorrowingRate=34&LaunchTime=2015-07-01&EndTime=2015-07-31&Remark=%E5%BE%B7%E5%9B%BD%E7%AD%89%E5%9B%BD&Weight=43&AddTime=2015%2F7%2F10+11:35:34&RepaymentMode=234234&LoanPeriod=34&ProjectType=1&account_id=1&ProjectStatus=0&Amount_able_fz=0.00000000
+请求类型:GET
+异常:MySql.Data.MySqlClient.MySqlException (0x80004005): Unknown column 'Pid' in 'where clause'
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteScalar(String Sql, CommandType ComType, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 414
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteScalar(String Sql, String notes, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 386
+   在 YxLiCai.Dao.Project.ProjectDao.ISProtExist(String ProjectName, Int32 Pid) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\Project\ProjectDao.cs:行号 878
+   在 YxLiCai.Server.Project.ProjectService.ISProtExist(String ProjectName, Int32 Pid) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\Project\ProjectService.cs:行号 301
+--------------------end---------------------
+ 

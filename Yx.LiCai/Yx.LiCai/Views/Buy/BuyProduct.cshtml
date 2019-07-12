@@ -1,0 +1,133 @@
+﻿@using YxLiCai
+@using YxLiCai.Model.User;
+@using Yx.LiCai.App_Start
+@{
+    ViewBag.Title = "购买产品";
+} 
+    <link href="@HttpPageHelper.GetRemoteNetURL(SystemSiteEnum.StaticResourceMallWeb, "css/buy.css")" rel="stylesheet">  
+	<div class="buy-input">
+        <dl class="gx-money">
+            <dt><i class="icon-word">买入</i></dt>
+            <dd><input type="text" class="gx-text" id="raisemoney" placeholder="最低买入金额为100元" value="@ViewBag.buyMoney"></dd>
+        </dl>
+        <p class="moner_num"><b> @ViewBag.ptypeDp</b> 可购买金额为<b id="AvailableAmount"> @ViewBag.AvailableAmount </b></p>
+        <ul class="ul-balance J_payWay" id="ul-bal">
+            <li>账户可用余额</li>
+            <li style="float:right;">
+                <span><b>@ViewBag.Money</b>元</span>
+                @if (ViewBag.IsBindBank == 1)
+                {
+                    if (ViewBag.buytype == "1")
+                    {
+
+                        <input type="radio" value="1" name="rbuy" checked="checked" class="ui-checkbox-s checked"/>
+                    }
+                    else
+                    {
+                        <input type="radio" value="1" name="rbuy" class="ui-checkbox-s"/>
+                    }
+                }
+                else
+                {
+                    if (ViewBag.buytype == "1")
+                    {
+
+                        <input type="radio" value="1" name="rbuy" checked="checked" class="ui-checkbox-s checked"/>
+                    }
+                    else
+                    {
+                        <input type="radio" value="1" name="rbuy" class="ui-checkbox-s"/>
+                    }
+                }
+            </li>
+        </ul>
+        @if (ViewBag.IsBindBank== 1)
+        {
+             <!-- 绑定完成状态 -->
+            var bank = ViewBag.BankInfo as UserBankCardModel;
+            <ul class="ul-balance J_payWay">
+                <li><i><img src="@HttpPageHelper.GetRemoteNetURL(SystemSiteEnum.StaticResourceMallWeb,string.Format("images/SysBankImg/{0}.jpg",bank.BankCode))"></i></li>
+                <li>
+                    <span id="bank-s"> @bank.BankName（<em>@bank.LastNum </em>）</span>
+
+                </li>
+                <li style="float: right;">
+                    @if (ViewBag.buytype == "2")
+                    {
+                    <input type="radio" checked="checked" name="rbuy" value="2" class="ui-checkbox-s checked" />
+                    }
+                    else
+                    {
+                    <input type="radio" name="rbuy" value="2" class="ui-checkbox-s" />
+                    }
+
+                    
+                </li>
+            </ul>
+        }
+        else
+        {
+        <div class="icon-bg"><a id="bindBank" href="javascript:void(0)">使用新的银行卡</a></div>
+        }
+        <a id="buyMoney" href="javascript:void(0)">
+            <ul class="ul-balance" id="ul-margin">
+                <li>使用加息劵</li>
+                <li style="float:right;">
+                    @*@(ViewBag.AddRate==0m ? ViewBag.AddInterestCount+"张可用" : "+"+ViewBag.AddRate+"%") href="/buy/addinterest?ptype=@ViewBag.Ptype  *@
+                    @if (ViewBag.AddRate == 0m)
+                    {
+                        <span><b>@ViewBag.AddInterestCount</b>张可用</span>
+                    }
+                    else
+                    {
+                        <span><b>@ViewBag.AddRate</b>%</span>
+                    }
+
+                    <em class="bank_conrner"></em>
+                </li>
+            </ul>
+        </a> 
+        <div class="gx-protocol">
+            <a href="/Buy/invest_serveAgreement">《投资咨询及管理服务协议》</a>
+        </div> 
+        <input type="hidden" value="@ViewBag.Ptype" id="ptype" />
+        <input type="hidden" value="@ViewBag.ProductId" id="productid" />
+        <input type="hidden" value="@ViewBag.Money" id="balance" /> 
+        <input type="hidden" value="@ViewBag.IsBindBank" id="isBindBank" /> 
+        <input type="hidden" value="@ViewBag.IsRealCard" id="isRealCard" /> 
+        <input type="hidden" value="@ViewBag.Addinterests" id="addrateids" />
+	    <input type="hidden" value="@ViewBag.buyMoney" id="buyMoney"/>
+	    <input type="hidden" value="@ViewBag.Ids" id="ids"/>
+        <div class="margin_top"><a href="javascript:void(0);" class="ui-btn" id="buyit">确认买入</a></div>
+    </div> 
+
+<!-- 密码交易弹窗 -->
+<div id="J_buyPwd" class="input-password" name="p1">
+    <h2>请输入交易密码</h2>
+    <p id="sallmoney"><span>500</span>元</p>
+    <div class="in-password">
+        <input type="password" id="sallpwd" class="in-txt">
+    </div> 
+    @if (UserContext.simpleUserInfoModel.IsJiaoYIPW == 0)
+    { 
+        <a href="javascript:void(0)" id="fetch_pwd_setting">去设置</a>
+         <div class="gx-passwoed-btn"> 
+             <a href="javascript:void(0)" class="gx-passwprd-sub gx-passwprd-gray">确认</a>
+    </div>
+    }
+    else
+    {
+        <a href="javascript:void(0)" id="forget_SPFist_pwd">忘记密码?</a>
+        <div class="gx-passwoed-btn"> 
+        <a href="javascript:void(0)" class="gx-passwprd-sub" id="okbuy">确认</a>
+    </div>
+    }
+    <div id="buyLoading"></div>
+</div>
+
+
+<script>
+    var buy_type = "@ViewBag.buytype";
+    seajs.use('User/UC/buy.js')
+</script>
+ 

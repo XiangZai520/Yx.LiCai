@@ -1,0 +1,311 @@
+
+/*利率*/
+.show-season{
+	width: 100%;
+	background: #f5f5f5;
+	padding:30px 15px 30px 25px;
+	overflow: hidden;;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+.show-season span{
+	color: #fe7c88;
+	font-size: 14px;
+	display: block;
+	float: right;
+	margin-top: -20px;
+}
+.show-season b{
+	font-size: 40px;
+	display: block;
+	float: left;
+	width: 100%;
+	text-align: center;;
+	position: absolute;
+	top:-2px;
+}
+.show-season b.interest-num-season{
+	color: #fe7c88;
+
+}
+.show-season b.interest-num-year,
+.show-season b.interest-num-year em{
+	color: #ffc016;
+
+}
+.show-season b.interest-num-month,
+.show-season b.interest-num-month em{
+	color: #00b7ee;
+
+}
+.show-season em{
+	color: #fe7c88;
+	font-size: 14px;
+	display:inline-block;
+	padding-top: 30px;
+}
+.show-season img{
+	display: block;
+	float: left;
+}
+.interest{
+    position: relative;
+}
+.interest p.interest-season{
+	background: url(../images/season_pic.png) no-repeat;
+	background-size: 100%;
+	width:50px;
+	height:53px;
+}
+.interest p.interest-year{
+	background: url(../images/year.png) no-repeat;
+	background-size: 100%;
+	width:50px;
+	height:53px;
+}
+.interest p.interest-month{
+	background: url(../images/month.png) no-repeat;
+	background-size: 100%;
+	width:50px;
+	height:53px;
+}
+/*导航*/
+#item-quarter .mod-nav{
+	padding-bottom: 80px;
+}
+.nav-season{
+    width: 100%;
+	padding: 0 1px;
+	height: 30px;
+	display: -webkit-box;
+	display: -moz-box;
+	display: -o-box;
+	display: box;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -o-flex;
+	display: flex;
+}
+.nav-season li{
+	position: relative;
+	height: 30px;
+	line-height: 30px;
+	font-size: 14px;
+	min-width: 100px;
+	text-align: center;
+	cursor: pointer;
+	border: 1px solid #f0f0f0;
+	color: #00b7ee;
+	-webkit-box-flex: 1;
+	-moz-box-flex: 1;
+	-o-box-flex: 1;
+	box-flex: 1;
+	-webkit-flex: 1;
+	-moz-flex: 1;
+	-o-flex: 1;
+	flex: 1;
+}
+.nav-season li:first-child{
+	border-right: none;
+}
+.nav-season li:last-child{
+	border-left: none;
+}
+.nav-season li.active{
+    background: #00b7ee;
+    color: #FFF;
+	border-color: #00b7ee
+}
+.nav-season li b.triangle-top-sb1 {
+	display: none;
+	width: 0px;
+	height: 0px;
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-bottom: 5px solid #FFF;
+	font-size: 0px;
+	line-height: 0px;
+	position: absolute;
+	bottom: -2px;
+	left: 50%;
+	margin-left: -5px;
+}
+.nav-season li.active b.triangle-top-sb1{
+	display: block;
+}
+/*导航列表*/
+.nav-list ol li{
+	border-bottom: 1px solid #F0F0F0;
+
+}
+.nav-list ol li{
+	overflow: hidden;
+	line-height: 40px;
+}
+.nav-list ol li a{
+	display: block;
+}
+.nav-list ol li .nav-list-left{
+	color: #b4b4b4;
+	font-size: 14px;
+    float: left;
+}
+.nav-list ol li .nav-list-right{
+	color: #828282;
+	font-size: 14px;
+	float: right;
+}
+.nav-list ol li .nav-list-right img{
+	display: block;
+	padding-top: 13px;
+
+}
+@media (max-width: 320px) {
+	.nav-list ol li .nav-list-left{
+		font-size: 12px;
+	}
+	.nav-list ol li .nav-list-right{
+		font-size: 12px;
+	}
+}
+/*e休理财投资优势*/
+.gl-financing{
+	overflow: hidden;
+	padding-top: 25px;
+}
+.gl-line1{
+	border-bottom: 1px solid #dfdfdf;
+	float: left;
+	width: 20%;
+	padding-top: 11px;
+}
+.gl-line2{
+	color: #00b7ee;
+	font-size: 16px;
+	font-weight: bold;
+	float: left;
+	width: 60%;
+	text-align: center;
+}
+.gl-line3{
+	border-bottom: 1px solid #dfdfdf;
+	float: left;
+	width: 20%;
+	padding-top: 11px;
+}
+.gl-financing-list{
+	overflow: hidden;
+}
+.gl-financing-list dl{
+	float: left;
+	width:33.3%;
+	margin-top: 20px;
+}
+.gl-financing-list dl dt{
+	background: url(../images/season_bg.png) no-repeat;
+	width: 55px;
+	height: 55px;
+	background-size: 100%;
+	margin:0 auto 10px;
+}
+.gl-financing-list1 dt img{
+	display: block;
+	width: 27%;
+	margin: 0 auto;
+	padding-top:13px;
+	overflow: hidden;
+}
+.gl-financing-list2 dt img{
+	display: block;
+	width: 37%;
+	margin: 0 auto;
+	padding-top:14px;
+}
+.gl-financing-list3 dt img{
+	display: block;
+	width: 50%;
+	margin: 0 auto;
+	padding-top:13px;
+}
+.gl-financing-list dl dd{
+	text-align: center;
+	font-size: 12px;
+	color: #999;
+}
+/*底部*/
+.product-do{
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	background: #fafafa;
+	padding-top: 3px;
+}
+.counter-tools{
+	cursor: pointer;
+	width: 60px;
+	height: 60px;
+	margin: 29px 20px 0;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+.counter-tools img{
+	width: 100%;
+}
+.product-btn{
+	padding: 0 20px 5px 100px
+}
+.product-btn a:visited,
+.product-btn a:active{
+	color: #FFF;
+}
+/* 人物形象 */
+.yixiu-imagery{
+	position: relative;
+	margin: 0 auto 15px;
+	width: 205px;
+	height: 160px;
+	padding-top: 1px;
+}
+.yixiu-imagery-text{
+	position: absolute;
+	top: 10px;
+	left: 0;
+	width: 135px;
+	height: 135px;
+	background: url("../images/bubble_bg.png") no-repeat center;
+	-webkit-background-size: contain;
+	background-size: contain;
+}
+.yixiu-imagery-text p{
+	color: #00b7ee;
+	font-size: 12px;
+	padding: 20px 20px 0 35px;
+	line-height: 16px;
+}
+.yixiu-imagery-icon{
+	position: absolute;
+	top: 0;
+	right: 0;
+	background: url(../images/yixiu_boy.png) no-repeat center;
+	height: 160px;
+	width: 95px;
+	-webkit-background-size: contain;
+	background-size: contain;
+}
+/*自有资产新增*/
+.userIncome-Seasonpic{
+width: 100px;
+height: 152px;
+margin: 20px auto 0;
+background: url(../images/userIncome-pic.png) no-repeat;
+background-size: 100%;
+}
+.userIncome-Mypic{
+width: 100px;
+height: 170px;
+margin: 0 auto;
+background: url(../images/userIncome-Monthpic.png) no-repeat;
+background-size: 100%;
+}

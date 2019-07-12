@@ -1,0 +1,274 @@
+﻿<style>
+    .k-grid-header th.k-header > .k-link {
+        text-align: center;
+    }
+
+    .k-widget, .k-widget * {
+        text-align: left;
+    }
+
+    .k-grid-header th.k-header {
+        text-align: center;
+    }
+</style>
+<link href="~/Resource/css/font-awesome.min.css" rel="stylesheet" />
+<div class="zpManage zpSh">
+    <h2 class="crumbs">您所在位置：融资机构-> 个人充值
+    </h2>
+    <div class="SearchMd form-horizontal">
+        <table>
+            <tr>
+                <td>账户余额：</td>
+                <td>@((YxLiCai.Tools.Const.SystemConst.MoenyConvert(ViewBag.Amount))==0 ? 0.00m:YxLiCai.Tools.Const.SystemConst.MoenyConvert(ViewBag.Amount))</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>充值金额：</td>
+                <td>
+                    <input type="text" id="RechargeMoney" />
+                    &nbsp; &nbsp; &nbsp;<input type="button" id="btnRecharge" value="充值" />
+                </td>
+                <td>&nbsp; &nbsp; &nbsp;<input type="button" id="LockMoney" value="查看还款" /></td>
+            </tr>
+        </table>
+
+    </div>
+    <div style="display: none; width: 500px; background-color: #11B446" id="JoinBlacklistDiv" class="add-openbox add-form">
+        <div style="text-align: center;">
+            <p>请输入交易密码：<i id="tt" style="color: red"></i></p>
+            <input id="SpWD" type="password" maxlength="6" />
+            <p>
+                <input style="margin: 5px" type="button" value="确定" id="ConfirmApp" /><input style="margin: 5px" type="button" value="取消" id="CancleApp" />
+                <a href="ForgetSPasswerd" style="color: red">忘记交易密码</a>
+            </p>
+        </div>
+    </div>
+    <div class="SearchMd form-horizontal">
+        @Html.Partial("EditorTemplates/KendoTextBox",
+        new YxLiCai.FinaAdmin.Models.KendoTextBoxViewModel
+        {
+            Content = "充值金额（起）",
+            Id = "recharge_moneyStar"
+        })
+        @Html.Partial("EditorTemplates/KendoTextBox",
+        new YxLiCai.FinaAdmin.Models.KendoTextBoxViewModel
+        {
+            Content = "充值金额（终）",
+            Id = "recharge_moneyEnd"
+        })
+        @Html.Partial("EditorTemplates/KendoDate",
+        new YxLiCai.FinaAdmin.Models.KendoDateTimeViewModel
+        {
+            Content = "充值时间(起)",
+            Id = "recharge_timeStar",
+            Format = "yyyy-MM-dd"
+        })
+        @Html.Partial("EditorTemplates/KendoDate",
+        new YxLiCai.FinaAdmin.Models.KendoDateTimeViewModel
+        {
+            Content = "充值时间(终)",
+            Id = "recharge_timeEnd",
+            Format = "yyyy-MM-dd"
+        })
+        @*       @Html.Partial("EditorTemplates/KendoDropdownlist",
+        new YxLiCai.FinaAdmin.Models.KendoDropdownlistViewModel
+        {
+            Content = "项目类型",
+            Id = "selecttype",
+            SourceUrl = "/Financing/GetConfig?configName=Fer|element=ProjectType"
+        })*@
+        <label class="control-label col-sm-6" style="font-size: 12px;">充值状态：</label>
+        <select id="selecttype">
+            <option value="-1">全部</option>
+            <option value="1">充值成功</option>
+            <option value="0">充值失败</option>
+        </select>
+        <input type="button" id="btnSearch" value="查询" class="searchBtn" />
+    </div>
+    <div class="control-group form-horizontal">
+        <div class="control-group">
+            <x style="color: red"> *按住Ctrl键或Shift键可以多选</x>
+            <div class="tbstyle">
+                <div id="productGrid"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var adminjs = new adminglass(); //实例化后台类  
+    $(document).ready(function () {
+        var SPassword = '@ViewBag.SPassword';
+        $("#LockMoney").click(function () {
+            window.location.href = "Index";
+        });
+
+
+        $('#RechargeMoney').on('input propertychange', function () {
+            
+            var moneyNum = $('#RechargeMoney').val();
+            moneyNum = moneyNum.replace(/[^\d.]/g, "");
+            //必须保证第一个为数字而不是.
+            moneyNum = moneyNum.replace(/^\./g, "");
+            //保证只有出现一个.而没有多个.
+            moneyNum = moneyNum.replace(/\.{2,}/g, ".");
+            //保证.只出现一次，而不能出现两次以上
+            moneyNum = moneyNum.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
+            //保证是小数点后两位
+            moneyNum = moneyNum.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3');
+
+            $('#RechargeMoney').val(moneyNum);
+        });
+
+
+        $("#btnRecharge").click(function () {
+            if (SPassword == "") {
+                alert("你还没有设置交易密码，请设置");
+                window.location.href = "UpdateSPasswerd?type=1";
+                return;
+            }
+            var money = $("#RechargeMoney").val();
+            if (money == "") { alert("请输入充值金额"); return; }
+
+            var raisemoney = money;
+            raisemoney = raisemoney.replace(/[^\d.]/g, "");
+            //必须保证第一个为数字而不是.
+            raisemoney = raisemoney.replace(/^\./g, "");
+            //保证只有出现一个.而没有多个.
+            raisemoney = raisemoney.replace(/\.{2,}/g, ".");
+            //保证.只出现一次，而不能出现两次以上
+            raisemoney = raisemoney.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
+
+            raisemoney = raisemoney.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3');
+
+            $('#RechargeMoney').val(raisemoney);
+            var mo = $("#RechargeMoney").val();
+            if (mo == "") { alert("请输入充值金额"); return; }
+            if (parseFloat(mo) <= 0) {
+                alert("请输入大于零的充值金额"); return;
+            }
+            if (confirm("确定要充值")) {
+                adminjs.openwinbox('#JoinBlacklistDiv');
+                //$("#JoinBlacklistDiv").show();
+            }
+        });
+
+        $("#ConfirmApp").click(function () {
+            var PassWord = $("#SpWD").val().replace(/\-/g, "\/");
+            if (PassWord == "") { alert("请输入交易密码"); return; }
+            $.ajax({
+                type: "POST",
+                async: false,
+                url: "/Financing/CheckUserSPW",
+                data: { Passwerd: PassWord },
+                success: function (data) {
+                    if (data.Status == 1) {
+                        $.ajax({
+                            type: "POST",
+                            async: false,
+                            url: "/Financing/UserAccountMoney",
+                            data: { Money: $("#RechargeMoney").val().replace(/\-/g, "\/") },
+                            success: function (data) {
+                                if (data.Status == 1) {
+//                                    window.top.location = data.Message;
+                                    window.top.location = "/Financing/Recharge_LL_Redirect?mer_ord_id=" + data.Message;
+                                    //window.location.href = "Fer_Recharge";
+                                    //alert(data.Message);
+                                } else { window.location.href = "Fer_Recharge"; alert(data.Message); }
+                            },
+                            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            },
+                        });
+
+                    } else if (data.Status == 3) {
+                        alert(data.Message);
+                        window.location.href = "UpdateSPasswerd?type=1";
+                    } else { alert(data.Message); }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                },
+            });
+        });
+        $("#CancleApp").click(function () {
+            adminjs.closewinbox('#JoinBlacklistDiv');
+            //$("#JoinBlacklistDiv").hide();
+            $("#SpWD").val("");
+        });
+    });
+    require(['CRM/common.assets'], function (common) {
+        var grid = $("#productGrid").kendoGrid({
+            sortable: true,
+            pageable: true,
+        }).data("kendoGrid");
+        $("#btnSearch").bind("click", function () {
+            var recharge_moneyStar = $("#recharge_moneyStar").val(),
+                recharge_moneyEnd = $("#recharge_moneyEnd").val(),
+                recharge_timeStar = $("#recharge_timeStar").val(),
+                State = $("#selecttype").val(),
+                recharge_timeEnd = $("#recharge_timeEnd").val();
+            var beginDate = $("#recharge_timeStar").val();
+            var endDate = $("#recharge_timeEnd").val();
+            var d1 = new Date(beginDate.replace(/\-/g, "\/"));
+            var d2 = new Date(endDate.replace(/\-/g, "\/"));
+            var m1 = parseInt(recharge_moneyStar);
+            var m2 = parseInt(recharge_moneyEnd);
+            if (m1 != "" && m2 != "" && m1 > m2) {
+                alert("充值金额(起)不能大于充值金额(终)!");
+                return false;
+            }
+            if (beginDate != "" && endDate != "" && d1 > d2) {
+                alert("充值时间(起)不能大于充值时间(终)!");
+                return false;
+            }
+            var param = {
+                recharge_moneyStar: recharge_moneyStar, recharge_moneyEnd: recharge_moneyEnd, recharge_timeStar: recharge_timeStar, recharge_timeEnd: recharge_timeEnd, State: State
+            };
+            var productDs = new kendo.data.DataSource({
+                pageSize: 15,
+                transport: {
+                    read: {
+                        url: "/Financing/GetUserFinancigRechargeRecordList",
+                        dataType: "json",
+                        data: param
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "id"
+                    }
+                }
+            });
+            grid.bind("dataBinding", function (e) {
+                if (productDs.Binding) return;
+                for (var i = 0; i < productDs.data().length; i++) {
+                    if (productDs.at(i).m_time != null) {
+                        var date1 = new Date(parseInt(productDs.at(i).m_time.substr(6)));
+                        productDs.at(i).m_time = date1.format("yyyy-MM-dd  hh:mm:ss");
+                    }
+                    if (productDs.at(i).pay_type != null) {
+                        if (productDs.at(i).pay_type == 0) { productDs.at(i).pay_type = "连连支付"; } else { productDs.at(i).pay_type = "其他"; }
+                    }
+                    if (productDs.at(i).status != null) {
+                        if (productDs.at(i).status == 1) { productDs.at(i).status = "充值成功"; } else { productDs.at(i).status = "充值失败"; }
+                    }
+                }
+                productDs.Binding = true;
+            });
+            var columns = [
+                { field: "id", title: "序号", sortable: true },
+                { field: "mer_ord_id", title: "订单号", sortable: true },
+                { field: "fer_id", title: "UID", sortable: true },
+                { field: "pay_type", title: "充值方式", sortable: true },
+                { field: "amount", title: "充值金额", sortable: true },
+                //{ field: "repay_type", title: "还款方式", sortable: true },
+                { field: "status", title: "状态", sortable: true },
+                { field: "m_time", title: "充值时间", sortable: true },
+            ];
+            grid.setOptions({
+                dataSource: productDs,
+                columns: columns,
+                selectable: "multiple, row"
+            });
+        });
+    });
+</script>

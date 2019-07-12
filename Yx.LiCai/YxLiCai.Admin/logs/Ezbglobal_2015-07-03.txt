@@ -1,0 +1,20 @@
+2015-07-03 10:37:22.4914 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/7/3 10:37:22
+异常发生地址:http://localhost:50143/LoanManager/GetAll
+请求类型:POST
+异常:System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 YxLiCai.Dao.LoanManager.LoanManagerDao.GetLoanList(String mName, Int32 LoanPeriod, Decimal LowMoney, Decimal UpMoney, Int32 status, Int32 Scount, Int32 PageSize) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\LoanManager\LoanManagerDao.cs:行号 27
+   在 YxLiCai.Server.LoanManager.LoanManager.GetAll(String mName, Int32 loanPeriod, Decimal amount_min, Decimal amount_max, Int32 status, Int32 startIndex, Int32 PageSize, Int32& totalCount) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\LoanManager\LoanManager.cs:行号 38
+--------------------end---------------------
+ 
+2015-07-03 10:37:23.5380 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/7/3 10:37:23
+异常发生地址:http://localhost:50143/LoanManager/GetAll
+请求类型:POST
+异常:System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 YxLiCai.Dao.LoanManager.LoanManagerDao.GetLoanList(String mName, Int32 LoanPeriod, Decimal LowMoney, Decimal UpMoney, Int32 status, Int32 Scount, Int32 PageSize) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\LoanManager\LoanManagerDao.cs:行号 27
+   在 YxLiCai.Server.LoanManager.LoanManager.GetAll(String mName, Int32 loanPeriod, Decimal amount_min, Decimal amount_max, Int32 status, Int32 startIndex, Int32 PageSize, Int32& totalCount) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\LoanManager\LoanManager.cs:行号 38
+--------------------end---------------------
+ 

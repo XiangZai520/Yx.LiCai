@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>登录</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="Globak-x">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+
+    <link href="../css/m_base.css" rel="stylesheet">
+    <link href="../css/global_x.css" rel="stylesheet">
+    <link href="../css/dialog_ui.css" rel="stylesheet">
+
+    <script src="../js/loader/sea.js"></script>
+    <script src="../js/loader/sea-config.js"></script>
+
+
+</head>
+<body>
+<header id="header"></header>
+
+<div id="gx-touch" class="m-wrap">
+    <div class="gx-container">
+        <form id="loginForm" name="loginForm" method="post" action="" autocomplete="off" novalidate="novalidate">
+            <div class="reg-list login-list">
+                <dl>
+                    <dt class="right-style code-img">
+                        <img src="../images/code_bg.png" alt="看不清，请点击重新发送">
+                    </dt>
+                    <dd>
+                        <input type="text" class="input-txt random-code" id="randomCode" name="randomCode" placeholder="请输入验证码">
+                    </dd>
+                    <dd class="warm-tips Validedate_check"></dd>
+                </dl>
+                <dl>
+                    <dd>
+                        <input type="password" class="input-txt log-pwd" id="logPassword" name="logPassword" placeholder="请输入登录密码">
+                    </dd>
+                    <dd class="warm-tips Validedate_check">
+                        <p>密码输入错误，请重新输入</p>
+                    </dd>
+                </dl>
+            </div>
+            <div class="do-btn">
+                <button type="submit" class="ui-btn" id="regBtn">登录</button>
+                <p class="forget-link"><a href="">忘记密码</a></p>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+
+
+
+<footer id="footer"></footer>
+
+<script>
+    seajs.use('../js/register');
+    seajs.use('../js/main');
+</script>
+
+</body>
+</html>

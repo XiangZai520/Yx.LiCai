@@ -1,0 +1,56 @@
+﻿@model Yx.LiCai.Models.UserAmountRecModelList
+@{
+    Layout = null;
+}
+<input type="hidden" name="CurrentPage" id="CurrentPage_@(Model.ProductType)" autocomplete="off" value="1" />
+@* <input type="hidden" name="CurrentPage" id="CurrentPage" autocomplete="off" value="1" />*@
+
+<div class="record-img">
+    <img src="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "images/record-img.jpg")" />
+</div>
+
+<div class="plus-income">
+    <ul class="income-list record-list" id="List_@(Model.ProductType)">
+        @if (Model.listModel != null)
+        {
+            foreach (YxLiCai.Model.User.UserAmountRecModel item in Model.listModel)
+            {
+            <li>
+                <a href="#">
+                    <h3>
+                        @if (item.type == 0)
+                        {
+                            <i class="plus-blue">买</i>
+                            <b>+@item.amount</b>
+                        }
+                        else if (item.type == 1)
+                        {
+                            <i class="plus-red">提</i>
+                            <b>-@item.amount</b>
+                        }
+                        else if (item.type == 2)
+                        {
+                            <i class="plus-red">赎</i>
+                            <b>-@item.amount</b>
+                        }
+                        else
+                        {
+                            <i class="plus-ash">买</i>
+                            <b>@item.amount</b>
+                        }
+                    </h3>
+                    <span class="record-time">@item.c_time</span>
+                </a>
+            </li>
+            }
+        }
+
+    </ul>
+</div>
+@if (Model.TotalCount > 10)
+{
+   
+    <div class="loadmore">
+        <a id="loadmore_@(Model.ProductType)"href="javascript:void(0);"></a>
+    </div>
+}

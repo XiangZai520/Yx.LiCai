@@ -1,0 +1,39 @@
+﻿@{
+    Layout = null;
+}
+@model YxLiCai.FinaAdmin.Models.LLPayOutModel
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8">
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <form action="https://yintong.com.cn/payment/bankgateway.htm" id="payBillForm" method="post">
+        <input type="hidden" name="version" value="@Model.version">
+        <input type="hidden" name="oid_partner" value="@Model.oid_partner">
+        <input type="hidden" name="user_id" value="@Model.user_id">
+        <input type="hidden" name="busi_partner" value="@Model.busi_partner">
+        <input type="hidden" name="no_order" value="@Model.no_order">
+        <input type="hidden" name="dt_order" value="@Model.dt_order">
+        <input type="hidden" name="name_goods" value="@Model.name_goods">
+        <input type="hidden" name="timestamp" value="@Model.timestamp">
+        <input type="hidden" name="money_order" value="@Model.money_order">
+        <input type="hidden" name="notify_url" value="@Model.notify_url">
+        <input type="hidden" name="url_return" value="@Model.url_return">
+        @*<input type="hidden" name="userreq_ip" value="*.*.*.*">
+        <input type="hidden" name="info_order" value="@Model.info_order">
+        <input type="hidden" name="url_order" value="@Model.url_order">*@
+        <input type="hidden" name="bank_code" value="@Model.bank_code">
+        <input type="hidden" name="pay_type" value="@Model.pay_type">
+        <input type="hidden" name="sign_type" value="@Model.sign_type">
+        <input type="hidden" name="sign" value="@Model.sign">
+        <input type="submit" style="display:none" value="立即支付">
+    </form>
+    <script type="text/javascript">
+        document.forms['payBillForm'].submit();
+    </script>
+</body>
+</html>

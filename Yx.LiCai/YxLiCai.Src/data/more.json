@@ -1,0 +1,7 @@
+{
+    "code":0,
+    "data":{
+        "nextUrl": "/dist/data/more.json",
+        "html": "<div class='assets-item'>更多列表</div>"
+    }
+}

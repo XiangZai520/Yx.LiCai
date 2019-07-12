@@ -1,0 +1,102 @@
+﻿@model Yx.LiCai.Models.UserAssetsListOutModel
+@{
+    Layout = null;
+
+}
+<input type="hidden" name="CurrentPage" id="CurrentPage_@(Model.ProductType)" autocomplete="off" value="@Model.CurrentPage" />
+
+@if (Model.ProductType == 2 || Model.ProductType == 3)
+{
+    <div class="assetsBottom">
+    <div class="assets-total">
+        <div class="cats-toatl own-tatal">
+            <div class="cats-icon">自</div>
+            <p>@(YxLiCai.Tools.Const.SystemConst.MoenyConvert(Model.Zi_Money))<span>元</span></p>
+        </div>
+        <div class="cats-toatl tatal">
+            <div class="cats-icon">总</div>
+            <p>@(YxLiCai.Tools.Const.SystemConst.MoenyConvert(Model.Zong_Money))<span>元</span></p>
+        </div>
+    </div>
+     <div class="asste-word"><a href="/UserAssets/User_record">查看交易记录</a></div>
+        </div>
+}
+else
+{
+    <div class="assets-total">
+        <div class="cats-toatl own-tatal">
+            <div class="cats-icon">自</div>
+            <p>@(YxLiCai.Tools.Const.SystemConst.MoenyConvert(Model.Zi_Money))<span>元</span></p>
+        </div>
+        <div class="cats-toatl tatal">
+            <div class="cats-icon">总</div>
+            <p>@(YxLiCai.Tools.Const.SystemConst.MoenyConvert(Model.Zong_Money))<span>元</span></p>
+        </div>
+    </div>
+}
+   <!--查看交易记录-->
+       @if (Model.ProductType ==1 || Model.ProductType == 4)
+{       <div class="asste-word"><a href="/UserAssets/User_record">查看交易记录</a></div>
+        }
+<div id="List_@(Model.ProductType)">
+    @if (Model.list != null && Model.list.Count > 0)
+    {
+      
+        foreach (Yx.LiCai.Models.UserAssetsViewModel item in Model.list)
+        {
+            <div class="assets-item">
+                <p>@item.CreateTime.ToString("yyyy-MM-dd")</p>
+                <dl class="assets-box">
+                    <dt>
+                        <span>@(YxLiCai.Tools.Const.SystemConst.RateConvert(item.TotalRate))%</span>
+                    </dt>
+                    <dd>
+                        <div class="assets-rate">
+                            当前收益率@(YxLiCai.Tools.Const.SystemConst.RateConvert(item.CurrentRate))% + <span>加息@(YxLiCai.Tools.Const.SystemConst.RateConvert(item.ExRate))%</span>
+                        </div>
+                        <ul class="assets-get clearfix">
+                            <li>
+                                <strong>实投本金</strong>
+                                <span><i>@(YxLiCai.Tools.Const.SystemConst.MoenyConvert(item.ActualMoney))</i>元</span>
+                            </li>
+                            <li>
+                                <strong>产生收益</strong>
+                                <span><i class="color-r">@(YxLiCai.Tools.Const.SystemConst.MoenyConvert(item.Income))</i>元</span>
+                            </li>
+                        </ul>
+                        <a href="/UserAssets/PointerIncome?orderinfoid=@(item.OrderInfoID)&ctime=@(item.CreateTime.Date)&amount=@(item.ActualMoney)" class="assets-to"></a>
+                         @if(Model.ProductType > 1)
+                         {
+                            <span class="assets-time">@item.EndTime.ToString("yyyy-MM-dd") 到期</span>
+                         }
+                    </dd>
+                </dl>
+            </div>
+        }
+    }
+</div>
+@if (Model.TotalCount > 2)
+{
+    <div class="loadmore">
+        <a id="loadmore_@(Model.ProductType)" href="javascript:void(0);"></a>
+    </div>
+}
+<div class="operation-btn clearfix">
+    @if (Model.ProductType == 1)
+    {
+        <a class="ui-btn ui-btn-s1" href="/Member/Withdrawals">提现</a>
+    }
+    else
+    {
+        if (Model.ProductType!=1&&Model.list != null && Model.list.Count > 0)
+        {
+            <a class="ui-btn ui-btn-s1" href="/Atone/Index">赎回</a>
+        }
+        else
+        {
+            <a class="ui-btn ui-btn-s1 ui-btn-gray" href="javascript:void(0)">赎回</a>
+        }
+
+    }
+    <a class="ui-btn ui-btn-s2" href="/buy/buyproduct?ptype=@(Model.ProductType)">买入</a>
+</div>

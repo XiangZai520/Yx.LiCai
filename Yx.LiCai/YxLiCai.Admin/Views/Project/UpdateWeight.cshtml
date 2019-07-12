@@ -1,0 +1,53 @@
+﻿@model YxLiCai.Model.Project.ProjectModel
+
+<div class="zpManage zpSh">
+    <h2 class="crumbs">您所在位置：项目管理 > 修改项目权值
+    </h2>
+    <div class="SearchMd">
+        修改项目权值<div id="Message" style="color: red"></div>
+    </div>
+    <div class="SearchMd form-horizontal">
+
+
+        <table>
+            <tr>
+                <td>
+                    <label>项目名称：</label>
+                    @Model.ProjectName </td>
+                <td>
+                    <label>&nbsp;&nbsp;权值：</label><input id="Weight" value="@Model.Weight" /></td>
+            </tr>
+        </table>
+
+    </div>
+
+    <div class="SearchMd form-horizontal">
+        <input type="hidden" id="ProjectID" value="@Model.Id" />
+        <input id="btnSave" type="button" value="修改权值"  class="searchBtn"/>
+        <input type="button" value="返回" class="searchBtn" onclick="javascript: window.location.href = 'Index'" />
+    </div>
+</div>
+
+<script>
+    require(['CRM/common.assets'], function (common) {
+        $("#btnSave").bind("click", function () {
+            var b = parseInt($("#Weight").val().replace(/[ ]/g, ""));   
+            if (!(b >= 1 && b <= 100)) { alert("权值是1-100的整数!"); return; }
+            data = { ProjectID: $("#ProjectID").val(), Weight: b };
+            sentAjax(data);
+        });
+        function sentAjax(data) {
+            $.ajax({
+                url: "/Project/UpdateProjectWeight",
+                data: data,
+                success: function (e) {
+                    common.popupNotification.show("更新成功", "info");
+                    window.location.href = "Index";
+                },
+                error: function (e) {
+                    common.popupNotification.show(e.responseText);
+                }
+            });
+        }
+    });
+</script>

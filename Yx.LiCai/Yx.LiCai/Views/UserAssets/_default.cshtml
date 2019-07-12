@@ -1,0 +1,83 @@
+﻿@model Yx.LiCai.Models.UserAssets_DefaultViewModel
+@{
+    Layout = null;
+
+}
+
+
+
+@if (Model.ProductType == 2 || Model.ProductType == 3)
+{
+    <div class="assets-quarter assetsBottom">
+        <strong>@(Model.MoneyValue)<i>%</i></strong>
+        <p>
+            @(Model.detail_type)<br>@(Model.detail_rule)
+        </p>
+    </div>
+}
+else
+{
+    <div class="assets-quarter">
+        <strong>@(Model.MoneyValue)<i>%</i></strong>
+        <p>
+            @(Model.detail_type)<br>@(Model.detail_rule)
+        </p>
+    </div>
+}
+
+<!-- 新增e休形象提示 -->
+<div class="yixiu-imagery">
+    @*<div class="yixiu-imagery-text">
+        <p><strong>@(Model.detail_Intro1)</strong><br>@(Model.detail_Intro2)<br>@(Model.detail_Intro3)</p>
+    </div>*@
+
+    @if (Model.ProductType == 1)
+    {
+        <div class="userIncome-Mypic"></div>
+    }
+    else if (Model.ProductType == 2)
+    {
+        <div class="userIncome-Seasonpic"></div>
+    }
+    else if (Model.ProductType == 3)
+    {
+        <div class="userIncome-Seasonpic"></div>
+    }
+    else if (Model.ProductType == 4)
+    {
+        <div class="userIncome-Mypic"></div>
+    }
+    else
+    {
+        <div class="userIncome-Mypic"></div>
+    }
+
+    <!--<div class="yixiu-imagery-icon"></div> -->
+</div>
+<div class="fast-buy">
+    <p>@(Model.detail_Intro)</p>
+    <a href="/Buy/Buy_product?ptype=@(Model.ProductType)" class="ui-btn">立即买入</a> 
+</div>
+<!-- e休理财投资优势 -->
+<div class="gl-financing">
+    <div class="gl-line1"></div>
+    <div class="gl-line2">e休理财投资优势</div>
+    <div class="gl-line3"></div>
+</div>
+<div class="gl-financing-list">
+    <dl class="gl-financing-list1">
+        <dt><img src="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "images/money.png")"></dt>
+        <dd>门槛低收益高</dd>
+        <dd>年化收益最高15%</dd>
+    </dl>
+    <dl class="gl-financing-list2">
+        <dt><img src="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "images/dong.png")"></dt>
+        <dd>低风险有保障</dd>
+        <dd>六道风控严格把关</dd>
+    </dl>
+    <dl class="gl-financing-list3">
+        <dt><img src="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "images/winnower.png")"></dt>
+        <dd>自由投灵活赎</dd>
+        <dd>保理机制自由赎回</dd>
+    </dl>
+</div>

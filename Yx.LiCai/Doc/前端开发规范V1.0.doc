@@ -1,0 +1,132 @@
+WEB前端开发规范
+规范目的
+　　为提高团队协作效率, 便于后台人员添加功能及前端后期优化维护, 输出高质量的文档, 特制订此文档.本文档如有不对或者不合适的地方请及时提出, 经讨论决定后方可更改.
+ 
+基本准则
+　　符合web标准, 语义化html, 结构、表现、行为分离, 兼容性优良. 页面性能方面, 代码要求简洁明了有序, 尽可能的减小服务器负载, 保证最快的解析速度.
+ 
+文件规范
+　　1. html, css, js, image文件均归档至约定的目录中;
+　　2. html文件命名: 英文命名, 后缀.htm. 同时将对应界面稿放于同目录中, 若界面稿命名为中文, 请重命名与html文件同名, 以方便后端添加 功能时查找对应页面;
+3. css文件命名: 英文命名, 后缀.css. 共用base.css,其它根据模块或页面内容命名
+4. Js文件命名: 英文命名, 后缀.js. 共用common.js, 其他依实际模块需求命名.
+ 
+html书写规范
+　　1. 文档类型声明及编码: 统一为html5声明类型<!DOCTYPE html>; mate属性统一为<metahttp-equiv="Content-Type" content="text/html;charset=utf-8">,编码统一为utf-8, 书写时利用IDE实现层次分明的缩进,比如dreamweave里代码格式化命令, 代码缩进使用TAB键,尽量别使用空格
+　　2. css和js文件外链至<head>...</head>之间,  css文件要放在js文件上面, js可根据需求放在尾部
+3. 引入样式文件或JavaScript文件时, 须略去默认类型声明(html5下的规则), 写法如下:
+<linkrel=”stylesheet” href=”…” />
+<style>…</style>
+<scriptsrc=”…”></script>
+4. 引入JS库文件, 文件名须包含库名称及版本号及是否为压缩版, 比如jquery-1.4.1.min.js; 引入插件, 文件名格式为库名称+插件名称, 比如jQuery.cookie.js;
+5. 所有编码均遵循xhtml标准, 标签和属性都用小写字母, 且所有标签必须闭合, 包括br (<br />), hr(<hr />)等; 属性值必须用双引号包括; 如,height=80,应该写为height=”80”
+6. <body>内的模块要加上注释,比如<!—content--><!—left sidebar-->等
+7.注释规范. html注释使用<!--这里是内容(这里面不允许再出现”-”)-->
+8.语义化html, 如 标题根据重要性用h系列标题标签, h1-h6的定义应遵循从大到小的原则, 体现文档结构的同时也有利于搜索引擎的查询 (同一页面只能有一个h1,LOGO是一个站点的标志,页面中最重要的地方,所以把它分配给LOGO) , h标签不可段层; 段落标记用p, 列表用ul,ol等,内联元素中不可嵌套块级元素;
+遵循表现和结构相分离的原则,代码中不涉及任何表现元素, 如<center> <font>标签等
+9.能以背景形式呈现的图片, 尽量写入css样式中; 重要图片必须加上alt属性; 给重要的元素和截断的元素加上title
+10. 尽可能减少div嵌套, 原则上div嵌套不超出两层, 如
+<div class=“box”>
+<div class=“welcome”>欢迎访问XXX, 您的用户名是
+<div class=“name”>用户名</div>
+</div>
+</div>
+完全可以用以下代码替代:
+<div  class=“box”>
+  <p>欢迎访问XXX, 您的用户名是<span>用户名</span></p>
+</div>
+11. 特殊符号应使用转意符,比如 <(&lt;) & >(&gt;)& 空格(&nbsp; )等;
+12. 必须为含有描述性表单元素(input,textarea)添加label,如
+<p>姓名: <input type=”text” id=”name” name=”name” /></p>
+须写成:
+<p><label for=”name”>姓名:</label><input type=”text” id=”name” /></p>
+13.关注标签语义化
+ 
+css编码规范
+         1. 基本书写规范:
+                   1)编码统一为utf-8
+                   2) 尽量不缩写, 除非一眼就能看明白的单词
+                   3) 用英文和下划线组合命名类/ID, 不允许用拼音和数字; 命名时应根据模块内容命名
+                 4) css全部采用小写,每项定义写成一行, 属性的冒号后面要加空格, 每项定义后面要加分号; 如
+         .box{
+              Width: 150px;
+                      }
+            5) 所有装饰性的背景图片都要写css中, 背景图片使用css  sprite
+                   6) 减少使用影响性能的属性, 比如position:absolute || float ; 不允许在css中使用滤镜表达式, 也尽量少用图片repeat, 尤其在body当中,渲染性能极差, 如果需要用repeat的话, 图片的宽或高不能少于8px
+                   7) 请注意采用css 缩写, 简少代码大小, 提高下载速度, 同时使代码简洁可读. 如
+          .box{
+               border-color: #fff;
+               border-width: 1px;
+               border-style: solid;
+}
+可以写为一句:
+.box{
+         Border: 1pxsolid #fff
+}
+                   8) css属性书写顺序, 建议遵循 布局定位属性–>自身属性–>文本属性–>其他属性. 此条可根据自身习惯书写, 但尽量保证同类属性写在一起.
+属性列举:
+布局定位属性主要包括: margin　＆　padding　＆　float（包括clear）　＆　position（相应的 top,right,bottom,left）　＆　display　＆　visibility　＆　overflow等；
+自身属性主要包括: width &  height  & background  &  border;
+文本属性主要包括： font　＆　color　＆　text-align　＆　text-decoration　＆　text-indent等；
+其他属性包括: list-style(列表样式)　＆　vertical-vlign　＆　cursor　＆　z-index(层叠顺序) 　＆　zoom等. 以上所列出的这些属性只是最常用到的, 并不代表全部
+                   9) 充分利用html自身属性及样式继承原理减少代码量, 比如:
+<ul class=”list”>
+<li>这儿是标题列表<span>2010-09-15</span></li>
+</ul>
+css定义
+ul.list li{
+position: relative;
+} 
+ul.list li span{
+position: absolute;
+right: 0
+}
+                   10) 必须为大区块样式添加注释, 小区块适量注释; 注释使用 /*注释内容*/
+                   11)书写代码前, 考虑并提高样式重复使用率, 减少代码
+2.命名规则
+         命名应以体现结构或内容为原则.命名以小写英文字母和下划线组合,避免使用数字,要以字母开头. 以下列出常见的基本命名，这个可以根据个人习惯，但是请保证命名符合内容
+ 
+    页面布局：
+ 
+     -页面头部：header
+       -图标：logo
+       -右上快捷区域：quick_links
+     -页面中部：main
+       -侧栏：side
+       -主栏：content
+       -区块：section
+         -区块顶部：box_top
+         -区块中部：container
+         -区块底部：box_bottom
+     -页面底部：foot
+       -版权说明：copyright
+ 
+    常用布局：
+ 
+     -列表布局：list
+     -标签切换：tab
+     -排行榜：billboard
+     -表单：post form
+     -纯文字区域：text area
+     -翻页：page navigation
+ 
+    通用模块：
+ 
+     -导航栏：navigation
+     -登陆框：login box
+     -搜索框：search box
+ 
+    通用样式：
+ 
+     -高亮：highlight
+     -激活：active，或者on
+     -清除浮动：fix，或者clear
+     -图：pic
+     -文：txt
+ 
+ 
+图片规范
+1.  图片格式仅限于gif || png || jpg
+   背景图尽量使用png-8的格式(IE6下支持其图片透明度), 对于图片质量要求高的背景图片,使用png-24(IE6下不支持其透明度). 基本原则就是在保证视觉效果的情况下选择最小的图片格式与图片质量, 以减少加载时间;
+2. 图片命名根据图片用途使用小写字母和下划线组合, 如send_btn.png等,方便其它成员理解.
+3. 运用css sprite技术集中小的背景图或图标,减小页面http请求

@@ -1,0 +1,49 @@
+﻿@model Yx.LiCai.Models.AtoneListOutModel
+@section styles{
+    <link href="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "css/atone.css")" rel="stylesheet">
+<link href="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "css/uc/setting_detail.css")" rel="stylesheet">
+}
+@{
+    ViewBag.Title = "赎回";
+}
+<input type="hidden" name="CurrentPage" id="CurrentPage" autocomplete="off" value="@Model.CurrentPage" />
+<input type="hidden" id="flag" autocomplete="off" value="@ViewBag.flag" />
+<div id="List">
+    @if (Model.list != null && Model.list.Count > 0)
+    {
+        foreach (Yx.LiCai.Models.AtoneDetaiModel item in Model.list)
+        {
+            <div class="atong">
+                <div class="ui-checkbox">
+                    <input type="checkbox" name="cb" value="@item.OrderInfoID" class="atong-left">
+                </div>
+                <div class="atong-right atong-@(item.ProductType==4?"year":"season")">
+                    <h2><p>@(item.EndTime.ToString("yyyy-MM-dd"))</p><b>@(item.ProductTypeName)</b></h2>
+                    <h3>买入金额：<span>@(item.BuyMoney)</span>元</h3>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="noticket">
+            <div class="noticket-pic"></div>
+            <p>暂无赎回订单</p>
+        </div>
+    }
+</div>
+@if (Model.TotalCount > 3)
+{
+    <div class="loadmore">
+        <a href="javascript:;"></a>
+    </div>
+}
+@if (Model.list != null && Model.list.Count > 0)
+{
+    <div class="margin_top1" id="atone"><a href="javascript:void(0);" class="ui-btn">赎回</a></div>
+}
+
+<script>
+    seajs.use('gx-input-click');
+    seajs.use('Atone');
+</script>

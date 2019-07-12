@@ -1,0 +1,59 @@
+﻿@section styles{
+    <link href="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "css/show.css")" rel="stylesheet">
+    }
+    @{
+        ViewBag.Title = "自有资产";
+        }
+        <div id="tab-pagination" class="ui-tab swipe-pagination">
+            <ul class="ui-tab-nav">
+                <li class="current"><a href="javascript://">月月盈</a></li>
+                <li><a href="javascript://">季季享</a></li>
+                <li><a href="javascript://">年年丰</a></li>
+            </ul>
+        </div>
+        <div id='tab-box' class='swipe'>
+            <div class="swipe-wrap">
+                <!-- begin 月月盈 -->
+                <div id="item-month" class="swipe-conts">
+                    @Html.Action("GetData_Month")
+                </div>
+                <!-- end 月月盈 -->
+                <!-- begin 季季享 -->
+                <div id="item-quarter" class="swipe-conts">
+
+                    <div class="gxtabs-wrap J_gxtabs">
+                        <div class="gxtabs-nav J_gxtabs_nav assetsAb">
+                            <ul>
+                                <li class="active">3个月<b class="triangle-top-sb"></b></li>
+                                <li>6个月<b class="triangle-top-sb"></b></li>
+                            </ul>
+                        </div>
+                        <div class="gxtabs-container J_gxtabs_container">
+                            <div class="J_gxtabs_item">
+                                 @Html.Action("GetData_Quarter_3")
+                            </div>
+                            <div class="J_gxtabs_item gx-hide">
+                                 @Html.Action("GetData_Quarter_6")
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end 季季享 -->
+                <!-- begin 年年丰 -->
+                <div id="item-year" class="swipe-conts">
+                    @Html.Action("GetData_Year")
+                </div>
+                <!-- end 年年丰 -->
+            </div>
+        </div>
+<script>
+    seajs.use('UserAssets')
+</script>
+<!-- 浮动栏 -->
+<div class="yx-fixedBar">
+    <a class="yx-back" href="javasrcipt:void(0);">返回</a>
+    <a class="yx-home" href="/">首页</a>
+</div>
+<script>
+    seajs.use('fixed_bar');
+</script>

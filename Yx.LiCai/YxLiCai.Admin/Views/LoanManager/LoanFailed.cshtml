@@ -1,0 +1,161 @@
+﻿<div class="zpManage zpSh">
+    <h2 class="crumbs">
+        您所在位置：放款管理 > 放款失败
+    </h2>
+    <div class="gx-textitem">
+        <div class="form-group">
+            <label class="gx-texttitle">
+                融资方：
+            </label>
+            <input id="f_name" type="text" class="gx-textbox search-txt" placeholder="请输入内容...">
+            <label class="gx-texttitle">
+                项目期限(月)：
+            </label>
+            @Html.Partial("EditorTemplates/KendoNumeric",
+        new YxLiCai.Admin.Models.KendoNumericTextBoxViewModel
+        {
+            Id = "pj_duration",
+            Min = "0"
+        })
+
+        </div>
+        <div class="form-group">
+            <label class="gx-texttitle">
+                放款时间：
+            </label>
+            @Html.Partial("EditorTemplates/KendoTime",
+        new YxLiCai.Admin.Models.KendoDateTimeViewModel
+        {
+            Id = "SDate",
+            Format = "yyyy-MM-dd hh:mm:ss"
+        })
+            <label class="gx-texttitle">
+                至：
+            </label>
+            @Html.Partial("EditorTemplates/KendoTime",
+        new YxLiCai.Admin.Models.KendoDateTimeViewModel
+        {
+            Id = "EDate",
+            Format = "yyyy-MM-dd hh:mm:ss"
+        })
+        </div>
+        <div class="form-group">
+            <label class="gx-texttitle">
+                项目金额：
+            </label>
+            @Html.Partial("EditorTemplates/KendoNumeric",
+        new YxLiCai.Admin.Models.KendoNumericTextBoxViewModel
+        {
+            Id = "amount_min",
+            Format = "n2",
+            Decimals = "2",
+            Min = "0"
+        })
+            <label class="gx-texttitle">
+                至：
+            </label>
+            @Html.Partial("EditorTemplates/KendoNumeric",
+        new YxLiCai.Admin.Models.KendoNumericTextBoxViewModel
+        {
+            Id = "amount_max",
+            Format = "n2",
+            Decimals = "2",
+            Min = "0"
+        })
+            <button id="btnSearch" class="gx-button gx-button-info search-btn" style="float:right;margin-right:300px;">查询</button>
+        </div>
+    </div>
+
+    <div class="cleanfix" style="margin:15px 15px 15px 15px">
+        <div class="control-group">
+            <div class="tbstyle">
+                <div id="grid"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    require(['CRM/common.assets', 'CRM/loan.assets'], function (common, loan) {
+
+        //initial
+        var grid = $("#grid").kendoGrid({
+            sortable: true,
+            pageable: true,
+            editable: "popup",
+        }).data("kendoGrid");
+        //columns
+        var columns = [
+              { field: "id", title: "ID", sortable: true },
+              { field: "pjid", title: "项目ID", sortable: true },
+              { field: "pjName", title: "项目名称", sortable: true },
+              { field: "loanPeriod", title: "项目期限", sortable: true },
+              { field: "pjAmount", title: "项目金额", sortable: true },
+              { field: "amount", title: "放款金额", sortable: true },
+              { field: "mID", title: "融资方账户ID", sortable: true },
+              { field: "mName", title: "融资方名称", sortable: true },
+              { field: "rName", title: "真实姓名", sortable: true },
+              { field: "phone", title: "手机号", sortable: true },
+              { field: "bkName", title: "银行", sortable: true },
+              { field: "bkCard", title: "银行卡号", sortable: true },
+              { field: "adminID", title: "放款人ID", sortable: true },
+              { field: "loanTime", title: "放款时间", sortable: true },
+              { field: "remark", title: "备注", sortable: true },
+              {
+                  command: [{ name: "edit", text: { edit: "详情", cancel: "取消", update: "更新" } },
+                  { text: "重新放款", click: function (e) { pay_loan(this, e) } }], title: "操作"
+              }
+        ];
+
+        var ds = null;
+        getData();
+        //get loan data
+        function getData() {
+            var mName = $("#f_name").val(),
+                loanPeriod = $("#pj_duration").val() || -1,
+                amount_min = $("#amount_min").val() || -1,
+                amount_max = $("#amount_max").val() || -1,
+                sDate = $("#SDate").val(), //放款时间
+                eDate = $("#EDate").val(); //放款时间
+            var param = {
+                mName: mName, loanPeriod: loanPeriod, amount_min: amount_min, amount_max: amount_max,
+                sDate: sDate, eDate: eDate
+            };
+            //datasource
+            ds = loan.getLoanFailedList(param);
+            //set options
+            grid.setOptions({
+                dataSource: ds,
+                columns: columns,
+                edit: function (e) {
+                    var editWindow = e.container.data("kendoWindow");
+                    e.container.data("kendoWindow").title('详情');
+                    $(".k-grid-update").hide();
+                }
+            });
+        }
+        //重新支付
+        function pay_loan(grid, e) {
+            e.preventDefault();
+            dataItem = grid.dataItem($(e.currentTarget).closest("tr"));
+
+            var param = loan.rePay(grid, e);
+
+            $.ajax({
+                url: "/LoanManager/RepayMerchant",
+                data: param,
+                success: function (result) {
+                    if (result) {
+                        common.popupNotification.show("放款成功", "info");
+                        ds.remove(dataItem);
+                    }
+                    else {
+                        common.popupNotification.show("放款失败", "error");
+                    }
+                }
+            });
+        }
+        //查询按钮
+        $("#btnSearch").bind("click", getData);
+    });
+</script>

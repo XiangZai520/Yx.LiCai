@@ -1,0 +1,365 @@
+﻿@model YxLiCai.Model.Product.ProductModel
+
+<div class="zpManage zpSh">
+    <h2 class="crumbs">
+        您所在位置：产品管理 > 修改产品
+    </h2>
+    <div class="control-group form-horizontal">
+        @Html.Partial("EditorTemplates/KendoTextBox",
+        new YxLiCai.Admin.Models.KendoTextBoxViewModel
+        {
+            Content = "产品名称",
+            Id = "ProductName",
+            Value = @Model.ProductName,
+            Tips = "*不超过100字"
+        })
+        @Html.Partial("EditorTemplates/KendoDropdownlist",
+        new YxLiCai.Admin.Models.KendoDropdownlistViewModel
+        {
+            Content = "产品类型",
+            Id = "ProductCategory",
+            SourceUrl = "/Product/GetConfig?configName=Product|element=ProductCategory",
+            Value = @Model.ProductCategory,
+            Tips = "*"
+        })
+        @Html.Partial("EditorTemplates/KendoNumericTextBox",
+        new YxLiCai.Admin.Models.KendoNumericTextBoxViewModel
+        {
+            Content = "产品金额(万元)",
+            Id = "ProductAmount",
+            Format = "n4",
+            Decimals = "4",
+            Value = @Model.ProductAmount,
+            Min = "0",
+            Tips = "*"
+        })
+        <div id="div_YieldBase">
+        @Html.Partial("EditorTemplates/KendoNumericTextBox",
+        new YxLiCai.Admin.Models.KendoNumericTextBoxViewModel
+        {
+            Content = "起始利率",
+            Id = "YieldBase",
+            Format = "n4",
+            Decimals = "4",
+            Value = @Model.YieldBase,
+            Min = "0",
+            Max = "1",
+            Tips = "*"
+        })
+        </div>
+        <div id="div_YieldIncrease">
+            @Html.Partial("EditorTemplates/KendoNumericTextBox",
+        new YxLiCai.Admin.Models.KendoNumericTextBoxViewModel
+        {
+            Content = "月递增利率",
+            Id = "YieldIncrease",
+            Format = "n4",
+            Decimals = "4",
+            Value = @Model.YieldIncrease,
+            Min = "0",
+            Max = "1",
+            Tips = "*输入0.005代表递增利率是0.5%"
+        })
+        </div>
+        @Html.Partial("EditorTemplates/KendoNumericTextBox",
+        new YxLiCai.Admin.Models.KendoNumericTextBoxViewModel
+        {
+            Content = "最高利率",
+            Id = "YieldTop",
+            Format = "n4",
+            Decimals = "4",
+            Value = @Model.YieldTop,
+            Min = "0",
+            Max = "1",
+            Tips = "*最高利率不包括加息券的利率"
+        })
+        @Html.Partial("EditorTemplates/KendoNumericTextBox",
+        new YxLiCai.Admin.Models.KendoNumericTextBoxViewModel
+        {
+            Content = "产品期限(天)",
+            Id = "ProductDuration",
+            Value = @Model.ProductDuration,
+            Min = "0",
+            Max = "10000",
+            Tips = "*月月盈暂无期限，填0即可",
+            Readonly = "true"
+        })
+        @Html.Partial("EditorTemplates/KendoMultiSelect",
+        new YxLiCai.Admin.Models.KendoTextBoxViewModel
+        {
+            Content = "匹配项目列表",
+            Id = "ProductList",
+            Readonly = "true"
+        })
+        @Html.Partial("EditorTemplates/KendoDateTime",
+        new YxLiCai.Admin.Models.KendoDateTimeViewModel
+        {
+            Content = "预期上线时间",
+            Id = "ExpectedEnableDate",
+            Format = "yyyy-MM-dd hh:mm:ss",
+            Value = @Model.ExpectedEnableDate,
+            Min = DateTime.Now,
+            Tips = "*自动上线选否时必填，选是时不可填"
+        })
+        @Html.Partial("EditorTemplates/KendoNumericTextBox",
+        new YxLiCai.Admin.Models.KendoNumericTextBoxViewModel
+        {
+            Content = "产品排序(0 - 1000)",
+            Id = "ProductOrder",
+            Value = @Model.ProductOrder,
+            Min = "0",
+            Max = "1000",
+            Tips = "*其他优选条件一致时排序值低的优先"
+        })
+        <div class="form-group">
+            <label class="control-label col-sm-6">是否自动上线</label>
+            <input id="Radio_False" type="radio" name="productRadio" value="0" checked="checked" />
+            <label for="Radio_False">否</label>
+            <input id="Radio_True" type="radio" name="productRadio" value="1" />
+            <label for="Radio_True">是</label>
+            <span style="color:red">*勾选后产品售卖完优先选择排序靠前的产品上架</span>
+        </div>
+        @{
+            if (Model.ProductStatus == 2)
+            {
+                @Html.Partial("EditorTemplates/KendoTextArea",
+                new YxLiCai.Admin.Models.KendoTextAreaViewModel
+                {
+                    Content = "备注",
+                    Id = "Remark",
+                    Value = @Model.Remark,
+                    Readonly = "readonly",
+                    Tips = "*不超过200字"
+                })
+            }
+        }
+    </div>
+
+    <div class="SearchMd">
+        <input type="hidden" id="AuditorID" value="@YxLiCai.Admin.UserContext.simpleUserInfoModel.Id" />
+        <input type="hidden" id="ProductID" value="@Model.Id" />
+        <input type="hidden" id="pjName" />
+        @{
+            if (@Model.ProductStatus == 0 || @Model.ProductStatus == 1 || @Model.ProductStatus == 2)
+            { 
+                <input id="btnSave" type="button" value="保存" class="searchBtn" />
+            }
+        }
+        <input type="button" value="返回" class="searchBtn" onclick="javascript: history.back()" />
+    </div>
+</div>
+
+<script>
+    require(['CRM/common.assets', 'CRM/project.assets', 'CRM/product.assets'], function (common, project, product) {
+
+        //original product name
+        var _pName = $("#ProductName").val();
+
+        //init category
+        var category_id = $("#ProductCategory").val(); //category id
+
+        //set selected projects
+        setMatchedProjectList(category_id);
+
+        //product duration
+        var durationDs = product.durationDs,
+            ProductDuration = $("#ProductDuration").data("kendoNumericTextBox");
+        durationDs.fetch();
+
+        //initial dropdownlist
+        if ($("#ProductCategory").val() > 1) {
+            $("#div_YieldBase").hide();
+            $("#div_YieldIncrease").hide();
+        }
+
+        // change event of dropdownlist
+        var dropdownlist = $("#ProductCategory").data("kendoDropDownList");
+        dropdownlist.bind("change", function (e) {
+            var selectedID = this.value(),
+                type = "Type" + selectedID,
+                interestDs = product.interestRateDs(type);
+            var base_Num = $("#YieldBase").data("kendoNumericTextBox"),
+                increase_Num = $("#YieldIncrease").data("kendoNumericTextBox"),
+                top_Num = $("#YieldTop").data("kendoNumericTextBox");
+            base_Num.value(0);
+            increase_Num.value(0);
+            top_Num.value(0);
+
+            interestDs.fetch(function (e) {
+                if (selectedID == -1)
+                    return;
+                var data = interestDs.data();
+                if (selectedID == 1 || selectedID == 5) {
+                    $("#div_YieldBase").show();
+                    $("#div_YieldIncrease").show();
+                    //set value
+                    base_Num.value(data[0].Name);
+                    increase_Num.value(data[1].Name);
+                    top_Num.value(data[2].Name);
+                }
+                else {
+                    $("#div_YieldBase").hide();
+                    $("#div_YieldIncrease").hide();
+                    //set value
+                    top_Num.value(data[0].Name);
+                }
+            });
+
+            //set default product duration
+            setDefaultDuration(selectedID);
+
+            //change matched project list
+            setMatchedProjectList(selectedID);
+        });
+
+        //匹配项目列表
+        function setMatchedProjectList(categoryID) {          
+            //change matched projects
+            if (categoryID == -1) {
+                multiselect.value([]);
+                return;
+            }
+            var param = { categoryID: categoryID },
+                projectDs = project.projectDs(param);
+
+            multiselect.setDataSource(projectDs);
+
+            projectDs.fetch(function (e) {
+                var data = projectDs.data(),
+                    array = [];
+                for (var i = 0; i < data.length; i++) {
+                    array.push(data[i].Id);
+                }
+
+                multiselect.value(array);
+            });
+        }
+
+        //set radio value
+        var radioValue = '@Model.IsAutoEnable';
+        if (radioValue == "1") {
+            $("#Radio_True").prop("checked", true);
+        }
+        else {
+            $("#Radio_False").prop("checked", true);
+        }
+
+        // save event
+        $("#btnSave").bind("click", function () {
+            //validate
+            if ($("#ProductName").val().trim() == "") {
+                common.popupNotification.show("请填写产品名称", "error");
+                return;
+            }
+            else {
+                if ($("#pjName").val() && $("#pjName").val() != _pName) {
+                    common.popupNotification.show("产品名称已存在，请更换名称", "error");
+                    return;
+                }
+            }
+            if ($("#ProductCategory").val() == -1) {
+                common.popupNotification.show("请选择产品类型", "error");
+                return;
+            }
+            if ($("#ProductAmount").val() == 0) {
+                common.popupNotification.show("产品金额应大于0", "error");
+                return;
+            }
+            if (!$("#ProductList").val()) {
+                common.popupNotification.show("请选择项目", "error");
+                return;
+            }
+            else {
+                //获取所选项目可售总额
+                var pjs = "";
+                $("#ProductList_taglist li").each(function () {
+                    pjs += $(this).find("span").first().html() + ",";
+                });
+                var array = pjs.split(',');
+                var amount_all = 0;
+                for (var i = 0; i < array.length; i++) {
+                    if (!array[i])
+                        continue;
+                    var item = array[i],
+                        item_array = item.split('|'),
+                        str_amount = item_array[3];
+                    amount_all += parseFloat(str_amount.substr(str_amount.indexOf(":") + 1));
+                }
+                //判断产品金额是否 <= 所选项目可售金额
+                if (amount_all < $("#ProductAmount").val()) {
+                    common.popupNotification.show("所选项目可售总额不能小于产品金额", "error");
+                    return;
+                }
+            }
+            if ($("#ExpectedEnableDate").val()) {
+                if ($('input[name="productRadio"]:checked').val() == 1) {
+                    common.popupNotification.show("填写预期上线时间，不能选自动上线", "error");
+                    return;
+                }
+            }
+            else {
+                if ($('input[name="productRadio"]:checked').val() == 0) {
+                    common.popupNotification.show("请选择预期上线时间", "error");
+                    return;
+                }
+            }
+
+            var productID = $("#ProductID").val();
+            data = project.jsonModel(productID, 0); //状态改为未审核
+            sentAjax(data);
+        });
+
+        function sentAjax(data) {
+            $.ajax({
+                type: "POST",
+                url: "/Product/UpdateProduct",
+                data: data,
+                success: function (e) {
+                    if (e) {
+                        common.popupNotification.show("更新成功", "info");
+                        history.back();
+                    }
+                    else {
+                        common.popupNotification.show("更新失败", "error");
+                    }
+                },
+                error: function (e) {
+                    common.popupNotification.show(e.responseText);
+                }
+            });
+        }
+
+        //is product name existed?
+        $("#ProductName").bind("blur", function () {
+            var name = $(this).val();
+            //name unchanged，return
+            if (name == _pName)
+                return;
+
+            $.ajax({
+                type: "POST",
+                url: "/Product/CheckProductName",
+                data: { pName: name },
+                success: function (e) {
+                    if (e) {
+                        $("#pjName").val(name);
+                        common.popupNotification.show("产品名称已存在，请更换名称", "error");
+                    }
+                    else {
+                        $("#pjName").val("");
+                    }
+                }
+            });
+        })
+
+        //set default product duration
+        //type: selected product category id
+        function setDefaultDuration(type) {
+            if (type < 0)
+                return;
+            var id = parseInt(type) - 1,
+                data = durationDs.data();
+            ProductDuration.value(data[id].Name);
+        }
+    });
+</script>

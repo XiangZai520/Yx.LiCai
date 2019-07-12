@@ -1,0 +1,89 @@
+﻿<div class="zpManage zpSh">
+    <h2 class="crumbs">
+        您所在位置：产品管理 > 待发布
+    </h2>
+</div>
+<div class="control-group form-horizontal">
+    <div class="cleanfix" style="margin:15px 15px 15px 15px">
+        <div class="tbstyle">
+            <div id="grid"></div>
+        </div>
+    </div>
+</div>
+
+<!--kendo template-->
+<script id="myTemplate" type="text/x-kendo-template">
+    #if(IsSellPdt == '1'){#
+    <a class="k-button k-button-icontext" id="#= Id #" href="javascript:void(0)" onclick="setProductAvailable(this)">上架</a>
+    <a class="k-button k-button-icontext " href="/Product/Edit/#= Id #"><span class=" "></span>修改</a>
+    #}else{#
+    <a class="k-button k-button-icontext " href="/Product/Edit/#= Id #"><span class=" "></span>修改</a>
+    #}#
+</script>
+
+<script>
+    require(['CRM/common.assets', 'CRM/product.assets'], function (common, product) {
+
+        //grid
+        var grid = $("#grid").kendoGrid({
+            sortable: true,
+            pageable: true,
+            editable: {
+                mode: "popup",
+                window: {
+                    title: "详情"
+                },
+            },
+            edit: function (e) {
+                $(".k-grid-update").hide();
+            }
+        }).data("kendoGrid");
+        //parameter
+        var param = {
+            ProductName: "",
+            ProductCategory: -1,
+            ProductStatus: 1
+        };
+        //data source
+        var ds = product.toSellProductDs(param);
+        //columns
+        var columns = [
+            { field: "Id", title: "产品ID", sortable: true },
+            { field: "PCategory", title: "产品类型", sortable: true },
+            { field: "ProductName", title: "产品名称", sortable: true },
+            { field: "ProductAmount", title: "产品金额(万元)", sortable: true },
+            { field: "ExpectedEnableDate", title: "预期上线时间", sortable: true },
+            { field: "ProductOrder", title: "产品排序", sortable: true },
+            { field: "AutoEnable", title: "是否自动上线", sortable: true },
+            { field: "CreateDate", title: "创建时间", sortable: true }
+        ];
+        columns.push({ field: "IsSellPdt", template: kendo.template($("#myTemplate").html()), title: "操作" });
+        //set dataSource
+        grid.setOptions({
+            dataSource: ds,
+            columns: columns
+        });
+    });
+
+    //上架产品
+    function setProductAvailable(obj) {
+        var pid = obj.id;
+
+        $.ajax({
+            type: "POST",
+            url: "/Product/EnableProduct",
+            data: { pid: pid },
+            success: function (result) {
+                if (result) {
+                    //common.popupNotification.show("产品上架成功", "info");
+                    //ds.remove(dataItem);
+                    alert("产品上架成功");
+                    window.location.href = window.location.href;
+                } else {
+                    //common.popupNotification.show("产品上架失败：可能存在同类型售卖中产品", "error");
+                    alert("产品上架失败：可能存在同类型售卖中产品");
+                }
+            }
+        });
+    }
+</script>

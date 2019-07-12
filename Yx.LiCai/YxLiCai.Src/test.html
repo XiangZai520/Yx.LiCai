@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>H5 test page</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="author" content="Globak-x">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<!-- <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" /> -->
+
+<link href="css/m_base.css" rel="stylesheet">
+<link href="css/global_x.css" rel="stylesheet">
+<link href="css/dialog_ui.css" rel="stylesheet">
+
+<script src="js/loader/sea.js"></script>
+<script src="js/loader/sea-config.js"></script>
+
+
+</head>
+<body>
+<header id="header"></header>
+
+<div id="gx-touch" class="m-wrap">
+
+
+	<a id="alert_html" class="gx-btn" href="javascript://">显示HTML</a>
+
+	<fieldset>
+	<legend>内容为 DOM 元素</legend>
+		<a id="alert_dom" class="gx-btn" href="javascript://">显示对话框</a>
+		<a id="alert_login" class="gx-btn" href="javascript://">用户登录</a>
+	</fieldset>
+
+	<fieldset>
+      <legend>对话框的内容</legend>
+      <div id="the_alert_info" class="the_alert_info">
+        <p>点击上面的按钮，此处内容将会显示到对话框中</p>
+        <dl>
+          <dt>gxDialog 对话框</dt>
+          <dd>一个简约的对话框插件</dd>
+        </dl>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>对话框的内容</legend>
+      <form id="the_login" class="the_login" action="#" method="post">
+        <dl class="form_add">
+          <dt>用户名</dt>
+          <dd><input type="text" class="gxinput"></dd>
+          <dt>密码</dt>
+          <dd><input type="text" class="gxinput"></dd>
+          <dt></dt>
+          <dd><button type="submit" class="gx-btn">登 录</button></dd>
+        </dl>
+      </form>
+    </fieldset>
+
+	<a id="alert_text" class="gx-btn" href="javascript://">显示对话框</a>
+	<a id="alert" class="gx-btn" href="javascript://">显示对话框</a>
+	<a id="confirm" class="gx-btn" href="javascript://">显示对话框</a>
+
+	<a id="ios_alert" class="gx-btn" href="javascript://">显示对话框</a>
+	<a id="ios_confirm" class="gx-btn" href="javascript://">显示对话框</a>
+	<a id="ios_rate" class="gx-btn" href="javascript://">操作对话框</a>
+
+
+</div>
+
+<div class="aaa">
+    <div class="ccc">ccc</div>
+    <div class="bbb">
+        <span>111</span>
+        <span>222</span>
+        <span>333</span>
+    </div>
+</div>
+
+<footer id="footer"></footer>
+
+<div class="gx-hide">
+	<!-- 代码统计加在此处 -->
+</div>
+
+<script>
+    seajs.use('./js/load_dev');
+    seajs.use('./js/test');
+    // seajs.use('./js/yixiu');
+</script>
+
+</body>
+</html>

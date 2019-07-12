@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<!--<MsgContentMenu>
+	<Msg>
+		<Type>1</Type>
+		<Title>验证码</Title>
+		<Content>师傅，您の验证码来了：{0}，验证码60秒内有效，还请尽快填写.安全贴示：请勿将验证码提供给他人，再次提醒，请勿转发.</Content>
+	</Msg>
+	<Msg>
+		<Type>2</Type>
+		<Title>投资成功</Title>
+		<Content>欢迎加入一休，非常荣幸为您服务您已经成功纳入一休理财{0}产品{1}元，系统已受理并在1个工作日内确认，我们正在加速办理，还请耐心等待，谢谢。</Content>
+	</Msg>
+	<Msg>
+		<Type>3</Type>
+		<Title>赎回</Title>
+		<Content>师傅，您刚刚从一休理财赎回的{0}产品{1}元，预计1至5个工作日内退回尾号为{2}の{3}银行卡，如超时未收到，请联系客服小叶子。</Content>
+	</Msg>
+	<Msg>
+		<Type>4</Type>
+		<Title>赎回到账</Title>
+		<Content>师傅，您在{0} 赎回の{1}产品{2}元已经到账，请注意查收，如有问题请联系客服叶子。</Content>
+	</Msg>
+	<Msg>
+		<Type>5</Type>
+		<Title>提现</Title>
+		<Content>您刚刚从一休理财账户中提现{0}元，预计1至5个工作日内退回尾号为{1}の{2}银行卡。如非本人操作请联系客服叶子。</Content>
+	</Msg>
+	<Msg>
+		<Type>6</Type>
+		<Title>提现到账</Title>
+		<Content>师傅，您在{0}提现の{1}元，钱已到尾号{2}の{3}银行卡，请在安全场合查看您的账户余额哦</Content>
+	</Msg>
+  
+</MsgContentMenu>-->
+
+
+
+
+<MsgContentMenu>
+  <Msg>
+    <Type>1</Type>
+    <Title>验证码</Title>
+    <Content>将军大人，给您送验证码来了{0}，该验证码60秒内有效，还请尽快填写。为了保障您用户安全，请勿将验证码提供给他人哦。</Content>
+  </Msg>
+  <Msg>
+    <Type>2</Type>
+    <Title>投资成功</Title>
+    <Content>将军大人，您成功的买入了一休理财的{0}产品{1}元，系统已受理，我们正在加速办理，还请耐心等待，请随时关注它的成长吧。</Content>
+  </Msg>
+  <Msg>
+    <Type>3</Type>
+    <Title>赎回申请</Title>
+    <Content>将军大人，您发起的一笔{0}元赎回申请，预计1-3个工作日将退回至尾号为{1}的{2}银行卡中，如超时未收到，请联系我们的小叶子{3}</Content>
+  </Msg>
+  <Msg>
+    <Type>4</Type>
+    <Title>提现申请</Title>
+    <Content>将军大人，您发起一笔{0}元的提现申请，预计1-3个工作日将退回至尾号{1}的{2}银行卡中，请留意您的银行卡资金变化，如非本人操作请联系我们的小叶子{3}</Content>
+  </Msg>
+  <Msg>
+    <Type>5</Type>
+    <Title>注册送特享金和加息券</Title>
+    <Content>将军大人，为庆祝您成功注册，一休献上10000元特享金和1%加息券，加息券购买任何产品均可叠加使用，快快买入新产品吧</Content>
+  </Msg>
+  <Msg>
+    <Type>6</Type>
+    <Title>邀请送特享金和加息券</Title>
+    <Content>将军大人，{0}的成功注册为您献上1000元特享金大礼和0.2%加息券，特享金已进入小金库，加息券购买任何产品均可叠加使用</Content>
+  </Msg>
+  <Msg>
+    <Type>7</Type>
+    <Title>邀请送加息券</Title>
+    <Content>将军大人，{0}的成功注册为您献上0.2%加息券，加息券购买任何产品均可叠加使用</Content>
+  </Msg>
+  <Msg>
+    <Type>8</Type>
+    <Title>特享金收益到期</Title>
+    <Content>将军大人，您的一休理财豪华特享金{0}元15天特享已到期，系统将自动回收特享本金，特享收益已经存放到您的账户，可随时提现，欢迎投资一休理财各类产品。</Content>
+  </Msg>
+  <Msg>
+    <Type>9</Type>
+    <Title>加息券过期提醒</Title>
+    <Content>将军大人，您获得的{0}%加息券，将在{1}到期，悄悄告诉你使用加息券可获得更多收益，不要让它白白流失哦，快速点击查看{2}</Content>
+  </Msg>
+  <Msg>
+    <Type>10</Type>
+    <Title>产品到期提醒</Title>
+    <Content>将军大人，忙碌总是让时光更快流逝，爱理财的你对时间一定更加珍惜，我是一休有没有很想我。轻轻提醒您{0}买入的一休理财{1}产品{2}元已到期，现将本金及未付利息{3}元存放至您的账户中，您可以选择提现或续投一休理财，快快查看小金库吧{4}</Content>
+  </Msg>
+</MsgContentMenu>
+

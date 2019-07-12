@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{89B7F8C1-2876-4AC7-84C5-C321A80B7469}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>YxLiCai.Server</RootNamespace>
+    <AssemblyName>YxLiCai.Server</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Account\AdminAuthenticationService.cs" />
+    <Compile Include="ActivityManege\ActivityManegeService.cs" />
+    <Compile Include="Activity\ActivityService.cs" />
+    <Compile Include="Activity\IActivityService.cs" />
+    <Compile Include="Act\ActService.cs" />
+    <Compile Include="Charge\ChargeManager.cs" />
+    <Compile Include="Bonus\IBonus.cs" />
+    <Compile Include="Bonus\BonusManager.cs" />
+    <Compile Include="Bonus\BonusFactory.cs" />
+    <Compile Include="Common\ConfigurationManager.cs" />
+    <Compile Include="Common\ResponseModel\WithdrawResponse.cs" />
+    <Compile Include="Common\YeePayManager.cs" />
+    <Compile Include="FactoringManage\FactoringManageService.cs" />
+    <Compile Include="LoanManager\LoanManager.cs" />
+    <Compile Include="Member\MemberManageService.cs" />
+    <Compile Include="MenuSet\AuthorityMenuService.cs" />
+    <Compile Include="MenuSet\SysService.cs" />
+    <Compile Include="Order\OrderInfoService.cs" />
+    <Compile Include="Order\OrderProjectService.cs" />
+    <Compile Include="PageListResponse.cs" />
+    <Compile Include="PagingResult.cs" />
+    <Compile Include="Product\ProductManager.cs" />
+    <Compile Include="Product\ProductProjectService.cs" />
+    <Compile Include="Project\ProjectService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Redemption\RedemptionService.cs" />
+    <Compile Include="Refund\RefundManager.cs" />
+    <Compile Include="SendMsg\BaiFenMessage.cs" />
+    <Compile Include="SendMsg\MessageFactory.cs" />
+    <Compile Include="SendMsg\Send.cs" />
+    <Compile Include="SendMsg\WDMessage.cs" />
+    <Compile Include="TransactionRecords\TransactionRecordsService.cs" />
+    <Compile Include="UserAccumulatedEarnings\UserAccumulatedEarningsService.cs" />
+    <Compile Include="UserFinancingManagement\UserInfo_FinancingManagement_Services.cs" />
+    <Compile Include="UserVerificationIDcard\VerificationIDcard.cs" />
+    <Compile Include="User\UserAddInterestService.cs" />
+    <Compile Include="User\UserBankCardService.cs" />
+    <Compile Include="User\UserCountMonthService.cs" />
+    <Compile Include="User\UserCountSeasonService.cs" />
+    <Compile Include="User\UserCountService.cs" />
+    <Compile Include="User\UserCountYearService.cs" />
+    <Compile Include="User\UserInfoService.cs" />
+    <Compile Include="User\UserInvitationService.cs" />
+    <Compile Include="User\UserMessageServer.cs" />
+    <Compile Include="User\UserRaiseService.cs" />
+    <Compile Include="User\UserRemptionService.cs" />
+    <Compile Include="User\UserSpecialAssetsService.cs" />
+    <Compile Include="WithdrawManager\NewWithdrawService.cs" />
+    <Compile Include="WithdrawManager\WithdrawManager.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Model\YxLiCai.Model\YxLiCai.Model.csproj">
+      <Project>{bfa05150-7a3b-45a3-a480-de606b0e6fda}</Project>
+      <Name>YxLiCai.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YxLica.Tools\YxLica.Tools.csproj">
+      <Project>{4cf85277-c84a-4b9a-abf6-1d5af4969ff1}</Project>
+      <Name>YxLica.Tools</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YxLiCai.Dao\YxLiCai.Dao.csproj">
+      <Project>{8f1a98c0-d155-4153-83eb-cbfdf2ee2bcd}</Project>
+      <Name>YxLiCai.Dao</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

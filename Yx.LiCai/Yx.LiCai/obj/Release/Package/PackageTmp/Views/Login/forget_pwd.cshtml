@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "忘记密码";
+} 
+
+            <div class="reg-list login-list">
+                <dl>
+                    <dt class="right-style gray-status" id="repOld">
+                        <span><b id="TimeMove">60</b>秒后重新发送</span>
+                    </dt>
+                    <dt class="right-style" id="repNew" style="display:none">
+                        <span id="repNewMsg">重新发送</span>                       
+                    </dt>
+                    <dd>
+                        <input type="tel" class="input-txt phone-code" id="phoneCode" name="phoneCode" placeholder="想你，快回来" maxlength="6"  onkeyup="value=value.replace(/[^\d]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))">
+                    </dd>
+                    <dd class="yx-tips">
+                    </dd>
+                    <dd class="warm-tips Validedate_check"></dd>
+                </dl>
+            </div>
+            <div class="do-btn">
+                <a class="ui-btn ui-btn-gray" id="btnNext">下一步</a>
+            </div>
+<script>
+    //电话
+    var dianhua = '@YxLiCai.Tools.Const.SystemConst.ConvertPhoneNum(ViewBag.Phone)'; 
+    var dian = '@ViewBag.Phone';
+    seajs.use('User/LoginOrRegister/forget_pwd.js');
+</script>
+

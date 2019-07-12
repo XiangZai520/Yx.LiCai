@@ -1,0 +1,105 @@
+﻿@section styles
+{
+    <link href="~/Resource/css/font-awesome.min.css" rel="stylesheet" />
+}
+<div class="zpManage zpSh">
+    <h2 class="crumbs">
+        您所在位置：活动管理->加息券->新建加息券
+    </h2>
+</div>
+<div class="gx-textitem">
+    <label class="gx-texttitle">
+        加息券名称：
+    </label>
+    <input id="name" type="text" class="gx-textbox" placeholder="请输入内容..." ><span style="color:red">*名称唯一</span>
+    <br/>
+    <label class="gx-texttitle">
+        面值(%)：
+    </label>
+    <input id="amount" type="text" class="gx-textbox" placeholder="请输入内容..." ><span style="color:red">*</span>
+    <br/>
+    <label class="gx-texttitle">
+        有效期(天)：
+    </label>
+    <input id="enableday" type="text" class="gx-textbox" placeholder="请输入内容..." ><span style="color:red">*用户活动加息券后开始计算的期限</span>
+    <br/><br/><br/>
+    <label class="gx-texttitle">
+        使用条件：
+    </label>
+    <label><input type="checkbox" name="usecondition" id="pt1" >月月盈</label>
+    <label><input type="checkbox" name="usecondition" id="pt2" >季季享-3个月</label><span style="color: red; margin-left: 15px;">*至少选择一项，可多选</span>
+    <br/>
+    <label class="gx-texttitle">
+    </label>
+    <label><input type="checkbox" name="usecondition" id="pt4" >年年丰</label>
+    <label><input type="checkbox" name="usecondition" id="pt3" >季季享-6个月</label>
+    <br/>
+    <button id="submit" class="gx-button gx-button-info" style="margin:30px;">提交审核</button>
+    <button id="cancle" class="gx-button gx-button-info" style="margin:30px">取消</button>
+
+</div>
+<script type="text/javascript">
+    $("#cancle").on("click", function () {
+        window.location = "/ActivityManege/InterestCouponList";
+    })
+    $("#submit").on("click", function () {
+        $("#submit").attr("disabled", "disabled");
+        var name = $("#name").val();
+        if ($.trim(name)=="")
+        {
+            alert("加息券名称不能为空！");
+            $("#submit").removeAttr("disabled");
+            return false;
+        }
+        var amount = $("#amount").val();
+
+        if (isNaN(parseFloat(amount)))
+        {
+            alert("面值格式不正确，请重新输入！");
+            $("#submit").removeAttr("disabled");
+            $("#amount").val("");
+            return false;
+        }
+        var enableday = $("#enableday").val();
+        if (isNaN(parseInt(enableday))) {
+            alert("有效期格式不正确，请重新输入！");
+            $("#submit").removeAttr("disabled");
+            $("#enableday").val("");
+            return false;
+        }
+        var usecondition = "";
+        
+        $("input[name='usecondition']").each(function () {
+            if ($(this).is(":checked"))
+            {
+                var id = $(this).attr("id");
+                id = id.replace("pt", "");
+                usecondition = usecondition + (usecondition==""?"":",") + id;
+            }
+        })
+        if (usecondition == "")
+        {
+            alert("请选择使用条件！");
+            $("#submit").removeAttr("disabled");
+            return false;
+        }
+        $.ajax({
+            type: "POST",
+            url: "/ActivityManege/AddInterestCoupon_ajax",
+            data: { name: name, amount: amount, enableday: enableday, usecondition: usecondition },
+            async: false,
+            success: function (data) {
+                if (data != null) {
+                    if (data == "ok") {
+                        alert("新增成功！");
+                        window.location = window.location.href;
+                    }
+                    else {
+                        alert(data.Message);
+                        $("#submit").removeAttr("disabled");
+                    }
+                }
+            }
+        })
+    })
+</script>

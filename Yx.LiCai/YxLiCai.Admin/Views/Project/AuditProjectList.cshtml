@@ -1,0 +1,36 @@
+﻿<style>
+    .k-grid-header th.k-header > .k-link {
+        text-align: center;
+    }
+
+    .k-widget, .k-widget * {
+        text-align: left;
+    }
+
+    .k-grid tbody .k-button, .k-ie8 .k-grid tbody button.k-button {
+        min-width: 42px;
+        text-align: center;
+    }
+        .k-grid-header th.k-header {
+         text-align: center;
+    }
+    #grid0{
+        width: 100%!important;
+    }
+</style>
+<div class="zpManage zpSh">
+    <h2 class="crumbs">
+        您所在位置：项目管理 > 待审核列表
+    </h2>
+    <div class="crumbs">
+        待审核列表
+    </div>
+    <div class="control-group form-horizontal padding">
+        @Html.Partial("_ListView",
+        new YxLiCai.Admin.Models.KendoTextBoxViewModel
+        {
+            Content = "0",
+            Id = "grid0"
+        })
+    </div>
+</div>

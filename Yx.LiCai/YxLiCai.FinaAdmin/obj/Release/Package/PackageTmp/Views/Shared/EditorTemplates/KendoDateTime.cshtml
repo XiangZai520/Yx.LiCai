@@ -1,0 +1,38 @@
+﻿@model YxLiCai.FinaAdmin.Models.KendoDateTimeViewModel
+<div class="form-group">
+    <label class="control-label col-sm-6" for="@Model.Id">@Model.Content</label>
+    <div class="col-sm-6 col-md-6">
+        <input id="@Model.Id" readonly="@Model.Readonly" value="@Model.Value" />
+    </div>
+</div>
+
+<script type="text/javascript">
+    var id = '@Model.Id',
+        start = '@Model.Start',
+        depth = '@Model.Depth',
+        format = '@Model.Format',
+        min = '@Model.Min',
+        readOnly = '@Model.Readonly';
+
+   if (min != "" && min != null) {
+       $("#" + id + "").kendoDateTimePicker({
+            start: start,
+            depth: depth,
+            format: format,
+            min: min
+        });
+   }
+   else {
+       $("#" + id + "").kendoDateTimePicker({
+           start: start,
+           depth: depth,
+           //format: format,
+           timeFormat: "HH:mm"
+       });
+   }
+
+   var datetimepicker = $("#" + id + "").data("kendoDateTimePicker");
+   if (readOnly == "true") {
+       datetimepicker.readonly();
+   }
+</script>

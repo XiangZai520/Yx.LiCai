@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "修改交易密码";
+}
+
+<div class="setting-box">
+    <form id="fetchPwdForm" name="fetchPwdForm" method="post" action="#" autocomplete="off">
+        <div class="reg-list fetch-list">
+            <dl>
+                <dt class="left-style">原始密码</dt>
+                <dd>
+                    <input type="password" class="input-txt fetch-pwd" id="oldPassword" name="oldPassword" maxlength="6" placeholder="原交易密码" />
+                </dd>
+            </dl>
+            <dl>
+                <dt class="left-style">设置密码</dt>
+                <dd>
+                    <input type="password" class="input-txt fetch-pwd" id="fetchPassword" name="fetchPassword" maxlength="6" placeholder="设置6位数字交易密码"/>@*</span>*@
+                    <b class="show-pwd" id="ShowPasswerd"></b>
+                </dd>
+            </dl>
+        </div>
+        <div class="ok-btn">
+            <a class="ui-btn" id="J_setting_ok">确认</a>
+            <p class="forget-link">
+                @if (Yx.LiCai.App_Start.UserContext.simpleUserInfoModel.IsRealCard == 1)
+                {
+                    <a href="forget_SPFist_pwd">忘记交易密码</a> 
+                }
+                else { 
+                    <span>如忘记交易密码，请先<a href="/UserSetting/uc_setting_status">实名认证</a></span>
+                }
+
+            </p>
+        </div>
+    </form>
+</div>
+<script>
+    seajs.use('User/UserSetting/fetch_pwd_modify')
+</script>
+

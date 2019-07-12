@@ -1,0 +1,325 @@
+﻿@model YxLiCai.Admin.Models.MemberDetailOutModel
+
+@section styles
+{
+    <link href="~/Resource/css/font-awesome.min.css" rel="stylesheet" />
+    <script src="~/Resource/js/My97DatePicker/WdatePicker.js"></script>
+}
+<div class="zpManage zpSh">
+    <h2 class="crumbs">您所在位置：会员管理->用户管理->详细信息
+    </h2>
+</div>
+<div class="gx-textitem">
+    <label class="gx-texttitle">用户名：</label><label class="gx-texttitle">@(Model.userInfo.LoginName)</label>
+    <label class="gx-texttitle">用户状态：</label><label class="gx-texttitle">@(Model.userInfo.Status == 1 ? "正常" : "拉黑")</label>
+    <label class="gx-texttitle">账户总资产：</label><label class="gx-texttitle">@(Model.TotalMoney)</label>
+    <br />
+    <label class="gx-texttitle">累计收益：</label><label class="gx-texttitle">@(Model.TotalIncome)</label>
+    <label class="gx-texttitle">自有资产：</label><label class="gx-texttitle">@(Model.ZiYouMoney)</label>
+    <label class="gx-texttitle">可提现金额：</label><label class="gx-texttitle">@(Model.KeTiXianMoney)</label>
+
+    <br />
+    <label class="gx-texttitle">已获红包：</label><label class="gx-texttitle">@(Model.TotalHongBao)</label>
+    <label class="gx-texttitle">特享资产：</label><label class="gx-texttitle">@(Model.TeXiangMoney)</label>
+    @*<label class="gx-texttitle">可赎回金额：</label><label class="gx-texttitle">@(Model.KeShuHuiMoney)</label>*@
+    <div style="margin-left: 30px">
+        <button id="ReSetLoginPw" class="gx-button gx-button-info">重置登录密码</button>
+        <button id="ReSetTradePw" class="gx-button gx-button-info">重置交易密码</button>
+        @if (Model.userInfo.IsBindBank == 1)
+        {
+            <button id="UnbindBankCard" class="gx-button gx-button-info" style="">解除绑定银行卡</button>
+            <button id="UnbindBankCard_LL" class="gx-button gx-button-info" style="">连连解除绑定银行卡</button>
+        }
+        @if (Model.userInfo.Status == 1)
+        {
+            <button id="JoinBlacklist" class="gx-button gx-button-info">拉黑</button>
+        }
+        <button id="Back" class="gx-button gx-button-info">返回</button>
+    </div>
+    <div>
+        <ul class="gx-tab" data-role="tab">
+            <li name="Myli" id="BasicInfo" class="gx-tab-actived">
+                <a href="javascript:void(0);">基本信息</a>
+            </li>
+            <li name="Myli" id="PurchaseRecord">
+                <a href="javascript:void(0);">投资记录</a>
+            </li>
+            <li name="Myli" id="WithDrawRecord">
+                <a href="javascript:void(0);">提现记录</a>
+            </li>
+            <li name="Myli" id="RedemptionRecord">
+                <a href="javascript:void(0);">赎回记录</a>
+            </li>
+        </ul>
+    </div>
+    <div id="BasicInfoDiv" name="MyDiv" style="display: block">
+        <label class="gx-texttitle">真实姓名：</label><label class="gx-texttitle">@(Model.userInfo.MyRealName)</label>
+        <label class="gx-texttitle">手机号：</label><label class="gx-texttitle">@(Model.userInfo.Phone)</label>
+        <label class="gx-texttitle">邮箱：</label><label class="gx-texttitle">暂无</label>
+        <br />
+        <label class="gx-texttitle">身份证号：</label><label class="gx-texttitle">@(Model.userInfo.MyRealCard)</label>
+        <label class="gx-texttitle">银行：</label><label class="gx-texttitle">@(Model.BankName)</label>
+        <label class="gx-texttitle">银行卡号：</label><label class="gx-texttitle">@(Model.BankCardNo)</label>
+    </div>
+    <div id="PurchaseRecordDiv" name="MyDiv" class="cleanfix" style="margin: 15px 15px 15px 15px; display: none">
+        <table class="gx-table gx-table-striped">
+            <thead>
+                <tr>
+                    <th>订单号</th>
+                    @* <th>用户名</th>*@
+                    <th>产品类型</th>
+                    <th>投资金额</th>
+                    <th>年化利率</th>
+                    <th>加息券</th>
+                    <th>投资时间</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.PurchaseRecordList != null && Model.PurchaseRecordList.Count > 0)
+                {
+                    foreach (YxLiCai.Model.ExtendModel.PurchaseRecordEx item in Model.PurchaseRecordList)
+                    {
+                    <tr>
+                        <td>@(item.OrderInfoID == 0 ? "" : item.OrderInfoID.ToString())</td>
+                        @*<td>@(Model.userInfo.LoginName)</td>*@
+                        <td>@(YxLica.Tools.Dic.CommonDic.ProductType.Keys.Contains(item.ProductType) ? YxLica.Tools.Dic.CommonDic.ProductType[item.ProductType] : "")</td>
+                        <td>@(YxLiCai.Tools.Const.SystemConst.MoenyConvert(item.PurchaseMoney))</td>
+                        <td>@(YxLiCai.Tools.Const.SystemConst.MoenyConvert(item.YearRate))</td>
+                        <td>@(YxLiCai.Tools.Const.SystemConst.MoenyConvert(item.InterestRateCoupon))</td>
+                        <td>@(item.CreateTime.ToString("yyyy-MM-dd HH:mm:ss"))</td>
+                    </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+    <div id="WithDrawRecordDiv" name="MyDiv" class="cleanfix" style="margin: 15px 15px 15px 15px; display: none">
+        <table class="gx-table gx-table-striped">
+            <thead>
+                <tr>
+                    <th>订单号</th>
+                    <th>用户名</th>
+                    <th>提现金额</th>
+                    <th>实到金额</th>
+                    <th>提现时间</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.WithdrawRecordList != null && Model.WithdrawRecordList.Count > 0)
+                {
+                    foreach (YxLiCai.Model.ExtendModel.WithdrawRecordEx item in Model.WithdrawRecordList)
+                    {
+                    <tr>
+                        <td>@(item.OrderInfoID == 0 ? "" : item.OrderInfoID.ToString())</td>
+                        <td>@(Model.userInfo.LoginName)</td>
+                        <td>@(YxLiCai.Tools.Const.SystemConst.MoenyConvert(item.WithdrawMoney))</td>
+                        <td>@(YxLiCai.Tools.Const.SystemConst.MoenyConvert(item.FinalWithdrawMoney))</td>
+                        <td>@(item.CreateTime.ToString("yyyy-MM-dd HH:mm:ss"))</td>
+                    </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div id="RedemptionRecordDiv" name="MyDiv" class="cleanfix" style="margin: 15px 15px 15px 15px; display: none">
+        <table class="gx-table gx-table-striped">
+            <thead>
+                <tr>
+                    <th>订单号</th>
+                    <th>用户名</th>
+                    <th>赎回金额</th>
+                    <th>违约金</th>
+                    <th>实到金额</th>
+                    <th>赎回时间</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.RedemptionRecordList != null && Model.RedemptionRecordList.Count > 0)
+                {
+                    foreach (YxLiCai.Model.ExtendModel.RedemptionRecordEx item in Model.RedemptionRecordList)
+                    {
+                    <tr>
+                        <td>@(item.OrderInfoID == 0 ? "" : item.OrderInfoID.ToString())</td>
+                        <td>@(Model.userInfo.LoginName)</td>
+                        <td>@(YxLiCai.Tools.Const.SystemConst.MoenyConvert(item.RedemptionMoney))</td>
+                        <td>@(YxLiCai.Tools.Const.SystemConst.MoenyConvert(item.WeiYueJin))</td>
+                        <td>@(YxLiCai.Tools.Const.SystemConst.MoenyConvert(item.FinalRedemptionMoney))</td>
+                        <td>@(item.CreateTime.ToString("yyyy-MM-dd HH:mm:ss"))</td>
+                    </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<div style="display: none; width: 500px;" id="ReSetPw" class="add-openbox add-form">
+    <div style="text-align: center;">
+        <input type="hidden" value="LoginPw" id="PwType" />
+        <p>请认真核对用户信息</p>
+        <div>
+            <p>
+                <label>真实姓名：</label><label>@(Model.userInfo.MyRealName)</label>
+            </p>
+            <p>
+                <label>身份证号：</label><label>@(Model.userInfo.MyRealCard)</label>
+            </p>
+            <p>
+                <label>手机号：</label><label>@(Model.userInfo.Phone)</label>
+            </p>
+            <p>
+                <input style="margin: 5px" type="button" value="确认重置" id="ConfirmReSet" /><input style="margin: 5px" type="button" value="放弃重置" id="CancleReSet" />
+            </p>
+        </div>
+    </div>
+</div>
+<div style="display: none; width: 500px;" id="JoinBlacklistDiv" class="add-openbox add-form">
+    <div style="text-align: center;">
+        <p>请输入拉黑理由</p>
+        <textarea cols="30" rows="5" id="Remark">
+
+        </textarea>
+        <p>500字以内</p>
+        <p>
+            <input style="margin: 5px" type="button" value="确认" id="ConfirmJoin" /><input style="margin: 5px" type="button" value="取消" id="CancleJoin" />
+        </p>
+    </div>
+</div>
+<script type="text/javascript">
+    $("li[name='Myli']").on("click", function() {
+        $("li[name='Myli']").each(function() {
+            $(this).removeClass("gx-tab-actived");
+        });
+        $("div[name='MyDiv']").each(function() {
+            $(this).hide();
+        });
+        $(this).addClass("gx-tab-actived");
+        var id = $(this).attr("id");
+        id = id + "Div";
+        $("#" + id).show();
+    });
+    $("#Back").on("click", function() {
+        window.location = "/Member/Index";
+    });
+</script>
+<script type="text/javascript">
+    var adminjs = new adminglass(); //实例化后台类  
+    //重置登录密码
+    $("#ReSetLoginPw").on("click", function() {
+        $("#PwType").val("LoginPw");
+        adminjs.openwinbox('#ReSetPw');
+    });
+    //重置交易密码
+    $("#ReSetTradePw").on("click", function() {
+        $("#PwType").val("TradePw");
+        adminjs.openwinbox('#ReSetPw');
+    });
+    //取消重置
+    $("#CancleReSet").on("click", function() {
+        adminjs.closewinbox('#ReSetPw');
+    });
+    //确认重置
+    $("#ConfirmReSet").on("click", function() {
+        if (confirm("确定要重置吗？会给用户发短息哟~~~")) {
+            var PwType = $("#PwType").val();
+            var userid = "@Model.userInfo.id";
+            $.ajax({
+                type: "POST",
+                url: "/Member/ReSetPw",
+                data: { userid: userid, PwType: PwType },
+                async: false,
+                success: function(data) {
+                    if (data != null) {
+                        if (data == "ok") {
+                            alert("重置成功！");
+                            adminjs.closewinbox('#ReSetPw');
+                        } else {
+                            alert(data.Message);
+                        }
+                    }
+                }
+            });
+        }
+    });
+    //拉黑
+    $("#JoinBlacklist").on("click", function () {
+        adminjs.openwinbox('#JoinBlacklistDiv');
+    })
+    //取消拉黑
+    $("#CancleJoin").on("click", function () {
+        adminjs.closewinbox('#JoinBlacklistDiv');
+    })
+    //确认拉黑
+    $("#ConfirmJoin").on("click", function() {
+        if (confirm("确认要加入黑名单吗？")) {
+            var Remark = $("#Remark").val();
+            var userid = "@Model.userInfo.id";
+            $.ajax({
+                type: "POST",
+                url: "/Member/JoinBlacklist",
+                data: { userid: userid, Remark: Remark },
+                async: false,
+                success: function(data) {
+                    if (data != null) {
+                        if (data == "ok") {
+                            alert("拉黑成功！");
+                            adminjs.closewinbox('#JoinBlacklistDiv');
+                            window.location.href = window.location.href;
+                        } else {
+                            alert(data.Message);
+                        }
+                    }
+                }
+            });
+        }
+    });
+    //解除绑定银行卡
+    $("#UnbindBankCard").on("click", function() {
+        if (confirm("确定要解除绑定银行卡吗？")) {
+            var userid = "@Model.userInfo.id";
+            $.ajax({
+                type: "POST",
+                url: "/Member/UnbindBankCard",
+                data: { userid: userid },
+                async: false,
+                success: function(data) {
+                    if (data != null) {
+                        if (data == "ok") {
+                            alert("解除绑定成功！");
+                            window.location.href = window.location.href;
+                        } else {
+                            alert(data.Message);
+                        }
+                    }
+                }
+            });
+
+        }
+    });
+    //解除绑定银行卡
+    $("#UnbindBankCard_LL").on("click", function () {
+        if (confirm("确定要解除绑定银行卡吗？")) {
+            var userid = "@Model.userInfo.id",
+                no_agree = "@Model.userInfo.no_agree";
+            
+            $.ajax({
+                type: "POST",
+                url: "/Member/UnbindBankCard_LL",
+                data: { userid: userid },
+                async: false,
+                success: function (data) {
+                    if (data != null) {
+                        if (data == "ok") {
+                            alert("解除绑定成功！");
+                            window.location.href = window.location.href;
+                        } else {
+                            alert(data.Message);
+                        }
+                    }
+                }
+            });
+
+        }
+    });
+    
+</script>

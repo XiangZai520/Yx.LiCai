@@ -1,0 +1,1 @@
+define("uc/show",["jquery","fastclick"],function(e,s,c){{var r=jQuery=e("jquery");e("fastclick")}r(".uc-matter-list").click(function(){var e=r(this);e.hasClass("hover")?(e.children(".uc-matter-menu").hide(),e.removeClass("hover")):(e.children(".uc-matter-menu").show(),e.addClass("hover"))})}),seajs.use("uc/show");

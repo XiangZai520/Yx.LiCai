@@ -1,0 +1,105 @@
+﻿@model YxLiCai.Model.ActivityManage.ActSpecialAssets
+@section styles
+{
+    <link href="~/Resource/css/font-awesome.min.css" rel="stylesheet" />
+}
+<div class="zpManage zpSh">
+    <h2 class="crumbs">
+        您所在位置：活动管理->特享金->修改特享金
+    </h2>
+</div>
+<div class="gx-textitem">
+    <label class="gx-texttitle">
+        特享金名称：
+    </label>
+    <input id="name" type="text" value="@Model.name" class="gx-textbox" placeholder="请输入内容..."><span style="color:red">*名称唯一</span>
+    <br />
+    <label class="gx-texttitle">
+        面值（元）：
+    </label>
+    <input id="amount" type="text" value="@(YxLiCai.Tools.Const.SystemConst.MoenyConvert(Model.amount))" class="gx-textbox" placeholder="请输入内容...">
+    <span style="color:red">*精确到小数点后两位</span>
+    <br />
+    <label class="gx-texttitle">
+        收益(%)：
+    </label>
+    <input id="rate" type="text" value="@(YxLiCai.Tools.Const.SystemConst.MoenyConvert(Model.rate))" class="gx-textbox" placeholder="请输入内容...">
+    <br />
+    <label class="gx-texttitle">
+        使用期限(天)：
+    </label>
+    <input id="enableday" type="text" value="@(Model.enable_day)" class="gx-textbox" placeholder="请输入内容...">
+    <span style="color:red">*使用期限是拿到特享金自动投入月月盈产品活动收益的时间</span>
+    <br />
+    <label class="gx-texttitle">
+        收益增幅(%)：
+    </label>
+    <input id="rate_increase" type="text" value="@(YxLiCai.Tools.Const.SystemConst.MoenyConvert(Model.rate_increase))" class="gx-textbox" placeholder="请输入内容...">
+    <span style="color:red">*输入0代表没有增幅</span>
+    <br />
+    <button id="submit" class="gx-button gx-button-info" style="margin:30px;">提交审核</button>
+    <button id="cancle" class="gx-button gx-button-info" style="margin:30px">取消</button>
+
+</div>
+<script type="text/javascript">
+    $("#cancle").on("click", function () {
+        window.location = "/ActivityManege/SpecialAssetsList";
+    })
+    $("#submit").on("click", function () {
+        $("#submit").attr("disabled", "disabled");
+        var name = $("#name").val();
+        if ($.trim(name) == "") {
+            alert("特享金名称不能为空！");
+            $("#submit").removeAttr("disabled");
+            return false;
+        }
+        var amount = $("#amount").val();
+
+        if (isNaN(parseFloat(amount))) {
+            alert("面值格式不正确，请重新输入！");
+            $("#submit").removeAttr("disabled");
+            $("#amount").val("");
+            return false;
+        }
+        var enableday = $("#enableday").val();
+        if (isNaN(parseInt(enableday))) {
+            alert("使用期限格式不正确，请重新输入！");
+            $("#submit").removeAttr("disabled");
+            $("#enableday").val("");
+            return false;
+        }
+        var rate = $("#rate").val();
+        if (isNaN(parseFloat(rate))) {
+            alert("特享金收益格式不正确，请重新输入！");
+            $("#submit").removeAttr("disabled");
+            $("#rate").val("");
+            return false;
+        }
+        var rate_increase = $("#rate_increase").val();
+        if (isNaN(parseFloat(rate_increase))) {
+            alert("收益增幅格式不正确，请重新输入！");
+            $("#submit").removeAttr("disabled");
+            $("#rate_increase").val("");
+            return false;
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/ActivityManege/ModifyActSpecialAssets_ajax",
+            data: { id:"@Model.id",name: name, amount: amount, enableday: enableday, rate: rate, rate_increase: rate_increase },
+            async: false,
+            success: function (data) {
+                if (data != null) {
+                    if (data == "ok") {
+                        alert("修改成功！");
+                        window.location = "/ActivityManege/SpecialAssetsList";
+                    }
+                    else {
+                        alert(data.Message);
+                        $("#submit").removeAttr("disabled");
+                    }
+                }
+            }
+        })
+    })
+</script>

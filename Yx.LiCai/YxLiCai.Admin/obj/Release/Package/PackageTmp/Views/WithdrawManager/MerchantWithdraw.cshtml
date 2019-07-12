@@ -1,0 +1,358 @@
+﻿<div class="zpManage zpSh">
+    <h2 class="crumbs">
+        您所在位置：提现管理 > 融资方提现
+    </h2>
+</div>
+<!--Filter begin-->
+<div class="gx-textitem">
+    <label class="gx-texttitle">
+        用户名：
+    </label>
+    <input id="lname" type="text" class="gx-textbox" placeholder="请输入内容...">
+    <label class="gx-texttitle">
+        状态：
+    </label>
+    @Html.Partial("EditorTemplates/KendoDropdown",
+        new YxLiCai.Admin.Models.KendoDropdownlistViewModel
+    {
+        Id = "status",
+        SourceUrl = "/WithdrawManager/GetConfig?configName=Withdraw|element=Status"
+    })
+    <br />
+    <label class="gx-texttitle">
+        申请时间：
+    </label>
+    @Html.Partial("EditorTemplates/KendoTime",
+    new YxLiCai.Admin.Models.KendoDateTimeViewModel
+    {
+        Id = "sDate",
+        Format = "yyyy-MM-dd hh:mm:ss"
+    })
+    <label class="gx-texttitle">
+        至：
+    </label>
+    @Html.Partial("EditorTemplates/KendoTime",
+    new YxLiCai.Admin.Models.KendoDateTimeViewModel
+    {
+        Id = "eDate",
+        Format = "yyyy-MM-dd hh:mm:ss"
+    })
+</div>
+<div class="SearchMd">
+    <button id="btnSearch" class="searchBtn">查询</button>
+    <button id="btnPassMulti" class="searchBtn">批量通过</button>
+    <button id="btnPassAll" class="searchBtn">全部通过</button>
+    <button id="btnPayMulti" class="searchBtn">批量放款</button>
+    <button id="btnPayAll" class="searchBtn">全部放款</button>
+</div>
+
+<!--Filter end-->
+<!--grid begin-->
+<div class="cleanfix" style="margin:15px 15px 15px 15px">
+    <div class="tbstyle">
+        <div id="grid"></div>
+    </div>
+</div>
+<!--grid end-->
+<!--弹出层 begin-->
+<div>
+    <div class="add-openbox add-form" id="addDiv" style="width:500px">
+        <h2>
+            <p id="statusFin_Add">审核拒绝</p>
+        </h2>
+        <fieldset>
+            <div class="control-group" style="width: 250px;margin: 0 auto;">
+                <label>原因：</label>
+                <textarea name="remark" id="remark"></textarea>
+                <input type="hidden" id="record_id" />
+            </div>
+        </fieldset>
+        <p class="btnbox">
+            <input value="确认" type="button" id="btnConfim" class="yesBtn" />
+            <input value="关闭" type="button" class="J_closebox qxBtn" />
+        </p>
+    </div>
+</div>
+<!--弹出层 end-->
+<!--kendo template begin-->
+<script type="text/x-kendo-template" id="myTemplate">
+    #if(status == '待审核'){#
+    <input type="button" class="k-button k-button-icontext auditPass" value="通过" id="#= id #" onclick="auditWithdraw(this.id, 1)" />
+    <input type="button" class="k-button k-button-icontext auditDeny" value="拒绝" id="#= id #" onclick="auditDeny(this.id)" />
+    #}else if (status == '待放款'){#
+    <input type="button" class="k-button k-button-icontext" value="放款" id="#= id #" name="#= account_id #_#= amount #" onclick="pay(this)" />
+    #}else if (status == '待放款'){#
+    <input type="button" class="k-button k-button-icontext" value="重新放款" id="#= id #" name="#= account_id #_#= amount #" onclick="pay(this)" />
+    #}#
+</script>
+<!--kendo template end-->
+<script type="text/javascript">
+    require(['CRM/common.assets', 'CRM/withdraw.assets'], function (common, withdraw) {
+
+        //init button
+        hideButtons();
+        function hideButtons() {
+            $("#btnPassMulti").hide();
+            $("#btnPassAll").hide();
+            $("#btnPayMulti").hide();
+            $("#btnPayAll").hide();
+        }
+        //dropdownlist change event
+        $("#status").change(function (e) {
+            getData();
+
+            var status = $(this).val();
+            if (status == 0) {
+                hideButtons();
+                $("#btnPassMulti").show();
+                $("#btnPassAll").show();
+            }
+            else if (status == 1) {
+                hideButtons();
+                $("#btnPayMulti").show();
+                $("#btnPayAll").show();
+            }
+            else {
+                hideButtons();
+            }
+        });
+        //grid
+        var grid = $("#grid").kendoGrid({
+            sortable: true,
+            pageable: true,
+            resizable: true,
+            editable: "popup",
+        }).data("kendoGrid");
+
+        //Query Filter
+        $("#btnSearch").bind("click", getData);
+
+        getData();
+
+        //get data
+        function getData() {
+            //query conditions
+            var lName = $("#lname").val(), //登录名
+                status = $("#status").val() || -1, //状态
+                sDate = $("#sDate").val(), //申请时间
+                eDate = $("#eDate").val(); //申请时间
+            var param = { lName: lName, status: status, sDate: sDate, eDate: eDate };
+
+            //datasource
+            var ds = withdraw.merchantWithdrawDs(param);
+
+            //columns
+            var columns = [
+                 {
+                     title: "<input id='checkAll' type='checkbox' />全选",
+                     template: "<input id='#= id #' type='checkbox' name='chkChildren' class='check-box' />"
+                 },
+                 { field: "id", title: "ID", sortable: true },
+                 { field: "account_id", title: "融资方账户ID", sortable: true },
+                 { field: "lName", title: "用户名", sortable: true },
+                 { field: "rName", title: "真实姓名", sortable: true },
+                 { field: "bank", title: "银行", sortable: true },
+                 { field: "bank_card", title: "银行卡号", sortable: true },
+                 { field: "phone", title: "手机号", sortable: true },
+                 { field: "amount", title: "申请提现金额", sortable: true },
+                 { field: "c_time", title: "申请时间", sortable: true },
+                 { field: "auditor_id", title: "审核人ID", sortable: true },
+                 { field: "audit_time", title: "审核时间", sortable: true },
+                 { field: "oprator_id", title: "放款人ID", sortable: true },
+                 { field: "pay_time", title: "放款时间", sortable: true },
+                 { field: "status", title: "状态", sortable: true },
+                 { field: "remark", title: "备注" },
+                 { command: { name: "edit", text: { edit: "详情", cancel: "关闭", update: "更新" } }, width:80, title: "详情" }
+            ];
+            columns.push(
+                    { template: kendo.template($("#myTemplate").html()), width: 160, title: "操作" }
+            );
+
+            //set options
+            grid.setOptions({
+                dataSource: ds,
+                columns: columns,
+                edit: function (e) {
+                    e.container.data("kendoWindow").title('详情');
+                    $(".k-grid-update").hide();
+                }
+            });
+        }
+
+        //check all 
+        $("#checkAll").change(function () {
+            if ($(this).is(":checked")) {
+                $('.check-box').prop("checked", true);
+            }
+            else {
+                $('.check-box').prop("checked", false);
+            }
+        });
+
+        //check box
+        $("#grid").on("change", ".check-box", function (e) {
+            var numChkBoxes = $('.check-box').length;
+            var numChkBoxesChecked = $("input[name='chkChildren']:checked").length;
+
+            if (numChkBoxes == numChkBoxesChecked && numChkBoxes > 0) {
+                $('#checkAll').prop("checked", true);
+            }
+            else {
+                $('#checkAll').prop("checked", false);
+            }
+        });
+
+        //批量通过
+        $("#btnPassMulti").bind("click", function (e) {
+            var IDs = getSelectedIds();
+
+            if (!IDs) {
+                common.popupNotification.show("未选择符合条件的记录", "error");
+                return;
+            }
+
+            SendAjax("/WithdrawManager/PassMultiMerchantWithdraw",
+                { IDs: IDs });
+        });
+
+        //全部通过
+        $("#btnPassAll").bind("click", function (e) {
+            SendAjax("/WithdrawManager/PassAllMerchantWithdraw");
+        });
+
+        //批量放款
+        $("#btnPayMulti").bind("click", function (e) {
+            var idList = getSelectedIds();
+
+            if (!idList) {
+                common.popupNotification.show("未选择符合条件的记录", "error");
+                return;
+            }
+
+            SendAjax("/WithdrawManager/PayMultiMerchant",
+                { idList: idList });
+        });
+
+        //全部放款
+        $("#btnPayAll").bind("click", function (e) {
+            SendAjax("/WithdrawManager/PayAllMerchant");
+        });
+
+        //common methods
+        //get selected record ids
+        function getSelectedIds() {
+            var array_selected_id = [];
+            $("input[name='chkChildren']:checked").each(function (e) {
+                if ($(this).attr("id"))
+                    array_selected_id.push($(this).attr("id"));
+            });
+
+            return array_selected_id.toString();
+        }
+
+        //send ajax
+        function SendAjax(action, param) {
+            $.ajax({
+                type: "POST",
+                url: action,
+                data: param,
+                success: function (result) {
+                    if (result.IsSuccess) {
+                        popNotification.show(result.Message, "info");
+                        window.location.href = window.location.href;
+                    }
+                    else {
+                        popNotification.show(result.Message, "error");
+                    }
+                }
+            });
+        }
+    });
+
+    //提示框
+    var popNotification = $("#popupNotification").kendoNotification({
+        position: {
+            pinned: true,
+            top: 30,
+            right: 80
+        },
+        autoHideAfter: 5000,
+        stacking: "down"
+
+    }).data("kendoNotification");
+
+    //initial
+    var adminjs = new adminglass(); //实例化弹出层
+    //关闭弹层
+    $('.J_closebox').click(function () {
+        adminjs.closewinbox('.add-openbox');
+    });
+
+    //拒绝
+    function auditDeny(id) {
+        //关闭kendo dialog
+        if ($(".k-window")) {
+            $(".k-window").hide();
+            $(".k-overlay").hide();
+        }
+
+        //弹出层
+        adminjs.openwinbox('#addDiv');
+        $("#remark").val("");
+        $("#record_id").val(id);
+    }
+
+    ////审核拒绝，填写原因，确认
+    $("#btnConfim").bind('click', function () {
+        var remark = $("#remark").val(),
+            record_id = $("#record_id").val();
+        //close dialog div
+        adminjs.closewinbox('.add-openbox');
+        //send ajax,do action
+        auditWithdraw(record_id, 2, remark);
+    });
+
+    //审核提现记录
+    function auditWithdraw(id, status, remark) {
+        param = { recordID: id, status: status, remark: remark };
+
+        $.ajax({
+            type: "POST",
+            url: "/WithdrawManager/AuditMerchantWithdraw",
+            data: param,
+            success: function (result) {
+                if (result) {
+                    popNotification.show("审核成功", "info");
+                    window.location.href = window.location.href;
+                }
+                else {
+                    popNotification.show("审核失败", "error");
+                }
+            }
+        });
+    }
+
+    //支付
+    function pay(obj) {
+        var record_id = obj.id,
+            array = obj.name.split('_'),
+            account_id = array[0],
+                amount = array[1],
+                param = { recordID: record_id, accountID: account_id, amount: amount };
+
+        $.ajax({
+            type: "POST",
+            url: "/WithdrawManager/PayMerchant",
+            data: param,
+            success: function (result) {
+                if (result) {
+                    popNotification.show("放款成功", "info");
+                    window.location.href = window.location.href;
+                }
+                else {
+                    popNotification.show("放款失败", "error");
+                }
+            }
+        })
+    }
+</script>

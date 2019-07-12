@@ -1,0 +1,108 @@
+2015-08-01 09:20:01.9318 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/8/1 9:20:01
+异常发生地址:http://localhost:10986/Member/
+请求类型:GET
+异常:NServiceKit.Redis.RedisException: Unable to Connect: sPort: 34822 ---> System.Net.Sockets.SocketException: 远程主机强迫关闭了一个现有的连接。
+   在 System.Net.Sockets.Socket.Send(IList`1 buffers, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Send(IList`1 buffers)
+   在 NServiceKit.Redis.RedisNativeClient.FlushSendBuffer()
+   在 NServiceKit.Redis.RedisNativeClient.SendCommand(Byte[][] cmdWithBinaryArgs)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 NServiceKit.Redis.RedisNativeClient.CreateConnectionError()
+   在 NServiceKit.Redis.RedisNativeClient.SendExpectLong(Byte[][] cmdWithBinaryArgs)
+   在 NServiceKit.Redis.RedisNativeClient.Exists(String key)
+   在 NServiceKit.Redis.RedisClient.ContainsKey(String key)
+   在 YxLiCai.Tools.NoSql.RedisCache.RedisCache.Add(String key, Object value, DateTime expiredTime) 位置 c:\YiXiu\Yx.LiCai\YxLica.Tools\NoSql\RedisCache\RedisCache.cs:行号 96
+   在 Yx.LiCai.App_Start.UserContext.get_simpleUserInfoModel() 位置 c:\YiXiu\Yx.LiCai\Yx.LiCai\App_Start\UserContent.cs:行号 64
+   在 ASP._Page_Views_Member_Index_cshtml.Execute() 位置 c:\YiXiu\Yx.LiCai\Yx.LiCai\Views\Member\Index.cshtml:行号 61
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.StartPage.RunPage()
+   在 System.Web.WebPages.StartPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.Mvc.RazorView.RenderView(ViewContext viewContext, TextWriter writer, Object instance)
+   在 System.Web.Mvc.BuildManagerCompiledView.Render(ViewContext viewContext, TextWriter writer)
+   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+IP:::1
+--------------------end---------------------
+ 
+2015-08-01 10:51:44.2350 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/8/1 10:51:43
+异常发生地址:http://localhost:10986/Member/
+请求类型:GET
+异常:NServiceKit.Redis.RedisException: Unable to Connect: sPort: 36756 ---> System.Net.Sockets.SocketException: 远程主机强迫关闭了一个现有的连接。
+   在 System.Net.Sockets.Socket.Send(IList`1 buffers, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Send(IList`1 buffers)
+   在 NServiceKit.Redis.RedisNativeClient.FlushSendBuffer()
+   在 NServiceKit.Redis.RedisNativeClient.SendCommand(Byte[][] cmdWithBinaryArgs)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 NServiceKit.Redis.RedisNativeClient.CreateConnectionError()
+   在 NServiceKit.Redis.RedisNativeClient.SendExpectLong(Byte[][] cmdWithBinaryArgs)
+   在 NServiceKit.Redis.RedisNativeClient.Exists(String key)
+   在 NServiceKit.Redis.RedisClient.ContainsKey(String key)
+   在 YxLiCai.Tools.NoSql.RedisCache.RedisCache.Add(String key, Object value, DateTime expiredTime) 位置 c:\YiXiu\Yx.LiCai\YxLica.Tools\NoSql\RedisCache\RedisCache.cs:行号 96
+   在 Yx.LiCai.App_Start.UserContext.get_simpleUserInfoModel() 位置 c:\YiXiu\Yx.LiCai\Yx.LiCai\App_Start\UserContent.cs:行号 64
+   在 ASP._Page_Views_Member_Index_cshtml.Execute() 位置 c:\YiXiu\Yx.LiCai\Yx.LiCai\Views\Member\Index.cshtml:行号 97
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.StartPage.RunPage()
+   在 System.Web.WebPages.StartPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.Mvc.RazorView.RenderView(ViewContext viewContext, TextWriter writer, Object instance)
+   在 System.Web.Mvc.BuildManagerCompiledView.Render(ViewContext viewContext, TextWriter writer)
+   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+IP:::1
+--------------------end---------------------
+ 
+2015-08-01 13:54:04.2592 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/8/1 13:54:03
+异常发生地址:http://localhost:10986/Member/
+请求类型:GET
+异常:NServiceKit.Redis.RedisException: Unable to Connect: sPort: 47164 ---> System.Net.Sockets.SocketException: 远程主机强迫关闭了一个现有的连接。
+   在 System.Net.Sockets.Socket.Send(IList`1 buffers, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Send(IList`1 buffers)
+   在 NServiceKit.Redis.RedisNativeClient.FlushSendBuffer()
+   在 NServiceKit.Redis.RedisNativeClient.SendCommand(Byte[][] cmdWithBinaryArgs)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 NServiceKit.Redis.RedisNativeClient.CreateConnectionError()
+   在 NServiceKit.Redis.RedisNativeClient.SendExpectLong(Byte[][] cmdWithBinaryArgs)
+   在 NServiceKit.Redis.RedisNativeClient.Exists(String key)
+   在 NServiceKit.Redis.RedisClient.ContainsKey(String key)
+   在 YxLiCai.Tools.NoSql.RedisCache.RedisCache.Add(String key, Object value, DateTime expiredTime) 位置 c:\YiXiu\Yx.LiCai\YxLica.Tools\NoSql\RedisCache\RedisCache.cs:行号 96
+   在 Yx.LiCai.App_Start.UserContext.get_simpleUserInfoModel() 位置 c:\YiXiu\Yx.LiCai\Yx.LiCai\App_Start\UserContent.cs:行号 64
+   在 ASP._Page_Views_Member_Index_cshtml.Execute() 位置 c:\YiXiu\Yx.LiCai\Yx.LiCai\Views\Member\Index.cshtml:行号 52
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.StartPage.RunPage()
+   在 System.Web.WebPages.StartPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.Mvc.RazorView.RenderView(ViewContext viewContext, TextWriter writer, Object instance)
+   在 System.Web.Mvc.BuildManagerCompiledView.Render(ViewContext viewContext, TextWriter writer)
+   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+IP:::1
+--------------------end---------------------
+ 

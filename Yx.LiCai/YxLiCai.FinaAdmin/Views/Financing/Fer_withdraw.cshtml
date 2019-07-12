@@ -1,0 +1,259 @@
+﻿<style>
+    .k-grid-header th.k-header > .k-link {
+        text-align: center;
+    }
+
+    .k-widget, .k-widget * {
+        text-align: left;
+    }
+
+    .k-grid-header th.k-header {
+        text-align: center;
+    }
+</style>
+<link href="~/Resource/css/font-awesome.min.css" rel="stylesheet" />
+<div class="zpManage zpSh">
+    <h2 class="crumbs">您所在位置：融资机构-> 个人提现
+    </h2>
+    <div class="SearchMd form-horizontal">
+        <table>
+            <tr>
+                <td>可提现金额（可用余额扣除待付利息）：</td>
+                <td>@((YxLiCai.Tools.Const.SystemConst.MoenyConvert(ViewBag.Amount)) == 0 ? 0.00m : YxLiCai.Tools.Const.SystemConst.MoenyConvert(ViewBag.Amount))</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>提现金额：</td>
+                <td>
+                    <input type="text" id="RechargeMoney" />
+                    &nbsp; &nbsp; &nbsp;<input type="button" id="btnRecharge" value="提现" />
+                </td>
+                <td></td>
+            </tr>
+        </table>
+
+    </div>
+    <div class="SearchMd form-horizontal">
+        @Html.Partial("EditorTemplates/KendoTextBox",
+            new YxLiCai.FinaAdmin.Models.KendoTextBoxViewModel
+            {
+                Content = "订单号",
+                Id = "Order"
+            })
+        @Html.Partial("EditorTemplates/KendoDate",
+            new YxLiCai.FinaAdmin.Models.KendoDateTimeViewModel
+            {
+                Content = "提现时间(起)",
+                Id = "recharge_timeStar",
+                Format = "yyyy-MM-dd"
+            })
+        @Html.Partial("EditorTemplates/KendoDate",
+            new YxLiCai.FinaAdmin.Models.KendoDateTimeViewModel
+            {
+                Content = "提现时间(终)",
+                Id = "recharge_timeEnd",
+                Format = "yyyy-MM-dd"
+            })
+        <label class="control-label col-sm-6" style="font-size: 12px;">提现状态：</label>
+        <select id="selecttype">
+            <option value="-1">全部</option>
+            <option value="0">待审核</option>
+            <option value="1">待放款</option>
+            <option value="2">审核不通过</option>
+            <option value="3">提现成功</option>
+            <option value="4">提现失败</option>
+        </select>
+        <input type="button" id="btnSearch" value="查询" class="searchBtn" />
+    </div>
+    <div style="display: none; width: 500px; background-color: #11B446" id="JoinBlacklistDiv" class="add-openbox add-form">
+        <div style="text-align: center;">
+            <p>请输入交易密码：<i id="tt" style="color: red"></i></p>
+            <input id="SpWD" type="password" maxlength="6" />
+            <p>
+                <input style="margin: 5px" type="button" value="确定" id="ConfirmApp" /><input style="margin: 5px" type="button" value="取消" id="CancleApp" />
+                <a href="ForgetSPasswerd" style="color: red">忘记交易密码</a>
+            </p>
+        </div>
+    </div>
+    <div class="control-group form-horizontal">
+        <div class="control-group">
+            <div class="tbstyle">
+                <div id="productGrid"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var adminjs = new adminglass(); //实例化后台类  
+    $(document).ready(function () {
+        var isbank = parseInt('@ViewBag.isbank_card');
+        var SPassword = '@ViewBag.SPassword';
+
+        $('#RechargeMoney').on('input propertychange', function() {
+            var moneyNum = $('#RechargeMoney').val();
+            moneyNum = moneyNum.replace(/[^\d.]/g, "");
+            //必须保证第一个为数字而不是.
+            moneyNum = moneyNum.replace(/^\./g, "");
+            //保证只有出现一个.而没有多个.
+            moneyNum = moneyNum.replace(/\.{2,}/g, ".");
+            //保证.只出现一次，而不能出现两次以上
+            moneyNum = moneyNum.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
+            //保证是小数点后两位
+            moneyNum = moneyNum.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3');
+
+            $('#RechargeMoney').val(moneyNum);
+        });
+
+        $("#btnRecharge").click(function() {
+            var OldMoney = '@(YxLiCai.Tools.Const.SystemConst.MoenyConvert(ViewBag.Amount))';
+            OldMoney = parseFloat(OldMoney);
+            if (OldMoney <= 0) {
+                alert("你的可提现金额为零，现在不可以提现"); return;
+            }
+            var money = $("#RechargeMoney").val().replace(/\-/g, "\/");
+            if (money == "") { alert("请输入提现金额"); return; }
+            var raisemoney = money;
+            raisemoney = raisemoney.replace(/[^\d.]/g, "");
+            //必须保证第一个为数字而不是.
+            raisemoney = raisemoney.replace(/^\./g, "");
+            //保证只有出现一个.而没有多个.
+            raisemoney = raisemoney.replace(/\.{2,}/g, ".");
+            //保证.只出现一次，而不能出现两次以上
+            raisemoney = raisemoney.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
+
+            raisemoney = raisemoney.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3');
+
+            $('#RechargeMoney').val(raisemoney);
+
+            if (isbank == 0) {
+                alert("你还没有绑定银行卡，请先绑卡");
+                window.location.href = "BindingBank";
+                return;
+            }
+            if (SPassword == "") {
+                alert("你还没有设置交易密码，请设置");
+                window.location.href = "UpdateSPasswerd?type=1";
+                return;
+            }
+
+            var Money = $("#RechargeMoney").val().replace(/\-/g, "\/");
+            if (Money < 0 || Money == 0) { alert("请输入大于零的金额"); return; }
+            Money = parseFloat(Money);
+           
+            if (Money > OldMoney) {
+                alert("提现金额超出了现有可提现金额"); return false;
+            }
+            if (OldMoney < 100 && OldMoney != Money) {
+                alert("可用余额小于100时必须全部提现！");
+                $("#RechargeMoney").val("");
+                return false;
+            }
+            if (OldMoney >= 100 && Money < 100) {
+                alert("提现金额不得小于100元，请重新输入！");
+                $("#RechargeMoney").val("");
+                return false;
+            }
+
+            if (confirm("确定要提现")) {
+                //$("#JoinBlacklistDiv").show();
+                adminjs.openwinbox('#JoinBlacklistDiv');
+            }
+        });
+        $("#ConfirmApp").click(function () {
+            var PassWord = $("#SpWD").val();
+            if (PassWord == "") { alert("请输入交易密码"); return; }
+            $.ajax({
+                type: "POST",
+                async: false,
+                url: "/Financing/Add_fer_withdraw",
+                data: { PassWord: PassWord, amount: $("#RechargeMoney").val().replace(/\-/g, "\/") },
+                success: function (data) {
+                    if (data.Status == 1) {
+                        window.location.href = "Fer_withdraw";
+                        alert(data.Message);
+                    } else if (data.Status == 11) { alert(data.Message); window.location.href = "UpdateSPasswerd?type=1"; } else { alert(data.Message); }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                },
+            });
+
+        });
+        $("#CancleApp").click(function () {
+            //$("#JoinBlacklistDiv").hide();
+            adminjs.closewinbox('#JoinBlacklistDiv');
+            $("#SpWD").val("");
+        });
+
+    });
+    require(['CRM/common.assets'], function (common) {
+        var grid = $("#productGrid").kendoGrid({
+            sortable: true,
+            pageable: true,
+        }).data("kendoGrid");
+        $("#btnSearch").bind("click", function () {
+            var Order = $("#Order").val(),
+                State = $("#selecttype").val(),
+                recharge_timeStar = $("#recharge_timeStar").val(),
+                recharge_timeEnd = $("#recharge_timeEnd").val();
+            var beginDate = $("#recharge_timeStar").val();
+            var endDate = $("#recharge_timeEnd").val();
+            var d1 = new Date(beginDate.replace(/\-/g, "\/"));
+            var d2 = new Date(endDate.replace(/\-/g, "\/"));
+
+            if (beginDate != "" && endDate != "" && d1 > d2) {
+                alert("提现时间(起)不能大于提现时间(终)!");
+                return false;
+            }
+            var param = {
+                Order: Order, recharge_timeStar: recharge_timeStar, recharge_timeEnd: recharge_timeEnd, State: State
+            };
+            var productDs = new kendo.data.DataSource({
+                pageSize: 15,
+                transport: {
+                    read: {
+                        url: "/Financing/GetFer_Withdraw_List",
+                        dataType: "json",
+                        data: param
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "id"
+                    }
+                }
+            });
+            grid.bind("dataBinding", function (e) {
+                if (productDs.Binding) return;
+                for (var i = 0; i < productDs.data().length; i++) {
+                    if (productDs.at(i).c_time != null) {
+                        var date1 = new Date(parseInt(productDs.at(i).c_time.substr(6)));
+                        productDs.at(i).c_time = date1.format("yyyy-MM-dd  hh:mm:ss");
+                    }
+                    if (productDs.at(i).type != null) {
+                        if (productDs.at(i).type == 0) { productDs.at(i).type = "易宝提现"; } else { productDs.at(i).type = "其他"; }
+                    }
+                    if (productDs.at(i).status != null) {
+                        if (productDs.at(i).status == 0) { productDs.at(i).status = "待审核"; } else if (productDs.at(i).status == 1) { productDs.at(i).status = "待放款"; } else if (productDs.at(i).status == 2) { productDs.at(i).status = "审核不通过"; } else if (productDs.at(i).status == 3) { productDs.at(i).status = "提现成功"; } else { productDs.at(i).status = "提现失败"; }
+                    }
+                }
+                productDs.Binding = true;
+            });
+            var columns = [
+                { field: "id", title: "序号", sortable: true, width: 50 },
+                { field: "user_withdraw_id", title: "订单号", sortable: true, width: 100 },
+                { field: "fer_id", title: "UID", sortable: true, width: 100 },
+                { field: "type", title: "提现方式", sortable: true, width: 100 },
+                { field: "amount", title: "提现金额", sortable: true, width: 100 },
+                { field: "status", title: "提现状态", sortable: true, width: 100 },
+                { field: "bankcard", title: "银行卡", sortable: true, width: 120 },
+                { field: "c_time", title: "提现时间", sortable: true, width: 100 }
+            ];
+            grid.setOptions({
+                dataSource: productDs,
+                columns: columns,
+                selectable: "multiple, row"
+            });
+        });
+    });
+
+</script>

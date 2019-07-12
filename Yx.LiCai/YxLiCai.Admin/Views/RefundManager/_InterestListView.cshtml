@@ -1,0 +1,29 @@
+﻿<div class="control-group">
+    <div class="tbstyle">
+        <div id="grid_interest"></div>
+    </div>
+</div>
+<script type="text/javascript">
+    //还息列表
+    function getInterestList(ds) {
+        //columns
+        var columns = [
+             { field: "id", title: "序号", sortable: true },
+             { field: "m_id", title: "融资方账户ID", sortable: true },
+             { field: "m_name", title: "融资方名称", sortable: true },
+             { field: "pjid", title: "项目ID", sortable: true },
+             { field: "pj_name", title: "项目名称", sortable: true },
+             { field: "amount", title: "项目金额(万元)", sortable: true },
+             { field: "loanPeriod", title: "项目期限(月)", sortable: true },
+             { field: "amount_paid", title:"已付利息(元)", sortable:true},
+             { field: "interest", title: "待付利息(元)", sortable: true }
+        ];
+        //grid
+        var grid = $('#grid_interest').kendoGrid({
+            sortable: true,
+            pageable: true,
+            dataSource: ds,
+            columns: columns,
+        }).data("kendoGrid");
+    }
+</script>

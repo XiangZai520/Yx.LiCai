@@ -1,0 +1,129 @@
+﻿@model YxLiCai.Admin.Models.KendoTextBoxViewModel
+
+<div class="control-group">
+    <div class="tbstyle">
+        <div id="@Model.Id"></div>
+    </div>
+</div>
+<script type="text/javascript">
+    require(['CRM/common.assets'], function (common) {
+        var id = '@Model.Id';
+        var status = '@Model.Content',
+            param = { ProjectStatus: status };
+        var productDs = new kendo.data.DataSource({
+            pageSize: 15,
+            transport: {
+                read: {
+                    url: "/Project/GetProjectList",
+                    dataType: "json",
+                    data: param
+                }
+            },
+            schema: {
+                model: {
+                    id: "Id",
+                    fields: {
+                        Id: { editable: false },
+                        ProjectName: { editable: false },
+                        Amount: { editable: false },
+                        Borrower: { editable: false },
+                        LoanPeriod: { editable: false },
+                        account_id_name: { editable: false },
+                        AmountSold: { editable: false },
+                        AvailableAmount: { editable: false },
+                        LaunchTime: { editable: false },
+                        AddTime: { editable: false },
+                        Remark: { editable: false },
+                        Weight: { editable: true, type: "number", validation: { min: 1, max: 100, required: true } },
+                    }
+                }
+            }
+        });
+        var itemId = "";
+        var grid = $('#' + id + '').kendoGrid({
+            batch: true,
+            sortable: true,
+            pageable: true,
+            editable: true,
+            change: function (e) {
+                $.map(this.select(), function (item) {
+                    itemId = $(item).parent("tr").children("td").first().html();
+                    $(item).removeClass("data-role");
+                });
+            },
+            edit: function (e) {
+                handleChange(e, itemId);
+            }
+        }).data("kendoGrid");
+        function handleChange(e, itemId) {
+            var input = e.container.find(":input");
+            //alert(input.val());
+
+            //var strs = input.val();
+            //var arr = strs.split(".");   
+            //alert(arr[0]);
+            //return;
+            input.change(function () {
+                var value = input.val();
+                updateChangedItem(itemId, value);
+            });
+        }
+        function updateChangedItem(id, value) {
+            if (value == "" || typeof (value) == "undefined") {
+                return;
+            }
+            value = parseInt(value);
+            $.ajax({
+                url: "/Project/UpdateProjectWeight",
+                dataType: "json",
+                data: { ProjectID: id, Weight: value },
+                success: function (e) {
+                    if (e.IsSuccess) {
+                        common.popupNotification.show(e.Message, "info");
+
+                    } else {
+                        alert(e.Message);
+                        return;
+                    }
+                },
+                error: function (e) {
+                    common.popupNotification.show("修改失败", "info");
+                }
+            });
+        }
+        var columns = [
+                { field: "id", title: "序号", sortable: true, width: 50 },
+                { field: "ProjectName", title: "项目名称", sortable: true, width: 100 },
+                { field: "Amount", title: "项目金额", sortable: true, width: 100 },
+                { field: "Weight", title: "权值", sortable: true, width: 100 },
+                { field: "Borrower", title: "借款人(单位)", sortable: true, width: 100 },
+                { field: "LoanPeriod", title: "还款期限(月)", sortable: true, width: 100 },
+                { field: "account_id_name", title: "融资方", sortable: true, width: 100 },
+                { field: "AmountSold", title: "已投金额", sortable: true, width: 100 },
+                { field: "AvailableAmount", title: "可投金额", sortable: true, width: 100 },
+                { field: "AddTime", title: "创建时间", sortable: true, width: 100 },
+                { field: "LaunchTime", title: "发起时间", sortable: true, width: 100 },
+                { field: "Remark", title: "备注", sortable: true, width: 100 },
+
+        ];
+        grid.bind("dataBinding", function (e) {
+            if (productDs.Binding) return;
+            for (var i = 0; i < productDs.data().length; i++) {
+                if (productDs.at(i).AddTime != null) {
+                    var date2 = new Date(parseInt(productDs.at(i).AddTime.substr(6)));
+                    productDs.at(i).AddTime = date2.format("yyyy-MM-dd");
+                }
+                if (productDs.at(i).LaunchTime != null) {
+                    var date2 = new Date(parseInt(productDs.at(i).LaunchTime.substr(6)));
+                    productDs.at(i).LaunchTime = date2.format("yyyy-MM-dd");
+                }
+            }
+            productDs.Binding = true;
+        });
+        grid.setOptions({
+            dataSource: productDs,
+            columns: columns,
+            selectable: "single cell"
+        });
+    });
+</script>

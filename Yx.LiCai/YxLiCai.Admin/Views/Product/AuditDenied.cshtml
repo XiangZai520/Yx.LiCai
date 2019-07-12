@@ -1,0 +1,20 @@
+﻿@section styles {
+    <style>
+        .k-grid-header th.k-header > .k-link, .tbstyle tr td {
+            text-align: center;
+        }
+    </style>
+}
+<div class="zpManage zpSh">
+    <h2 class="crumbs">
+        您所在位置：产品管理 > 审核未通过
+    </h2>
+    <div class="control-group form-horizontal">
+        @Html.Partial("_ListView",
+        new YxLiCai.Admin.Models.KendoTextBoxViewModel
+        {
+            Content = "2",
+            Id = "grid2"
+        })
+    </div>
+</div>

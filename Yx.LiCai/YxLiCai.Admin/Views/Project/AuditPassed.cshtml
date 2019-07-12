@@ -1,0 +1,32 @@
+﻿<style>
+    .k-grid-header th.k-header > .k-link {
+        text-align: center;
+    }
+
+    .k-widget, .k-widget * {
+        text-align: left;
+    }
+
+    .k-grid tbody .k-button, .k-ie8 .k-grid tbody button.k-button {
+        min-width: 42px;
+        text-align: center;
+    }
+</style>
+<div class="zpManage zpSh">
+    <h2 class="crumbs">
+        您所在位置：项目管理 > 售卖中
+    </h2>
+        <div class="control-group">
+            <div class="tbstyle">
+                <x style="color: red; font-size: 18px"> *直接点击权值列就可进行修改(权值范围1-100)</x>              
+            </div>
+        </div>
+    <div class="control-group form-horizontal padding">
+        @Html.Partial("AP_ListView",
+        new YxLiCai.Admin.Models.KendoTextBoxViewModel
+        {
+            Content = "2",
+            Id = "grid2"
+        })
+    </div>
+</div>

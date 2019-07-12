@@ -1,0 +1,207 @@
+2015-08-18 16:08:42.4938 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/8/18 16:08:42
+异常发生地址:http://localhost:10991/Member/MemberDetail?UserID=100127
+请求类型:GET
+异常:MySql.Data.MySqlClient.MySqlException (0x80004005): Table 'yxlc.ord_info' doesn't exist
+   在 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   在 MySql.Data.MySqlClient.NativeDriver.ReadResult(UInt64& affectedRows, Int64& lastInsertId)
+   在 MySql.Data.MySqlClient.MySqlDataReader.GetResultSet()
+   在 MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   在 MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   在 MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   在 System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, CommandType ComType, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 464
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, String notes, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 494
+   在 YxLiCai.Dao.Order.OrderInfoDao.GetMemberPurchaseRecord(Int64 UserId) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\Order\OrderInfoDao.cs:行号 405
+   在 YxLiCai.Server.Order.OrderInfoService.GetMemberPurchaseRecord(Int64 UserId) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\Order\OrderInfoService.cs:行号 183
+IP:::1
+--------------------end---------------------
+ 
+2015-08-18 16:09:10.3335 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/8/18 16:09:10
+异常发生地址:http://localhost:10991/Member/MemberDetail?UserID=100324
+请求类型:GET
+异常:MySql.Data.MySqlClient.MySqlException (0x80004005): Table 'yxlc.ord_info' doesn't exist
+   在 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   在 MySql.Data.MySqlClient.NativeDriver.ReadResult(UInt64& affectedRows, Int64& lastInsertId)
+   在 MySql.Data.MySqlClient.MySqlDataReader.GetResultSet()
+   在 MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   在 MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   在 MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   在 System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, CommandType ComType, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 464
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, String notes, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 494
+   在 YxLiCai.Dao.Order.OrderInfoDao.GetMemberPurchaseRecord(Int64 UserId) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\Order\OrderInfoDao.cs:行号 405
+   在 YxLiCai.Server.Order.OrderInfoService.GetMemberPurchaseRecord(Int64 UserId) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\Order\OrderInfoService.cs:行号 183
+IP:::1
+--------------------end---------------------
+ 
+2015-08-18 16:09:25.6034 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/8/18 16:09:25
+异常发生地址:http://localhost:10991/Member/MemberDetail?UserID=100076
+请求类型:GET
+异常:MySql.Data.MySqlClient.MySqlException (0x80004005): Table 'yxlc.ord_info' doesn't exist
+   在 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   在 MySql.Data.MySqlClient.NativeDriver.ReadResult(UInt64& affectedRows, Int64& lastInsertId)
+   在 MySql.Data.MySqlClient.MySqlDataReader.GetResultSet()
+   在 MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   在 MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   在 MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   在 System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, CommandType ComType, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 464
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, String notes, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 494
+   在 YxLiCai.Dao.Order.OrderInfoDao.GetMemberPurchaseRecord(Int64 UserId) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\Order\OrderInfoDao.cs:行号 405
+   在 YxLiCai.Server.Order.OrderInfoService.GetMemberPurchaseRecord(Int64 UserId) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\Order\OrderInfoService.cs:行号 183
+IP:::1
+--------------------end---------------------
+ 
+2015-08-18 16:12:54.9841 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/8/18 16:12:54
+异常发生地址:http://localhost:10991/Member/MemberDetail?UserID=100076
+请求类型:GET
+异常:MySql.Data.MySqlClient.MySqlException (0x80004005): Table 'yxlc.ord_info' doesn't exist
+   在 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   在 MySql.Data.MySqlClient.NativeDriver.ReadResult(UInt64& affectedRows, Int64& lastInsertId)
+   在 MySql.Data.MySqlClient.MySqlDataReader.GetResultSet()
+   在 MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   在 MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   在 MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   在 System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, CommandType ComType, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 464
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, String notes, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 494
+   在 YxLiCai.Dao.Order.OrderInfoDao.GetMemberPurchaseRecord(Int64 UserId) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\Order\OrderInfoDao.cs:行号 405
+   在 YxLiCai.Server.Order.OrderInfoService.GetMemberPurchaseRecord(Int64 UserId) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\Order\OrderInfoService.cs:行号 183
+IP:::1
+--------------------end---------------------
+ 
+2015-08-18 16:20:30.0323 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/8/18 16:20:30
+异常发生地址:http://localhost:10991/Member/MemberDetail?UserID=100324
+请求类型:GET
+异常:MySql.Data.MySqlClient.MySqlException (0x80004005): Table 'yxlc.ord_info' doesn't exist
+   在 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   在 MySql.Data.MySqlClient.NativeDriver.ReadResult(UInt64& affectedRows, Int64& lastInsertId)
+   在 MySql.Data.MySqlClient.MySqlDataReader.GetResultSet()
+   在 MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   在 MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   在 MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   在 System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, CommandType ComType, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 464
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, String notes, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 494
+   在 YxLiCai.Dao.Order.OrderInfoDao.GetMemberPurchaseRecord(Int64 UserId) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\Order\OrderInfoDao.cs:行号 405
+   在 YxLiCai.Server.Order.OrderInfoService.GetMemberPurchaseRecord(Int64 UserId) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\Order\OrderInfoService.cs:行号 183
+IP:::1
+--------------------end---------------------
+ 
+2015-08-18 16:20:48.1842 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/8/18 16:20:48
+异常发生地址:http://localhost:10991/Member/MemberDetail?UserID=100386
+请求类型:GET
+异常:MySql.Data.MySqlClient.MySqlException (0x80004005): Table 'yxlc.ord_info' doesn't exist
+   在 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   在 MySql.Data.MySqlClient.NativeDriver.ReadResult(UInt64& affectedRows, Int64& lastInsertId)
+   在 MySql.Data.MySqlClient.MySqlDataReader.GetResultSet()
+   在 MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   在 MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   在 MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   在 System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, CommandType ComType, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 464
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, String notes, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 494
+   在 YxLiCai.Dao.Order.OrderInfoDao.GetMemberPurchaseRecord(Int64 UserId) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\Order\OrderInfoDao.cs:行号 405
+   在 YxLiCai.Server.Order.OrderInfoService.GetMemberPurchaseRecord(Int64 UserId) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\Order\OrderInfoService.cs:行号 183
+IP:::1
+--------------------end---------------------
+ 
+2015-08-18 16:20:57.5228 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/8/18 16:20:57
+异常发生地址:http://localhost:10991/Member/MemberDetail?UserID=100000
+请求类型:GET
+异常:MySql.Data.MySqlClient.MySqlException (0x80004005): Table 'yxlc.ord_info' doesn't exist
+   在 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   在 MySql.Data.MySqlClient.NativeDriver.ReadResult(UInt64& affectedRows, Int64& lastInsertId)
+   在 MySql.Data.MySqlClient.MySqlDataReader.GetResultSet()
+   在 MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   在 MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   在 MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   在 System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, CommandType ComType, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 464
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, String notes, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 494
+   在 YxLiCai.Dao.Order.OrderInfoDao.GetMemberPurchaseRecord(Int64 UserId) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\Order\OrderInfoDao.cs:行号 405
+   在 YxLiCai.Server.Order.OrderInfoService.GetMemberPurchaseRecord(Int64 UserId) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\Order\OrderInfoService.cs:行号 183
+IP:::1
+--------------------end---------------------
+ 
+2015-08-18 16:40:28.2974 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/8/18 16:40:28
+异常发生地址:http://localhost:10991/Member/MemberDetail?UserID=100000
+请求类型:GET
+异常:MySql.Data.MySqlClient.MySqlException (0x80004005): Table 'yxlc.ord_info' doesn't exist
+   在 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   在 MySql.Data.MySqlClient.NativeDriver.ReadResult(UInt64& affectedRows, Int64& lastInsertId)
+   在 MySql.Data.MySqlClient.MySqlDataReader.GetResultSet()
+   在 MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   在 MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   在 MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   在 System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, CommandType ComType, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 464
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, String notes, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 494
+   在 YxLiCai.Dao.Order.OrderInfoDao.GetMemberPurchaseRecord(Int64 UserId) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\Order\OrderInfoDao.cs:行号 396
+   在 YxLiCai.Server.Order.OrderInfoService.GetMemberPurchaseRecord(Int64 UserId) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\Order\OrderInfoService.cs:行号 183
+IP:::1
+--------------------end---------------------
+ 
+2015-08-18 17:00:32.9540 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/8/18 17:00:32
+异常发生地址:http://localhost:10991/Member/MemberDetail?UserID=100000
+请求类型:GET
+异常:MySql.Data.MySqlClient.MySqlException (0x80004005): Table 'yxlc.ord_info' doesn't exist
+   在 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   在 MySql.Data.MySqlClient.NativeDriver.ReadResult(UInt64& affectedRows, Int64& lastInsertId)
+   在 MySql.Data.MySqlClient.MySqlDataReader.GetResultSet()
+   在 MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   在 MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   在 MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   在 System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, CommandType ComType, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 464
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, String notes, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 494
+   在 YxLiCai.Dao.Order.OrderInfoDao.GetMemberPurchaseRecord(Int64 UserId) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\Order\OrderInfoDao.cs:行号 396
+   在 YxLiCai.Server.Order.OrderInfoService.GetMemberPurchaseRecord(Int64 UserId) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\Order\OrderInfoService.cs:行号 183
+IP:::1
+--------------------end---------------------
+ 

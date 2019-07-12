@@ -1,0 +1,207 @@
+﻿@model YxLiCai.Admin.Models.MenuNewOut
+@{
+    ViewBag.Title = "Menu";
+} 
+<div class="zpManage zpSh">
+    <h2 class="crumbs">
+        您所在位置：权限 > 菜单设置
+    </h2>
+    <div class="SearchMd">
+        <table border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td>
+                    @if (Model.ParMenuName!="")
+                    { 
+                        <span class="">上级菜单:@(Model.ParMenuName) </span>
+                    }
+                    else
+                    {
+                        <span class="">一级菜单</span>
+                    }
+                    <input type="submit" value="新增菜单" class="searchBtn" id="btnAdd" />
+                    @if (Model.ParUrl !="")
+                    {
+                        <input type="submit" value="返回上一级" class="searchBtn" onclick="window.location = '/MenuManager/MenuNew?ParID=@Model.ParParID';" />                   
+                    }
+
+                </td>
+            </tr>
+        </table>
+    </div>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tbstyle">
+        <thead> 
+            <tr class="tdbg">
+                <th width="%5">编号</th>
+                <th>菜单名称</th>
+                <th>菜单地址</th>
+                <th>父级菜单</th>
+                <th>是否按钮</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+        @{
+        if (Model.list_menu != null&&Model.list_menu.Count>0)
+        {
+            foreach (YxLiCai.Model.Authority.AuthorityMenuModel item in Model.list_menu)
+            {
+                <tr>
+                    <td>@item.Id</td> 
+                    <td>@item.MenuName</td>
+                    <td>@item.Url</td>
+                    <td>@Model.ParMenuName</td>
+                    <td>@(item.IsButton==1?"是":"否")</td>                    
+                    <td>
+                        <a href="javascript:void(0)" onclick="InitModifyDiv('@item.Id','@item.MenuName','@item.Url');" >修改</a>
+                    @if (item.MenuType == 1 || item.MenuType == 2)
+                    {
+                        <a href="javascript:void(0)" onclick="window.location='/MenuManager/MenuNew?ParID=@item.Id'">查看子菜单</a> 
+                    }
+                    else
+                    {
+                        <a   href="/MenuManager/MenuButton?pid=@item.Id">添加按钮</a>
+                    }
+                    </td> 
+                </tr> 
+            }
+        }
+        }
+        </tbody> 
+    </table>
+</div>
+
+@*新增菜单*@
+<div>
+    <div class="add-openbox add-form" id="addDiv" style="width:500px">
+        <h2>
+            <p id="statusFin_Add">新增菜单</p>
+        </h2>
+        <input type="hidden" value="@Model.ParID" id="hidParId"/>
+        <fieldset>
+            <div class="control-group" style="width: 250px;margin: 0 auto;">
+                <label >菜单名称</label> 
+                <input  name="txtName" id="txtName" type="text">
+            </div> 
+            @if(Model.ParMenuType==2)
+            {
+                <div class="control-group" style="width: 250px;margin: 0 auto;">
+                    <label >菜单Url</label> 
+                    <input  name="txtUrl" id="txtUrl" type="text">
+                </div> 
+            }
+        </fieldset>
+        <p class="btnbox">
+            <input value="确认" type="button" id="btnConfim" class="yesBtn" />                
+            <input value="关闭" type="button" class="J_closebox qxBtn" />
+        </p>
+    </div>
+</div>
+@*修改菜单*@
+<div>
+    <div class="add-openbox add-form" id="updateDiv" style="width:500px">
+        <h2>
+            <p id="statusFin_Modify">修改菜单</p>
+        </h2>
+        <input type="hidden" value="" id="hidId"/>
+        <fieldset>
+            <div class="control-group" style="width: 250px;margin: 0 auto;">
+                <label >菜单名称</label> 
+                <input  name="txtuName" id="txtuName" type="text">
+            </div> 
+            @if(Model.ParMenuType==2)
+            {
+                <div class="control-group" style="width: 250px;margin: 0 auto;">
+                    <label >菜单Url</label> 
+                    <input  name="txtuUrl" id="txtuUrl" type="text">
+                </div> 
+            }
+        </fieldset>
+        <p class="btnbox">
+            <input value="确认" type="button" id="btnUpdateConfim" class="yesBtn" />                
+            <input value="关闭" type="button" class="J_closebox qxBtn" />
+        </p>
+    </div>
+</div>
+
+<script>
+    var adminjs = new adminglass(); //实例化后台类  
+    //关闭弹层
+    $('.J_closebox').click(function () {
+        adminjs.closewinbox('.add-openbox');
+        return false;
+    });
+    $("#btnAdd").on("click", function () {
+        adminjs.openwinbox('#addDiv');
+    })
+    //新增菜单
+    $("#btnConfim").on('click', function () {  
+        var txtName = $("#txtName").val(); //菜单名称
+        var txtUrl = $("#txtUrl").val(); //菜单Url
+        var hidParId = $("#hidParId").val();
+        var isbutton = false;
+       
+        if (txtName == "") {
+            alert("请输入菜单名称!");
+            return;
+        }
+        
+        if ('@(Model.ParMenuType)'=="2" && txtUrl == "") {
+            alert("请输入菜单Url!");
+            return;
+        }
+        var pars = { "ParId": hidParId, "BeLock": 0, "IsButton": isbutton, "MenuName": txtName, "Url": txtUrl,"ParMenuType":"@(Model.ParMenuType)" };
+        var url = "/MenuManager/AddMenu";
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: pars,
+            success: function (result) {
+                if (result.IsSuccess) {
+                    alert("添加成功!");
+                    window.location = "/MenuManager/MenuNew?ParID=@(Model.ParID)";
+                } else {
+                    alert(result.Message);
+                }
+            }
+        });
+    });
+    function InitModifyDiv(hidId,menuname,menuurl)
+    {
+        $("#hidId").val(hidId);
+        $("#txtuName").val(menuname);
+        $("#txtuUrl").val(menuurl);
+        adminjs.openwinbox('#updateDiv');
+    }
+    //修改菜单
+    $("#btnUpdateConfim").on('click', function () {
+        var txtName = $("#txtuName").val(); //菜单名称
+        var txtUrl = $("#txtuUrl").val(); //菜单Url
+        var hidId = $("#hidId").val(); //菜单id
+        var isbutton = false;
+        
+        if (txtName == "") {
+            alert("请输入菜单名称!");
+            return;
+        }
+
+        if ('@(Model.ParMenuType)'=="2" && txtUrl == "") {
+            alert("请输入菜单Url!");
+            return;
+        }
+        var pars = { "Id": hidId, "ParId": "@Model.ParID", "IsButton": isbutton, "MenuName": txtName, "Url": txtUrl };
+        var url = "/MenuManager/UpdateMenu";
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: pars,
+            success: function (result) {
+                if (result.IsSuccess) {
+                    alert("修改成功!");
+                    window.location = "/MenuManager/MenuNew?ParID=@(Model.ParID)";
+                } else {
+                    alert(result.Message);
+                }
+            }
+        });
+    });
+</script>

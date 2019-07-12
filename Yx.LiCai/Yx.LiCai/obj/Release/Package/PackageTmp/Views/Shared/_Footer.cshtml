@@ -1,0 +1,26 @@
+﻿<footer id="footer">
+    <div class="footer-bar">
+        <ul class="footer-nav">
+            <li><a href="/Home/Introduction">一休理财</a></li>
+            <li><a href="/Home/Protocol">安全保障</a></li>
+            <li><a href="/Home/FAQ">常见问题</a></li>
+            @{
+                if (Yx.LiCai.App_Start.UserContext.simpleUserInfoModel.Id > 0)
+                {
+                    <li class="login-nav">
+                        <a href="/member/Index">我的账户</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="login-nav">
+                        <a href="/Login/RegisteredOrLogin">登录/注册</a>                        
+                    </li>
+                }
+            }
+        </ul>
+    </div>
+    <div class="gx-hide">
+        <!-- 代码统计加在此处 -->
+    </div>
+</footer>

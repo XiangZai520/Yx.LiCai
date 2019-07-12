@@ -1,0 +1,48 @@
+﻿@using YxLiCai
+@using Yx.LiCai.App_Start
+@using YxLiCai.Tools.Const
+@model YxLiCai.Model.UserRaise.UserCountModel
+@{
+    ViewBag.Title = "个人资产构成";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+} 
+  <div class="fixed-chart">
+            <div class="user-accountAsset-box">
+                <div data-num="@SystemConst.MoenyConvert(Model.MyBlance)" class="circle-ui user-balance fadeRight">
+                    <strong>可用余额</strong>
+                    <span>￥@SystemConst.MoenyConvert(Model.MyBlance)</span>
+                </div>
+                <div data-num="@SystemConst.MoenyConvert(Model.RaiseMoney)" class="circle-ui user-investing fadeLeft">
+                    <strong>在投资产</strong>
+                    <span>￥@SystemConst.MoenyConvert(Model.RaiseMoney)</span>
+                </div>
+                <div data-num="@SystemConst.MoenyConvert(Model.LockMoney)" class="circle-ui user-freeze fadeRight">
+                    <strong>冻结金额</strong>
+                    <span>￥@SystemConst.MoenyConvert(Model.LockMoney)</span>
+                </div>
+                <div id="doughnutChart" class="account-chart"></div>
+            </div> 
+        </div>
+        <div class="user-accountAsset-item">
+            <ul>
+                <li class="clearfix">
+                    <strong class="gx-left">月月盈<b>在投</b></strong>
+                    <span class="gx-right">￥@SystemConst.MoenyConvert(ViewBag.MonthAmount)</span>
+                </li>
+                <li class="clearfix">
+                    <strong class="gx-left">季季享<b>在投</b></strong>
+                    <span class="gx-right">￥@SystemConst.MoenyConvert(ViewBag.SeasonAmount)</span>
+                </li>
+                <li class="clearfix">
+                    <strong class="gx-left">年年丰<b>在投</b></strong>
+                    <span class="gx-right">￥@SystemConst.MoenyConvert(ViewBag.YearAmount)</span>
+                </li>
+                <li class="clearfix">
+                    <strong class="gx-left">特享金<b>在投</b></strong>
+                    <span class="gx-right">￥@ViewBag.t_amount_invest</span>
+                </li>
+            </ul>
+        </div> 
+<script>
+    seajs.use('gx_chart');
+</script>

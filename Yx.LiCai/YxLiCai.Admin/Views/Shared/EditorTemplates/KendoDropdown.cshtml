@@ -1,0 +1,43 @@
+﻿@model YxLiCai.Admin.Models.KendoDropdownlistViewModel
+
+<input id="@Model.Id" />
+
+<script type="text/javascript">
+    var id = '@Model.Id';
+    var url = '@Model.SourceUrl';
+    var index = '@Model.Index';
+    var selectedValue = '@Model.Value';
+    var readOnly = '@Model.Readonly';
+
+    var textField = "Name";
+    var valueField = "Id";
+
+    if (url != "" && url.indexOf("|") > 0) {
+        url = url.replace("|", "&");
+    }
+
+    if ("" != url || url !== "undefiend") {
+        var ds = new kendo.data.DataSource({
+            transport: {
+                read: {
+                    url: url,
+                    dataType: "json"
+                }
+            }                     
+        });
+       
+        $("#" + id + "").kendoDropDownList({
+            dataTextField: textField,
+            dataValueField: valueField,
+            dataSource: ds
+        });
+
+        var dropdownlist = $("#" + id + "").data("kendoDropDownList");
+        if (selectedValue != ""){
+            dropdownlist.value(selectedValue);
+        }
+        if (readOnly == "true") {
+            dropdownlist.readonly();
+        }
+    }
+</script>

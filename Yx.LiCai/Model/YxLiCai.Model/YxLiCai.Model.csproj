@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BFA05150-7A3B-45A3-A480-DE606B0E6FDA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>YxLiCai.Model</RootNamespace>
+    <AssemblyName>YxLiCai.Model</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Account\LoginModel.cs" />
+    <Compile Include="Account\SimpleUserInfo.cs" />
+    <Compile Include="Account\UserSmallReads.cs" />
+    <Compile Include="Account\SimpleFerUserInfo.cs" />
+    <Compile Include="ActivityManage\ActInterestCoupon.cs" />
+    <Compile Include="ActivityManage\ActInterestCouponModelView.cs" />
+    <Compile Include="ActivityManage\ActPromotion.cs" />
+    <Compile Include="ActivityManage\ActPromotionItem.cs" />
+    <Compile Include="ActivityManage\ActPromotionModelView.cs" />
+    <Compile Include="ActivityManage\ActSpecialAssets.cs" />
+    <Compile Include="ActivityManage\ActSpecialAssetsModelView.cs" />
+    <Compile Include="ActivityManage\ActUserLog.cs" />
+    <Compile Include="Authority\account.cs" />
+    <Compile Include="Authority\accountauthority.cs" />
+    <Compile Include="Authority\AccountModel.cs" />
+    <Compile Include="Authority\authority.cs" />
+    <Compile Include="Authority\AuthorityAccountMenuSet.cs" />
+    <Compile Include="Authority\AuthorityDepartmentModel.cs" />
+    <Compile Include="Authority\AuthorityMenuModel.cs" />
+    <Compile Include="Authority\AuthorityRoleMentMenuSet.cs" />
+    <Compile Include="Authority\AuthorityRoleModel.cs" />
+    <Compile Include="Charge\CharegeModel.cs" />
+    <Compile Include="Authority\FerAccountModel.cs" />
+    <Compile Include="ExtendModel\AccountMenuEx.cs" />
+    <Compile Include="ExtendModel\ActPaidRecEx.cs" />
+    <Compile Include="ExtendModel\ActRechargeRecEx.cs" />
+    <Compile Include="ExtendModel\FactoringUserAccountLog.cs" />
+    <Compile Include="ExtendModel\InterestCouponSendDetailEx.cs" />
+    <Compile Include="ExtendModel\InvestmentDetailEx.cs" />
+    <Compile Include="ExtendModel\MemberInfoEx.cs" />
+    <Compile Include="ExtendModel\PurchaseRecordEx.cs" />
+    <Compile Include="ExtendModel\RedemptionRecordEx.cs" />
+    <Compile Include="ExtendModel\SpecialAssetsSendDetailEx.cs" />
+    <Compile Include="ExtendModel\UserAccountEx.cs" />
+    <Compile Include="ExtendModel\UserAssetsEx.cs" />
+    <Compile Include="ExtendModel\UserBlackListEx.cs" />
+    <Compile Include="ExtendModel\UserRedemptionEx.cs" />
+    <Compile Include="ExtendModel\UserWithDrawEx.cs" />
+    <Compile Include="ExtendModel\WithdrawRecordEx.cs" />
+    <Compile Include="InterestBonus\InterestBonus.cs" />
+    <Compile Include="Loan\LoanModel.cs" />
+    <Compile Include="Order\OrderProject.cs" />
+    <Compile Include="Order\UserOrderInfoModel.cs" />
+    <Compile Include="Plat\PlatAccount.cs" />
+    <Compile Include="Product\ProductCategory.cs" />
+    <Compile Include="Product\ProductModel.cs" />
+    <Compile Include="Product\Product_Project.cs" />
+    <Compile Include="Product\SallProductModel.cs" />
+    <Compile Include="Project\Pjt_logModel.cs" />
+    <Compile Include="Project\ProjectModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Refund\RefundModel.cs" />
+    <Compile Include="ResultInfo.cs" />
+    <Compile Include="ResultModel.cs" />
+    <Compile Include="SysActionLogModel.cs" />
+    <Compile Include="TransactionRecords\Ord_infoModel.cs" />
+    <Compile Include="TransactionRecords\User_purchase_recsumModel.cs" />
+    <Compile Include="TransactionRecords\User_redemptionModel.cs" />
+    <Compile Include="TransactionRecords\User_withdrawModel.cs" />
+    <Compile Include="UploadConfig\Setting.cs" />
+    <Compile Include="UploadConfig\SettingsCollection.cs" />
+    <Compile Include="UploadConfig\UploadConfig.cs" />
+    <Compile Include="UploadConfig\UploadConfigSection.cs" />
+    <Compile Include="UploadConfig\UploadProvice.cs" />
+    <Compile Include="UserAccumulatedEarnings\UserCountMonth_AccumulatedEarnings_Model.cs" />
+    <Compile Include="UserAccumulatedEarnings\UserCountSeason_AccumulatedEarnings_Model.cs" />
+    <Compile Include="UserAccumulatedEarnings\UserCountYear_AccumulatedEarnings_Model.cs" />
+    <Compile Include="UserFinancingManagement\Fer_account_item.cs" />
+    <Compile Include="UserFinancingManagement\Fer_Withdraw.cs" />
+    <Compile Include="UserFinancingManagement\Financier_account_log.cs" />
+    <Compile Include="UserFinancingManagement\Fina_Recharge_Record_Model.cs" />
+    <Compile Include="UserFinancingManagement\Fina_User_Count_Model.cs" />
+    <Compile Include="UserFinancingManagement\Pjt_repayment_Model.cs" />
+    <Compile Include="UserFinancingManagement\Project_refund_interest.cs" />
+    <Compile Include="UserFinancingManagement\Project_refund_principal.cs" />
+    <Compile Include="UserFinancingManagement\UserInfo_FinancingManagement_Model.cs" />
+    <Compile Include="UserRaise\UserBlanceItemModel.cs" />
+    <Compile Include="UserRaise\UserCountModel.cs" />
+    <Compile Include="UserRaise\UserCountMonthModel.cs" />
+    <Compile Include="UserRaise\UserCountSeasonModel.cs" />
+    <Compile Include="UserRaise\UserCountYearModel.cs" />
+    <Compile Include="UserRaise\UserRaiseProductModel.cs" />
+    <Compile Include="UserVerification\IDCardNo.cs" />
+    <Compile Include="UserVerification\IDCardQuery.cs" />
+    <Compile Include="UserVerification\People_IDCard.cs" />
+    <Compile Include="User\IDCard.cs" />
+    <Compile Include="User\SmallUserInfo.cs" />
+    <Compile Include="User\Sys_MsgCode.cs" />
+    <Compile Include="User\UserAccountLog.cs" />
+    <Compile Include="User\UserAccountLogModel.cs" />
+    <Compile Include="User\UserAddInterestModel.cs" />
+    <Compile Include="User\UserAmountRecModel.cs" />
+    <Compile Include="User\UserBankCardModel.cs" />
+    <Compile Include="UserRedemption\UserwithdrawModel.cs" />
+    <Compile Include="UserRedemption\UserRedemptionProductModel.cs" />
+    <Compile Include="User\UserBlackListModel.cs" />
+    <Compile Include="User\UserInfoModel.cs" />
+    <Compile Include="User\UserInvitationModel.cs" />
+    <Compile Include="User\UserMessageModel.cs" />
+    <Compile Include="User\UserRateCouponModel.cs" />
+    <Compile Include="User\UserRecharge.cs" />
+    <Compile Include="User\UserSenMesgDog.cs" />
+    <Compile Include="User\UserSmallReads.cs" />
+    <Compile Include="User\UserSpecialAssetsModel.cs" />
+    <Compile Include="User\UserSpecialInterestModel.cs" />
+    <Compile Include="User\UserWithdraw.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\YxLica.Tools\YxLica.Tools.csproj">
+      <Project>{4cf85277-c84a-4b9a-abf6-1d5af4969ff1}</Project>
+      <Name>YxLica.Tools</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

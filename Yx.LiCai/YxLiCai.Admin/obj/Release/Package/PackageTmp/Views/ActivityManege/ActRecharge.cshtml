@@ -1,0 +1,227 @@
+﻿@model YxLiCai.Model.Plat.PlatAccount
+@section styles
+{
+    <link href="~/Resource/css/font-awesome.min.css" rel="stylesheet" />
+    <script src="~/Resource/js/My97DatePicker/WdatePicker.js"></script>
+}
+<div class="zpManage zpSh">
+    <h2 class="crumbs">
+        您所在位置：财务管理->充值->活动充值
+    </h2>
+</div>
+<div class="gx-textitem">
+    <label class="gx-texttitle">
+        累计充值(元)：
+    </label>
+    <label>
+       @YxLiCai.Tools.Const.SystemConst.MoenyConvert(Model.amount_recharge)
+    </label>
+    <label class="gx-texttitle">
+        可用余额(元)：
+    </label>
+    <label>
+        @YxLiCai.Tools.Const.SystemConst.MoenyConvert(Model.amount < 0 ? 0 : Model.amount)
+    </label>
+    <br/>
+    <label class="gx-texttitle">
+        已付资金(元)：
+    </label>
+    <label>
+        @YxLiCai.Tools.Const.SystemConst.MoenyConvert(Model.amount_paid)
+    </label>
+    <label class="gx-texttitle">
+        欠款金额(元)：
+    </label>
+    <label>
+        @YxLiCai.Tools.Const.SystemConst.MoenyConvert(Model.amount < 0 ? (0 - Model.amount) : 0)
+    </label>
+    <br />
+</div>
+<div>
+    <label class="gx-texttitle">
+        充值金额：
+    </label>
+    <input type="text" id="RechargeAmount" class="gx-textbox" />
+    <button id="Recharge" class="gx-button gx-button-info">充值</button>
+</div>
+<h2 class="crumbs"></h2>
+<div>
+    <ul class="gx-tab" data-role="tab">
+        <li name="Myli" id="RechargeRec" class="gx-tab-actived">
+            <a href="javascript:void(0);">充值记录</a>
+        </li>
+        <li name="Myli" id="PayRec">
+            <a href="javascript:void(0);">支付记录</a>
+        </li>
+    </ul>
+</div>
+<div id="RechargeRecDiv" name="MyDiv">
+    <div class="gx-textitem">
+        <label class="gx-texttitle">
+            充值时间：
+        </label>
+        <input type="text" id="s_rtime" class="Wdate gx-textbox" value="@(DateTime.Now.AddDays(-3).ToString("yyyy-MM-dd"))" style="height:34px;" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd' })">
+        <label class="gx-texttitle">
+            至：
+        </label>
+        <input type="text" id="e_rtime" class="Wdate gx-textbox" style="height:34px;" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd' })" />
+        <button id="rsearch" class="gx-button gx-button-info" style="float:right;margin-right:300px;">查询</button>
+    </div>
+    <div class="cleanfix" style="margin:15px 15px 15px 15px">
+        <table class="gx-table gx-table-striped">
+            <thead>
+                <tr>
+                    <th>充值时间</th>
+                    <th>充值状态</th>
+                    <th>充值金额</th>
+                    <th>操作人</th>
+                </tr>
+            </thead>
+            <tbody id="rtdata"></tbody>
+        </table>
+    </div>
+</div>
+<div id="PayRecDiv" name="MyDiv" style="display:none">
+    <div class="gx-textitem">
+        <label class="gx-texttitle">
+            支付时间：
+        </label>
+        <input type="text" id="s_ptime" value="@(DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd"))" class="Wdate gx-textbox" style="height:34px;" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd' })">
+        <label class="gx-texttitle">
+            至：
+        </label>
+        <input type="text" id="e_ptime" value="@(DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd"))" class="Wdate gx-textbox" style="height:34px;" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd' })" />
+        <button id="psearch" class="gx-button gx-button-info" style="float:right;margin-right:300px;">查询</button>
+    </div>
+    <div class="cleanfix" style="margin:15px 15px 15px 15px">
+        <table class="gx-table gx-table-striped">
+            <thead>
+                <tr>
+                    <th>支付类型</th>
+                    <th>支付金额</th>
+                </tr>
+            </thead>
+            <tbody id="ptdata"></tbody>
+        </table>
+    </div>
+</div>
+<script type="text/javascript">
+    $("#RechargeAmount").keydown(function (e) {
+        if (e.which != 8) {
+            var RechargeAmount = $("#RechargeAmount").val();
+            if (RechargeAmount.indexOf('.') >= 0 && RechargeAmount.length - RechargeAmount.indexOf('.') > 2) {
+                return false;
+            }
+        }
+    })
+    $("#Recharge").on("click", function () {
+        if (confirm("确定要充值吗？")) {
+            var RechargeAmount = $("#RechargeAmount").val();
+
+            if (isNaN(parseFloat(RechargeAmount))) {
+                alert("充值金额格式不正确，请重新输入！");
+                $("#RechargeAmount").val("");
+                return false;
+            }
+            if (parseFloat(RechargeAmount) < 0) {
+                alert("充值金额必须大于0，请重新输入！");
+                $("#RechargeAmount").val("");
+                return false;
+            }
+            $.ajax({
+                type: "POST",
+                url: "/ActivityManege/ActRecharge_ajax",
+                data: { RechargeAmount: RechargeAmount },
+                async: false,
+                success: function (data) {
+                    if (data != null) {
+                        if (data == "ok") {
+                            alert("充值成功！");
+                            window.location = window.location.href;
+                        }
+                        else {
+                            alert(data.Message);
+                        }
+                    }
+                }
+            })
+        }
+    })
+    $("li[name='Myli']").on("click", function () {
+        $("li[name='Myli']").each(function () {
+            $(this).removeClass("gx-tab-actived");
+        })
+        $("div[name='MyDiv']").each(function () {
+            $(this).hide();
+        })
+        $(this).addClass("gx-tab-actived");
+        var id = $(this).attr("id");
+        id = id + "Div";
+        $("#" + id).show();
+    })
+</script>
+<script type="text/javascript">
+    function Search(tab)
+    {
+        var s_ctime ;
+        var e_ctime;
+        if (tab == 1)
+        {
+            s_ctime = $("#s_rtime").val();
+            e_ctime = $("#e_rtime").val();
+        }
+        else if (tab == 2) {
+            s_ctime = $("#s_ptime").val();
+            e_ctime = $("#e_ptime").val();
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/ActivityManege/ActRechargeRec",
+            data: { tab: tab, s_ctime: s_ctime, e_ctime: e_ctime },
+            async: false,
+            success: function (data) {
+                if (data != null) {
+                    var Rows = data.Rows;
+                    if (Rows != null) {
+                        var strHTML = "";
+                        if (tab == 1) {
+                            for (var i = 0; i < Rows.length; i++) {
+                                var row = Rows[i];
+                                strHTML = strHTML + "<tr>";
+                                strHTML = strHTML + "<td>" + row.c_time + "</td>";
+                                strHTML = strHTML + "<td>" + row.status + "</td>";
+                                strHTML = strHTML + "<td>" + row.amount + "</td>";
+                                strHTML = strHTML + "<td>" + row.opname + "</td>";
+                                strHTML = strHTML + "</tr>";
+                            }
+                            $("#rtdata").html(strHTML);
+                        }
+                        else if (tab == 2) {
+                            for (var i = 0; i < Rows.length; i++) {
+                                var row = Rows[i];
+                                strHTML = strHTML + "<tr>";
+                                strHTML = strHTML + "<td>" + row.type + "</td>";
+                                strHTML = strHTML + "<td>" + row.amount + "</td>";
+                                strHTML = strHTML + "</tr>";
+                            }
+                            $("#ptdata").html(strHTML);
+                        }
+                    }
+                }
+            }
+        })
+    }
+    $("#rsearch").on("click", function () {
+        Search(1);
+    })
+    $("#psearch").on("click", function () {
+        Search(2);
+    })
+    $(function () {
+        Search(1);
+        Search(2);
+    })
+</script>
+
+

@@ -1,0 +1,119 @@
+﻿ @{  
+    Layout = null;
+} 
+@model Yx.LiCai.Models.UserMoney.UserAssetsListOutModel
+@*<input type="hidden" name="CurrentPage" id="CurrentPage_@(Model.ProductType)" value="1" />*@
+<input type="hidden" name="CurrentPage" id="CurrentPage_@(Model.ProductType)" autocomplete="off" value="@Model.CurrentPage" />
+<div class="assets-special">
+    <div class="cats-special">
+        <span class="cats-icon">益</span>
+        累计收益（元）
+    </div>
+    <p>@YxLiCai.Tools.Const.SystemConst.MoenyConvert(Model.ShouYI)</p>
+</div>
+<div id="List_@(Model.ProductType)">
+    <div class="plus-income">
+        <div class="plus-income">
+            <ul class="income-list">
+                @if (Model.ProductType == 1)
+                {
+                    if (Model.list1 != null && Model.list1.Count > 0)
+                    {
+                        foreach (Yx.LiCai.Models.UserMoney.UserMonthViewModel item in Model.list1)
+                        {
+                    <li>
+                        <a href="#">
+                            @if (item.Type == 0)
+                            {
+                                <h3>
+                                    <i class="plus-blue">自</i>
+                                    <b>+@YxLiCai.Tools.Const.SystemConst.MoenyConvert(item.EarningsAmount)</b>
+                                </h3>
+                                <span>@item.CreateTime.ToString("yyyy-MM-dd")</span>
+                            }
+                            else
+                            {
+                                <h3>
+                                    <i class="plus-red">特</i>
+                                    <b>+@YxLiCai.Tools.Const.SystemConst.MoenyConvert(item.EarningsAmount)</b>
+                                </h3>
+                                <span>@item.CreateTime.ToString("yyyy-MM-dd")</span>
+                            }
+
+
+                        </a>
+                    </li>
+                        }
+
+                    }
+                }
+                @if (Model.ProductType == 2)
+                {
+                    if (Model.list2 != null && Model.list2.Count > 0)
+                    {
+                        foreach (Yx.LiCai.Models.UserMoney.UserSeanViewModel item in Model.list2)
+                        {
+                    <li>
+                        <a href="#">
+
+                            <h3>
+                                <i class="plus-blue">自</i>
+                                <b>+@YxLiCai.Tools.Const.SystemConst.MoenyConvert(item.EarningsAmount)</b>
+                            </h3>
+                            <span>@item.CreateTime.ToString("yyyy-MM-dd")</span>
+                        </a>
+                    </li>
+                        }
+
+                    }
+                }
+                @if (Model.ProductType == 3)
+                {
+                    if (Model.list2 != null && Model.list2.Count > 0)
+                    {
+                        foreach (Yx.LiCai.Models.UserMoney.UserSeanViewModel item in Model.list2)
+                        {
+                    <li>
+                        <a href="#">
+
+                            <h3>
+                                <i class="plus-blue">自</i>
+                                <b>+@YxLiCai.Tools.Const.SystemConst.MoenyConvert(item.EarningsAmount)</b>
+                            </h3>
+                            <span>@item.CreateTime.ToString("yyyy-MM-dd")</span>
+                        </a>
+                    </li>
+                        }
+
+                    }
+                }
+                @if (Model.ProductType == 4)
+                {
+                    if (Model.list3 != null && Model.list3.Count > 0)
+                    {
+                        foreach (Yx.LiCai.Models.UserMoney.UserYearViewModel item in Model.list3)
+                        {
+                    <li>
+                        <a href="#">
+                            <h3>
+                                <i class="plus-blue">自</i>
+                                <b>+@YxLiCai.Tools.Const.SystemConst.MoenyConvert(item.EarningsAmount)</b>
+                            </h3>
+                            <span>@item.CreateTime.ToString("yyyy-MM-dd")</span>
+                        </a>
+                    </li>
+                        }
+
+                    }
+                }
+            </ul>
+
+        </div>
+    </div>
+</div>
+@if (Model.TotalCount > 15)
+{
+    <div class="loadmore">
+        <a id="loadmore_@(Model.ProductType)" href="javascript:void(0);"></a>
+    </div>
+}

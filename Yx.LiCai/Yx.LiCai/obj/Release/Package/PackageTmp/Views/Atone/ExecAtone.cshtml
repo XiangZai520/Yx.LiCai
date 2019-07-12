@@ -1,0 +1,33 @@
+﻿@section styles{
+    <link href="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "css/buy.css")" rel="stylesheet">
+
+    }
+@{
+    ViewBag.Title = "赎回";
+}
+    	<div class="yixiu_man"><span></span></div>
+        <div class="main-buy">
+        	<dl>
+        		<dt class="hover"><img src="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb,"images/buy_right.png")"></dt>
+        		<dd>
+        		    <b>您已成功发起金额<span>@(ViewBag.AtoneTotalMoney)</span>元的赎回操作</b>
+        		</dd>
+        	</dl>
+        	<dl>
+        		<dt><img src="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb,"images/buy_time.png")"></dt>
+        		<dd>
+        		    <b>赎回申请已确认，请您耐心等待，系统将于3个工作日内赎回至您的绑定银行卡</b>
+        		</dd>
+        	</dl>
+            <dl>
+        		<dt><img src="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb,"images/buy_day.png")"></dt>
+        		<dd>
+        		    <b>感谢您信任并投资一休理财</b>
+        		</dd>
+        	</dl>
+        </div>
+        <div class="margin_top1"><a href="/member/index/" class="ui-btn">确认</a></div>
+<script>
+    seajs.use('gx-input-click');
+</script>
+

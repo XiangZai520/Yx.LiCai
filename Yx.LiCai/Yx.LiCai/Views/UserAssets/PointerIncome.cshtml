@@ -1,0 +1,43 @@
+﻿@model List<Yx.LiCai.Models.PointerIncomeOutModel>
+@section styles{
+    <link href="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "css/uc/invest_base.css")" rel="stylesheet">
+
+    }
+    @{
+        ViewBag.Title = "自有账户资金流向";
+        }
+
+    <div class="pointer-income">
+        <dl>
+            <dt class="pointer-blue">自</dt>
+            <dd>自有账户资金流向</dd>
+        </dl>
+    </div>
+    @if (Model != null && Model.Count > 0)
+    {
+        foreach (Yx.LiCai.Models.PointerIncomeOutModel item in Model)
+        {
+            <div class="pointer-cod">
+                <h2><span>借款单位：</span><p>@(item.Company)</p></h2>
+                <h2><span>还款期限：</span><p>@(item.RepaymentPeriod)</p></h2>
+                <h2><span>借出金额：</span><p>@(item.LendMoney)元</p></h2>
+            </div>
+        }
+    }
+    @if(ViewBag.OrderInfoid==0)
+    {
+        <div class="pointer-cod-main">
+			    <p class="pointer-word">暂未匹配债权</p>
+        </div>
+    }
+    <div class="lookConfer"><a href="/UserAssets/PointerIncome_Agreement?ctime=@(ViewBag.Ctime)&amount=@(ViewBag.Amount)">查看协议</a></div>
+
+<!-- 浮动栏 -->
+<div class="yx-fixedBar">
+    <a class="yx-back" href="javasrcipt:void(0);">返回</a>
+    <a class="yx-home" href="/">首页</a>
+</div>
+<script>
+    seajs.use('fixed_bar');  
+</script>
+

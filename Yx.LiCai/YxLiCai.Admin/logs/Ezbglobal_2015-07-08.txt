@@ -1,0 +1,150 @@
+2015-07-08 09:33:22.5888 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/7/8 9:33:22
+异常发生地址:http://localhost:50143/Project/UpdateProject?Id=317&ProjectName=project_test_1436268067.41&Borrower=%E4%B8%87%E6%98%8E%E4%B8%BD&OrderNumber=test999&Amount=3349580.94&AmountSold=0&AvailableAmount=3349580.94&BorrowingRate=25&LaunchTime=2015-07-08&EndTime=2015-07-11&Remark=%E6%88%90%E6%98%8E&Weight=18&AddTime=2015%2F7%2F7+19:21:26&RepaymentMode=%E8%BF%98%E6%AC%BE%E6%96%B9%E5%BC%8F&LoanPeriod=17&ProjectType=0&account_id=5&ProjectStatus=1
+请求类型:GET
+异常:MySql.Data.MySqlClient.MySqlException (0x80004005): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where name ='project_test_1436268067.41' and is_deleted !=1 and id !=Pid ;#2015' at line 1
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteScalar(String Sql, CommandType ComType, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 414
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteScalar(String Sql, String notes, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 386
+   在 YxLiCai.Dao.Project.ProjectDao.ISProtExist(String ProjectName, Int32 Pid) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\Project\ProjectDao.cs:行号 782
+   在 YxLiCai.Server.Project.ProjectService.ISProtExist(String ProjectName, Int32 Pid) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\Project\ProjectService.cs:行号 325
+--------------------end---------------------
+ 
+2015-07-08 11:39:20.6435 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/7/8 11:39:20
+异常发生地址:http://localhost:50143/Project/Edit/322
+请求类型:GET
+异常:MySql.Data.MySqlClient.MySqlException (0x80004005): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'seelect p.id,p.name,p.ord_number,p.amount,p.pjt_status,p.verify_status,p.pjt_typ' at line 1
+   在 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   在 MySql.Data.MySqlClient.NativeDriver.ReadResult(UInt64& affectedRows, Int64& lastInsertId)
+   在 MySql.Data.MySqlClient.MySqlDataReader.GetResultSet()
+   在 MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   在 MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   在 MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   在 System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, CommandType ComType, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 464
+   在 YxLiCai.Dao.Project.ProjectDao.GetModel(Int32 Id) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\Project\ProjectDao.cs:行号 281
+   在 YxLiCai.Server.Project.ProjectService.GetModel(Int32 id) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\Project\ProjectService.cs:行号 183
+--------------------end---------------------
+ 
+2015-07-08 11:39:25.8300 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/7/8 11:39:25
+异常发生地址:http://localhost:50143/Project/Edit/307
+请求类型:GET
+异常:MySql.Data.MySqlClient.MySqlException (0x80004005): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'seelect p.id,p.name,p.ord_number,p.amount,p.pjt_status,p.verify_status,p.pjt_typ' at line 1
+   在 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   在 MySql.Data.MySqlClient.NativeDriver.ReadResult(UInt64& affectedRows, Int64& lastInsertId)
+   在 MySql.Data.MySqlClient.MySqlDataReader.GetResultSet()
+   在 MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   在 MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   在 MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   在 System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, CommandType ComType, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 464
+   在 YxLiCai.Dao.Project.ProjectDao.GetModel(Int32 Id) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\Project\ProjectDao.cs:行号 281
+   在 YxLiCai.Server.Project.ProjectService.GetModel(Int32 id) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\Project\ProjectService.cs:行号 183
+--------------------end---------------------
+ 
+2015-07-08 11:39:29.7731 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/7/8 11:39:29
+异常发生地址:http://localhost:50143/Project/AD_Edit/299
+请求类型:GET
+异常:MySql.Data.MySqlClient.MySqlException (0x80004005): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'seelect p.id,p.name,p.ord_number,p.amount,p.pjt_status,p.verify_status,p.pjt_typ' at line 1
+   在 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   在 MySql.Data.MySqlClient.NativeDriver.ReadResult(UInt64& affectedRows, Int64& lastInsertId)
+   在 MySql.Data.MySqlClient.MySqlDataReader.GetResultSet()
+   在 MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   在 MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   在 MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   在 System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, CommandType ComType, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 464
+   在 YxLiCai.Dao.Project.ProjectDao.GetModel(Int32 Id) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\Project\ProjectDao.cs:行号 281
+   在 YxLiCai.Server.Project.ProjectService.GetModel(Int32 id) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\Project\ProjectService.cs:行号 183
+--------------------end---------------------
+ 
+2015-07-08 11:39:31.3598 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/7/8 11:39:31
+异常发生地址:http://localhost:50143/Project/AD_Edit/299
+请求类型:GET
+异常:MySql.Data.MySqlClient.MySqlException (0x80004005): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'seelect p.id,p.name,p.ord_number,p.amount,p.pjt_status,p.verify_status,p.pjt_typ' at line 1
+   在 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   在 MySql.Data.MySqlClient.NativeDriver.ReadResult(UInt64& affectedRows, Int64& lastInsertId)
+   在 MySql.Data.MySqlClient.MySqlDataReader.GetResultSet()
+   在 MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   在 MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   在 MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   在 System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, CommandType ComType, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 464
+   在 YxLiCai.Dao.Project.ProjectDao.GetModel(Int32 Id) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\Project\ProjectDao.cs:行号 281
+   在 YxLiCai.Server.Project.ProjectService.GetModel(Int32 id) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\Project\ProjectService.cs:行号 183
+--------------------end---------------------
+ 
+2015-07-08 11:39:32.8108 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/7/8 11:39:32
+异常发生地址:http://localhost:50143/Project/AD_Edit/299
+请求类型:GET
+异常:MySql.Data.MySqlClient.MySqlException (0x80004005): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'seelect p.id,p.name,p.ord_number,p.amount,p.pjt_status,p.verify_status,p.pjt_typ' at line 1
+   在 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   在 MySql.Data.MySqlClient.NativeDriver.ReadResult(UInt64& affectedRows, Int64& lastInsertId)
+   在 MySql.Data.MySqlClient.MySqlDataReader.GetResultSet()
+   在 MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   在 MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   在 MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   在 System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, CommandType ComType, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 464
+   在 YxLiCai.Dao.Project.ProjectDao.GetModel(Int32 Id) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\Project\ProjectDao.cs:行号 281
+   在 YxLiCai.Server.Project.ProjectService.GetModel(Int32 id) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\Project\ProjectService.cs:行号 183
+--------------------end---------------------
+ 
+2015-07-08 11:39:34.0513 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/7/8 11:39:34
+异常发生地址:http://localhost:50143/Project/AD_Edit/299
+请求类型:GET
+异常:MySql.Data.MySqlClient.MySqlException (0x80004005): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'seelect p.id,p.name,p.ord_number,p.amount,p.pjt_status,p.verify_status,p.pjt_typ' at line 1
+   在 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   在 MySql.Data.MySqlClient.NativeDriver.ReadResult(UInt64& affectedRows, Int64& lastInsertId)
+   在 MySql.Data.MySqlClient.MySqlDataReader.GetResultSet()
+   在 MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   在 MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   在 MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   在 System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, CommandType ComType, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 464
+   在 YxLiCai.Dao.Project.ProjectDao.GetModel(Int32 Id) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\Project\ProjectDao.cs:行号 281
+   在 YxLiCai.Server.Project.ProjectService.GetModel(Int32 id) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\Project\ProjectService.cs:行号 183
+--------------------end---------------------
+ 
+2015-07-08 11:47:15.8829 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/7/8 11:47:15
+异常发生地址:http://localhost:50143/Project/UpdateProject?Id=324&ProjectName=%E5%88%98%E8%8D%A3%E5%8D%8E%E5%88%9D%E6%81%8B&Borrower=%E4%BE%AF%E8%A3%95%E7%A5%A5&OrderNumber=2513149250&Amount=565656&AmountSold=0&AvailableAmount=565656&BorrowingRate=0.45&LaunchTime=2015-07-11&EndTime=2015-07-31&Remark=%E6%88%91%E4%BC%9A%E7%88%B1%E4%BD%A0%E7%9A%84&Weight=6&AddTime=2015%2F7%2F8+11:46:28&RepaymentMode=%E7%BA%BF%E4%B8%8B%E6%94%AF%E4%BB%98&LoanPeriod=25&ProjectType=1&account_id=2&ProjectStatus=0
+请求类型:GET
+异常:MySql.Data.MySqlClient.MySqlException (0x80004005): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where name ='刘荣华初恋' and is_deleted !=1 and id !=Pid ;#2015年6月16日' at line 1
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteScalar(String Sql, CommandType ComType, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 414
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteScalar(String Sql, String notes, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 386
+   在 YxLiCai.Dao.Project.ProjectDao.ISProtExist(String ProjectName, Int32 Pid) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\Project\ProjectDao.cs:行号 834
+   在 YxLiCai.Server.Project.ProjectService.ISProtExist(String ProjectName, Int32 Pid) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\Project\ProjectService.cs:行号 325
+--------------------end---------------------
+ 

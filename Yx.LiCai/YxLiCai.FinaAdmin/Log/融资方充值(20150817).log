@@ -1,0 +1,4 @@
+FER_ID:8,融资方账户ID：1金额33、订单：20150817150834
+FER_ID:8,融资方账户ID：1金额88、订单：20150817151405
+FER_ID:8,融资方账户ID：1金额66、订单：20150817151545
+FER_ID:8,融资方账户ID：1--返回结果:https://yintong.com.cn/payment/bankgateway.htm?busi_partner=101001&dt_order=20150817155451&info_order=用户购买融资方充值&money_order=0.01&name_goods=融资方充值&no_order=20150817155448&notify_url=http://fina.taogucheng.com/LLPayCallBackOnline/CallBack_Notify&oid_partner=201408071000001543&sign=86ab5ababaf166cc75da086dab8080d4&sign_type=MD5&timestamp=20150817155451&url_order=&url_return=http://fina.taogucheng.com/LLPayCallBackOnline/PayCallBack&user_id=8&userreq_ip=::1&valid_order=10080&version=1.0金额0.01

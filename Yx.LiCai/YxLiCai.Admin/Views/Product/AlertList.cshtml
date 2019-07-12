@@ -1,0 +1,64 @@
+﻿<div class="zpManage zpSh">
+    <h2 class="crumbs">
+        您所在位置：产品管理 > 报警产品列表
+    </h2>
+    <div class="crumbs">
+        报警产品列表 (可投金额 < 100 元)
+    </div>
+    <div class="control-group form-horizontal">
+        <div id="tabstrip">
+            <ul>
+                <li id="tab1">
+                    月月盈
+                </li>
+                <li>
+                    季季享3个月
+                </li>
+                <li>
+                    季季享6个月
+                </li>
+                <li>
+                    年年丰
+                </li>
+            </ul>
+            @Html.Partial("_AlertListView",
+            new YxLiCai.Admin.Models.KendoTextBoxViewModel
+            {
+                Content = "1",
+                Id = "grid1"
+            })
+            @Html.Partial("_AlertListView",
+            new YxLiCai.Admin.Models.KendoTextBoxViewModel
+            {
+                Content = "2",
+                Id = "grid2"
+            })
+            @Html.Partial("_AlertListView",
+            new YxLiCai.Admin.Models.KendoTextBoxViewModel
+            {
+                Content = "3",
+                Id = "grid3"
+            })
+            @Html.Partial("_AlertListView",
+            new YxLiCai.Admin.Models.KendoTextBoxViewModel
+            {
+                Content = "4",
+                Id = "grid4"
+            })
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#tabstrip").kendoTabStrip({
+            animation: {
+                close: {
+                    effects: "fadeOut"
+                }
+            }
+        });
+        var tabToActivate = $("#tab1");
+        $("#tabstrip").kendoTabStrip().data("kendoTabStrip").activateTab(tabToActivate);
+    });
+</script>

@@ -1,0 +1,26 @@
+﻿@section styles {
+    <style>
+        .k-grid-header th.k-header > .k-link, .tbstyle tr td {
+            text-align: center;
+        }
+        .k-grid .k-button {
+            text-align:center;
+        }
+        .tbstyle tr td{
+            height: 35px;
+        }
+    </style>
+}
+<div class="zpManage zpSh">
+    <h2 class="crumbs">
+        您所在位置：产品管理 > 待审核
+    </h2>
+    <div class="cleanfix" style="margin:15px 15px 15px 15px">
+        @Html.Partial("_ListView",
+        new YxLiCai.Admin.Models.KendoTextBoxViewModel
+        {
+            Content = "0",
+            Id = "grid0"
+        })
+    </div>
+</div>

@@ -1,0 +1,16 @@
+﻿@model YxLiCai.Admin.Models.UEditorViewModel
+
+<input id="hid_@Model.Id" type="hidden" value="@Model.Content" />
+<script type="text/plain" id="@Model.Id" style="width:1000px;height:240px;">
+</script>
+
+<script>
+    var id = '@Model.Id';
+    var content = $("#hid_" + id).val();
+
+    window["um_" + id] = UM.getEditor('' + id + '');
+    if (content != "undefined" && content != "") {
+        UM.getEditor('' + id + '').execCommand('insertHtml', content);
+    }
+
+</script>

@@ -1,0 +1,27 @@
+﻿@model YxLiCai.Admin.Models.KendoDateTimeViewModel
+<div class="form-group">
+    <label class="control-label col-sm-6" for="@Model.Id">@Model.Content</label>
+    <div class="col-sm-6 col-md-6">
+        <input id="@Model.Id" readonly="@Model.Readonly"  /><v style="color: red"> *(按合同截止时间填写)</v>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var id = '@Model.Id';
+    var start = '@Model.Start';
+    var depth = '@Model.Depth';
+    var format = '@Model.Format';
+
+    var myDate = '@Model.Value';
+    myDate = (myDate.split(' ')[0]).replace(/\//g, "-");
+
+    $("#" + id + "").kendoDatePicker({
+        start: start,
+        depth: depth,
+        format: format,
+        value: myDate
+    });
+
+
+</script>
+

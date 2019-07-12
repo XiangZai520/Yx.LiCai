@@ -1,0 +1,82 @@
+﻿@using YxLiCai
+@model List<YxLiCai.Model.User.UserRateCouponModel>
+@{
+    ViewBag.Title = "加息券";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+    <link href="@HttpPageHelper.GetRemoteNetURL(SystemSiteEnum.StaticResourceMallWeb, "css/uc.css")" rel="stylesheet"> 
+<link href="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "css/uc/setting_detail.css")" rel="stylesheet">
+     <style>
+		.add-money-right{ margin-left: 0;}
+    </style>
+
+@{
+    if(Model !=null && Model.Count > 0)
+    {
+        foreach(var mod in Model)
+        {
+            if (mod.use_status == 0 && YxLiCai.Tools.DateOper.DateDays(mod.e_time, DateTime.Now) > 0)
+                {
+            <div class="add-moner">
+	    	<div class="add-money-right">
+		 		<h2><i></i><span>加息券</span></h2>
+		 		<div class="add-money-num">
+		 			<b>@(YxLiCai.Tools.Const.SystemConst.RateConvert(mod.interest_rate*100))<span>%</span></b>
+		 			<div class="add-moner-word">
+						<h3>使用条件：</h3>
+						<p>有效期内可用于任<br />意理财产品的加息</p>
+		 			</div>
+		 		</div>
+		 		<div class="add-money-time">
+		 			   <span>还有<b>@(YxLiCai.Tools.DateOper.DateDays(mod.e_time,DateTime.Now)+1)</b>天过期</span>
+		 			    <span>有效期至：<b>@mod.e_time.ToString("yyyy-MM-dd")</b></span>
+		 		</div>
+			</div>
+	    </div> 
+}
+        else
+        { 
+                  <div class="add-moner">
+	    	<div class="add-money-right add-moner-pass">
+		 		<h2><i></i><span>加息券</span></h2>
+		 		<div class="add-money-num">
+		 			<b>@(YxLiCai.Tools.Const.SystemConst.RateConvert(mod.interest_rate*100))<span>%</span></b>
+		 			<div class="add-moner-word">
+						<h3>使用条件：</h3>
+						<p>有效期内可用于任<br />意理财产品的加息</p>
+		 			</div>
+		 		</div>
+		 		<div class="add-money-time1">
+					  @if(mod.use_status==1){<span>已使用</span>} 
+                     else
+                     {
+                         <span>已过期</span>
+                     }
+		 			<span>有效期至：<b>@mod.e_time.ToString("yyyy-MM-dd")</b></span>
+		 		</div> 
+			</div>
+	    </div>
+              
+       }
+    }  
+}
+else
+{ 
+    <div class="noticket">
+	    	<div class="noticket-pic"></div>
+	    	<p>很遗憾！您暂无加息券可用！</p>
+	 </div>
+}
+}
+<div class="gxBtn-box">
+			<a href="/buy/RuleCoupon" class="datail-rule">加息券使用规则</a>
+			<a href="/Activity/invite" class="ui-btn">邀请好友</a>
+		</div>
+<!-- 浮动栏 -->
+<div class="yx-fixedBar">
+    <a class="yx-back" href="javasrcipt:void(0);">返回</a>
+    <a class="yx-home" href="/">首页</a>
+</div>
+<script>
+    seajs.use('fixed_bar');  
+</script>

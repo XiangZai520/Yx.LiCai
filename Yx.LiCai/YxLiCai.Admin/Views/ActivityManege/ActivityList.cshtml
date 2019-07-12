@@ -1,0 +1,204 @@
+﻿@section styles
+{
+    <link href="~/Resource/css/font-awesome.min.css" rel="stylesheet" />
+    <script src="~/Resource/js/My97DatePicker/WdatePicker.js"></script>
+    <style>
+       .gx-table th,.gx-table td {
+            text-align: center;
+            padding: 5px;
+        }
+    </style>
+}
+<div class="zpManage zpSh">
+    <h2 class="crumbs">
+        您所在位置：活动管理->活动管理->活动
+    </h2>
+</div>
+<div class="gx-textitem">
+    <label class="gx-texttitle">
+        活动名称：
+    </label>
+    <input id="name" type="text" class="gx-textbox" placeholder="请输入内容...">
+    <label class="gx-texttitle">
+        活动类型：
+    </label>
+    <select id="type" class="gx-textbox">
+        <option value="-1">全部</option>
+        <option value="0">注册</option>
+        <option value="1">邀请</option>
+        <option value="2">购买</option>
+    </select>
+    <label class="gx-texttitle">
+        状态：
+    </label>
+    <select id="status" class="gx-textbox">
+        <option value="-1">全部</option>
+        <option value="0">待审核</option>
+        <option value="1">审核通过</option>
+        <option value="2">审核未通过</option>
+        <option value="3">强制下线</option>
+    </select>
+    <br />
+    <label class="gx-texttitle">
+        创建时间：
+    </label>
+    <input type="text" id="s_ctime" class="Wdate gx-textbox" style="height:34px;" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd' })">
+    <label class="gx-texttitle">
+        至：
+    </label>
+    <input type="text" id="e_ctime" class="Wdate gx-textbox" style="height:34px;" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd' })" />
+    <label for="IsAct" class="gx-texttitle">
+        上线中活动：
+    </label>
+     <input type="checkbox" id="IsAct" />
+    <button id="search" class="gx-button gx-button-info search-btn" style="float:right;margin-right:100px;">查询</button>
+</div>
+<div class="cleanfix" style="margin:15px 15px 15px 15px;">
+    <table class="gx-table gx-table-striped">
+        <thead>
+            <tr>
+                <th width="5%">活动ID</th>
+                <th width="10%">活动名称</th>
+                <th width="5%">活动类型</th>
+                <th width="5%">赠送上限</th>
+                <th width="10%">活动广告语</th>
+                <th width="10%">创建时间</th>
+                <th width="5%">参与上限</th>
+                <th width="5%">已参与人</th>
+                <th width="5%">链接</th>
+                <th width="5%">预算/元</th>
+                <th width="10%">活动开始时间</th>
+                <th width="10%">活动结束时间</th>
+                <th width="5%">状态</th>
+                <th width="10%">操作</th>
+            </tr>
+        </thead>
+        <tbody id="tdata"></tbody>
+    </table>
+</div>
+<!--分页控件-->
+<div class="clearfix">
+    <nav class="gx-pager" id="pager">
+
+    </nav>
+</div>
+
+<script type="text/javascript">
+    //固定查询方法 方法名必须叫Search
+    function Search(CurrentPage) {
+        var name = $("#name").val();
+        var type = $("#type").val();
+        var status = $("#status").val();
+        var s_ctime = $("#s_ctime").val();
+        var e_ctime = $("#e_ctime").val();
+        var IsAct = 0;
+        if ($("#IsAct").is(":checked"))
+        {
+            IsAct = 1;
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/ActivityManege/ActivityList_ajax",
+            data: { name: name, type: type, status: status, s_ctime: s_ctime, e_ctime: e_ctime, CurrentPage: CurrentPage, PageSize: 10, IsAct: IsAct },
+            async: false,
+            success: function (data) {
+                if (data != null) {
+
+                    $("#pager").html(data.PageHTML);
+                    var Rows = data.Rows;
+                    if (Rows != null) {
+                        var strHTML = "";
+                        for (var i = 0; i < Rows.length; i++) {
+                            var row = Rows[i];
+                            //a.id,a.name,a.type,a.limit_num,a.ad_content,a.c_time,a.max_user_num,a.curt_user_num,a.url,a.budget,a.s_time,a.e_time,a.status
+                            strHTML = strHTML + "<tr>";
+                            strHTML = strHTML + "<td>" + row.id + "</td>";
+                            strHTML = strHTML + "<td>" + row.name + "</td>";
+                            strHTML = strHTML + "<td>" + row.type + "</td>";
+                            strHTML = strHTML + "<td>" + row.limit_num + "</td>";
+                            strHTML = strHTML + "<td>" + row.ad_content + "</td>";
+                            strHTML = strHTML + "<td>" + row.c_time + "</td>";
+                            strHTML = strHTML + "<td>" + row.max_user_num + "</td>";
+                            strHTML = strHTML + "<td>" + row.curt_user_num + "</td>";
+                            strHTML = strHTML + "<td>" + row.url + "</td>";
+                            strHTML = strHTML + "<td>" + row.budget + "</td>";
+                            strHTML = strHTML + "<td>" + row.s_time + "</td>";
+                            strHTML = strHTML + "<td>" + row.e_time + "</td>";
+                            if (row.status == "0") {
+                                strHTML = strHTML + "<td>待审核</td>";
+                                strHTML = strHTML + "<td><a href='/ActivityManege/ActivityDetail?id=" + row.id + "'>详情</a><a style='margin:5px' href='/ActivityManege/AuditActivity?id=" + row.id + "'>审核</a><a style='margin:5px' href='/ActivityManege/ModifyActivity?id=" + row.id + "'>修改</a><a style='margin:5px' id='Del_" + row.id + "' name='Del'>删除</a></td>";
+                            }
+                            else if (row.status == "1") {
+                                strHTML = strHTML + "<td>审核通过</td>";
+                                strHTML = strHTML + "<td><a href='/ActivityManege/ActivityDetail?id=" + row.id + "'>详情</a><a style='margin:5px' id='UpS_" + row.id + "' name='UpS'>强制下线</a></td>";
+                            }
+                            else if (row.status == "2") {
+                                strHTML = strHTML + "<td>审核未通过</td>";
+                                strHTML = strHTML + "<td><a href='/ActivityManege/ActivityDetail?id=" + row.id + "'>详情</a><a style='margin:5px' href='/ActivityManege/ModifyActivity?id=" + row.id + "'>修改</a><a style='margin:5px' id='Del_" + row.id + "' name='Del'>删除</a></td>";
+                            }
+                            else if (row.status == "3") {
+                                strHTML = strHTML + "<td>强制下线</td>";
+                                strHTML = strHTML + "<td><a href='/ActivityManege/ActivityDetail?id=" + row.id + "'>详情</a></td>";
+                            }
+                            strHTML = strHTML + "</tr>";
+                        }
+                        $("#tdata").html(strHTML);
+                    }
+                }
+            }
+        })
+    }
+    $("#search").on("click", function () {
+        Search(1);
+    })
+    $(function () {
+        Search(1);
+    })
+    $("#tdata").on("click", "a[name='Del']", function () {
+        if (confirm("确定要删除吗？")) {
+            var id = $(this).attr("id");
+            id = id.replace("Del_", "");
+            $.ajax({
+                type: "POST",
+                url: "/ActivityManege/DelActivity",
+                data: { id: id },
+                async: false,
+                success: function (data) {
+                    if (data != null) {
+                        if (data == "ok") {
+                            alert("删除成功！");
+                            Search(1);
+                        }
+                        else {
+                            alert(data.Message);
+                        }
+                    }
+                }
+            })
+        }
+    })
+    $("#tdata").on("click", "a[name='UpS']", function () {
+        if (confirm("确定要强制下线吗？")) {
+            var id = $(this).attr("id");
+            id = id.replace("UpS_", "");
+            $.ajax({
+                type: "POST",
+                url: "/ActivityManege/UpdateActivityStatus",
+                data: { id: id, status: 3, remark: "" },
+                async: false,
+                success: function (data) {
+                    if (data != null) {
+                        if (data == "ok") {
+                            alert("操作成功！");
+                            Search(1);
+                        }
+                        else {
+                            alert(data.Message);
+                        }
+                    }
+                }
+            })
+        }
+    })
+</script>

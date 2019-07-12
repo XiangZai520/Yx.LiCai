@@ -1,0 +1,39 @@
+2015-07-11 19:53:07.9922 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/7/11 19:53:06
+异常发生地址:http://localhost:50151/UserAssets/User_record
+请求类型:GET
+异常:System.FormatException: 输入字符串的格式不正确。
+   在 System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   在 System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   在 System.Convert.ToInt32(String value)
+   在 YxLiCai.Dao.M_Users.UsersMoneyDao.GetListUserAmountRecModel(Int64 UserID, Int32 SCount, Int32 ECout, Int32& record) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\M_Users\UsersMoneyDao.cs:行号 694
+   在 YxLiCai.Server.User.UserInfoService.GetListUserAmountRecModel(Int64 UserID, Int32 CurrentPage, Int32 PageSize, Int32& record) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\User\UserInfoService.cs:行号 1038
+--------------------end---------------------
+ 
+2015-07-11 19:56:24.1138 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/7/11 19:56:23
+异常发生地址:http://localhost:50151/UserAssets/User_record
+请求类型:GET
+异常:System.FormatException: 输入字符串的格式不正确。
+   在 System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   在 System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   在 System.Convert.ToInt32(String value)
+   在 YxLiCai.Dao.M_Users.UsersMoneyDao.GetListUserAmountRecModel(Int64 UserID, Int32 SCount, Int32 ECout, Int32& record) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\M_Users\UsersMoneyDao.cs:行号 694
+   在 YxLiCai.Server.User.UserInfoService.GetListUserAmountRecModel(Int64 UserID, Int32 CurrentPage, Int32 PageSize, Int32& record) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\User\UserInfoService.cs:行号 1038
+--------------------end---------------------
+ 
+2015-07-11 19:58:03.1374 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/7/11 19:58:02
+异常发生地址:http://localhost:50151/UserAssets/User_record
+请求类型:GET
+异常:System.FormatException: 输入字符串的格式不正确。
+   在 System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   在 System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   在 System.Convert.ToInt32(String value)
+   在 YxLiCai.Dao.M_Users.UsersMoneyDao.GetListUserAmountRecModel(Int64 UserID, Int32 SCount, Int32 ECout, Int32& record) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\M_Users\UsersMoneyDao.cs:行号 694
+   在 YxLiCai.Server.User.UserInfoService.GetListUserAmountRecModel(Int64 UserID, Int32 CurrentPage, Int32 PageSize, Int32& record) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\User\UserInfoService.cs:行号 1038
+--------------------end---------------------
+ 

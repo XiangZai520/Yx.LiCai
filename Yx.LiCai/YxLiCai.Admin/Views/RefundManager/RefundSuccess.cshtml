@@ -1,0 +1,134 @@
+﻿<div class="zpManage zpSh">
+    <h2 class="crumbs">
+        您所在位置：财务管理->还款管理->还款记录
+    </h2>
+</div>
+<div class="gx-textitem">
+    <div class="form-group">
+        <label class="gx-texttitle">
+            融资方名称：
+        </label>
+        <input id="m_name" type="text" class="gx-textbox search-txt" placeholder="请输入内容...">
+        <label class="gx-texttitle">
+            项目ID：
+        </label>
+        @Html.Partial("EditorTemplates/KendoNumeric",
+    new YxLiCai.Admin.Models.KendoNumericTextBoxViewModel
+    {
+        Id = "pjt_id",
+        Min = "0"
+    })
+    </div>
+    <div class="form-group">
+        <label class="gx-texttitle">
+            还款日期：
+        </label>
+        @Html.Partial("EditorTemplates/KendoTime",
+    new YxLiCai.Admin.Models.KendoDateTimeViewModel
+    {
+        Id = "SDate",
+        Format = "yyyy-MM-dd hh:mm:ss"
+    })
+        <label class="gx-texttitle">
+            至：
+        </label>
+        @Html.Partial("EditorTemplates/KendoTime",
+    new YxLiCai.Admin.Models.KendoDateTimeViewModel
+    {
+        Id = "EDate",
+        Format = "yyyy-MM-dd hh:mm:ss"
+    })
+    </div>
+    <div class="form-group">
+        <label class="gx-texttitle">
+            还款金额：
+        </label>
+        @Html.Partial("EditorTemplates/KendoNumeric",
+    new YxLiCai.Admin.Models.KendoNumericTextBoxViewModel
+    {
+        Id = "amount_min",
+        Format = "n2",
+        Decimals = "2",
+        Min = "0"
+    })
+        <label class="gx-texttitle">
+            至：
+        </label>
+        @Html.Partial("EditorTemplates/KendoNumeric",
+    new YxLiCai.Admin.Models.KendoNumericTextBoxViewModel
+    {
+        Id = "amount_max",
+        Format = "n2",
+        Decimals = "2",
+        Min = "0"
+    })
+    </div>
+    <div class="form-group">
+        <label class="gx-texttitle">
+            还款类型：
+        </label>
+        @Html.Partial("EditorTemplates/KendoDropdown",
+    new YxLiCai.Admin.Models.KendoDropdownlistViewModel
+    {
+        Id = "refund_type",
+        SourceUrl = "/RefundManager/GetConfig?configName=Refund|element=Type"
+    })
+        <button id="btnSearch" class="gx-button gx-button-info search-btn" style="float:right;margin-right:300px;">查询</button>
+    </div>
+</div>
+<div class="cleanfix" style="margin:15px 15px 15px 15px">
+    <div id="grid_interest"></div>
+</div>
+
+<script type="text/javascript">
+    require(['CRM/common.assets', 'CRM/refund.assets'], function (common, refund) {
+
+        //initial data
+        var param_init = {
+            merchantName: '', pjt_id: -1, amount_min: -1, amount_max: -1,
+            sDate: '', eDate: '', type: -1
+        };
+        getData(param_init);
+
+        //查询按钮事件
+        $("#btnSearch").bind("click", function () {
+            var mName = $("#m_name").val(), //融资方名称
+                pjt_id = $("#pjt_id").val() || -1, //项目id
+                amount_min = $("#amount_min").val() || -1,
+                amount_max = $("#amount_max").val() || -1,
+                sDate = $("#SDate").val(), //申请时间
+                eDate = $("#EDate").val(), //申请时间
+                type = $("#refund_type").val(); //还款类型
+
+            param = {
+                merchantName: mName, pjt_id: pjt_id, amount_min: amount_min,
+                amount_max: amount_max, sDate: sDate, eDate: eDate, type: type
+            };
+            getData(param);
+        });
+
+        //还息列表
+        function getData(param) {
+            //datasource
+            var ds = refund.getRefundLog(param);
+            //columns
+            var columns = [
+                 { field: "id", title: "ID", sortable: true },
+                 { field: "pjt_id", title: "项目ID", sortable: true },
+                 { field: "ProjectName", title: "项目名称", sortable: true },
+                 { field: "ProjectAmount", title: "项目金额(万元)", sortable: true },
+                 { field: "amount", title: "还款金额(元)", sortable: true },
+                 { field: "ctime", title: "还款日期", sortable: true },
+                 { field: "MerchantName", title: "融资方名称", sortable: true },
+                 { field: "Type", title: "还款类型", sortable: true }
+            ];
+            //grid
+            var grid = $('#grid_interest').kendoGrid({
+                sortable: true,
+                pageable: true,
+                dataSource: ds,
+                columns: columns,
+            }).data("kendoGrid");
+        }
+    });
+</script>

@@ -1,0 +1,1 @@
+define("yxClick",["jquery","fastclick"],function(i,c,e){{var n=jQuery=i("jquery");i("fastclick")}n(".leaf").click(function(){n(this).hide()}),n(".ui-inviteBtn").click(function(){n(".leaf").show()})}),seajs.use("yxClick");

@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "注册";
+} 
+
+        <div class="reg-list">
+            <dl>
+                <dt class="right-style gray-status" id="repOld">
+                    <span id="btnSend"><b id="TimeMove">60</b>秒后重新发送</span>
+                </dt>
+                <dt class="right-style" id="repNew" style="display:none">
+                    <span id="repNewMsg">重新发送</span>                  
+                </dt>
+                <dd>
+                    <input type="tel" class="input-txt phone-code" id="phoneCode" name="phoneCode" placeholder="机器人才不会输验证码" maxlength="6"/>
+                </dd>
+                <dd class="yx-tips">
+                </dd>
+                <dd class="warm-tips Validedate_check"></dd>
+            </dl>
+            <dl>
+                <dt class="left-style">设置密码</dt>
+                <dd>
+                    <input type="password" class="input-txt reg-pwd" id="regPassword" name="regPassword" placeholder="6-16位字母.数字.下划线" maxlength="16"/>
+                    <b class="show-pwd" id="ShowPasswerd"></b>
+                </dd>
+            </dl>
+        </div>
+        <div class="do-btn">
+            <button type="button" class="ui-btn" id="regBtn">注册</button>
+            <p class="yx-safety">您的隐私是用来让一小休保护的</p>
+        </div>
+<input id="inviteCode" type="hidden" value="@ViewBag.inviteCode" />
+<script>
+    var dianhua = '@YxLiCai.Tools.Const.SystemConst.ConvertPhoneNum(ViewBag.Phone)';  
+    var dian = '@ViewBag.Phone';
+    seajs.use('User/LoginOrRegister/register.js');
+    seajs.use('User/UserCommen');
+</script>
+

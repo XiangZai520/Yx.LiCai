@@ -1,0 +1,112 @@
+﻿@section styles
+{
+    <link href="~/Resource/css/font-awesome.min.css" rel="stylesheet" />
+    <script src="~/Resource/js/My97DatePicker/WdatePicker.js"></script>
+}
+<div class="zpManage zpSh">
+    <h2 class="crumbs">
+        您所在位置：活动管理->加息券->发放/使用明细
+    </h2>
+</div>
+<div class="gx-textitem">
+    <label class="gx-texttitle">
+        加息券名称：
+    </label>
+    <input id="name" type="text" class="gx-textbox" placeholder="请输入内容...">
+    <label class="gx-texttitle">
+        手机号：
+    </label>
+    <input id="login_name" type="text" class="gx-textbox" placeholder="请输入内容...">
+    <label class="gx-texttitle">
+        状态：
+    </label>
+    <select id="use_status" class="gx-textbox">
+        <option value="-1">全部</option>
+        <option value="0">未使用</option>
+        <option value="1">已使用</option>
+    </select>
+    <br />
+    <label class="gx-texttitle">
+        发放时间：
+    </label>
+    <input type="text" id="s_ctime" class="Wdate gx-textbox" style="height:34px;" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd' })">
+    <label class="gx-texttitle">
+        至：
+    </label>
+    <input type="text" id="e_ctime" class="Wdate gx-textbox" style="height:34px;" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd' })" />
+    <button id="search" class="gx-button gx-button-info" style="float:right;margin-right:300px;">查询</button>
+</div>
+<div class="cleanfix" style="margin:15px 15px 15px 15px">
+    <table class="gx-table gx-table-striped">
+        <thead>
+            <tr>
+                <th>用户名</th>
+                <th>加息券名称</th>
+                <th>加息券面值/%</th>                
+                <th>发放时间</th>
+                <th>失效时间</th>
+                <th>状态</th>
+                <th>是否过期</th>
+                <th>投资产品</th>
+                <th>使用时间</th>
+            </tr>
+        </thead>
+        <tbody id="tdata"></tbody>
+    </table>
+</div>
+<!--分页控件-->
+<div class="clearfix">
+    <nav class="gx-pager" id="pager">
+
+    </nav>
+</div>
+
+<script type="text/javascript">
+    //固定查询方法 方法名必须叫Search
+    function Search(CurrentPage) {
+        var name = $("#name").val();
+        var login_name = $("#login_name").val();
+        var s_ctime = $("#s_ctime").val();
+        var e_ctime = $("#e_ctime").val();
+        var use_status = $("#use_status").val();
+
+        $.ajax({
+            type: "POST",
+            url: "/ActivityManege/InterestCouponSendDetail_ajax",
+            data: { name: name, login_name: login_name, s_ctime: s_ctime, e_ctime: e_ctime, PageIndex: CurrentPage, PageSize: 10, use_status: use_status },
+            async: false,
+            success: function (data) {
+                if (data != null) {
+
+                    $("#pager").html(data.PageHTML);
+                    var Rows = data.Rows;
+                    if (Rows != null) {
+                        var strHTML = "";
+                        for (var i = 0; i < Rows.length; i++) {
+                            var row = Rows[i];
+
+                            strHTML = strHTML + "<tr>";
+                            strHTML = strHTML + "<td>" + row.login_name + "</td>";
+                            strHTML = strHTML + "<td>" + row.name + "</td>";
+                            strHTML = strHTML + "<td>" + row.interest_rate + "</td>";
+                            strHTML = strHTML + "<td>" + row.c_time + "</td>";
+                            strHTML = strHTML + "<td>" + row.e_time + "</td>";
+                            strHTML = strHTML + "<td>" + row.use_status + "</td>";
+                            strHTML = strHTML + "<td>" + row.IsExpired + "</td>";
+                            strHTML = strHTML + "<td>" + row.pdt_type + "</td>";
+                            strHTML = strHTML + "<td>" + row.use_date + "</td>";
+                            strHTML = strHTML + "</tr>";
+                        }
+                        $("#tdata").html(strHTML);
+                    }
+                }
+            }
+        })
+    }
+    $("#search").on("click", function () {
+        Search(1);
+    })
+    $(function () {
+        Search(1);
+    })
+</script>

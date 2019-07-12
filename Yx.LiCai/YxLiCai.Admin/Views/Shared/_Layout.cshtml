@@ -1,0 +1,119 @@
+﻿ 
+@using YxLiCai.Model.Authority
+@using YxLiCai.Service.MenuSet
+@using YxLiCai.Tools
+@using YxLiCai.Tools.Util
+@using YxLiCai.Admin
+@{
+    Layout = null;
+    AuthorityMenuService iauthority = new AuthorityMenuService();
+    List<AuthorityMenuModel> menus = iauthority.GetAllMenuList(); //所有菜单权限
+    List<int> myMenus = null;//我的权限菜单数组
+    string cookieValue =CookieHelper.ReadCookie("menulist");
+    if (cookieValue == "")
+    {
+        List<int> myMenusR = iauthority.GetMenuIdsByRoloId(UserContext.simpleUserInfoModel.RoleId);
+        myMenus = iauthority.GetMenuIdsByAccountId(UserContext.simpleUserInfoModel.Id);
+        if (myMenusR!=null)
+        {
+            myMenus.AddRange(myMenusR);
+        }  
+    }
+    else
+    {
+        cookieValue = YxLiCai.Tools.SafeEncrypt.DES.DesDecrypt(cookieValue, YxLiCai.Tools.Const.SystemConst.encrypt_des);
+        myMenus = SerializeHelper.JsonDeserialize<List<int>>(cookieValue); 
+    } 
+}
+<!DOCTYPE html>
+
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>管理后台</title>
+    <link href="~/Content/fromwangying/admin.css" rel="stylesheet" />
+    <link href="~/Content/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/pager.css" rel="stylesheet" /> 
+ 
+    <link href="~/Content/kendo/2014.3.1119/kendo.common.min.css" rel="stylesheet" />
+    <link href="~/Content/kendo/2014.3.1119/kendo.default.min.css" rel="stylesheet" />
+
+    @Styles.Render("~/css")
+    <link rel="shortcut icon" type="image/ico" href="/favicon.ico">
+    @RenderSection("styles", false)
+    <script src="~/Scripts/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="/Scripts/common/admin.js"></script> 
+    <script src="~/Scripts/kendo/2014.3.1119/kendo.all.min.js"></script>
+    @*<script src="~/Scripts/kendo/2014.3.1119/kendo.aspnetmvc.min.js"></script>*@
+    <script src="~/Scripts/require.js"></script>
+    <script src="~/Scripts/Modules/settings.js"></script>
+</head>
+<body>
+    <span id="popupNotification"></span>
+    <div class="container-fluid">
+        <header class="hd">
+           <div>
+                <div class="toptitle">
+                    e休理财管理后台
+                </div>
+            </div>
+            <div class="loginInfo" style="width: 460px;">
+                您好： <strong>@UserContext.simpleUserInfoModel.LoginName</strong>，欢迎使用<span class="line">|</span><a href="/Account/LogOff" class="importMsg">退出</a>
+            </div>
+        </header>
+        <div class="main-container">
+            <div class="sidebar">
+                <ul class="nav nav-list">
+                    <li>
+                        <a href="/Home/Index">
+                            <i class="homeicon"></i>
+                            <span class="menu-text">后台首页</span>
+                        </a>
+                    </li> 
+                    @{
+                        if (menus != null)
+                        { 
+                            List<AuthorityMenuModel> partMenus = (from m in menus where m.ParId == 0 select m).ToList();
+                            foreach (var pMenu in partMenus)
+                            { <li>
+                                <a class="dropdown-toggle" href="javascript:void(0);">
+                                    <i class="skuicon"></i>
+                                    <span class="menu-text">@pMenu.MenuName</span>
+                                    <b class="arrow icon-angle-down"></b>
+                                </a>
+                                <ul class="submenu">
+                                    @{
+                                        List<AuthorityMenuModel> childMenus = (from m in menus where m.ParId == pMenu.Id && pMenu.IsButton==0 select m).ToList();
+                                        if (childMenus!=null && childMenus.Count > 0)
+                                        {
+                                            foreach(var cMenu in childMenus)
+                                            {
+                                                if(myMenus.Contains(cMenu.Id) && cMenu.IsButton==0){<li><a href="@cMenu.Url" data-url-def="#">@cMenu.MenuName</a></li> }
+                                            }  
+                                        }
+                                    }  
+                                </ul> </li>  
+                            }
+                            }
+
+                        }  
+                </ul>
+                <div id="sidebar-collapse" class="sidebar-collapse">
+                    <i data-icon2="icon-double-angle-right" data-icon1="icon-double-angle-left" class="icon-double-angle-left"></i>
+                </div>
+            </div>
+            <div class="main-content">
+                <div class="page-content">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+   </div>
+    <script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/Layout/Layout.js"></script>
+    @*<script type="text/javascript" src="~/Scripts/jquery.colorbox-min.js"></script>*@
+    @RenderSection("scripts", false)
+</body>
+</html>

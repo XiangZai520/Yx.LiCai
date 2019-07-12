@@ -1,0 +1,35 @@
+﻿@using YxLiCai
+@using Yx.LiCai.App_Start 
+@{
+    ViewBag.Title = "购买成功";
+} 
+    <link href="@HttpPageHelper.GetRemoteNetURL(SystemSiteEnum.StaticResourceMallWeb, "css/buy.css")" rel="stylesheet">  
+	<div class="yixiu_man"><span></span></div>
+    <div class="main-buy">
+    	<dl>
+    		<dt class="hover"><img src="@HttpPageHelper.GetRemoteNetURL(SystemSiteEnum.StaticResourceMallWeb, "images/buy_right.png")"></dt>
+    		<dd>  
+    		    <b>您已成功申请购买@(ViewBag.Ptype)产品</b>
+    		    <b><span>@ViewBag.Money</span>元</b>
+    		</dd>
+    	</dl> 
+        <dl>
+            <dt><img src="@HttpPageHelper.GetRemoteNetURL(SystemSiteEnum.StaticResourceMallWeb, "images/buy_time.png")"></dt>
+            <dd>
+                <b>即时开始计算收益</b>
+                <b>@ViewBag.NowDay</b>
+            </dd>
+        </dl>
+        <dl>
+            <dt><img src="@HttpPageHelper.GetRemoteNetURL(SystemSiteEnum.StaticResourceMallWeb, "images/buy_day.png")"></dt>
+            <dd>
+                <b>查看收益</b>
+                <b>@ViewBag.NextDay</b>
+            </dd>
+        </dl>
+    </div>
+    <div class="margin_top" id="padding-bottom">
+        <a href="/Member/" class="ui-btn">确认</a>
+    </div>
+ 
+ 

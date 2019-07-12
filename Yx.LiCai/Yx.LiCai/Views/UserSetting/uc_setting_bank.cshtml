@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "我的银行卡";
+}
+<link rel="stylesheet" href="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "css/uc/setting_detail.css")">
+<div class="dope">
+    <div class="uc_bank_s">
+        <div class="uc_bank_pic"></div>
+        <div class="uc_bank_num">银行卡号<span> @YxLiCai.Tools.Const.SystemConst.BankIDCut(ViewBag.BankID)</span></div>
+        <div class="uc_bank_main">
+            <h2>更换银行卡指南</h2>
+            <dl>
+                <dt class="uc-bank-dt1"></dt>
+                <dd>
+                    <p><b>提现余额</b></p>
+                    <p>将总资产余额提现到原银行卡</p>
+                </dd>
+            </dl>
+            <dl>
+                <dt class="uc-bank-dt2"></dt>
+                <dd>
+                    <p><b>拍摄持证照</b></p>
+                    <p>拍摄手持身份证照片，手持银行卡照片</p>
+                </dd>
+            </dl>
+            <dl>
+                <dt class="uc-bank-dt3"></dt>
+                <dd>
+                    <p><b>发送资料给我们</b></p>
+                    <p>将手持身份证照片，手持银行卡照片、姓名、身份证号、原银行卡号、新银行卡号及开户行发送至<span>admin@yxlc.com</span></p>
+                </dd>
+            </dl>
+            <dl>
+                <dt class="uc-bank-dt4"></dt>
+                <dd>
+                    <p><b>完成</b></p>
+                    <p>客服收到邮件后24小时内给您以邮件形式回复</p>
+                </dd>
+            </dl>
+        </div>
+    </div>
+</div>
+ 

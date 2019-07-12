@@ -1,0 +1,34 @@
+﻿@{
+    ViewBag.Title = "修改登录密码";
+}
+<div class="setting-box">
+    <form id="settingForm" name="settingForm" method="post" action="#" autocomplete="off">
+        <div class="reg-list login-list">
+            <dl>
+                <dt class="left-style">原始密码</dt>
+                <dd>
+                    <input type="password" class="input-txt user-pwd" id="oldPassword" name="oldPassword" placeholder="请输入原始密码" maxlength="16">
+                </dd>
+            </dl>
+            <dl>
+                <dt class="left-style">设置密码</dt>
+                <dd>
+                   @* <span id="pwspn">*@
+                        <input type="password" class="input-txt reg-pwd" maxlength="16" id="regPassword" name="regPassword" placeholder="6-16位字母.数字.下划线">@*</span>*@                 
+                    <b class="show-pwd" id="ShowPasswerd"></b>
+                </dd>
+                <dd class="warm-tips Validedate_check">
+                    <p id="MessageShow"></p>
+                </dd>
+            </dl>
+        </div>
+        <div class="ok-btn">
+            <a class="ui-btn" id="J_setting_pwd">确认</a>
+            <p class="forget-link"><a href="/Login/forget_pwd?phone=@YxLiCai.Tools.Const.SystemConst.ConvertPhoneNum(Yx.LiCai.App_Start.UserContext.simpleUserInfoModel.Account)">忘记密码</a></p>
+        </div>
+    </form>
+</div>
+<script>
+    seajs.use('User/UserSetting/user_setting_pwd');
+</script>
+

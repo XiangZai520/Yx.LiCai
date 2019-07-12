@@ -1,0 +1,166 @@
+.account{
+	padding:40px 20px 20px 20px;
+}
+.account-month{
+	display: none;
+}
+.account-title{
+	border-radius: 5px;
+	border:1px solid #00b7ee;
+	height: 40px;
+	display: -webkit-box;
+    display: -moz-box;
+    display: -o-box;
+    display: box;
+}
+.account-title li{
+	-webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    -o-box-flex: 1;
+    box-flex: 1;
+	color: #00b7ee;
+	text-align: center;
+	font-size: 16px;
+	line-height: 38px;
+	cursor: pointer;
+}
+.account-title li.hover{
+	background: #00b8ee;
+	color: #fff;
+}
+.account-title li:nth-child(1),
+.account-title li:nth-child(2){
+	border-right:1px solid #00b7ee;
+}
+.account-income h2{
+	color: #969696;
+	font-size: 16px;
+	margin:15px 0 0 15px;
+}
+.account-income b{
+	display: block;
+	text-align: center;
+	color: #ff6280;
+	font-size: 30px;
+	margin-top:15px;
+}
+.acconnt-list{
+   position: relative;
+}
+.buy-money{
+	border:1px solid #dfdfdf;
+	overflow: hidden;
+	padding-left: 100px;
+	padding-right: 30px;
+	margin-top: 10px;
+}
+.buy-money h2{
+	position: absolute;
+	left: 0;
+	top: 0;
+	color: #fff;
+	font-size: 16px;
+	width: 100px;
+	line-height: 42px;
+	text-align: center;
+	background: #00b7ee;
+	float: left;
+}
+.account-word{
+	float: right;
+	line-height: 40px;
+	width: 100%;
+}
+.account-money{
+	color: #ff6280;
+	font-size: 14px;
+	text-align: right;
+	width: 100%;
+}
+.account-word p{
+	color: #969696;
+	font-size: 14px;
+	position: absolute;
+	right: 14px;
+}
+.income-num{
+	font-size: 14px;
+	color: #969696;
+	padding-top: 10px;
+}
+.income-num span{
+	font-size: 14px;
+	color: #ff6280;
+}
+.income-account{
+	margin-top: 20px;
+}
+/*季季享*/
+.account-word-s{
+	float: right;
+	line-height: 40px;
+}
+.account-word-s span{
+	color: #b4b4b4;
+	font-size: 14px;
+	cursor: pointer;
+}
+.account-word-s span b{
+	color: #ff6280;
+	font-weight: normal;
+}
+.account-word-s ul{
+	position: absolute;
+	right:-12px;
+	top:28px;
+	padding-top: 10px;
+	box-shadow: 0 5px 2px -5px #333;
+	display: none;
+}
+
+.account-word-s ul li{
+	color: #fff;
+	width: 100px;
+	font-size: 14px;
+	text-align: center;
+	font-weight: bold;
+	background: #00b7ee;
+	cursor: pointer;
+}
+.account-word-s ul li:hover{
+	background: #08a7d7;
+}
+.account-word-s ul li i{
+	display: block;
+    width:0px;
+    height:0px;
+    border-left:5px solid transparent;
+    border-right:5px solid transparent;
+    border-bottom:5px solid #00b7ee;
+    font-size:0px;
+    line-height:0px;
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    z-index: 999;
+    margin-left: -5px;
+}
+.account-word-s i{
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	background: url(../images/bank_s.png) no-repeat;
+	background-size: 100%;
+	margin:0 0 0 4px;
+}
+.account-word-s i.hover{
+	background: url(../images/bank_h.png) no-repeat;
+	background-size: 100%;
+}
+
+.other-list .buy-money{
+	padding-right: 8px;
+	padding-left: 0;
+}
+
+

@@ -1,0 +1,294 @@
+﻿<div class="zpManage zpSh">
+    <h2 class="crumbs">您所在位置：项目管理 > 项目列表
+    </h2>
+    <div class="SearchMd form-horizontal">
+        @Html.Partial("EditorTemplates/KendoTextBox",
+        new YxLiCai.Admin.Models.KendoTextBoxViewModel
+        {
+            Content = "项目名称",
+            Id = "ProjectName"
+        })
+        @Html.Partial("EditorTemplates/KendoDate",
+        new YxLiCai.Admin.Models.KendoDateTimeViewModel
+        {
+            Content = "发起日期(起)",
+            Id = "LaunchTime",
+            Format = "yyyy-MM-dd"
+        })
+        @Html.Partial("EditorTemplates/KendoDate",
+        new YxLiCai.Admin.Models.KendoDateTimeViewModel
+        {
+            Content = "(终)",
+            Id = "EndTime",
+            Format = "yyyy-MM-dd"
+        })
+        @Html.Partial("EditorTemplates/KendoNumericTextBox",
+        new YxLiCai.Admin.Models.KendoNumericTextBoxViewModel
+        {
+            Content = "权值范围",
+            Id = "Weight"
+
+        })
+        @Html.Partial("EditorTemplates/KendoNumericTextBox",
+        new YxLiCai.Admin.Models.KendoNumericTextBoxViewModel
+        {
+            Content = "至",
+            Id = "EndWeight"
+        })
+        <input type="button" id="btnSearch" value="查询" class="searchBtn" />
+
+    </div>
+    <div class="control-group form-horizontal">
+        <div class="control-group">
+            <div class="tbstyle">
+                <x style="color: red; font-size: 18px"> *直接点击权值列就可进行修改(权值范围1-100)</x>
+                <div id="productGrid"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    require(['CRM/common.assets'], function (common) {
+
+        var itemId = "";
+        var grid = $("#productGrid").kendoGrid({
+            batch: true,
+            sortable: true,
+            pageable: true,
+            editable: true,
+            change: function (e) {
+                $.map(this.select(), function (item) {
+                    itemId = $(item).parent("tr").children("td").first().html();
+                    $(item).removeClass("data-role");
+                });
+            },
+            edit: function (e) {
+                handleChange(e, itemId);
+            }
+        }).data("kendoGrid");
+        function handleChange(e, itemId) {
+            var input = e.container.find(":input");
+            input.change(function () {
+                var value = input.val();
+                updateChangedItem(itemId, value);
+            });
+        }
+        function updateChangedItem(id, value) {
+            if (value == "" || typeof (value) == "undefined") {
+                return;
+            }
+            value = parseInt(value);
+
+            $.ajax({
+                url: "/Project/UpdateProjectWeight",
+                dataType: "json",
+                data: { ProjectID: id, Weight: value },
+                success: function (e) {         
+                    if (e.IsSuccess) {
+                        common.popupNotification.show(e.Message, "info");
+
+                    } else {
+                        alert(e.Message);
+                        return;
+                    }
+                },
+                error: function (e) {
+                    common.popupNotification.show("修改失败", "info");
+                }
+            });
+        }
+
+        var ProjectName = $("#ProjectName").val(),
+             LaunchTime = $("#LaunchTime").val(),
+             EndTime = $("#EndTime").val(),
+             Weight = $("#Weight").val(),
+             EndWeight = $("#EndWeight").val();
+        var param = {
+            ProjectName: ProjectName, ProjectStatus: 2, LaunchTime: LaunchTime, EndTime: EndTime, Weight: Weight, EndWeight: EndWeight
+        };
+        var productDs = new kendo.data.DataSource({
+            pageSize: 15,
+            transport: {
+                read: {
+                    url: "/Project/GetProjectWeightList",
+                    dataType: "json",
+                    data: param
+                },
+            },
+            schema: {
+                model: {
+                    id: "Id",
+                    fields: {
+                        Id: { editable: false },
+                        ProjectName: { editable: false },
+                        Amount: { editable: false },
+                        AmountSold: { editable: false },
+                        AvailableAmount: { editable: false },
+                        Quantity: { editable: false },
+                        Singleday: { editable: false },
+                        Fullscaledays: { editable: false },
+                        Chushoudays: { editable: false },
+                        Weight: { editable: true, type: "number", validation: { min: 0, max: 100, required: true } },
+                        LaunchTime: { editable: false },
+                    }
+                }
+            }
+        });
+        grid.bind("dataBinding", function (e) {
+            if (productDs.Binding) return;
+            for (var i = 0; i < productDs.data().length; i++) {
+                if (productDs.at(i).Quantity != null) {
+                    a = productDs.at(i).Quantity;
+                    productDs.at(i).Quantity = toPercent(a);
+                }
+                if (productDs.at(i).Singleday != null) {
+                    a = productDs.at(i).Singleday;
+                    productDs.at(i).Singleday = toPercent(a);
+                }
+                if (productDs.at(i).Fullscaledays != null) {
+                    a = productDs.at(i).Fullscaledays;
+                    productDs.at(i).Fullscaledays = parseInt(a);
+                }
+                if (productDs.at(i).LaunchTime != null) {
+                    var date2 = new Date(parseInt(productDs.at(i).LaunchTime.substr(6)));
+                    productDs.at(i).LaunchTime = date2.format("yyyy-MM-dd");
+                }
+            }
+            productDs.Binding = true;
+        });
+        grid.bind("dataBinding", function (e) {
+            if (productDs.Binding) return;
+            for (var i = 0; i < productDs.data().length; i++) {
+                if (productDs.at(i).LaunchTime != null) {
+                    var date1 = new Date(parseInt(productDs.at(i).LaunchTime.substr(6)));
+                    productDs.at(i).LaunchTime = date1.format("yyyy-MM-dd");
+                }
+                if (productDs.at(i).EndTime != null) {
+                    var date2 = new Date(parseInt(productDs.at(i).EndTime.substr(6)));
+                    productDs.at(i).EndTime = date2.format("yyyy-MM-dd");
+                }
+                if (productDs.at(i).AddTime != null) {
+                    var date2 = new Date(parseInt(productDs.at(i).AddTime.substr(6)));
+                    productDs.at(i).AddTime = date2.format("yyyy-MM-dd");
+                }
+            }
+            productDs.Binding = true;
+        });
+        var columns = [
+          { field: "Id", title: "编号", sortable: true },
+          { field: "ProjectName", title: "项目名称", sortable: true },
+          { field: "Amount", title: "项目金额", sortable: true },
+          { field: "AmountSold", title: "已售金额", sortable: true },
+          { field: "AvailableAmount", title: "可售金额", sortable: true },
+          { field: "Quantity", title: "出售量", sortable: true },
+          { field: "Singleday", title: "单日售量", sortable: true },
+          { field: "Fullscaledays", title: "预计满标天数", sortable: true },
+          { field: "Chushoudays", title: "已售天数", sortable: true },
+          { field: "Weight", title: "权值", sortable: true },
+          { field: "LaunchTime", title: "发起时间", sortable: true },
+        ];
+        //columns.push({ title: "操作", command: { text: "修改权值", click: function (e) { common.showDetails(this, e, "/Project/UpdateWeight/"); } } });
+        grid.setOptions({
+            dataSource: productDs,
+            columns: columns,
+            //selectable: "multiple, row"
+            selectable: "single cell"
+        });
+        //Query Filter
+        $("#btnSearch").bind("click", function () {
+            //search conditions
+            var ProjectName = $("#ProjectName").val(),
+            LaunchTime = $("#LaunchTime").val()
+            EndTime = $("#EndTime").val(),
+            Weight = $("#Weight").val(),
+            EndWeight = $("#EndWeight").val();
+            var param = {
+                ProjectName: ProjectName, ProjectStatus: 2, LaunchTime: LaunchTime, EndTime: EndTime, Weight: Weight, EndWeight: EndWeight
+            };
+            var beginDate = $("#LaunchTime").val();
+            var endDate = $("#EndTime").val();
+            var d1 = new Date(beginDate.replace(/\-/g, "\/"));
+            var d2 = new Date(endDate.replace(/\-/g, "\/"));
+
+            if (beginDate != "" && endDate != "" && d1 > d2) {
+                alert("发起日期不能大于截止上线日期!");
+                return false;
+            }
+            var productDs = new kendo.data.DataSource({
+                pageSize: 15,
+                transport: {
+                    read: {
+                        url: "/Project/GetProjectWeightList",
+                        dataType: "json",
+                        dataType: "json",
+                        data: param
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "Id",
+                        fields: {
+                            Id: { editable: false },
+                            ProjectName: { editable: false },
+                            Amount: { editable: false },
+                            AmountSold: { editable: false },
+                            AvailableAmount: { editable: false },
+                            Quantity: { editable: false },
+                            Singleday: { editable: false },
+                            Fullscaledays: { editable: false },
+                            Chushoudays: { editable: false },
+                            Weight: { editable: true, type: "number", validation: { min: 0, max: 100, required: true }, },
+                            LaunchTime: { editable: false },
+                        }
+                    }
+                }
+            });
+            grid.bind("dataBinding", function (e) {
+                if (productDs.Binding) return;
+                for (var i = 0; i < productDs.data().length; i++) {
+                    if (productDs.at(i).LaunchTime != null) {
+                        var date2 = new Date(parseInt(productDs.at(i).LaunchTime.substr(6)));
+                        productDs.at(i).LaunchTime = date2.format("yyyy-MM-dd");
+                    }
+                    if (productDs.at(i).Quantity != null) {
+                        a = productDs.at(i).Quantity;
+                        productDs.at(i).Quantity = toPercent(a);
+                    }
+                    if (productDs.at(i).Singleday != null) {
+                        a = productDs.at(i).Singleday;
+                        productDs.at(i).Singleday = toPercent(a);
+                    }
+                    if (productDs.at(i).Fullscaledays != null) {
+                        a = productDs.at(i).Fullscaledays;
+                        productDs.at(i).Fullscaledays = parseInt(a);
+                    }
+                }
+                productDs.Binding = true;
+            });
+            var columns = [
+              { field: "Id", title: "编号", sortable: true },
+              { field: "ProjectName", title: "项目名称", sortable: true },
+              { field: "Amount", title: "项目金额", sortable: true },
+              { field: "AmountSold", title: "已售金额", sortable: true },
+              { field: "AvailableAmount", title: "可售金额", sortable: true },
+              { field: "Quantity", title: "出售量", sortable: true },
+              { field: "Singleday", title: "单日售量", sortable: true },
+              { field: "Fullscaledays", title: "预计满标天数", sortable: true },
+              { field: "Chushoudays", title: "已售天数", sortable: true },
+              { field: "Weight", title: "权值", sortable: true },
+               { field: "LaunchTime", title: "发起时间", sortable: true },
+            ];
+            //columns.push({ title: "操作", command: { text: "修改权值", click: function (e) { common.showDetails(this, e, "/Project/UpdateWeight/"); } } });
+            grid.setOptions({
+                dataSource: productDs,
+                columns: columns,
+                selectable: "single cell"
+            });
+        });
+    });
+    function toPercent(data) {
+        var strData = parseFloat(data) * 100;
+        var ret = strData.toString() + "%";
+        return ret;
+    }
+</script>

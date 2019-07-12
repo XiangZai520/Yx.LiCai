@@ -1,0 +1,322 @@
+﻿@{
+    ViewBag.Title = "e休理财";
+}
+<div id="tab-pagination" class="ui-tab swipe-pagination">
+    <ul class="ui-tab-nav">
+        <li class="current"><a href="javascript://">月月盈</a></li>
+        <li><a href="javascript://">季季享</a></li>
+        <li><a href="javascript://">年年丰</a></li>
+    </ul>
+</div>
+<div id='tab-box' class='swipe'>
+    <div class="swipe-wrap">
+        <!-- begin 月月盈 -->
+        <div id="item-month" class="swipe-conts">
+            <div class="item-main">
+                <div class="item-earnings">
+                    <div class="item-box">
+                        <a href="/Product/Index/1">
+                            <div class="item-conts">
+                                <h3>最高年化收益率</h3>
+                                <div class="item-rate h-@ViewBag.Month_RaisedRate">
+                                    <strong data-content="12">12</strong>
+                                    <span>%</span>
+                                </div>
+                                <p class="pt-1">7%起，逐月涨0.5%，最高12%</p>
+                                <p class="pt-2">随存随取，100起投</p>
+                            </div>
+                            <div class="progress-setting" style="height: @ViewBag.Month_RaisedRate%" data-num="@ViewBag.Month_RaisedRate">
+                                <div class="wave-ui">
+                                    <div class="wave-bg-1"></div>
+                                    <div class="wave-bg-2"></div>
+                                </div>
+                            </div>
+                        </a><b class="triangle-top-b"></b>
+                    </div>
+                    <div class="item-infor">
+                        <a href="/Product/Index/1"><b></b>项目详情</a>
+                    </div>
+                </div>
+                <a class="item-rush" href="/Activity/invite">
+                    <dl>
+                        <dt></dt>
+                        <dd>
+                            <p>新手抢券,收益立增至8%</p>
+                            <p>邀请好友,最高可达14%</p>
+                        </dd>
+                    </dl>
+                </a>
+            </div>
+            <div class="do-btn" id="itemType_1">
+                @{
+                    if (Yx.LiCai.App_Start.UserContext.simpleUserInfoModel.Id > 0)
+                    {
+                        if (ViewBag.Month_Id != 0)
+                        {
+                            if (ViewBag.Month_EnableDate > DateTime.Now)
+                            {
+                                <div class="next-time">
+                                    距下期开售时间：<span class="t_d"></span>天 <span class="t_h"></span>时<span class="t_m"></span>分<span class="t_s"></span>秒
+                                </div>
+                                <a class="ui-btn ui-btn-gray" href="javascript:;">已售罄</a>
+                            }
+                            else
+                            {
+                                <a class="ui-btn" style="cursor:pointer" href="/Buy/Buy_Product?ptype=1">立即买入</a>
+                            }
+                        }
+                        else
+                        {
+                            <a class="ui-btn ui-btn-gray" href="javascript:;">已售罄</a>
+                        }
+                    }
+                    else
+                    {
+                        <a class="ui-btn" href="/Login/RegisteredOrLogin">立即买入</a>
+                    }
+                }
+
+                <input type="hidden" id="id_1" value="@ViewBag.Month_Id" />
+                <input type="hidden" class="enableDate" value="@ViewBag.Month_EnableDate">
+
+            </div>
+        </div>
+        <!-- end 月月盈 -->
+        <!-- begin 季季享 -->
+        <div id="item-quarter" class="swipe-conts">
+
+            <div class="gxtabs-wrap J_gxtabs">
+                <div class="gxtabs-nav J_gxtabs_nav">
+                    <ul>
+                        <li class="active">3个月<b class="triangle-top-sb"></b></li>
+                        <li>6个月<b class="triangle-top-sb"></b></li>
+                    </ul>
+                </div>
+                <div class="gxtabs-container J_gxtabs_container">
+                    <div class="J_gxtabs_item">
+                        <div class="item-main">
+                            <div class="item-earnings">
+                                <div class="item-box">
+                                    <a href="/Product/Index/2">
+                                        <div class="item-conts">
+                                            <h3>最高年化收益率</h3>
+                                            <div class="item-rate h-@ViewBag.Quarter3_RaisedRate">
+                                                <strong data-content="9">9</strong>
+                                                <span>%</span>
+                                            </div>
+                                            <p class="pt-1">期限3个月，支持提前赎回</p>
+                                            <p class="pt-2">每月付息，到期退出可提现</p>
+                                        </div>
+                                        <div class="progress-setting" style="height: @ViewBag.Quarter3_RaisedRate%" data-num="@ViewBag.Quarter3_RaisedRate">
+                                            <div class="wave-ui">
+                                                <div class="wave-bg-1"></div>
+                                                <div class="wave-bg-2"></div>
+                                            </div>
+                                        </div>
+                                    </a><b class="triangle-top-b"></b>
+                                </div>
+                                <div class="item-infor">
+                                    <a href="/Product/Index/2"><b></b>项目详情</a>
+                                </div>
+                            </div>
+                            <a class="item-rush" href="/Activity/invite">
+                                <dl>
+                                    <dt></dt>
+                                    <dd>
+                                        <p>新手抢券,收益立增至10%</p>
+                                        <p>邀请好友,最高可达11%</p>
+                                    </dd>
+                                </dl>
+                            </a>
+                        </div>
+                        <div class="do-btn" id="itemType_2">
+                            @{
+                                if (Yx.LiCai.App_Start.UserContext.simpleUserInfoModel.Id > 0)
+                                {
+                                    if (ViewBag.Quarter3_Id != 0)
+                                    {
+                                        if (ViewBag.Quarter3_EnableDate > DateTime.Now)
+                                        {
+                                            <div class="next-time">
+                                                距下期开售时间：<span class="t_d"></span>天 <span class="t_h"></span>时<span class="t_m"></span>分<span class="t_s"></span>秒
+                                            </div>
+                                            <a class="ui-btn ui-btn-gray" href="javascript:;">已售罄</a>
+                                        }
+                                        else
+                                        {
+                                            <a class="ui-btn" style="cursor:pointer" href="/Buy/Buy_Product?ptype=2">立即买入</a>
+
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <a class="ui-btn ui-btn-gray" href="javascript:;">已售罄</a>
+                                    }
+                                }
+                                else
+                                {
+                                    <a class="ui-btn" href="/Login/RegisteredOrLogin">立即买入</a>
+                                }
+                            }
+
+                            <input type="hidden" id="id_2" value="@ViewBag.Quarter3_Id" />
+                            <input type="hidden" class="enableDate" value="@ViewBag.Quarter3_EnableDate">
+                        </div>
+                    </div>
+                    <div class="J_gxtabs_item gx-hide">
+                        <div class="item-main">
+                            <div class="item-earnings">
+                                <div class="item-box">
+                                    <a href="/Product/Index/3">
+                                        <div class="item-conts">
+                                            <h3>最高年化收益率</h3>
+                                            <div class="item-rate h-@ViewBag.Quarter6_RaisedRate">
+                                                <strong data-content="11">11</strong>
+                                                <span>%</span>
+                                            </div>
+                                            <p class="pt-1">期限6个月，支持提前赎回</p>
+                                            <p class="pt-2">每月付息，到期退出可提现</p>
+                                        </div>
+                                        <div class="progress-setting" style="height: @ViewBag.Quarter6_RaisedRate%" data-num="@ViewBag.Quarter6_RaisedRate">
+                                            <div class="wave-ui">
+                                                <div class="wave-bg-1"></div>
+                                                <div class="wave-bg-2"></div>
+                                            </div>
+                                        </div>
+                                    </a><b class="triangle-top-b"></b>
+                                </div>
+                                <div class="item-infor">
+                                    <a href="/Product/Index/3"><b></b>项目详情</a>
+                                </div>
+                            </div>
+                            <a class="item-rush" href="/Activity/invite">
+                                <dl>
+                                    <dt></dt>
+                                    <dd>
+                                        <p>新手抢券,收益立增至12%</p>
+                                        <p>邀请好友,最高可达13%</p>
+                                    </dd>
+                                </dl>
+                            </a>
+                        </div>
+                        <div class="do-btn" id="itemType_3">
+                            @{
+                                if (Yx.LiCai.App_Start.UserContext.simpleUserInfoModel.Id > 0)
+                                {
+                                    if (ViewBag.Quarter6_Id != 0)
+                                    {
+                                        if (ViewBag.Quarter6_EnableDate > DateTime.Now)
+                                        {
+                                            <div class="next-time">
+                                                距下期开售时间：<span class="t_d"></span>天 <span class="t_h"></span>时<span class="t_m"></span>分<span class="t_s"></span>秒
+                                            </div>
+                                            <a class="ui-btn ui-btn-gray" href="javascript:;">已售罄</a>
+                                        }
+                                        else
+                                        {
+                                            <a class="ui-btn" style="cursor:pointer" href="/Buy/Buy_Product?ptype=3">立即买入</a>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <a class="ui-btn ui-btn-gray" href="javascript:;">已售罄</a>
+                                    }
+                                }
+                                else
+                                {
+                                    <a class="ui-btn" href="/Login/RegisteredOrLogin">立即买入</a>
+                                }
+                            }
+
+                            <input type="hidden" id="id_3" value="@ViewBag.Quarter6_Id" />
+                            <input type="hidden" class="enableDate" value="@ViewBag.Quarter6_EnableDate">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end 季季享 -->
+        <!-- begin 年年丰 -->
+        <div id="item-year" class="swipe-conts">
+            <div class="item-main">
+                <div class="item-earnings">
+                    <div class="item-box">
+                        <a href="/Product/Index/4">
+                            <div class="item-conts">
+                                <h3>最高年化收益率</h3>
+                                <div class="item-rate h-@ViewBag.Year_RaisedRate">
+                                    <strong data-content="13">13</strong>
+                                    <span>%</span>
+                                </div>
+                                <p class="pt-1">期限12个月，支持提前赎回</p>
+                                <p class="pt-2">每月付息，到期退出可提现</p>
+                            </div>
+                            <div class="progress-setting" style="height: @ViewBag.Year_RaisedRate%" data-num="@ViewBag.Year_RaisedRate">
+                                <div class="wave-ui">
+                                    <div class="wave-bg-1"></div>
+                                    <div class="wave-bg-2"></div>
+                                </div>
+                            </div>
+                        </a><b class="triangle-top-b"></b>
+                    </div>
+                    <div class="item-infor">
+                        <a href="/Product/Index/4"><b></b>项目详情</a>
+                    </div>
+                </div>
+                <a class="item-rush" href="/Activity/invite">
+                    <dl>
+                        <dt></dt>
+                        <dd>
+                            <p>新手抢券,收益立增至14%</p>
+                            <p>邀请好友,最高可达15%</p>
+                        </dd>
+                    </dl>
+                </a>
+            </div>
+            <div class="do-btn" id="itemType_4">
+                @{
+                    if (Yx.LiCai.App_Start.UserContext.simpleUserInfoModel.Id > 0)
+                    {
+                        if (ViewBag.Year_Id != 0)
+                        {
+                            if (ViewBag.Year_EnableDate > DateTime.Now)
+                            {
+                                <div class="next-time">
+                                    距下期开售时间：<span class="t_d"></span>天 <span class="t_h"></span>时<span class="t_m"></span>分<span class="t_s"></span>秒
+                                </div>
+                                <a class="ui-btn ui-btn-gray" href="javascript:;">已售罄</a>
+                            }
+                            else
+                            {
+                                <a class="ui-btn" style="cursor:pointer" href="/Buy/Buy_Product?ptype=4">立即买入</a>
+                            }
+                        }
+                        else
+                        {
+                            <a class="ui-btn ui-btn-gray" href="javascript:;">已售罄</a>
+                        }
+                    }
+                    else
+                    {
+                        <a class="ui-btn" href="/Login/RegisteredOrLogin">立即买入</a>
+                    }
+                }
+
+                <input type="hidden" id="id_4" value="@ViewBag.Year_Id" />
+                <input type="hidden" class="enableDate" value="@ViewBag.Year_EnableDate">
+            </div>
+        </div>
+        <!-- end 年年丰 -->
+    </div>
+</div>
+<input id="NowTime" type="hidden" value="@ViewBag.NowTime" />
+@Html.Partial("../Shared/_Footer")
+
+<script>
+    localStorage.removeItem("NowTimeValue");
+    localStorage.setItem("NowTimeValue", "@ViewBag.NowTime");
+
+    seajs.use('yixiu');
+    seajs.use('countdown');
+</script>
+

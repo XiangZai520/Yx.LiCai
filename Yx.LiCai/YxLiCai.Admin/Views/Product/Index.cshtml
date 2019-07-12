@@ -1,0 +1,168 @@
+﻿@section styles {
+    <style>
+        .k-grid-header th.k-header > .k-link, .tbstyle tr td {
+            text-align: center;
+        }
+        .k-grid td {
+            padding: 0;
+        }
+    </style>
+}
+<div class="zpManage zpSh">
+    <h2 class="crumbs">
+        您所在位置：产品管理 > 产品列表
+    </h2>
+
+    <div class="SearchMd form-horizontal">
+        @Html.Partial("EditorTemplates/KendoTextBox",
+        new YxLiCai.Admin.Models.KendoTextBoxViewModel
+        {
+            Content = "产品名称",
+            Id = "ProductName"
+        })
+        @Html.Partial("EditorTemplates/KendoDropdownlist",
+        new YxLiCai.Admin.Models.KendoDropdownlistViewModel
+        {
+            Content = "产品类型",
+            Id = "ProductCategory",
+            SourceUrl = "/Product/GetConfig?configName=Product|element=ProductCategory"
+        })
+        @Html.Partial("EditorTemplates/KendoDropdownlist",
+        new YxLiCai.Admin.Models.KendoDropdownlistViewModel
+        {
+            Content = "产品状态",
+            Id = "ProductStatus",
+            SourceUrl = "/Product/GetConfig?configName=Product|element=ProductStatus"
+        })
+        @Html.Partial("EditorTemplates/KendoDateTime",
+        new YxLiCai.Admin.Models.KendoDateTimeViewModel
+        {
+            Content = "预期上线日期(起)",
+            Id = "EnableDateStart",
+            Format = "yyyy-MM-dd hh:mm:ss"
+        })
+        @Html.Partial("EditorTemplates/KendoDateTime",
+        new YxLiCai.Admin.Models.KendoDateTimeViewModel
+        {
+            Content = "预期上线日期(终)",
+            Id = "EnableDateEnd",
+            Format = "yyyy-MM-dd hh:mm:ss"
+        })
+        <input type="button" id="btnSearch" value="查询" class="searchBtn" />
+        <input type="button" id="btnDelete" value="删除" class="searchBtn" />
+        <input type="button" id="btnAdd" value="新增产品" class="searchBtn" />
+    </div>
+
+    <div class="cleanfix" style="margin:15px 15px 15px 15px">
+        <div class="control-group">
+            <a style="color:red">*按住Ctrl键或Shift键可以多选</a>
+            <div class="tbstyle">
+                <div id="productGrid"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    require(['CRM/common.assets', 'CRM/product.assets'], function (common, product) {
+
+        //initial
+        var grid = $("#productGrid").kendoGrid({
+            sortable: true,
+            pageable: true,
+        }).data("kendoGrid");
+        getProductList();
+
+        //Query Filter
+        $("#btnSearch").bind("click", getProductList);
+        //get data and show on page
+        function getProductList() {
+            //search conditions
+            var ProductName = $("#ProductName").val(),
+                ProductCategory = $("#ProductCategory").val() || -1,
+                ProductStatus = $("#ProductStatus").val() || -1,
+                StartDate = $("#EnableDateStart").val(),
+                EndDate = $("#EnableDateEnd").val();
+            var param = {
+                ProductName: ProductName, ProductCategory: ProductCategory, ProductStatus: ProductStatus,
+                StartDate: StartDate, EndDate: EndDate
+            };
+            //datasource
+            var productDs = product.productDs(param);
+            //columns
+            var columns = [
+               { field: "Id", title: "产品ID", sortable: true },
+               { field: "PCategory", title: "产品类型", sortable: true },
+               { field: "ProductName", title: "产品名称", sortable: true },
+               { field: "ProductAmount", title: "产品金额(万元)", sortable: true },
+               { field: "AvailableAmount", title: "剩余金额(万元)", sortable: true },
+               { field: "PStatus", title: "产品状态", sortable: true },
+               { field: "CreateDate", title: "创建时间", sortable: true },
+               { field: "AuditDate", title: "审核时间", sortable: true },
+               { field: "ExpectedEnableDate", title: "预期上线时间", sortable: true },
+               { field: "EndDate", title: "产品售罄时间", sortable: true },
+               { field: "ProductOrder", title: "产品排序", sortable: true },
+               { field: "AutoEnable", title: "是否自动上线", sortable: true }
+            ];
+            grid.setOptions({
+                dataSource: productDs,
+                columns: columns,
+                selectable: "multiple, row",
+                change: function (e) {
+                    var selectedRows = this.select();
+                    for (var i = 0; i < selectedRows.length; i++) {
+                        var dataItem = this.dataItem(selectedRows[i]);
+                        if (dataItem.PStatus != "待审核" && dataItem.PStatus != "审核未通过") {
+                            var row = $(selectedRows[i]);
+                            row.removeClass("k-state-selected");
+                        }
+                    }
+                }
+            });
+        }
+
+        //更新按钮
+        $(".k-button").bind("click", function (e) {
+            $(".k-edit-buttons k-state-default").hide();
+        });
+
+        //Delete
+        $("#btnDelete").bind("click", function () {
+            var selectedID = "";
+            var row = grid.select();
+            for (var i = 0; i < row.length; i++) {
+                var data = grid.dataItem(row[i]);
+                selectedID += data.Id + ",";
+            }
+            selectedID = selectedID.substr(0, selectedID.lastIndexOf(','));
+
+            //未选择不能删除
+            if (selectedID.length == 0)
+                return;
+
+            var param = { IdList: selectedID };
+            $.ajax({
+                url: "/Product/DeleteProduct",
+                data: param,
+                error: function (err) {
+                    common.popupNotification.show(err.xhr.responseText, "error");
+                },
+                success: function (e) {
+                    if (e.IsSuccess) {
+                        common.popupNotification.show(e.Message, "info");
+                        for (var i = 0; i < row.length; i++) {
+                            grid.removeRow(row[i]);
+                        }
+                    }
+                    else {
+                        common.popupNotification.show(e.Message, "error");
+                    }
+                }
+            });
+        });
+
+        //新增
+        $("#btnAdd").bind("click", function (e) {
+            window.location.href = "/Product/Add";
+        });
+    });
+</script>

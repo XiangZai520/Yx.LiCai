@@ -1,0 +1,47 @@
+﻿@model YxLiCai.Admin.Models.KendoDateTimeViewModel
+<div class="form-group">
+    <label class="control-label col-sm-6" for="@Model.Id">@Model.Content</label>
+    <div class="col-sm-6 col-md-6">
+        @{
+            var id = Model.Id;
+            var _readOnly = Model.Readonly;
+            var value = Convert.ToDateTime(Model.Value) < Convert.ToDateTime("2015-01-01") ? "" : Model.Value.ToString();
+            <input id="@id" readonly="@_readOnly" value="@value" width="182" />
+        }
+        <span style="color:red">@Model.Tips</span>        
+    </div>
+</div>
+
+<script type="text/javascript">
+    var id = '@Model.Id',
+        start = '@Model.Start',
+        depth = '@Model.Depth',
+        format = '@Model.Format',
+        min = '@Model.Min',
+        readOnly = '@Model.Readonly';
+
+   if (min) {
+       $("#" + id + "").kendoDateTimePicker({
+            start: start,
+            depth: depth,
+            timeFormat: "HH:mm",
+            format: format,
+            parseFormats: ["MM/dd/yyyy hh:mmtt", "MM/dd/yyyy HH:mm", "MM/dd/yyyy", "HH:mm"],
+            min: min
+        });
+   }
+   else {
+       $("#" + id + "").kendoDateTimePicker({
+           start: start,
+           depth: depth,
+           timeFormat: "HH:mm",
+           format: format,
+           parseFormats: ["MM/dd/yyyy hh:mmtt", "MM/dd/yyyy HH:mm", "MM/dd/yyyy", "HH:mm"]
+       });
+   }
+
+   var datetimepicker = $("#" + id + "").data("kendoDateTimePicker");
+   if (readOnly == "true") {
+       datetimepicker.readonly();
+   }
+</script>

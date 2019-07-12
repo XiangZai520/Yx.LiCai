@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "实名认证";
+} 
+<link href="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "css/buy.css")" rel="stylesheet">
+
+    <div class="buy-input">
+        <dl class="gx-money">
+            <dt><i class="icon-word">姓名</i></dt>
+            <dd>
+                <input type="text" placeholder="请输入您的大名" class="gx-text" id="Name"></dd>
+        </dl>
+        <dl class="gx-money">
+            <dt><i class="icon-word">身份证号</i></dt>
+            <dd>
+                <input type="text" class="gx-text" placeholder="请输入您的身份证号" maxlength="18" id="IDCard"/></dd>
+        </dl>
+        <div class="sub margin_top"><a id="ok-bank"  class="ui-btn" >认证</a></div>
+        <h2>提示：</h2>
+        <p>如果您在公安机关修改了名字，请联系我们的客服，凭有关公安机关改名的核证材料修改您的身份信息，谢谢客服电话：<span>400-888-8888</span></p>
+    </div>
+<div id="preview"></div>
+<input type="hidden" id="returnUrl" value="@ViewBag.returnUrl" />
+<script>
+    seajs.use('User/UserSetting/uc_setting_status')
+    seajs.use('lib/spin')
+</script>
+

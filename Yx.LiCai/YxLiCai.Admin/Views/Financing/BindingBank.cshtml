@@ -1,0 +1,389 @@
+﻿<link href="~/Resource/css/bank/m_base.css" rel="stylesheet" />
+<link href="~/Resource/css/bank/dialog.css" rel="stylesheet" />
+<link href="~/Resource/css/bank/bank.css" rel="stylesheet" />
+
+<script src="~/Resource/js/bank/bank.js"></script>
+<div class="m-wrap">
+    <div class="gx-container">
+        <div class="buy-input">
+            <dl class="buy-bank-position">
+                <dt><i class="icon-word">银行</i></dt>
+                <dd>
+                    <div id="J_bankInfor" class="bank-select bank-infor">
+                        <a href="javascript:///">
+                            <img src="">
+                            <span id="BankName"></span>
+                        </a>
+                    </div>
+                </dd>
+            </dl>
+            <dl class="gx-money">
+                <dt><i class="icon-word">卡号</i></dt>
+                <dd>
+                    <input type="number" class="gx-text" placeholder="输入卡号，即刻开始e休理财" id="BankCard" onkeyup="value=value.replace(/[^\d]/g,'') " onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"></dd>
+            </dl>
+            <dl class="gx-money">
+                <dt><i class="icon-word">手机</i></dt>
+                <dd>
+                    <input type="tel" class="gx-text" placeholder="请输入银行预留手机号" id="Phone" maxlength="11" onkeyup="value=value.replace(/[^\d]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"></dd>
+            </dl>
+            <div class="reg-list">
+                <dl>
+                    <dt class="right-style gray-status" id="repOld" style="display: none">
+                        <span id="btnSend"><b id="TimeMove">60</b>秒后重新发送</span>
+                    </dt>
+                    <dt class="right-style" id="repNew">
+                        <span id="repNewMsg">发送验证码</span>
+                    </dt>
+                    <dd>
+                        <input type="tel" class="input-txt phone-code" id="phoneCode" name="phoneCode" placeholder="机器人才不会输验证码" maxlength="6" onkeyup="value=value.replace(/[^\d]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))">
+                    </dd>
+                    <dd class="yx-tips">我们已将验证码发送至您的手机，请耐心等待。
+                    </dd>
+                </dl>
+            </div>
+            <div class="sub margin_top"><a id="bankGo" class="ui-btn">确认</a></div>
+        </div>
+
+    </div>
+</div>
+
+<!-- 选择银行卡弹窗 -->
+<div id="selectBank" class="gx-hide">
+    <div class="elect-bank">
+        <h2>选择银行</h2>
+        <ul class="J_selectBank">
+            <li>
+
+                <i>
+                    <img src="../Resource/img/SysBankImg/boc.jpg"></i>
+                <p>
+                    <b>中国银行</b>
+                    <span>限额：<em>5</em>万/笔 <em>20</em>万/日</span>
+                </p>
+                <input type="radio" name="a" class="gx-radio-bank" />
+
+            </li>
+            <li>
+                <i>
+                    <img src="../Resource/img/SysBankImg/icbc.jpg"></i>
+                <p>
+                    <b>中国工商银行</b>
+                    <span>限额：<em>5</em>万/笔 <em>20</em>万/日</span>
+                </p>
+                <input type="radio" name="a" class="gx-radio-bank" />
+            </li>
+            <li>
+                <i>
+                    <img src="../Resource/img/SysBankImg/ccb.jpg"></i>
+                <p>
+                    <b>中国建设银行</b>
+                    <span>限额：<em>5</em>万/笔 <em>20</em>万/日</span>
+                </p>
+                <input type="radio" name="a" class="gx-radio-bank" />
+            </li>
+            <li>
+                <i>
+                    <img src="../Resource/img/SysBankImg/abc.jpg"></i>
+                <p>
+                    <b>中国农业银行</b>
+                    <span>限额：<em>5</em>万/笔 <em>20</em>万/日</span>
+                </p>
+                <input type="radio" name="a" class="gx-radio-bank" />
+            </li>
+            <li>
+                <i>
+                    <img src="../Resource/img/SysBankImg/ceb.jpg"></i>
+                <p>
+                    <b>光大银行</b>
+                    <span>限额：<em>5</em>万/笔 <em>20</em>万/日</span>
+                </p>
+                <input type="radio" name="a" class="gx-radio-bank" />
+            </li>
+            <li>
+                <i>
+                    <img src="../Resource/img/SysBankImg/cmb.jpg"></i>
+                <p>
+                    <b>招商银行</b>
+                    <span>限额：<em>5</em>万/笔 <em>20</em>万/日</span>
+                </p>
+                <input type="radio" name="a" class="gx-radio-bank" />
+            </li>
+            <li>
+                <i>
+                    <img src="../Resource/img/SysBankImg/bcm.jpg"></i>
+                <p>
+                    <b>交通银行</b>
+                    <span>限额：<em>5</em>万/笔 <em>20</em>万/日</span>
+                </p>
+                <input type="radio" name="a" class="gx-radio-bank" />
+            </li>
+            <li>
+                <i>
+                    <img src="../Resource/img/SysBankImg/cmbc.jpg"></i>
+                <p>
+                    <b>中国民生银行</b>
+                    <span>限额：<em>5</em>万/笔 <em>20</em>万/日</span>
+                </p>
+                <input type="radio" name="a" class="gx-radio-bank" />
+            </li>
+            <li>
+                <i>
+                    <img src="../Resource/img/SysBankImg/cib.jpg"></i>
+                <p>
+                    <b>兴业银行</b>
+                    <span>限额：<em>5</em>万/笔 <em>20</em>万/日</span>
+                </p>
+                <input type="radio" name="a" class="gx-radio-bank" />
+            </li>
+
+            <li>
+                <i>
+                    <img src="../Resource/img/SysBankImg/gdb.jpg"></i>
+                <p>
+                    <b>广东发展银行</b>
+                    <span>限额：<em>5</em>万/笔 <em>20</em>万/日</span>
+                </p>
+                <input type="radio" name="a" class="gx-radio-bank" />
+            </li>
+@*            <li>
+                <i>
+                    <img src="../Resource/img/SysBankImg/gcb.jpg"></i>
+                <p>
+                    <b>广州银行</b>
+                    <span>限额：<em>5</em>万/笔 <em>20</em>万/日</span>
+                </p>
+                <input type="radio" name="a" class="gx-radio-bank" />
+            </li>*@
+            <li>
+
+                <i>
+                    <img src="../Resource/img/SysBankImg/hxb.jpg"></i>
+                <p>
+                    <b>华夏银行</b>
+                    <span>限额：<em>5</em>万/笔 <em>20</em>万/日</span>
+                </p>
+                <input type="radio" name="a" class="gx-radio-bank" />
+            </li>
+            <li>
+                <i>
+                    <img src="../Resource/img/SysBankImg/picc.jpg"></i>
+                <p>
+                    <b>平安银行</b>
+                    <span>限额：<em>5</em>万/笔 <em>20</em>万/日</span>
+                </p>
+                <input type="radio" name="a" class="gx-radio-bank" />
+            </li>
+            <li>
+                <i>
+                    <img src="../Resource/img/SysBankImg/spdb.jpg"></i>
+                <p>
+                    <b>上海浦东发展银行</b>
+                    <span>限额：<em>5</em>万/笔 <em>20</em>万/日</span>
+                </p>
+                <input type="radio" name="a" class="gx-radio-bank" />
+            </li>
+            <li>
+                <i>
+                    <img src="../Resource/img/SysBankImg/post.jpg"></i>
+                <p>
+                    <b>邮政银行</b>
+                    <span>限额：<em>5</em>万/笔 <em>20</em>万/日</span>
+                </p>
+                <input type="radio" name="a" class="gx-radio-bank" />
+            </li>
+            <li>
+                <label>
+                    <i>
+                        <img src="../Resource/img/SysBankImg/citic.jpg"></i>
+                    <p>
+                        <b>中信银行</b>
+                        <span>限额：<em>5</em>万/笔 <em>20</em>万/日</span>
+                    </p>
+                    <input type="radio" name="a" class="gx-radio-bank" />
+                </label>
+            </li>
+        </ul>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+
+        var flag = false;
+        var InterValObj; //timer变量，控制时间
+        var count = 60; //间隔函数，1秒执行
+        var curCount;//当前剩余秒数
+        var ecount = 60;
+        var ecurCount;
+        var eInterValObj;
+        //timer处理函数
+        function SetRemainTime() {
+            if (curCount == 1) {
+                window.clearInterval(InterValObj);//停止计时器
+                $("#repOld").hide();
+                $("#repNew").show();
+                $("#repNew").html("重新发送");
+                $("#TimeMove").html("60");
+            }
+            else {
+                curCount--;
+                $("#TimeMove").html(curCount);
+
+            }
+        }
+        $("#repNew").click(function () {
+            sendMessage();
+        });
+        //发送手机验证码
+        function sendMessage() {
+            //var BankName = $("#BankName").html().replace(/[ ]/g, "");
+            var BankCard = $("#BankCard").val().replace(/[ ]/g, "");
+            var Phone = $("#Phone").val().replace(/[ ]/g, "");
+            //if (BankName == "") { alert("请选择开户银行"); return; }
+            if (BankCard == "") { alert("请输入银行卡号"); return; }
+            if (!luhmCheck(BankCard)) { alert("银行卡输入不正确"); return; }
+            if (Phone == "") { alert("请输入手机号"); return; }
+            if (!isMobel(Phone)) { alert("手机号输入不正确"); return; }
+            $.ajax({
+                type: "POST",
+                async: false,
+                url: "/UserFinancing/SendBoundBankCard",
+                data: { BankName: 2, BankCard: BankCard, Phone: Phone },
+                success: function (data) {
+                    if (data.Status == 1) {
+                        flag = true;
+                        $("#repOld").show();
+                        $("#repNew").hide();
+                        curCount = count;
+                        InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+                    } else {
+                        flag = false;
+                        alert(data.Message);
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                },
+            });
+        }
+
+        $("#bankGo").click(function () {
+            //var BankName = $("#BankName").html().replace(/[ ]/g, "");
+            var BankCard = $("#BankCard").val().replace(/[ ]/g, "");
+            var Phone = $("#Phone").val().replace(/[ ]/g, "");
+            //if (BankName == "") { alert("请选择开户银行"); return; }
+            var reg = /^(\d{15,19})$/g;
+            if (BankCard == "") { alert("请输入银行卡号"); return; }
+            if (!reg.test(BankCard)) { alert("银行卡输入不正确"); return; }
+            if (Phone == "") { alert("请输入手机号"); return; }
+            if (!isMobel(Phone)) { alert("手机号输入不正确"); return; }
+            var phoneCode = $("#phoneCode").val().replace(/[ ]/g, "");
+            if (phoneCode == "") { alert("请输入手机验证码"); return; }
+            //if (!flag) { alert("手机验证码输入不正确"); return; }
+            $.ajax({
+                type: "POST",
+                async: false,
+                url: "/UserFinancing/ConfimBoundBankCard",
+                data: { BankName: 1, BankCard: BankCard, Phone: Phone, validatecode: phoneCode },
+                success: function (data) {
+                    if (data.Status == 1) { window.location.href = "/UserSetting/"; } else { alert(data.Message); }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                },
+            });
+        });
+        function isMobel(value) {
+            if (/^13\d{9}$/g.test(value) || (/^14[0-9]\d{8}$/g.test(value)) || (/^15[0-9]\d{8}$/g.test(value)) || (/^18[0-9]\d{8}$/g.test(value)) || (/^17[0-9]\d{8}$/g.test(value)))
+            { return true; }
+            else
+            { return false; }
+        }
+        //银行卡选择
+        var $bankSelect = $('.J_selectBank'),
+            $bankInfor = $('#J_bankInfor');
+        $bankInfor.on('click', function () {
+            $.gxDialog({
+                title: '',
+                width: 280,
+                closeBtn: false,
+                info: document.getElementById('selectBank')
+            });
+        });
+
+        $bankSelect.on('click', 'li', function (event) {
+            event.preventDefault();
+            var _this = $(this),
+                bankLogo = _this.find('img').attr('src'),
+                bankName = _this.find('p>b').html();
+            $bankInfor.find('img').show().attr('src', bankLogo);
+            $bankInfor.find('span').show().text(bankName)
+            _this.addClass('checked');
+            _this.siblings('li').removeClass('checked');
+            $.gxDialog.close();
+        });
+
+        /**
+    验证是否为银行卡
+    */
+        function luhmCheck(bankno) {
+            var lastNum = bankno.substr(bankno.length - 1, 1);//取出最后一位（与luhm进行比较）
+
+            var first15Num = bankno.substr(0, bankno.length - 1);//前15或18位
+            var newArr = new Array();
+            for (var i = first15Num.length - 1; i > -1; i--) {    //前15或18位倒序存进数组
+                newArr.push(first15Num.substr(i, 1));
+            }
+            var arrJiShu = new Array();  //奇数位*2的积 <9
+            var arrJiShu2 = new Array(); //奇数位*2的积 >9
+
+            var arrOuShu = new Array();  //偶数位数组
+            for (var j = 0; j < newArr.length; j++) {
+                if ((j + 1) % 2 == 1) {//奇数位
+                    if (parseInt(newArr[j]) * 2 < 9)
+                        arrJiShu.push(parseInt(newArr[j]) * 2);
+                    else
+                        arrJiShu2.push(parseInt(newArr[j]) * 2);
+                }
+                else //偶数位
+                    arrOuShu.push(newArr[j]);
+            }
+
+            var jishu_child1 = new Array();//奇数位*2 >9 的分割之后的数组个位数
+            var jishu_child2 = new Array();//奇数位*2 >9 的分割之后的数组十位数
+            for (var h = 0; h < arrJiShu2.length; h++) {
+                jishu_child1.push(parseInt(arrJiShu2[h]) % 10);
+                jishu_child2.push(parseInt(arrJiShu2[h]) / 10);
+            }
+
+            var sumJiShu = 0; //奇数位*2 < 9 的数组之和
+            var sumOuShu = 0; //偶数位数组之和
+            var sumJiShuChild1 = 0; //奇数位*2 >9 的分割之后的数组个位数之和
+            var sumJiShuChild2 = 0; //奇数位*2 >9 的分割之后的数组十位数之和
+            var sumTotal = 0;
+            for (var m = 0; m < arrJiShu.length; m++) {
+                sumJiShu = sumJiShu + parseInt(arrJiShu[m]);
+            }
+
+            for (var n = 0; n < arrOuShu.length; n++) {
+                sumOuShu = sumOuShu + parseInt(arrOuShu[n]);
+            }
+
+            for (var p = 0; p < jishu_child1.length; p++) {
+                sumJiShuChild1 = sumJiShuChild1 + parseInt(jishu_child1[p]);
+                sumJiShuChild2 = sumJiShuChild2 + parseInt(jishu_child2[p]);
+            }
+            //计算总和
+            sumTotal = parseInt(sumJiShu) + parseInt(sumOuShu) + parseInt(sumJiShuChild1) + parseInt(sumJiShuChild2);
+
+            //计算Luhm值
+            var k = parseInt(sumTotal) % 10 == 0 ? 10 : parseInt(sumTotal) % 10;
+            var luhm = 10 - k;
+            if (lastNum == luhm) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+
+    });
+</script>

@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "登录";
+}
+
+<div class="reg-list login-list">
+    <dl>
+        <dt class="right-style code-img">
+            <img src="@Url.Action("CaptchaImage")" class="captcha"  alt="看不清，请点击重新发送">
+        </dt>
+        <dd>
+            <input type="tel" class="input-txt random-code" id="randomCode" name="randomCode" placeholder="请输入验证码" maxlength="4" />
+        </dd>
+        <dd class="warm-tips Validedate_check"></dd>
+    </dl>
+    <dl>
+        <dd>
+            <input type="password" class="input-txt log-pwd" id="logPassword" maxlength="16" name="logPassword" placeholder="请输入登录密码" />
+        </dd>
+    </dl>
+</div>
+<div class="do-btn">
+    <button type="button" class="ui-btn" id="regBtn">登录</button>
+</div>
+<p class="forget-link"><a id="forgetPW" href="/Login/forget_pwd?phone=@YxLiCai.Tools.Const.SystemConst.ConvertPhoneNum(ViewBag.Phone)">忘记密码?</a></p>
+<script>
+    var dianhua = '@YxLiCai.Tools.Const.SystemConst.ConvertPhoneNum(ViewBag.Phone)';
+    seajs.use('User/LoginOrRegister/Login.js');</script>
+

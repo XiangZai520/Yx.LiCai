@@ -1,0 +1,49 @@
+2015-07-29 12:37:10.4685 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/7/29 12:37:09
+异常发生地址:http://localhost:9342/Login/SendValidateCode
+请求类型:POST
+异常:NServiceKit.Redis.RedisException: Unable to Connect: sPort: 46156 ---> System.Net.Sockets.SocketException: 远程主机强迫关闭了一个现有的连接。
+   在 System.Net.Sockets.Socket.Send(IList`1 buffers, SocketFlags socketFlags)
+   在 System.Net.Sockets.Socket.Send(IList`1 buffers)
+   在 NServiceKit.Redis.RedisNativeClient.FlushSendBuffer()
+   在 NServiceKit.Redis.RedisNativeClient.SendCommand(Byte[][] cmdWithBinaryArgs)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 NServiceKit.Redis.RedisNativeClient.CreateConnectionError()
+   在 NServiceKit.Redis.RedisNativeClient.SendExpectLong(Byte[][] cmdWithBinaryArgs)
+   在 NServiceKit.Redis.RedisNativeClient.Exists(String key)
+   在 NServiceKit.Redis.RedisClient.ContainsKey(String key)
+   在 YxLiCai.Tools.NoSql.RedisCache.RedisCache.Add(String key, Object value, DateTime expiredTime) 位置 c:\YiXiu\Yx.LiCai\YxLica.Tools\NoSql\RedisCache\RedisCache.cs:行号 96
+   在 Yx.LiCai.Controllers.LoginController.SendValidateCode(String account) 位置 c:\YiXiu\Yx.LiCai\Yx.LiCai\Controllers\LoginController.cs:行号 232
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   在 System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+IP:::1
+--------------------end---------------------
+ 
+2015-07-29 12:39:06.0528 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/7/29 12:39:05
+异常发生地址:http://localhost:9342/Login/SendValidateCode
+请求类型:POST
+异常:System.ArgumentException: 要在此字符串中进行分析，必须指定有效信息。
+   在 System.Enum.TryParseEnum(Type enumType, String value, Boolean ignoreCase, EnumResult& parseResult)
+   在 System.Enum.Parse(Type enumType, String value, Boolean ignoreCase)
+   在 System.Enum.Parse(Type enumType, String value)
+   在 YxLiCai.Server.SendMsg.Send.GetEnumValue(String key) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\SendMsg\Send.cs:行号 145
+   在 YxLiCai.Server.SendMsg.Send.SendMsg(String toMobile, String Content) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\SendMsg\Send.cs:行号 56
+IP:::1
+--------------------end---------------------
+ 

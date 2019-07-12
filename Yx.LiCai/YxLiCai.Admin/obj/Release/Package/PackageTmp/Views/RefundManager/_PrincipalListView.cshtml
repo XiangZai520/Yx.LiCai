@@ -1,0 +1,71 @@
+﻿
+<div class="control-group">
+    <div class="tbstyle">
+        <div id="grid_principal"></div>
+    </div>
+</div>
+<!--kendo template begin-->
+<script type="text/x-kendo-template" id="myTemplate">
+    #if(status == '待审核'){#
+    <input type="button" class="k-button k-button-icontext" value="还款" id="#=id#_#=pjid#_#=merchantID#_#=amount#" onclick="payPrincipal(this)" /> 
+    #}#
+</script>
+<!--kendo template end-->
+<script type="text/javascript">
+
+    //还本金列表
+    function getPrincipalList(ds) {
+        //columns
+        var columns = [
+            { field: "id", title: "ID", sortable: true },
+            { field: "pjid", title: "项目ID", sortable: true },
+            { field: "ProjectName", title: "项目名称", sortable: true },
+            { field: "ProjectAmount", title: "项目金额(万元)", sortable: true },
+            { field: "LoanPeriod", title: "项目期限(月)", sortable: true },
+            { field: "RepayAmount", title: "已还本金", sortable: true },
+            { field: "merchantID", title: "融资方账户ID", sortable: true },
+            { field: "MerchantName", title: "融资方名称", sortable: true },
+            { field: "amount", title: "申请还本金额", sortable: true },
+            { field: "status", title: "状态" },
+            { field: "ctime", title: "申请时间", sortable: true },
+            //{ command: { text: "还款", click: function (e) { payPrincipal(grid, e, ds); } }, title:"操作" }
+        ];
+        columns.push(
+                  { template: kendo.template($("#myTemplate").html()), title: "操作" }
+          );
+        //grid
+        var grid = $('#grid_principal').kendoGrid({
+            sortable: true,
+            pageable: true,
+            dataSource: ds,
+            columns: columns,
+        }).data("kendoGrid");
+    }
+    //还款操作
+    function payPrincipal(obj) {
+        if (!obj.id)
+            return;
+        var array = obj.id.split('_'),
+            rId = array[0],
+            pjId = array[1],
+            ferId = array[2],
+            amount = array[3];
+        //隐藏 “还款”按钮
+        $(obj).closest("td").hide();
+
+        $.ajax({
+            url: "/RefundManager/PayPrincipal",
+            data: { rId: rId, pjId: pjId, ferId: ferId, amount: amount },
+            success: function (result) {
+                if (result) {
+                    popNotification.show("还款成功", "info");
+                    $(obj).closest("tr").children("td").eq(9).html('还款中');
+                }
+                else {
+                    popNotification.show("还款失败", "error");
+                    $(obj).closest("td").show();
+                }
+            }
+        });
+    }
+</script>

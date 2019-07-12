@@ -1,0 +1,661 @@
+﻿@model YxLiCai.Model.UserFinancingManagement.UserInfo_FinancingManagement_Model
+@using YxLiCai.Server.UserFinancingManagement
+@using YxLiCai.Model
+@using YxLiCai.Model.UserFinancingManagement
+@using YxLiCai.FinaAdmin
+@using YxLiCai.Tools.Const
+<link href="~/Resource/css/font-awesome.min.css" rel="stylesheet" />
+<style type="text/css">
+    * {
+        padding: 0;
+        margin: 0;
+        line-height: 25px;
+        font-size: 12px;
+        list-style: none;
+    }
+
+    #tabContainer {
+        margin: 30px;
+    }
+
+        #tabContainer li {
+            float: left;
+            width: 80px;
+            margin: 0 3px;
+            background: #efefef;
+            text-align: center;
+        }
+
+        #tabContainer a {
+            display: block;
+        }
+
+            #tabContainer a.on {
+                background: pink;
+            }
+
+    .gx-texttitle {
+        font-size: 14px;
+        color: #666;
+        width: 142px;
+        text-align: right;
+        display: inline-block;
+    }
+</style>
+<div class="zpManage zpSh">
+    <h2 class="crumbs">第三方管理->融资机构->个人中心
+    </h2>
+</div>
+<div class="gx-textitem">
+    <p style="font-size: large;">用户信息</p>
+    <label class="gx-texttitle">真实姓名：</label>
+    @if (Model != null)
+    {
+        if (!(string.IsNullOrEmpty(Model.myreal_card)))
+        {
+            if (Model.isreal_card == 1)
+            { <label style="font-size: 14px; color: #666; text-align: right; display: inline-block;">@Model.myreal_name（@YxLiCai.Tools.Const.SystemConst.IDCardCut(Model.myreal_card)）</label> }
+            else
+            {<a href="IdentityAuthentication" style="color: red">未验证</a>}
+        }
+        else
+        {<a href="IdentityAuthentication" style="color: red">未验证</a>}
+        <label class="gx-texttitle">登录密码：</label><a href="UpdatePasswerd">修改</a>
+        <label class="gx-texttitle">交易密码：</label>
+        if (!(string.IsNullOrEmpty(Model.spassword)))
+        {     <a href="UpdateSPasswerd?type=0">修改</a>
+        }
+        else
+        { <a href="UpdateSPasswerd?type=1" style="color: red">未设置</a> }
+        <br />
+        <label class="gx-texttitle">手机号：</label>
+        if (!(string.IsNullOrEmpty(Model.phone)))
+        {
+        <label class="gx-texttitle">@Model.phone</label>
+
+        }
+        else
+        {<a href="CheckPhone" style="color: red">未验证</a>}
+        <label class="gx-texttitle">银行卡：</label>
+        if (!(string.IsNullOrEmpty(Model.bank_card)))
+        {
+            if (Model.isbank_card == 1)
+            { <label class="gx-texttitle">@YxLiCai.Tools.Const.SystemConst.BankIDCut(Model.bank_card)</label> }
+            else
+            {<a href="javascript:void(0)" onclick="BingBank();" style="color: red">去绑定</a>}
+        }
+        else
+        {<a href="javascript:void(0)" onclick="BingBank();" style="color: red">去绑定</a>}
+        <br />
+        <label class="gx-texttitle">公司名称：</label>
+        if (!(string.IsNullOrEmpty(Model.financier_name)))
+        {
+        <label style="font-size: 14px; color: #666; text-align: right; display: inline-block;">@Model.financier_name</label>
+
+        }
+        else
+        { <a href="SetComentName" style="color: red">未设置</a> }
+    }
+    <br />
+    <br />
+    <div>
+        <p style="font-size: large;">资产信息</p>
+        @{UserInfo_FinancingManagement_Services user = new UserInfo_FinancingManagement_Services(); ;
+          ResultInfo<Fina_User_Count_Model> result = user.GetFina_User_Count_Model(UserContext.simpleUserInfoModel.Fer_account);
+
+          if (result.Result && result.Data != null)
+          {
+            <label class="gx-texttitle">账户余额（元）：</label><label class="gx-texttitle">@SystemConst.MoenyConvert(result.Data.amount_repay)</label>
+            <label class="gx-texttitle">借款资金（元）：</label><label class="gx-texttitle">@SystemConst.MoenyConvert(result.Data.amount_borrow)</label>
+            <input type="hidden" id="YFliXI" value="@SystemConst.MoenyConvert(result.Data.interest_payable)" />
+            <label class="gx-texttitle">待付利息（元）：</label><label class="gx-texttitle">@SystemConst.MoenyConvert(result.Data.interest_payable)</label>
+            <br />
+            <input type="hidden" id="KeYongMoney" value="@SystemConst.MoenyConvert(result.Data.amount_repay - result.Data.amount_repay_fz)" />
+            <label class="gx-texttitle">可用余额（元）：</label><label class="gx-texttitle" id="amount_available">@SystemConst.MoenyConvert(result.Data.amount_repay - result.Data.amount_repay_fz)</label>
+            <label class="gx-texttitle">已还本金（元）：</label><label class="gx-texttitle">@SystemConst.MoenyConvert(result.Data.amount_paid)</label>
+            <br />
+            <label class="gx-texttitle">冻结金额（元）：</label><label class="gx-texttitle" id="amount_fz">@SystemConst.MoenyConvert(result.Data.amount_repay_fz)</label>
+            <label class="gx-texttitle">已付利息（元）：</label><label class="gx-texttitle">@SystemConst.MoenyConvert(result.Data.interest_paid)</label>
+          }
+          else
+          { <label class="gx-texttitle">账户余额（元）：</label><label class="gx-texttitle">0</label>
+            <label class="gx-texttitle">借款资金（元）：</label><label class="gx-texttitle">0</label>
+            <label class="gx-texttitle">已付利息（元）：</label><label class="gx-texttitle">0</label>
+            <br />
+            <label class="gx-texttitle">冻结金额（元）：</label><label class="gx-texttitle">0</label>
+            <label class="gx-texttitle">已还本金（元）：</label><label class="gx-texttitle">0</label>
+
+            <br />
+            <input type="hidden" id="KeYongMoney" value="0" />
+            <label class="gx-texttitle">可用余额（元）：</label><label class="gx-texttitle">0</label>
+            <input type="hidden" id="YFliXI" value="0" />
+            <label class="gx-texttitle">待付利息（元）：</label><label class="gx-texttitle">0</label>
+          }
+        }
+
+    </div>
+</div>
+<div id="tabContainer">
+    <p style="font-size: large;">项目信息</p>
+    <ul>
+        <li id="tab1"><a href="#" class="on" onclick="switchTab('tab1','con1');this.blur();return false;">还款记录</a></li>
+        <li id="tab2"><a href="#" onclick="switchTab('tab2','con2');this.blur();return false;">利息</a></li>
+        <li id="tab3"><a href="#" onclick="switchTab('tab3','con3');this.blur();return false;">本金</a></li>
+    </ul>
+    <div style="clear: both">
+    </div>
+    <div id="con1">
+        <div class="SearchMd form-horizontal">
+            <!--还款记录-->
+            项目期限：<input id="LoanPeriod" style="width: 50px" />
+            还款日期：
+            <input type="text" id="S_Time" class="Wdate gx-textbox" style="height: 28px; width: 110px" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd' })" />至
+            <input type="text" id="E_Time" class="Wdate gx-textbox" style="height: 28px; width: 110px" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd' })" />
+            还款金额：<input id="SMoney" style="width: 50px" />至<input id="EMoney" style="width: 50px" />
+            <input type="button" id="btnSearch" value="查询" class="searchBtn" />
+        </div>
+        <div class="control-group form-horizontal">
+            <div class="control-group">
+                <x style="color: red">  </x>
+                <div class="tbstyle">
+                    <div id="productGrid"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="con2" style="display: none">
+        <!--利息-->
+        <div class="SearchMd form-horizontal">
+            项目期限：<input id="LoanPeriod_Interest" style="width: 50px" />
+            待付利息：<input id="Wait_Interest" style="width: 50px" />
+            <input type="button" id="btnSearch_Interest" value="查询" class="searchBtn" />
+        </div>
+        <div class="control-group form-horizontal">
+            <div class="control-group">
+                <x style="color: red">  </x>
+                <div class="tbstyle">
+                    <div id="productGrid_Interest"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="con3" style="display: none">
+        <!--本金-->
+        <div class="SearchMd form-horizontal">
+            项目名称：<input id="ProjectName" />
+            项目金额：<input id="Amount_Principal" />
+            &nbsp; &nbsp; &nbsp;
+            还款状态： &nbsp; &nbsp; &nbsp;<select id="selecttype">
+                <option value="-1">全部</option>
+                <option value="0">还款中</option>
+                <option value="1">审核中</option>
+                <option value="3">已还清</option>
+            </select>
+            <input type="button" id="btnSearch_Principal" value="查询" class="searchBtn" />
+        </div>
+        <div class="control-group form-horizontal">
+            <div class="control-group">
+                <x style="color: red">  </x>
+                <div class="tbstyle">
+                    <div id="productGrid_Principal"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="display: none; width: 500px; background-color: #a5D771;" id="JoinBlacklistDiv" class="add-openbox add-form">
+    <div style="text-align: center;">
+        <p>
+            请输入还款金额：<v id="tt" style="color: red"></v>
+        </p>
+        <input id="RepMoney" />
+        <p style="margin-right: 277px;">请输入交易密码：</p>
+        <input id="SpWD" type="password" maxlength="6" />
+        <p>
+            <input style="margin: 5px" type="button" value="提交申请" id="ConfirmApp" /><input style="margin: 5px" type="button" value="取消" id="CancleApp" />
+        </p>
+    </div>
+</div>
+<script type="text/javascript">
+    var adminjs = new adminglass(); //实例化后台类  
+    $('#RepMoney').on('input propertychange', function () {
+
+        var moneyNum = $('#RepMoney').val();
+        moneyNum = moneyNum.replace(/[^\d.]/g, "");
+        //必须保证第一个为数字而不是.
+        moneyNum = moneyNum.replace(/^\./g, "");
+        //保证只有出现一个.而没有多个.
+        moneyNum = moneyNum.replace(/\.{2,}/g, ".");
+        //保证.只出现一次，而不能出现两次以上
+        moneyNum = moneyNum.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
+        //保证是小数点后两位
+        moneyNum = moneyNum.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3');
+
+        $('#RepMoney').val(moneyNum);
+    });
+    //绑定银行卡跳转
+    function BingBank() {
+        var iscard =parseInt(@Model.isreal_card);
+        if (iscard == 0) {
+            alert("你还没有实名认证，请认证");
+            window.location.href = "IdentityAuthentication";
+        } else {
+            window.location.href = "BindingBank";
+        }
+    }
+    function switchTab(ProTag, ProBox) {
+        for (i = 1; i < 4; i++) {
+            if ("tab" + i == ProTag) {
+                document.getElementById(ProTag).getElementsByTagName("a")[0].className = "on";
+            } else {
+                document.getElementById("tab" + i).getElementsByTagName("a")[0].className = "";
+            }
+            if ("con" + i == ProBox) {
+                document.getElementById(ProBox).style.display = "";
+            } else {
+                document.getElementById("con" + i).style.display = "none";
+            }
+        }
+    }
+
+    require(['CRM/common.assets'], function (common) {
+        //还款记录开始-start
+        $("#btnSearch").bind("click", function () {
+            var Panme = $("#ProjectName_rep").val(),
+                LoanPeriod = $("#LoanPeriod").val(),
+                recharge_moneyStar = $("#SMoney").val(),
+                recharge_moneyEnd = $("#EMoney").val(),
+                recharge_timeStar = $("#S_Time").val(),
+                recharge_timeEnd = $("#E_Time").val();
+            var beginDate = $("#S_Time").val();
+            var endDate = $("#E_Time").val();
+            var d1 = new Date(beginDate.replace(/\-/g, "\/"));
+            var d2 = new Date(endDate.replace(/\-/g, "\/"));
+            var m1 = parseInt(recharge_moneyStar);
+            var m2 = parseInt(recharge_moneyEnd);
+            if (m1 != "" && m2 != "" && m1 > m2) {
+                alert("还款金额(起)不能大于还款金额(终)!");
+                return false;
+            }
+            if (beginDate != "" && endDate != "" && d1 > d2) {
+                alert("还款日期(起)不能大还款日期(终)!");
+                return false;
+            }
+            var loanPeriod = $("#LoanPeriod").val() || -1, //项目期限
+                amount_min = $("#SMoney").val() || -1,
+                amount_max = $("#EMoney").val() || -1,
+                time_min = $("#S_Time").val() || '0001/1/1 0:00:00',
+                time_max = $("#E_Time").val() || '0001/1/1 0:00:00';
+            param = { loanPeriod: loanPeriod, amount_min: amount_min, amount_max: amount_max, time_min: time_min, time_max: time_max };
+            getData(param);
+        });
+
+        //还息列表
+        function getData(param) {
+            //datasource
+            var productDs = new kendo.data.DataSource({
+                type: "json",
+                serverPaging: true,
+                pageSize: 15,
+                transport: {
+                    read: {
+                        url: "/Financing/GetRefundLog",
+                        dataType: "json",
+                        data: param
+                    }
+                },
+                parameterMap: function (options) {
+                    return JSON.stringify(options);
+                },
+                schema: {
+                    model: {
+                        id: "id"
+                    },
+                    data: "DataResult",
+                    total: "TotalCount"
+                }
+            });
+            //columns
+            var columns = [
+                { field: "id", title: "项目ID", sortable: true },
+                { field: "ProjectName", title: "项目名称", sortable: true },
+                { field: "ProjectAmount", title: "项目金额", sortable: true },
+                { field: "LoanPeriod", title: "项目期限(月)", sortable: true },
+                { field: "amount", title: "还款金额", sortable: true },
+                { field: "ctime", title: "还款日期", sortable: true },
+                { field: "MerchantName", title: "融资方", sortable: true },
+                { field: "Type", title: "还款类型", sortable: true }
+            ];
+            //grid
+            var grid_productGridd = $('#productGrid').kendoGrid({
+                sortable: true,
+                pageable: true,
+                dataSource: productDs,
+                columns: columns,
+            }).data("kendoGrid");
+            //format data
+            grid_productGridd.bind("dataBinding", function (e) {
+                for (var i = 0; i < productDs.data().length; i++) {
+                    if (productDs.at(i).ctime != null) {
+                        var date = new Date(parseInt(productDs.at(i).ctime.substr(6)));
+                        productDs.at(i).ctime = date.format("yyyy-MM-dd");
+                    }
+                }
+            });
+            grid_productGridd.setOptions({
+                dataSource: productDs,
+                columns: columns,
+                selectable: "multiple, row"
+            })
+        }
+
+        //还款记录结束-end
+
+        //利息记录开始-start
+        var grid_Interest = $("#productGrid_Interest").kendoGrid({
+            sortable: true,
+            pageable: true,
+        }).data("kendoGrid");
+        $("#btnSearch_Interest").bind("click", function () {
+            var LoanPeriod = $("#LoanPeriod_Interest").val().replace(/\-/g, "\/"),
+                interest_payable = $("#Wait_Interest").val().replace(/\-/g, "\/");
+            var param = { LoanPeriod: LoanPeriod, interest_payable: interest_payable };
+            var productDs = new kendo.data.DataSource({
+                pageSize: 15,
+                transport: {
+                    read: {
+                        url: "/Financing/GetFer_account_item_List",
+                        dataType: "json",
+                        data: param
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "PID"
+                    }
+                }
+            });
+            grid_Interest.bind("dataBinding", function (e) {
+                if (productDs.Binding) return;
+                for (var i = 0; i < productDs.data().length; i++) {
+                    if (productDs.at(i).c_time != null) {
+                        var date1 = new Date(parseInt(productDs.at(i).c_time.substr(6)));
+                        productDs.at(i).c_time = date1.format("yyyy-MM-dd");
+                    }
+                    if (productDs.at(i).pay_type != null) {
+                        if (productDs.at(i).pay_type == 0) {
+                            productDs.at(i).pay_type = "易宝充值";
+                        } else {
+                            productDs.at(i).pay_type = "其他";
+                        }
+                    }
+                    if (productDs.at(i).status != null) {
+                        if (productDs.at(i).status == 1) {
+                            productDs.at(i).status = "充值成功";
+                        } else {
+                            productDs.at(i).status = "充值失败";
+                        }
+                    }
+                    if (productDs.at(i).repay_type != null) {
+                        if (productDs.at(i).repay_type == 1) {
+                            productDs.at(i).repay_type = "利息偿还";
+                        } else {
+                            productDs.at(i).repay_type = "本金偿还";
+                        }
+                    }
+
+                }
+                productDs.Binding = true;
+            });
+            var columns = [
+                { field: "PID", title: "项目ID", sortable: true },
+                { field: "Pname", title: "项目名称", sortable: true },
+                { field: "Pmoney", title: "项目金额", sortable: true },
+                { field: "LoanPeriod", title: "项目期限", sortable: true },
+                { field: "interest_paid", title: "已付利息", sortable: true },
+                { field: "interest_payable", title: "待付利息", sortable: true },
+            ];
+            grid_Interest.setOptions({
+                dataSource: productDs,
+                columns: columns,
+                selectable: "multiple, row"
+            });
+        });
+
+        //利息记录结束-end
+
+
+        //本金记录开始-start
+        var productDssss;
+        var grid_Principal = $("#productGrid_Principal").kendoGrid({
+            sortable: true,
+            pageable: true,
+        }).data("kendoGrid");
+        $("#btnSearch_Principal").bind("click", function () {
+            var ProjectName = $("#ProjectName").val().replace(/\-/g, "\/"),
+                State = $("#selecttype").val(),
+                recharge_moneyStar = $("#Amount_Principal").val().replace(/\-/g, "\/");
+            var param = {
+                ProjectName: ProjectName,
+                recharge_moneyStar: recharge_moneyStar,
+                State: State
+            };
+            productDssss = new kendo.data.DataSource({
+                pageSize: 15,
+                transport: {
+                    read: {
+                        url: "/Financing/GetProjectModel_List",
+                        dataType: "json",
+                        data: param
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "Id"
+                    }
+                }
+            });
+            grid_Principal.bind("dataBinding", function (e) {
+                if (productDssss.Binding) return;
+                for (var i = 0; i < productDssss.data().length; i++) {
+
+                    if (productDssss.at(i).rep_status != null) {
+                        if (productDssss.at(i).rep_status == 0) {
+                            productDssss.at(i).rep_status_W = "还款中";
+                        } else if (productDssss.at(i).rep_status == 1) {
+                            productDssss.at(i).rep_status_W = "审核中";
+                        } else {
+                            productDssss.at(i).rep_status_W = "已还清";
+                        }
+                    }
+                }
+                productDssss.Binding = true;
+            });
+            var columns = [
+                { field: "Id", title: "项目ID", sortable: true },
+                { field: "ProjectName", title: "项目名称", sortable: true },
+                { field: "Amount", title: "项目金额", sortable: true },
+                { field: "LoanPeriod", title: "项目期限", sortable: true },
+                { field: "Amount_paid", title: "已还金额", sortable: true },
+                { field: "rep_status_W", title: "状态", sortable: true },
+                { field: "rep_status", title: "状态2", sortable: true },
+                { field: "AmountSold", title: "已售金额", sortable: true }
+                // { field: "rep_status", title: "状态2", width: 1 },
+                //{ field: "AmountSold", title: "已售金额", width: 1 }
+            ];
+            columns.push({ title: "操作", width: 100, command: { text: "申请", click: function (e) { pay_loan(this, e); } } });
+            grid_Principal.setOptions({
+                dataSource: productDssss,
+                columns: columns,
+                selectable: "multiple, row"
+            });
+            grid_Principal.hideColumn("rep_status");
+            grid_Principal.hideColumn("AmountSold");
+        });
+
+        //申请还款
+        var amount = 0;
+        //已还金额
+        var repamount = 0;
+        //项目ID
+        var project_ID = 0;
+        //grid 删除数据
+        var row_del;
+        //应付利息
+        var YFliXI = parseFloat($("#YFliXI").val());
+        var PState = 1;
+        //可售余额
+        var KeShou = 0;
+
+        function pay_loan(grid, e) {
+            var pwd = '@(string.IsNullOrEmpty(Model.spassword)? "0":"13")';
+            if (pwd == "0") {
+                alert("你还没有设置交易密码");
+                window.location.href = "UpdateSPasswerd?type=1";
+                return;
+            }
+
+
+            //可用余额
+            var KeYongMoney = parseFloat($("#KeYongMoney").val());
+            if (KeYongMoney <= 0) {
+                alert("你的可用余额不足，请充值");
+                return;
+            }
+            var dataItem = grid.dataItem($(e.currentTarget).closest("tr"));
+            e.preventDefault();
+            PState = parseInt(dataItem.rep_status);
+            KeShou = parseFloat(dataItem.AmountSold);
+            var pstext = dataItem.rep_status_W;
+            if (PState != 0 || pstext == "审核中") {
+                alert("只能申请还款中的项目");
+                return;
+            }
+
+            if (YFliXI <= 0) {
+                if (KeYongMoney <= 0) {
+                    alert("你的可用余额已经不足,请充值");
+                    return;
+                }
+            } else {
+                var mm = parseFloat(KeYongMoney - YFliXI);
+                if (mm < 0) {
+                    alert("你的可用余额已经不足（除去待付利息后）,请充值");
+                    return;
+                }
+            }
+
+            //$("#JoinBlacklistDiv").show();
+            adminjs.openwinbox('#JoinBlacklistDiv');
+            $("#tt").html("你现在的还款可用金额是除去待付利息后 ￥：" + (KeYongMoney - YFliXI) + "</br>本次项目应该偿还的金额为 ￥：" + KeShou);
+
+            amount = dataItem.Amount;
+            repamount = dataItem.Amount_paid;
+            project_ID = dataItem.Id;
+            row_del = dataItem;
+        }
+
+        $("#CancleApp").click(function () {
+            //$("#JoinBlacklistDiv").hide();
+            adminjs.closewinbox('#JoinBlacklistDiv');
+            $("#RepMoney").val("");
+            $("#SpWD").val("");
+        });
+        ///提交申请
+        $("#ConfirmApp").click(function () {
+            var nowamount = $("#RepMoney").val();
+            var SpWD = $("#SpWD").val();
+            if ($("#RepMoney").val().replace(/\-/g, "\/") == "") {
+                alert("请输入还款金额");
+                return;
+            }
+            if (SpWD == "") {
+                alert("请输入交易密码！");
+                return;
+            }
+            nowamount = parseFloat($("#RepMoney").val());
+            //alert(nowamount<=0);
+            //return;
+            if (nowamount <= 0) {
+                alert("请输入大于零的金额");
+                return;
+            }
+            //if (!pcheck(nowamount)) {
+            //    alert("请输入大于零的金额");
+            //    return;
+            //}
+            //nowamount = parseFloat(nowamount);
+            //可用余额
+            var KeYongMoney = parseFloat($("#KeYongMoney").val());
+            if (!YFliXI <= 0) {
+                if (nowamount > (KeYongMoney - YFliXI)) {
+                    alert("你的可用余额不足，还有未还的利息，请充值……");
+                    return;
+                }
+            } else {
+                if (nowamount > KeYongMoney) {
+                    alert("你的可用余额不足，请充值……");
+                    return;
+                }
+            }
+            if (nowamount > KeShou) {
+                alert("本次项目应还金额为￥：" + KeShou + "，不要超出哦！");
+                return;
+            }
+            /*
+            if ((nowamount + repamount) > amount) {
+                alert("你的还款超出了项目金额");
+                return;
+            }*/
+
+            var flag = false;
+            ///异步提交申请操作
+            $.ajax({
+                type: "POST",
+                async: false,
+                url: "/Financing/ApplicationRepayment",
+                data: { project_ID: project_ID, nowamount: nowamount, SpWD: SpWD },
+                success: function (data) {
+                    if (data.Status == 1) {
+                        //更新值
+                        row_del.set('rep_status_W', '审核中');
+                        var amount_ava = $("#amount_available").html(),
+                            amount_fz = $("#amount_fz").html();
+                        $("#amount_available").html(parseFloat(amount_ava) - parseFloat(nowamount));
+                        $("#amount_fz").html(parseFloat(amount_fz) + parseFloat(nowamount));
+
+                        //在这里偷偷的给之前可用金额-已付利息的金额做重新判断
+                        $("#KeYongMoney").val(amount_ava - parseFloat(nowamount));
+                        flag = true;
+                        alert(data.Message);
+                        //productDssss.remove(row_del);
+                        //window.location.href = "Index";
+                        //$("#JoinBlacklistDiv").hide();
+                        adminjs.closewinbox('#JoinBlacklistDiv');
+                    } else {
+                        alert(data.Message);
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                },
+            });
+            if (flag) {
+                $("#RepMoney").val("");
+                $("#SpWD").val("");
+            }
+        });
+
+        ///检测密码（）
+        function pcheck(str) {
+            var reg = /^[0-9]{1,9}$/;
+            if (!reg.test(str)) {
+                return false;
+            } else {
+                return true;
+            }
+        };
+
+        //本金记录结束-end
+    });
+
+</script>

@@ -1,0 +1,22 @@
+﻿<div class="zpManage zpSh">
+    <h2 class="crumbs">
+        您所在位置：产品管理 > 报警设置
+    </h2>
+    <div class="control-group form-horizontal">      
+        @Html.Partial("EditorTemplates/KendoNumericTextBox",
+        new YxLiCai.Admin.Models.KendoNumericTextBoxViewModel
+        {
+            Content = "月月盈产品报警设置 ",
+            Id = "ProductAmount",
+            Format = "n4",
+            Decimals = "4",
+            Value = "0",
+            Min = "0"
+        })  
+    </div>
+    <div class="SearchMd">
+        <input type="hidden" id="CreatorID" value="@YxLiCai.Admin.UserContext.simpleUserInfoModel.Id" />
+        <input id="btnSave" type="button" value="保存" class="searchBtn" />
+        <input type="button" value="返回" class="searchBtn" onclick="javascript: window.location.href = 'Index'" />
+    </div>
+</div>

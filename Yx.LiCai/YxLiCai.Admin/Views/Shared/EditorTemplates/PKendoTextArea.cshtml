@@ -1,0 +1,8 @@
+﻿@model YxLiCai.Admin.Models.KendoTextAreaViewModel
+<div class="form-group ">
+    <label class="control-label col-sm-4" for="@Model.Id">@Model.Content</label>
+    <div class="col-sm-6 ">
+        <textarea id="@Model.Id" maxlength="300" readonly="@Model.Readonly">@Model.Value</textarea>
+        (不超过300字符)
+    </div>
+</div>

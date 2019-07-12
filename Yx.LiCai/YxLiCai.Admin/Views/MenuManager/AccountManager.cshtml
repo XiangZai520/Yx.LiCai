@@ -1,0 +1,367 @@
+﻿ @using YxLiCai.Model.Authority;
+@model List<AccountModel>
+@{
+    ViewBag.Title = "Account";
+}  
+@section styles{
+        <link href="~/Resource/css/font-awesome.min.css" rel="stylesheet" />
+        <link href="~/Resource/css/sidebar.css?V=1.1" rel="stylesheet" />
+        <style>
+            .tbstyle th, .tbstyle td {
+                text-align: center;
+            }
+        </style>
+    }
+<div class="zpManage zpSh">
+    <h2 class="crumbs">
+        您所在位置：权限 > 账号设置
+    </h2>
+    <div class="margin">
+        <h2> 个人权限设置</h2>
+        <div class="padding">
+                      <input type="submit" value="添加账户" class="searchBtn gx-button-info search-btn" onclick="showUserAdd();" id="btnAdd" />
+        </div>
+    </div>
+    <table width="98%" border="0" cellspacing="0" cellpadding="0" class="tbstyle margin">
+        <thead> 
+            <tr class="tdbg">
+                <th width="%5">编号</th>
+                <th>名称</th>  
+                <th>角色</th> 
+                 <th>状态</th> 
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                if (Model != null)
+                { 
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Id</td> 
+                            <td>@item.LoginName</td>
+                             <td>@item.RoleName</td>
+                            @if (@item.Status > 0)
+                            {
+                                <td>可用</td>
+                            }
+                            else
+                            {
+                                <td>锁定</td>
+                            }
+                            <td>
+                                <a href="javascript:void(0)" onclick="showMenu(@item.Id,'@item.LoginName')">分配权限</a>
+                                <a href="javascript:void(0)" onclick="showRoles(@item.Id,'@item.LoginName',@item.RoleId)">分配角色</a>
+                                <a href="javascript:void(0)" onclick="showPwd(@item.Id,'@item.LoginName')">修改密码</a>
+                            </td>
+                        </tr> 
+                    }
+                }
+            }
+        </tbody> 
+    </table>
+</div>
+<div>
+    <div class="add-openbox add-form" id="MenuDiv" style="width:500px">
+        <h2>
+            <p id="statusFinMenu">菜单权限列表</p>
+        </h2>
+        <fieldset>
+            <input type="hidden" id="hidaid"/>
+            <!-- 侧边栏 -->
+            <div class="yx-wrapper clearfix">
+                <div class="sidebar-list">
+                    <ul class="sidebar-list-ul">
+                        @{
+                            List<AuthorityMenuModel> AllMenu = ViewBag.AllMenu as List<AuthorityMenuModel>;
+                            List<AuthorityMenuModel> temp_1;
+                            List<AuthorityMenuModel> temp_2;
+                            List<AuthorityMenuModel> temp_3;
+                            List<AuthorityMenuModel> temp_4;
+
+                            if (AllMenu != null && AllMenu.Count > 0)
+                            {
+                                temp_1 = AllMenu.Where(a => a.ParId == 0 && a.MenuType == 1).ToList();
+                                if(temp_1!=null&&temp_1.Count>0)
+                                {
+                                    foreach(AuthorityMenuModel item_1 in temp_1)
+                                    {
+                                        <li class="sidebar-list-one sidebar-bottom">
+                                           <!-- 一级 -->
+                                            <a href="javascript:void(0);">
+                                                <i class="fa fa-caret-square-o-down"></i>
+                                                <span>@item_1.MenuName</span>
+                                            </a>
+                                        </li>
+                                        temp_2 = AllMenu.Where(a => a.ParId == item_1.Id && a.MenuType == 2).ToList();
+                                        if(temp_2!=null&&temp_2.Count>0)
+                                        {
+                                            <ul class="sidebar-list-two">
+                                            @foreach(AuthorityMenuModel item_2 in temp_2)
+                                            {
+                                                
+                                                <li>
+                                                   <!-- 二级 -->
+                                                    <a href="javascript:void(0);">
+                                                        <i class="fa fa-caret-square-o-down"></i>
+                                                        <span>@item_2.MenuName</span>
+                                                    </a>
+                                                </li>
+                                                temp_3 = AllMenu.Where(a => a.ParId == item_2.Id && a.MenuType == 3).ToList();
+                                                if(temp_3!=null&&temp_3.Count>0)
+                                                {
+                                                   <ul class="sidebar-list-three">
+                                                       @foreach(AuthorityMenuModel item_3 in temp_3)
+                                                       {
+                                                            <li>
+                                                               <!-- 三级 -->
+                                                                <a href="javascript:void(0);">
+                                                                    <label><input name="checkMenus" id="chkMenu@(item_3.Id)" value="@(item_3.Id)" type="checkbox"><span>@item_3.MenuName</span></label>
+                                                                </a>
+                                                            </li>
+                                                           temp_4 = AllMenu.Where(a => a.ParId == item_3.Id && a.MenuType == 4).ToList();
+                                                           if (temp_4 != null && temp_4.Count > 0)
+                                                           {
+                                                               <ul class="sidebar-list-four">
+                                                                   @foreach(AuthorityMenuModel item_4 in temp_4)
+                                                                   {
+                                                                       <li>
+                                                                           <!-- 四级 -->
+                                                                            <a href="javascript:void(0);">
+                                                                                <label><input name="checkMenus" id="chkMenu@(item_4.Id)" value="@(item_4.Id)" type="checkbox"><span>@item_4.MenuName</span></label>
+                                                                            </a>
+                                                                        </li>
+                                                                   }
+                                                               </ul> 
+                                                           }
+                                                       }
+                                                    </ul>
+                                                }
+                                            }
+                                            </ul>
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>     
+        </fieldset>
+        <p class="btnbox">
+            <input value="确认" type="button" id="btnMenuConfim" class="yesBtn" />                
+            <input value="关闭" type="button" class="J_closebox qxBtn" />
+        </p>
+    </div>
+
+     <div class="add-openbox add-form" id="RoleDiv" style="width:500px">
+        <h2>
+            <p id="statusFinRole">角色列表</p>
+        </h2> 
+            <input type="hidden" id="hidaccountid"/>
+            @{
+                var ListRoles = ViewBag.ListRoles as List<AuthorityRoleModel>;
+                if (ListRoles != null && ListRoles.Count > 0)
+                {  
+                <div class="control-group">
+                    <label class="control-label" style="margin-top:8px">角色</label>
+                    <div class="controls">
+                        @Html.DropDownList("selRoles", new SelectList(ListRoles, "Id", "RoleName"), "--无--", new { style = "width:155px" })
+                    </div> 
+                </div>  
+                } 
+            } 
+        <p class="btnbox">
+            <input value="确认" type="button" id="btnRoleConfim" class="yesBtn" />                
+            <input value="关闭" type="button" class="J_closebox qxBtn" />
+        </p>
+    </div>
+    
+     @*修改密码*@ 
+    <div class="add-openbox add-form" id="addPwdDiv" style="width:500px">
+        <h2>
+            <p id="statusFinPwd">修改密码</p>
+        </h2> 
+        <fieldset>
+            <div class="control-group" style="width: 250px;margin: 0 auto;">
+                <label >密码</label> 
+                <input  name="txtAccountName" id="txtPassWord" type="text">
+                <input type="hidden" id="hidaccountidpwd"/>
+            </div>  
+        </fieldset>
+        <p class="btnbox">
+            <input value="确认" type="button" id="btnPwdAdd" class="yesBtn" />                
+            <input value="关闭" type="button" class="J_closebox qxBtn" />
+        </p>
+    </div>  
+    @*新增账户*@ 
+    <div class="add-openbox add-form" id="addUserDiv" style="width:500px">
+        <h2>
+            <p>新增账户</p>
+        </h2> 
+        <fieldset>
+            <div class="control-group form-inline" style="width: 250px;margin: 15px auto;">
+                <label >账户:</label> 
+                <input class="form-control"  name="txtAccountName" id="txtAccountName" type="text">
+            </div>  
+        </fieldset>
+        <p class="btnbox">
+            <input value="确认" type="button" id="btnUserAdd" class="yesBtn" />                
+            <input value="关闭" type="button" class="J_closebox qxBtn" />
+        </p>
+    </div>  
+</div> 
+<script>
+    var adminjs = new adminglass(); //实例化后台类   
+    //分配角色
+    function showRoles(id, name, roleid) {
+        $("#statusFinRole").text("分配:" + name + "的角色");
+        $("#hidaccountid").val(id);
+        $("#selRoles").val(roleid); 
+        adminjs.openwinbox('#RoleDiv'); 
+    }
+    //修改密码
+    $("#btnPwdAdd").on('click', function () {
+        var PassWord = $('#txtPassWord').val(); //密码 
+        if (PassWord == "")
+        {
+            alert("请输入密码!");
+            return;
+        }
+        var hidId = $("#hidaccountidpwd").val();
+        var pars = { "aid": hidId, "pwd": PassWord };
+        var url = "/MenuManager/UpdateAccountPwd";
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: pars,
+            success: function (result) {
+                if (result.IsSuccess) {
+                    alert("修改成功!");
+                    window.location.href = "/MenuManager/AccountManager/";
+                } else {
+                    alert(result.Message);
+                }
+            }
+        });
+    });
+    //修改角色
+    $("#btnRoleConfim").on('click', function () {
+        var selRoles = $('#selRoles').val(); //角色id 
+        if (selRoles == "") {
+            alert("请选择角色!");
+            return;
+        }
+        var hidId = $("#hidaccountid").val(); //id 
+        var pars = { "aid": hidId, "rid": selRoles };
+        var url = "/MenuManager/EditAccountRole";
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: pars,
+            success: function (result) {
+                if (result.IsSuccess) {
+                    alert("修改成功!");
+                    window.location.href = "/MenuManager/AccountManager/";
+                } else {
+                    alert(result.Message);
+                }
+            }
+        });
+    });
+    //显示权限菜单
+    function showMenu(id, name) {
+        $("#statusFinMenu").text("分配:"+name+"的权限"); 
+        $("#hidaid").val(id);
+        var pars = { "aid": id };
+        var url = "/MenuManager/GetMenusByAccount";
+        $.ajax({
+            type: 'GET',
+            url: url,
+            data: pars,
+            cache: false,
+            success: function (result) {
+                if (result.IsSuccess) {
+                    $("input[name='checkMenus']").each(function () {
+                        $(this).removeAttr("checked");
+                    }); 
+                    if (result.Data != null) { 
+                        $.each(result.Data, function (key, val) {
+                            $('input[value=' + val + ']').prop("checked", true);
+                        }); 
+                    }
+                    adminjs.openwinbox('#MenuDiv');
+                } else {
+                    alert(result.Message);
+                }
+            }
+        }); 
+        
+    }
+    //修改权限
+    $("#btnMenuConfim").on('click', function () {
+        var ids = "";
+        $('input[name="checkMenus"]:checked').each(function () {
+            var i = $(this).val();
+            ids += i+",";
+        });
+        var hidId = $("#hidaid").val(); //角色id 
+        var pars = { "aid": hidId, "ids": ids };
+        var url = "/MenuManager/EditAccountMenus";
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: pars,
+            success: function (result) {
+                if (result.IsSuccess) {
+                    alert("修改成功!");
+                    window.location.href = "/MenuManager/AccountManager/";
+                } else {
+                    alert(result.Message);
+                }
+            }
+        });
+    });
+
+    //新增账户
+    $("#btnUserAdd").on('click', function () {
+        var txtName = $("#txtAccountName").val(); //名称 
+        if (txtName === "") {
+            alert("请输入名称!");
+            return;
+        }
+        var pars = {"AccountName": txtName };
+        var url = "/MenuManager/AddAccount";
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: pars,
+            dataType: 'json',
+            success: function (result) {
+                if (result.IsSuccess) {
+                    alert("添加成功!");
+                    window.location.href = "/MenuManager/AccountManager/";
+                } else {
+                    alert(result.Message);
+                }
+            }
+        });
+    });
+    //修改密码
+    function showPwd(id, name) {
+        $("#statusFinPwd").text("修改:" + name + "的密码");
+        $("#hidaccountidpwd").val(id); 
+        adminjs.openwinbox('#addPwdDiv');
+    }
+    function showUserAdd() {
+        adminjs.openwinbox('#addUserDiv');
+    }
+    //关闭弹层
+    $('.J_closebox').click(function () {
+        adminjs.closewinbox('.add-openbox');
+        return false;
+    });
+</script>
+
+

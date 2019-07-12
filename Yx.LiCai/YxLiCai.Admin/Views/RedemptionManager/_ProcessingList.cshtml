@@ -1,0 +1,82 @@
+﻿@model YxLiCai.Admin.Models.KendoTextBoxViewModel
+
+<div class="control-group">
+    @{
+        if (Model.Id == "grid1")
+        {
+            <div class="SearchMd form-horizontal">
+                <input type="button" id="btnPayAll" value="全部打款" class="searchBtn" />
+            </div>
+        }
+    }
+
+    <div class="tbstyle">
+        <div id="@Model.Id"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    require(['CRM/common.assets', 'CRM/withdraw.assets'], function (common, withdraw) {
+
+        //initial
+        var id = '@Model.Id',
+            status = '@Model.Content',
+            sysStatus = '@Model.Value',
+            param = { status: status, sysStatus: sysStatus },
+            ds = withdraw.redemptionDs(param);
+        var columns = [
+            { field: "id", title: "ID", sortable: true },
+            { field: "user_id", title: "用户ID", sortable: true },
+            { field: "UserInfo.LoginName", title: "用户名", sortable: true },
+            { field: "UserInfo.MyRealName", title: "真实姓名", sortable: true },
+            { field: "UserInfo.Phone", title: "手机号", sortable: true },
+            { field: "BankCardInfo.BankName", title: "银行", sortable: true },
+            { field: "BankCardInfo.BankCard", title: "银行卡号", sortable: true },
+            { field: "amount", title: "申请赎回金额", sortable: true },
+            { field: "atone_benjin", title: "赎回本金", sortable: true },
+            { field: "atone_lixi", title: "赎回利息", sortable: true },
+            { field: "PenalSum", title: "违约金", sortable: true },
+            { field: "order_id", title: "订单编号", sortable: true },
+            { field: "create_time", title: "申请时间", sortable: true },
+            { command: ["edit"], title: "详情" }
+        ];
+
+        if (status == 1) {
+            columns.push({ command: { text: "支付", click: function (e) { withdraw.payRedemption(this, e, ds, "/RedemptionManager/Pay"); } } });
+        }
+        if (status == 4) {
+            columns.push({ command: { text: "重新支付", click: function (e) { withdraw.payRedemption(this, e, ds, "/RedemptionManager/Pay"); } } });
+        }
+
+        var grid = $("#" + id).kendoGrid({
+            sortable: true,
+            pageable: true,
+            editable: "popup",
+            dataSource: ds,
+            columns: columns
+        }).data("kendoGrid");
+
+        //get data and show on page
+        grid.bind("dataBinding", function (e) {
+            if (ds.Binding) return;
+            for (var i = 0; i < ds.data().length; i++) {
+                if (ds.at(i).create_time != null) {
+                    var date1 = new Date(parseInt(ds.at(i).create_time.substr(6)));
+                    ds.at(i).create_time = date1.format("yyyy/MM/dd");
+                }
+                if (ds.at(i).audit_time != null) {
+                    var date1 = new Date(parseInt(ds.at(i).audit_time.substr(6)));
+                    ds.at(i).audit_time = date1.format("yyyy/MM/dd");
+                }
+            }
+            ds.Binding = true;
+        });
+
+        //全部打款
+        $("#btnPayAll").bind("click", function (e) {
+
+        });
+
+    });
+</script>
+

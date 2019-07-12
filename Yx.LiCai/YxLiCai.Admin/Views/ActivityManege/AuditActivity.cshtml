@@ -1,0 +1,152 @@
+﻿@model YxLiCai.Admin.Models.ModifyActivityOut
+@section styles
+{
+    <link href="~/Resource/css/font-awesome.min.css" rel="stylesheet" />
+    <script src="~/Resource/js/My97DatePicker/WdatePicker.js"></script>
+}
+<div class="zpManage zpSh">
+    <h2 class="crumbs">
+        您所在位置：活动管理->活动->审核活动
+    </h2>
+</div>
+<div class="gx-textitem">
+    <label class="gx-texttitle">
+        活动名称：
+    </label>
+    <input id="name" type="text" disabled="disabled" value="@Model.actPromotion.name" class="gx-textbox" placeholder="请输入内容...">
+    <span style="color:red">*活动名称唯一</span>
+    <br />
+    <label class="gx-texttitle">
+        活动类型：
+    </label>
+    <select id="type" disabled="disabled" class="gx-textbox">
+        <option value="0">注册</option>
+        <option value="1">邀请</option>
+        <option value="2">购买</option>
+    </select>
+    <br />
+    <label class="gx-texttitle">
+        参与人上限：
+    </label>
+    <input id="max_user_num" type="text" disabled="disabled" value="@Model.actPromotion.max_user_num" class="gx-textbox" placeholder="请输入内容...">
+    <span style="color:red">*活动参与最高人数</span>
+    <br />
+    <label class="gx-texttitle">
+        赠送上限：
+    </label>
+    <input id="limit_num" type="text" disabled="disabled" class="gx-textbox" value="@Model.actPromotion.limit_num" placeholder="请输入内容...">
+    <span style="color:red">*单个用户参与该活动的次数</span>
+    <br />
+    <label class="gx-texttitle">
+        预算（元）：
+    </label>
+    <input id="budget" type="text" disabled="disabled" class="gx-textbox" value="@YxLiCai.Tools.Const.SystemConst.MoenyConvert(Model.actPromotion.budget)" placeholder="请输入内容...">
+    <br />
+    <label class="gx-texttitle">
+        活动广告语：
+    </label>
+    <input id="ad_content" type="text" disabled="disabled" class="gx-textbox" value="@Model.actPromotion.ad_content" placeholder="请输入内容...">
+    <br />
+    <label class="gx-texttitle">
+        活动开始时间：
+    </label>
+    <input type="text" id="s_time" disabled="disabled" value="@Model.actPromotion.s_time" class="Wdate gx-textbox" style="height:34px;" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm' })" />
+    <br />
+    <label class="gx-texttitle">
+        活动结束时间：
+    </label>
+    <input type="text" id="e_time" disabled="disabled" value="@Model.actPromotion.e_time" class="Wdate gx-textbox" style="height:34px;" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm' })" />
+    <br />
+    <label class="gx-texttitle">
+        链接：
+    </label>
+    <input id="url" type="text" disabled="disabled" value="@Model.actPromotion.url" class="gx-textbox" placeholder="请输入内容...">
+    <br />
+    <label class="gx-texttitle">
+        赠送项：
+    </label>
+    <div style="border:solid 1px;width:80%">
+        @if (Model.All_Item != null && Model.All_Item.Count > 0)
+        {
+            List<YxLiCai.Model.ActivityManage.ActPromotionItem> list_temp;
+            bool IsChoose = false;
+            YxLiCai.Model.ActivityManage.ActPromotionItem api = null;
+            foreach (YxLiCai.Model.ActivityManage.ActPromotionItem item in Model.All_Item)
+            {
+                IsChoose = false;
+                list_temp = Model.Choose_Item.Where(a => a.item_id == item.item_id && a.item_type == item.item_type).ToList();
+                api = null;
+                if (list_temp != null && list_temp.Count > 0)
+                {
+                    IsChoose = true;
+                    api = list_temp[0];
+                }
+                <div>
+                    <label class="gx-texttitle">
+                    </label>
+                    <label style="width:20%"><input disabled="disabled" type="checkbox" @(IsChoose ? "checked='checked'" : "") name="item_type" id="@(item.item_type.ToString()+"_"+item.item_id.ToString())">@item.item_name</label>
+                    <label class="gx-texttitle">
+                        数量：
+                    </label>
+                    <input name="item_qty" disabled="disabled" value="@(api==null?"":api.item_qty.ToString())" type="text" class="gx-textbox" placeholder="请输入内容...">
+                    <span style="color:red">*单次给用户赠品的数量</span>
+                </div>
+            }
+        }
+    </div>
+    <br/>
+    <label class="gx-texttitle">
+        审核备注：
+    </label>
+    <textarea id="remark">@Model.actPromotion.remark</textarea><br />
+    <button id="pass" class="gx-button gx-button-info" style="margin:30px;">审核通过</button>
+    <button id="refuse" class="gx-button gx-button-info" style="margin:30px">拒绝通过</button>
+    <button id="cancle" class="gx-button gx-button-info" style="margin:30px">取消</button>
+
+</div>
+<div style="border:solid 1px;width:53%;color:red;padding:15px;">
+    温馨提示：
+    <br />
+    1、注册类型的活动在同一时间段内只能有一个在上线中
+    <br />
+    2、赠送上限对赠送项的所有内容同时有效，当赠送项的限制不一致时不能放在同一活动中
+</div>
+<script type="text/javascript">
+    $(function () {
+        $("#type").val("@Model.actPromotion.type");
+    })
+    $("#cancle").on("click", function () {
+        window.location = "/ActivityManege/ActivityList";
+    })
+    function UpdateStatus(status) {
+        var id = "@Model.actPromotion.id";
+        var remark = $("#remark").val();
+        if (status == 2 && remark == "") {
+            alert("备注不能为空！");
+            return false;
+        }
+        $.ajax({
+            type: "POST",
+            url: "/ActivityManege/UpdateActivityStatus",
+            data: { id: id, status: status, remark: remark },
+            async: false,
+            success: function (data) {
+                if (data != null) {
+                    if (data == "ok") {
+                        alert("操作成功！");
+                        window.location = "/ActivityManege/ActivityList";
+                    }
+                    else {
+                        alert(data.Message);
+                    }
+                }
+            }
+        })
+    }
+    $("#pass").on("click", function () {
+        UpdateStatus(1);
+    })
+    $("#refuse").on("click", function () {
+        UpdateStatus(2);
+    })
+</script>

@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>详情页</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="Globak-x">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="css/m_base.css">
+    <link rel="stylesheet" href="css/global_x.css">
+	<link rel="stylesheet" href="css/dialog_ui.css">
+	<link rel="stylesheet" href="css/show.css">
+    <link rel="stylesheet" href="css/account.css">
+	<script src="js/loader/sea.js"></script>
+    <script src="js/loader/sea-config.js"></script>
+
+</head>
+<body>
+<div id="gx-touch" class="m-wrap">
+    <div class="gx-container">
+        <div id="tab-pagination" class="ui-tab swipe-pagination">
+            <ul class="ui-tab-nav">
+                <li class="current"><a href="javascript://">月月盈</a></li>
+                <li><a href="javascript://">季季享</a></li>
+                <li><a href="javascript://">年年丰</a></li>
+            </ul>
+        </div>
+        <div id='tab-box' class='swipe'>
+            <div class="swipe-wrap">
+                <div id="item-month" class="swipe-conts">
+                    <!--利率-->
+                    <div class="show-season">
+                        <span><stong>281129</stong>人已加入</span>
+                        <div class="interest">
+                            <p class="interest-month"></p>
+                            <b class="interest-num-month">9.00<em>%</em></b>
+                        </div>
+                    </div>
+                    <!--导航-->
+                    <div class="mod-nav">
+                        <!-- 导航列表 -->
+                        <div class="nav-list">
+                            <ol>
+                                <li>
+                                    <span class="nav-list-left">流动性</span>
+                                    <span class="nav-list-right">
+                                        每月付息，到期退出可赎回
+                                    </span>
+                                </li>
+                                <li>
+                                    <span class="nav-list-left">预期年化收益率</span>
+                                    <span class="nav-list-right">9%，最高可加息至11%</span>
+                                </li>
+                                <li>
+                                    <a class="clearfix" href="">
+                                        <span class="nav-list-left">安全保障</span>
+                                        <span class="nav-list-right"><img src="images/triangle.png" height="27" width="9"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="clearfix" href="uc/show_month_product.html">
+                                        <span class="nav-list-left">查看详情</span>
+                                        <span class="nav-list-right"><img src="images/triangle.png" height="27" width="9"></span>
+                                    </a>
+                                </li>
+                            </ol>
+                        </div>
+                        <!-- e休理财投资优势 -->
+                        <div class="gl-financing">
+                            <div class="gl-line1"></div>
+                            <div class="gl-line2">e休理财投资优势</div>
+                            <div class="gl-line3"></div>
+                        </div>
+                        <div class="gl-financing-list">
+                            <dl class="gl-financing-list1">
+                                <dt><img src="images/money.png"></dt>
+                                <dd>门槛低收益高</dd>
+                                <dd>年化收益最高21%</dd>
+                            </dl>
+                            <dl class="gl-financing-list2">
+                                <dt><img src="images/dong.png"></dt>
+                                <dd>低风险有保障</dd>
+                                <dd>六道风控严格把关</dd>
+                            </dl>
+                            <dl class="gl-financing-list3">
+                                <dt><img src="images/winnower.png"></dt>
+                                <dd>自由投灵活赎</dd>
+                                <dd>保理机制自由赎回</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+                <div id="item-quarter" class="swipe-conts">
+                    <!--利率-->
+                    <div class="show-season">
+                        <span><stong>281129</stong>人已加入</span>
+                        <div class="interest">
+                            <p class="interest-season"></p>
+                            <b class="interest-num-season">9.00<em>%</em></b>
+                        </div>
+                    </div>
+                    <!--导航-->
+                    <div class="mod-nav J_gxtabs">
+                        <div class="J_gxtabs_nav">
+                            <ul class="nav-season">
+                                <li class="active">3个月<b class="triangle-top-sb1"></b></li>
+                                <li>6个月<b class="triangle-top-sb1"></b></li>
+                            </ul>
+                        </div>
+                        <!-- 导航列表 -->
+                        <div class="nav-list J_gxtabs_container">
+                            <div class="J_gxtabs_item">
+                                <ol>
+                                    <li>
+                                        <span class="nav-list-left">流动性</span>
+                                        <span class="nav-list-right">每月付息，到期退出可赎回</span>
+                                    </li>
+                                    <li>
+                                        <span class="nav-list-left">预期年化收益率</span>
+                                        <span class="nav-list-right">9%，最高可加息至11%</span>
+                                    </li>
+                                    <li>
+                                        <a class="clearfix" href="">
+                                            <span class="nav-list-left">安全保障</span>
+                                            <span class="nav-list-right"><img src="images/triangle.png" height="27" width="9"></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="clearfix" href="uc/show_threeSeason_product.html">
+                                            <span class="nav-list-left">查看详情</span>
+                                            <span class="nav-list-right"><img src="images/triangle.png" height="27" width="9"></span>
+                                        </a>
+                                    </li>
+                                </ol>
+                            </div>
+                            <div class="J_gxtabs_item gx-hide">
+                                <ol>
+                                    <li>
+                                        <span class="nav-list-left">流动性</span>
+                                        <span class="nav-list-right">每月付息，到期退出可赎回</span>
+                                    </li>
+                                    <li>
+                                        <span class="nav-list-left">预期年化收益率</span>
+                                        <span class="nav-list-right">11%，最高可加息至13%</span>
+                                    </li>
+                                    <li>
+                                        <a class="clearfix" href="">
+                                            <span class="nav-list-left">安全保障</span>
+                                            <span class="nav-list-right"><img src="images/triangle.png" height="27" width="9"></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="clearfix" href="uc/show_sixSeason_product.html">
+                                            <span class="nav-list-left">查看详情</span>
+                                            <span class="nav-list-right"><img src="images/triangle.png" height="27" width="9"></span>
+                                        </a>
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+                        <!-- e休理财投资优势 -->
+                        <div class="gl-financing">
+                            <div class="gl-line1"></div>
+                            <div class="gl-line2">e休理财投资优势</div>
+                            <div class="gl-line3"></div>
+                        </div>
+                        <div class="gl-financing-list">
+                            <dl class="gl-financing-list1">
+                                <dt><img src="images/money.png"></dt>
+                                <dd>门槛低收益高</dd>
+                                <dd>年化收益最高21%</dd>
+                            </dl>
+                            <dl class="gl-financing-list2">
+                                <dt><img src="images/dong.png"></dt>
+                                <dd>低风险有保障</dd>
+                                <dd>六道风控严格把关</dd>
+                            </dl>
+                            <dl class="gl-financing-list3">
+                                <dt><img src="images/winnower.png"></dt>
+                                <dd>自由投灵活赎</dd>
+                                <dd>保理机制自由赎回</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+                <div id="item-year" class="swipe-conts">
+                    <!--利率-->
+                    <div class="show-season">
+                        <span><stong>281129</stong>人已加入</span>
+                        <div class="interest">
+                            <p class="interest-year"></p>
+                            <b class="interest-num-year">9.00<em>%</em></b>
+                        </div>
+                    </div>
+                    <!--导航-->
+                    <div class="mod-nav">
+                        <!-- 导航列表 -->
+                        <div class="nav-list">
+                            <ol>
+                                <li>
+                                    <span class="nav-list-left">流动性</span>
+                                    <span class="nav-list-right">每月付息，到期退出可赎回</span>
+                                </li>
+                                <li>
+                                    <span class="nav-list-left">预期年化收益率</span>
+                                    <span class="nav-list-right">9%，最高可加息至11%</span>
+                                </li>
+                                <li>
+                                    <a class="clearfix" href="">
+                                        <span class="nav-list-left">安全保障</span>
+                                        <span class="nav-list-right"><img src="images/triangle.png" height="27" width="9"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="clearfix" href="uc/show_year_product.html">
+                                        <span class="nav-list-left">查看详情</span>
+                                        <span class="nav-list-right"><img src="images/triangle.png" height="27" width="9"></span>
+                                    </a>
+                                </li>
+                            </ol>
+                        </div>
+                        <!-- e休理财投资优势 -->
+                        <div class="gl-financing">
+                            <div class="gl-line1"></div>
+                            <div class="gl-line2">e休理财投资优势</div>
+                            <div class="gl-line3"></div>
+                        </div>
+                        <div class="gl-financing-list">
+                            <dl class="gl-financing-list1">
+                                <dt><img src="images/money.png"></dt>
+                                <dd>门槛低收益高</dd>
+                                <dd>年化收益最高21%</dd>
+                            </dl>
+                            <dl class="gl-financing-list2">
+                                <dt><img src="images/dong.png"></dt>
+                                <dd>低风险有保障</dd>
+                                <dd>六道风控严格把关</dd>
+                            </dl>
+                            <dl class="gl-financing-list3">
+                                <dt><img src="images/winnower.png"></dt>
+                                <dd>自由投灵活赎</dd>
+                                <dd>保理机制自由赎回</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 底部 -->
+        <div class="product-do">
+            <div class="counter-tools"><img src="images/counter_icon.png" alt=""></div>
+            <div class="product-btn">
+                <a class="ui-btn" href="login/register_login.html">马上加入</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div id="J_account" class="account gx-hide">
+    <ul class="account-title J_gxtabs_nav">
+        <li>月月盈</li>
+        <li>季季享</li>
+        <li>年年丰</li>
+    </ul>
+    <div class="account-main J_gxtabs_container">
+        <!-- 月月盈 -->
+        <div class="account-month J_gxtabs_item" style="display:block;">
+            <div class="account-income">
+                <h2>预期收益:</h2>
+                <b>36.78</b>
+            </div>
+            <div class="acconnt-list">
+                <div class="buy-money">
+                    <h2>买入金额</h2>
+                    <div class="account-word">
+                        <p>元</p>
+                        <input type="text" value="1000" class="account-money">
+                    </div>
+                </div>
+            </div>
+            <div class="acconnt-list">
+                <div class="buy-money">
+                    <h2>买入时间</h2>
+                    <div class="account-word">
+                        <p>天</p>
+                        <input type="text" value="30" class="account-money">
+                    </div>
+                </div>
+            </div>
+            <p class="income-num">收益率：9%+<span>1.2%</span></p>
+            <div class="income-account"><a href="#" class="ui-btn">计算</a></div>
+        </div>
+        <!-- 季季享 -->
+        <div class="account-month J_gxtabs_item">
+            <div class="account-income">
+                <h2>预期收益:</h2>
+                <b>36.78</b>
+            </div>
+            <div class="acconnt-list">
+                <div class="buy-money">
+                    <h2>买入金额</h2>
+                    <div class="account-word">
+                        <p>元</p>
+                        <input type="text" value="1000" class="account-money">
+                    </div>
+                </div>
+            </div>
+            <div class="acconnt-list other-list">
+                <div class="buy-money">
+                    <h2>买入时间</h2>
+                    <div class="account-word-s">
+                       <span><b>3</b>个月</span>
+                        <ul>
+                            <li><b>3</b>个月</li>
+                            <li><b>6</b>个月</li>
+                            <li><i></i></li>
+                        </ul>
+                        <i></i>
+                    </div>
+                </div>
+            </div>
+            <p class="income-num">收益率：9%+<span>1.2%</span></p>
+            <div class="income-account"><a href="#" class="ui-btn">计算</a></div>
+        </div>
+         <!-- 年年丰 -->
+        <div class="account-month J_gxtabs_item">
+            <div class="account-income">
+                <h2>预期收益:</h2>
+                <b>36.78</b>
+            </div>
+            <div class="acconnt-list">
+                <div class="buy-money">
+                    <h2>买入金额</h2>
+                    <div class="account-word">
+                        <p>元</p>
+                        <input type="text" value="1000" class="account-money">
+                    </div>
+                </div>
+            </div>
+            <div class="acconnt-list">
+                <div class="buy-money">
+                    <h2>买入时间</h2>
+                    <div class="account-word">
+                        <p>月</p>
+                        <div class="account-money">12</div>
+                    </div>
+                </div>
+            </div>
+            <p class="income-num">收益率：9%+<span>1.2%</span></p>
+            <div class="income-account"><a href="#" class="ui-btn">计算</a></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    seajs.use('./js/yixiu');
+    seajs.use('./js/gx-input-click');
+</script>
+</body>
+</html>
+
+
+
+
+
+
+

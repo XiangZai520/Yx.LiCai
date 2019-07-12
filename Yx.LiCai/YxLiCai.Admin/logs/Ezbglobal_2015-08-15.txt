@@ -1,0 +1,100 @@
+2015-08-15 11:20:13.7178 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/8/15 11:20:13
+异常发生地址:http://localhost:10991/Project/AddProject?ProjectName=345345&Borrower=345345345&OrderNumber=345345&Amount=55&AmountSold=0&AvailableAmount=55&BorrowingRate=555&LaunchTime=2015-07-29&EndTime=2015-08-28&Weight=5&RepaymentMode=345345345&LoanPeriod=55&ProjectType=1&account_id=1&pdt_collection=1%2C2%2C4%2C3
+请求类型:GET
+异常:MySql.Data.MySqlClient.MySqlException (0x80004005): Access denied for user 'test_write'@'172.16.16.53' (using password: YES)
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteScalar(String Sql, CommandType ComType, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 414
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteScalar(String Sql, String notes, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 386
+   在 YxLiCai.Dao.Project.ProjectDao.Add(ProjectModel model, Int32 CreateID) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\Project\ProjectDao.cs:行号 80
+   在 YxLiCai.Server.Project.ProjectService.Add(ProjectModel model, Int32 CreateID) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\Project\ProjectService.cs:行号 30
+IP:::1
+--------------------end---------------------
+ 
+2015-08-15 11:24:11.2911 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/8/15 11:24:11
+异常发生地址:http://localhost:10991/Project/AddProject?ProjectName=345345&Borrower=345345345&OrderNumber=345345&Amount=55&AmountSold=0&AvailableAmount=55&BorrowingRate=555&LaunchTime=2015-07-29&EndTime=2015-08-28&Weight=5&RepaymentMode=345345345&LoanPeriod=55&ProjectType=1&account_id=1&pdt_collection=1%2C2%2C4%2C3
+请求类型:GET
+异常:MySql.Data.MySqlClient.MySqlException (0x80004005): Access denied for user 'test_write'@'172.16.16.103' (using password: YES)
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteScalar(String Sql, CommandType ComType, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 414
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteScalar(String Sql, String notes, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 386
+   在 YxLiCai.Dao.Project.ProjectDao.Add(ProjectModel model, Int32 CreateID) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\Project\ProjectDao.cs:行号 80
+   在 YxLiCai.Server.Project.ProjectService.Add(ProjectModel model, Int32 CreateID) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\Project\ProjectService.cs:行号 30
+IP:::1
+--------------------end---------------------
+ 
+2015-08-15 11:27:21.3862 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/8/15 11:27:21
+异常发生地址:http://localhost:10991/Project/AddProject?ProjectName=hiusafdsadsdg&Borrower=345345345&OrderNumber=34534534&Amount=435&AmountSold=0&AvailableAmount=435&BorrowingRate=4&LaunchTime=2015-07-31&EndTime=2015-08-28&Weight=4&RepaymentMode=345345345&LoanPeriod=44&ProjectType=1&account_id=1&pdt_collection=1%2C2%2C4%2C3
+请求类型:GET
+异常:MySql.Data.MySqlClient.MySqlException (0x80004005): Access denied for user 'test_write'@'172.16.16.103' (using password: YES)
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteScalar(String Sql, CommandType ComType, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 414
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteScalar(String Sql, String notes, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 386
+   在 YxLiCai.Dao.Project.ProjectDao.Add(ProjectModel model, Int32 CreateID) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\Project\ProjectDao.cs:行号 80
+   在 YxLiCai.Server.Project.ProjectService.Add(ProjectModel model, Int32 CreateID) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\Project\ProjectService.cs:行号 30
+IP:::1
+--------------------end---------------------
+ 
+2015-08-15 11:31:56.4610 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/8/15 11:31:56
+异常发生地址:http://localhost:10991/Project/AddProject?ProjectName=hiusafdsadsdg&Borrower=345345345&OrderNumber=34534534&Amount=435&AmountSold=0&AvailableAmount=435&BorrowingRate=4&LaunchTime=2015-07-31&EndTime=2015-08-28&Weight=4&RepaymentMode=345345345&LoanPeriod=44&ProjectType=1&account_id=1&pdt_collection=1%2C2%2C4%2C3
+请求类型:GET
+异常:MySql.Data.MySqlClient.MySqlException (0x80004005): Access denied for user 'test_write'@'172.16.16.103' (using password: YES)
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteScalar(String Sql, CommandType ComType, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 414
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteScalar(String Sql, String notes, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 386
+   在 YxLiCai.Dao.Project.ProjectDao.Add(ProjectModel model, Int32 CreateID) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\Project\ProjectDao.cs:行号 80
+   在 YxLiCai.Server.Project.ProjectService.Add(ProjectModel model, Int32 CreateID) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\Project\ProjectService.cs:行号 30
+IP:::1
+--------------------end---------------------
+ 
+2015-08-15 11:35:12.0925 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/8/15 11:35:12
+异常发生地址:http://localhost:10991/
+请求类型:GET
+异常:MySql.Data.MySqlClient.MySqlException (0x80004005): Access denied for user 'backgd_read'@'172.16.16.103' (using password: YES)
+   在 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   在 MySql.Data.MySqlClient.NativeDriver.Authenticate411()
+   在 MySql.Data.MySqlClient.NativeDriver.Authenticate()
+   在 MySql.Data.MySqlClient.NativeDriver.Open()
+   在 MySql.Data.MySqlClient.Driver.Create(MySqlConnectionStringBuilder settings)
+   在 MySql.Data.MySqlClient.MySqlPool.GetPooledConnection()
+   在 MySql.Data.MySqlClient.MySqlPool.TryToGetDriver()
+   在 MySql.Data.MySqlClient.MySqlPool.GetConnection()
+   在 MySql.Data.MySqlClient.MySqlConnection.Open()
+   在 System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, CommandType ComType, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 464
+   在 YxLiCai.Dao.MenuSet.AuthoritySetDao.GetAllListMenu() 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\MenuSet\AuthoritySetDao.cs:行号 229
+   在 YxLiCai.Service.MenuSet.AuthorityMenuService.GetAllMenuList() 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\MenuSet\AuthorityMenuService.cs:行号 88
+IP:::1
+--------------------end---------------------
+ 
+2015-08-15 11:35:12.1305 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/8/15 11:35:12
+异常发生地址:http://localhost:10991/
+请求类型:GET
+异常:MySql.Data.MySqlClient.MySqlException (0x80004005): Access denied for user 'backgd_read'@'172.16.16.103' (using password: YES)
+   在 MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   在 MySql.Data.MySqlClient.NativeDriver.Authenticate411()
+   在 MySql.Data.MySqlClient.NativeDriver.Authenticate()
+   在 MySql.Data.MySqlClient.NativeDriver.Open()
+   在 MySql.Data.MySqlClient.Driver.Create(MySqlConnectionStringBuilder settings)
+   在 MySql.Data.MySqlClient.MySqlPool.GetPooledConnection()
+   在 MySql.Data.MySqlClient.MySqlPool.TryToGetDriver()
+   在 MySql.Data.MySqlClient.MySqlPool.GetConnection()
+   在 MySql.Data.MySqlClient.MySqlConnection.Open()
+   在 System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataSet dataSet)
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteDataSet(String Sql, CommandType ComType, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 464
+   在 YxLiCai.Dao.Account.AccountDao.GetAccountMenuByAccountID(Int32 AccountID) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\Account\AccountDao.cs:行号 255
+   在 YxLiCai.Service.Account.AdminAuthenticationService.GetAccountMenuByAccountID(Int32 AccountID) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\Account\AdminAuthenticationService.cs:行号 180
+IP:::1
+--------------------end---------------------
+ 

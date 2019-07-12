@@ -1,0 +1,74 @@
+﻿<div class="zpManage zpSh">
+    <h2 class="crumbs">
+        您所在位置：产品管理 > 待发布
+    </h2>
+    <div class="control-group form-horizontal">
+        <div class="control-group">
+            <label class="control-label">
+                点击上架产品
+            </label>
+            <div class="controls">
+                <a class="btn" href="javascript:void(0)" onclick="UpProductByType(1)">月月盈</a>  
+                <a class="btn" href="javascript:void(0)" onclick="UpProductByType(2)">季季享（3个月）</a>  
+                <a class="btn" href="javascript:void(0)" onclick="UpProductByType(3)">季季享（6个月）</a>  
+                <a class="btn" href="javascript:void(0)" onclick="UpProductByType(4)">年年丰</a>
+            </div>
+        </div>
+
+        @Html.Partial("_ListView",
+            new YxLiCai.Admin.Models.KendoTextBoxViewModel
+            {
+                Content = "1",
+                Id = "grid1"
+            })
+    </div>
+</div>
+<script>
+    //提示框
+    var popNotification = $("#popupNotification").kendoNotification({
+        position: {
+            pinned: true,
+            top: 30,
+            right: 80
+        },
+        autoHideAfter: 5000,
+        stacking: "down"
+    }).data("kendoNotification");
+
+    //上架产品
+    function setProductAvailable(grid, e) {
+        e.preventDefault();
+        var dataItem = grid.dataItem($(e.currentTarget).closest("tr")),
+            pid = dataItem.Id;
+
+        $.ajax({
+            type: "POST",
+            url: "/Product/EnableProduct",
+            data: { pid: pid },
+            success: function (result) {
+                if (result) {
+                    popNotification.show("产品上架成功", "info");
+                    ds.remove(dataItem);
+                } else {
+                    popNotification.show("产品上架失败：可能存在同类型售卖中产品", "error");
+                }
+            }
+        });
+    }
+
+    function UpProductByType(type) {
+        $.ajax({
+            type: "POST",
+            url: "/Product/UpProductByType",
+            data: { type: parseInt(type) },
+            success: function (result) {
+                if (result) {
+                    popNotification.show("产品上架成功", "info");
+                    ds.remove(dataItem);
+                } else {
+                    popNotification.show("产品上架失败：可能存在同类型售卖中产品", "error");
+                }
+            }
+        });
+    }
+</script>

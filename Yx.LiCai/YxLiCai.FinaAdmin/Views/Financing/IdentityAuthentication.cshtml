@@ -1,0 +1,141 @@
+﻿<style>
+    .gx-money {
+        overflow: hidden;
+        margin-top: 20px;
+        position: relative;
+    }
+
+    .icon-word {
+        position: absolute;
+        left: 0;
+        top: 0;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+        display: block;
+        width: 70px;
+        height: 46px;
+        text-align: center;
+        line-height: 46px;
+        background: #4cccf3;
+        background-size: 100%;
+        color: #fff;
+        font-size: 16px;
+    }
+
+    em, i {
+        font-style: normal;
+    }
+
+    .gx-money dd {
+        padding: 10px 20px;
+        height: 46px;
+        border-radius: 5px;
+        border: 1px solid #c8c8c8;
+        width: 100%;
+        float: left;
+        padding-left: 11px;
+    }
+
+        .gx-money dd .gx-text {
+            padding-left: 70px;
+            font-size: 16px;
+            height: 24px;
+            color: #aaa;
+            width: 100%;
+        }
+
+    .ui-btn {
+        display: block;
+        width: 100%;
+        height: 55px;
+        line-height: 55px;
+        box-shadow: 0 5px 0 0 #009dcc;
+        border-radius: 5px;
+        background: #00b7ee;
+        color: #FFF;
+        font-size: 24px;
+        font-weight: 700;
+        cursor: pointer;
+        text-align: center;
+    }
+
+    input, button, textarea, select {
+        font-family: inherit;
+        font-size: inherit;
+        font-weight: inherit;
+        border: 0;
+        background: none;
+        -webkit-appearance: none;
+        outline: 0;
+    }
+    .margin_top {
+        margin-top: 35px;
+    }
+
+    .status-wrong {
+        color: #fe7c88;
+        font-size: 14px;
+        padding-left: 10px;
+        display: block;
+        padding-top: 5px;
+    }
+</style>
+<div class="buy-input">
+    <dl class="gx-money">
+        <dt><i class="icon-word">姓名</i></dt>
+        <dd>
+            <input type="text" placeholder="请输入您的大名" class="gx-text" id="Name"></dd>
+    </dl>
+    <dl class="gx-money">
+        <dt><i class="icon-word">身份证号</i></dt>
+        <dd>
+            <input type="text" class="gx-text" placeholder="请输入您的身份证号" maxlength="18" id="IDCard" onkeyup="value=value.replace(/[^\d|X|x]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d|X|x]/g,''))"></dd>
+    </dl>
+    <!-- 认证不符 -->
+    <i class="status-wrong" id="message"></i>
+    <div class="sub margin_top"><a id="ok-bank" class="ui-btn">认证</a></div>
+</div>
+<script>
+    $(document).ready(function () {
+
+        $("#ok-bank").click(function () {
+            if ($("#Name").val().replace(/[ ]/g, "") == "") { $("#message").html("请输入真实姓名"); return; } else { $("#message").empty(); }
+            if ($("#IDCard").val().replace(/[ ]/g, "") == "") { $("#message").html("请输入身份证号"); return; } else { $("#message").empty(); }
+
+            var manCode = $("#IDCard").val().replace(/[ ]/g, "");
+            var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+            if (!reg.test(manCode)) {
+                $("#message").html("身份证号输入错误，请重新输入"); return;
+            } else { $("#message").empty(); }
+            len = manCode.length;
+            if (len == 15) {
+                year = "19" + manCode.substr(6, 2);
+                if (year > 2015 || year < 1900) {
+                    $("#message").html("身份证号输入错误，请重新输入"); return;
+                } else { $("#message").empty(); }
+            } else if (len == 18) {
+                year = manCode.substr(6, 4);
+                if (year > 2015 || year < 1900) {
+                    $("#message").html("身份证号输入错误，请重新输入"); return;
+                } else { $("#message").empty(); }
+            }
+            $.ajax({
+                type: "POST",
+                async: false,
+                url: "/Financing/UpdateIsRealCard",
+                data: { IDcard: $("#IDCard").val().replace(/[ ]/g, ""), Username: $("#Name").val().replace(/[ ]/g, "") },
+                success: function (data) {
+                    if (data.Status == 1) {
+                        alert("认证成功");
+                        window.location.href = "Index";
+                    } else {
+                        $("#message").html(data.Message);
+                    }
+
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                },
+            });
+        });
+    });
+</script>

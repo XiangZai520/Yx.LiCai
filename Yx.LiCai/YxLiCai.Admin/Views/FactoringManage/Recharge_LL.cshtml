@@ -1,0 +1,181 @@
+﻿@model YxLiCai.Admin.Models.FactoringUserInfoOut
+@section styles
+{
+    <link href="~/Resource/css/font-awesome.min.css" rel="stylesheet" />
+    <script src="~/Resource/js/My97DatePicker/WdatePicker.js"></script>
+    <style>
+        .gx-table th,.gx-table td {
+            text-align: center;
+            padding: 5px;
+        }
+    </style>
+}
+<div class="zpManage zpSh">
+    <h2 class="crumbs">
+        您所在位置：第三方管理->保理机构->充值
+    </h2>
+</div>
+<div class="gx-textitem">
+    <label class="gx-texttitle">
+        可用余额(元)：
+    </label>
+    <label>
+        @(Model.KeYongMoney)
+    </label>
+    <label class="gx-texttitle">
+        欠款金额(元)：
+    </label>
+    <label>
+        @(Model.QianKuanMoney)
+    </label>
+    <br />
+</div>
+<div>
+    <label class="gx-texttitle">
+        充值金额：
+    </label>
+    <input type="text" id="RechargeAmount" class="gx-textbox" />
+    <button id="Recharge" class="gx-button gx-button-info search-btn">充值</button>
+</div>
+<h2 class="crumbs"></h2>
+<div class="gx-textitem">
+    <label class="gx-texttitle">
+        充值时间：
+    </label>
+    <input type="text" id="s_ctime" value="@(DateTime.Now.AddDays(-3).ToString("yyyy-MM-dd"))" class="Wdate gx-textbox" style="height:34px;" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd' })">
+    <label class="gx-texttitle">
+        至：
+    </label>
+    <input type="text" id="e_ctime" class="Wdate gx-textbox" style="height:34px;" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd' })" />
+    <label class="gx-texttitle">
+        状态：
+    </label>
+    <select id="status" class="gx-textbox">
+        <option value="-1">全部</option>
+        <option value="0">未支付</option>
+        <option value="1">已支付</option>
+    </select>
+    <button id="search" class="gx-button gx-button-info search-btn">查询</button>
+</div>
+<div class="cleanfix" style="margin:15px 15px 15px 15px">
+    <table class="gx-table gx-table-striped">
+        <thead>
+            <tr>
+                <th>充值时间</th>
+                <th>充值金额</th>
+                <th>充值方式</th>
+                <th>充值状态</th>
+            </tr>
+        </thead>
+        <tbody id="tdata"></tbody>
+    </table>
+</div>
+<div class="add-openbox add-form" id="TradeDiv" style="display:none">
+    <fieldset>
+        <div class="control-group" style="width: 260px;margin:15px;text-align:center;">
+            <label>请输入交易密码</label>
+        </div>
+        <div class="control-group" style="width: 260px;margin: 0 auto;">
+            <label>交易密码：</label><input type="password" id="TradePsw" />
+            <br /><label style="color:red">忘记交易密码请联系客服</label>
+            <br />
+            <button id="confirm_op" class="gx-button gx-button-info search-btn" style="margin: 15px">确认</button><button id="closeDiv" class="gx-button search-btn" style="margin:15px">关闭</button>
+        </div>
+    </fieldset>
+</div>
+<script type="text/javascript">
+    var adminjs = new adminglass(); //实例化后台类
+    $("#closeDiv").on("click", function () {
+        adminjs.closewinbox('.add-openbox');
+    })
+    $("#RechargeAmount").keydown(function (e) {
+        if (e.which != 8) {
+            var RechargeAmount = $("#RechargeAmount").val();
+            if (RechargeAmount.indexOf('.') >= 0 && RechargeAmount.length - RechargeAmount.indexOf('.') > 2) {
+                return false;
+            }
+        }
+    })
+    $("#Recharge").on("click", function () {
+        var RechargeAmount = $("#RechargeAmount").val();
+        if ($.trim(RechargeAmount) == "") {
+            alert("充值金额不能为空！");
+            return false;
+        }
+        if (isNaN(parseFloat(RechargeAmount))) {
+            alert("充值金额格式不正确，请重新输入！");
+            $("#RechargeAmount").val("");
+            return false;
+        }
+        if (parseFloat(RechargeAmount) <= 0) {
+            alert("充值金额要大于0，请重新输入！");
+            $("#RechargeAmount").val("");
+            return false;
+        }
+        adminjs.openwinbox('#TradeDiv');
+    })
+    $("#confirm_op").on("click", function () {
+        var RechargeAmount = $("#RechargeAmount").val();
+        var TradePsw = $("#TradePsw").val();
+        $.ajax({
+            type: "POST",
+            url: "/FactoringManage/Recharge_LL_ajax",
+            data: { RechargeAmount: RechargeAmount, TradePsw: TradePsw },
+            async: false,
+            success: function (data) {
+                if (data != null) {
+                    adminjs.closewinbox('#TradeDiv');
+                    if (data.Message == "ok") {
+                        window.top.location = "/FactoringManage/Recharge_LL_Redirect?mer_ord_id=" + data.mer_ord_id;
+                    }
+                    else {
+                        alert(data.Message);
+                    }
+                }
+            }
+        })
+    })
+</script>
+<script type="text/javascript">
+    //固定查询方法 方法名必须叫Search
+    function Search(CurrentPage) {
+
+        var status = $("#status").val();
+        var s_ctime = $("#s_ctime").val();
+        var e_ctime = $("#e_ctime").val();
+
+        $.ajax({
+            type: "POST",
+            url: "/FactoringManage/RechargeDetail",
+            data: { status: status, s_ctime: s_ctime, e_ctime: e_ctime },
+            async: false,
+            success: function (data) {
+                if (data != null) {
+                    var Rows = data.Rows;
+                    if (Rows != null) {
+                        var strHTML = "";
+                        for (var i = 0; i < Rows.length; i++) {
+                            var row = Rows[i];
+
+                            strHTML = strHTML + "<tr>";
+                            strHTML = strHTML + "<td>" + row.c_time + "</td>";
+                            strHTML = strHTML + "<td>" + row.amount + "</td>";
+                            strHTML = strHTML + "<td>" + row.type + "</td>";
+                            strHTML = strHTML + "<td>" + row.status + "</td>";
+                            strHTML = strHTML + "</tr>";
+                        }
+                        $("#tdata").html(strHTML);
+                    }
+                }
+            }
+        })
+    }
+    $("#search").on("click", function () {
+        Search(1);
+    })
+    $(function () {
+        Search(1);
+    })
+</script>
+
+

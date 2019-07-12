@@ -1,0 +1,65 @@
+﻿@model YxLiCai.FinaAdmin.Models.KendoTreeViewViewModel
+
+<div class="form-group">
+    <label class="control-label col-sm-6" for="@Model.Id">@Model.Content</label>
+    <div class="col-sm-6 col-md-6">
+        <input id="@Model.Id" value="@Model.Value" />
+    </div>
+</div>
+
+<script type="text/javascript">
+    var id = '@Model.Id';
+    @*var id = '@Model.Id';
+    var t = 0;
+    $("#" + id).attr("style", "display:none");
+    $(".tree-box").click(function () {
+        t += 1;
+        if (t % 2 == 1)
+            $("#" + id).slideDown();
+        else
+            $("#" + id).slideUp();
+    });
+
+    $("#" + id).focusout(function () {
+        $("#" + id).slideUp();
+    });
+
+    function onFocuingIndustrySelect(e) {
+        $("#" + id).val(this.text(e.node));
+    }*@
+
+    //$("#" + id).kendoTreeView({
+    //    dragAndDrop: true,
+    //    select: onFocuingIndustrySelect,
+    //    dataSource: [
+    //        {
+    //            text: "TMT", expanded: true, items: [
+    //                { text: "Internet" },
+    //                { text: "Mobile internet" },
+    //                { text: "Telecom" },
+    //                { text: "Media" },
+    //                { text: "Electronics" }
+    //            ]
+    //        },
+    //        {
+    //            text: "New Materials"
+    //        },
+    //        {
+    //            text: "Clean-tech", items: [
+    //                { text: "New Energy" },
+    //                { text: "Environment Protection&Enegry Saving" },
+    //                { text: "Clean-tech others" }
+    //            ]
+    //        },
+    //        {
+    //            text: "Healthcare", items: [
+    //                { text: "Medicine" },
+    //                { text: "Medical Equipment" },
+    //                { text: "Medical Services" },
+    //                { text: "Healthcare others" }
+    //            ]
+    //        }
+    //    ]
+    //});
+
+</script>

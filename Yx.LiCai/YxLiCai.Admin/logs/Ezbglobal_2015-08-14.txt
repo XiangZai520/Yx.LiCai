@@ -1,0 +1,26 @@
+2015-08-14 17:52:10.0339 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/8/14 17:52:09
+异常发生地址:http://localhost:10991/Project/AddProject?ProjectName=%E4%BE%AF%E8%A3%95%E7%A5%A5&Borrower=%E7%9A%84%E6%A0%B9%E6%B7%B1%E8%92%82%E5%9B%BA&OrderNumber=3543534&Amount=345&AmountSold=0&AvailableAmount=345&BorrowingRate=5&LaunchTime=2015-08-20&EndTime=2015-08-29&Weight=4&RepaymentMode=345345345&LoanPeriod=5&ProjectType=1&account_id=1&pdt_collection=1%2C2
+请求类型:GET
+异常:MySql.Data.MySqlClient.MySqlException (0x80004005): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'insert into pjt_pdtcategory(pjt_id,pdt_c_id,status) values (405,2,1);#2015年6' at line 1
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteNonQuery(String Sql, CommandType ComType, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 286
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteNonQuery(String Sql, String notes, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 259
+   在 YxLiCai.Dao.Project.ProjectDao.Add(ProjectModel model, Int32 CreateID) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\Project\ProjectDao.cs:行号 118
+   在 YxLiCai.Server.Project.ProjectService.Add(ProjectModel model, Int32 CreateID) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\Project\ProjectService.cs:行号 30
+IP:::1
+--------------------end---------------------
+ 
+2015-08-14 17:55:37.8894 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/8/14 17:55:37
+异常发生地址:http://localhost:10991/Project/AddProject?ProjectName=%E4%BE%AF%E8%A3%95%E7%A5%A54&Borrower=%E7%9A%84%E6%A0%B9%E6%B7%B1%E8%92%82%E5%9B%BA&OrderNumber=3543534&Amount=345&AmountSold=0&AvailableAmount=345&BorrowingRate=5&LaunchTime=2015-08-20&EndTime=2015-08-29&Weight=4&RepaymentMode=345345345&LoanPeriod=5&ProjectType=1&account_id=1&pdt_collection=1%2C2
+请求类型:GET
+异常:MySql.Data.MySqlClient.MySqlException (0x80004005): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'insert into pjt_pdtcategory(pjt_id,pdt_c_id,status) values (406,2,1);#2015年6' at line 1
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteNonQuery(String Sql, CommandType ComType, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 286
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteNonQuery(String Sql, String notes, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 259
+   在 YxLiCai.Dao.Project.ProjectDao.Add(ProjectModel model, Int32 CreateID) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\Project\ProjectDao.cs:行号 118
+   在 YxLiCai.Server.Project.ProjectService.Add(ProjectModel model, Int32 CreateID) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\Project\ProjectService.cs:行号 30
+IP:::1
+--------------------end---------------------
+ 

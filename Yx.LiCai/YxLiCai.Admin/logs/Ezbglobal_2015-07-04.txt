@@ -1,0 +1,32 @@
+2015-07-04 10:40:22.2882 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/7/4 10:40:22
+异常发生地址:http://localhost:50143/Project/UpdateProject?Id=268&ProjectName=%E7%A5%A5%E4%BB%94%E6%88%91%E7%88%B1%E4%BD%A0%E5%93%88&Borrower=%E5%A5%BD%E6%83%B3%E5%A5%BD%E6%83%B3&OrderNumber=45456456&Amount=255555&AmountSold=0&AvailableAmount=255555&BorrowingRate=0.6&LaunchTime=2015-07-10&EndTime=2015-07-31&Remark=%E7%BB%88%E4%BA%8E%E4%BF%AE%E6%94%B9%E6%88%90%E5%8A%9F%E4%BA%86&Weight=5&AddTime=2015%2F7%2F4+10:13:24&RepaymentMode=%E7%BA%BF%E4%B8%8B%E8%BF%98%E9%92%B1&LoanPeriod=12&ProjectType=0&account_id=8
+请求类型:GET
+异常:MySql.Data.MySqlClient.MySqlException (0x80004005): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where name ='祥仔我爱你哈' and id !=Pid ;#2015年6月16日 18:04:54-侯裕' at line 1
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteScalar(String Sql, CommandType ComType, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 414
+   在 YxLiCai.DataHelper.DBUtility.MySqlHelper.ExecuteScalar(String Sql, String notes, DbParameter[] Prams) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.DataHelper\DBUtility\MySqlHelper.cs:行号 386
+   在 YxLiCai.Dao.Project.ProjectDao.ISProtExist(String ProjectName, Int32 Pid) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\Project\ProjectDao.cs:行号 864
+   在 YxLiCai.Server.Project.ProjectService.ISProtExist(String ProjectName, Int32 Pid) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\Project\ProjectService.cs:行号 325
+--------------------end---------------------
+ 
+2015-07-04 10:53:15.7593 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/7/4 10:53:15
+异常发生地址:http://localhost:50143/LoanManager/GetAll
+请求类型:POST
+异常:System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 YxLiCai.Dao.LoanManager.LoanManagerDao.GetLoanList(String mName, Int32 LoanPeriod, Decimal LowMoney, Decimal UpMoney, Int32 status, Int32 Scount, Int32 PageSize) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\LoanManager\LoanManagerDao.cs:行号 27
+   在 YxLiCai.Server.LoanManager.LoanManager.GetAll(String mName, Int32 loanPeriod, Decimal amount_min, Decimal amount_max, Int32 status, Int32 startIndex, Int32 PageSize, Int32& totalCount) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\LoanManager\LoanManager.cs:行号 38
+--------------------end---------------------
+ 
+2015-07-04 10:53:16.7228 YxLiCai.Tools.LogHelper.LogWriterFromFilter  INFO YxLiCai.Tools.LogHelper [LENOVO_XIANGZAI] - - 
+-----------------start----------------------
+2015/7/4 10:53:16
+异常发生地址:http://localhost:50143/LoanManager/GetAll
+请求类型:POST
+异常:System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 YxLiCai.Dao.LoanManager.LoanManagerDao.GetLoanList(String mName, Int32 LoanPeriod, Decimal LowMoney, Decimal UpMoney, Int32 status, Int32 Scount, Int32 PageSize) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Dao\LoanManager\LoanManagerDao.cs:行号 27
+   在 YxLiCai.Server.LoanManager.LoanManager.GetAll(String mName, Int32 loanPeriod, Decimal amount_min, Decimal amount_max, Int32 status, Int32 startIndex, Int32 PageSize, Int32& totalCount) 位置 c:\YiXiu\Yx.LiCai\YxLiCai.Server\LoanManager\LoanManager.cs:行号 38
+--------------------end---------------------
+ 

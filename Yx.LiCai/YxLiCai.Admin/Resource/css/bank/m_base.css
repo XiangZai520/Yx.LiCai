@@ -1,0 +1,251 @@
+/**
+ * @description:base.css
+ * @author:Eilvein
+ * @version:V1.0.0
+ * @update:2015/5/25
+ */
+
+/*CSS Reset*/
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+code,
+form,
+fieldset,
+legend,
+input,
+textarea,
+p,
+blockquote,
+th,
+td,
+header,
+hgroup,
+nav,
+section,
+article,
+aside,
+footer,
+figure,
+figcaption,
+menu,
+button {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+}
+
+body {
+    font-family: "Microsoft Yahei","Hiragino Sans GB","Helvetica Neue", Helvetica, STHeiTi, sans-serif;
+    line-height: 1.5;
+    font-size: 12px;
+    color: #000;
+    background-color: #FFF;
+    -webkit-user-select: none;
+    -webkit-text-size-adjust: none;
+    -webkit-tap-highlight-color: rgba(255,255,255,0);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-size: inherit;
+    font-weight: normal;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+fieldset,
+img {
+    border: 0;
+}
+
+li {
+    list-style: none;
+}
+
+input,
+button,
+textarea,
+select {
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    border: 0;
+    background: none;
+    -webkit-appearance: none;
+    outline: 0;
+}
+a,button,input,select,textarea,a:focus,button:focus,input:focus,select:focus,textarea:focus,[onclick]{
+    outline: 0;
+    -webkit-tap-highlight-color:rgba(255,255,255,0);
+}
+a {
+    -webkit-touch-callout:none;
+    text-decoration: none;
+    color: #00b7ee;
+    outline: 0;
+
+}
+
+em,i {
+    font-style: normal;
+
+}
+em{color: #f28c48;}
+::-webkit-input-placeholder {
+    color:#999;
+}
+
+/*
+ * 基础类
+ * gx-->Global-x
+ */
+
+*{
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box
+}
+html{
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    background-color: #FFF;
+    height: 100%;
+}
+body{
+    height: 100%;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    font-family: "Microsoft Yahei","Hiragino Sans GB","Helvetica Neue", Helvetica, STHeiTi, sans-serif;
+}
+a,
+a:hover,
+:focus{
+    outline: none;
+}
+ul {
+    list-style:none;
+}
+/* 高亮选中 */
+::-moz-selection {
+    background:#08c;
+    color:#fff;
+}
+::selection {
+    background:#08c;
+    color:#fff;
+}
+
+/* Placeholder Color */
+::-moz-placeholder {
+    color: #aaa;
+}
+::-webkit-input-placeholder {
+    color: #aaa;
+}
+::-ms-input-placeholder {
+    color:#aaa;
+}
+
+/* clearfix */
+.clearfix:before,
+.clearfix:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+/*
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+
+.clearfix {
+    *zoom: 1;
+}
+
+/*左右浮动*/
+.gx-right{
+    float:right;
+}
+.gx-left{
+    float:left;
+}
+
+/*显示隐藏*/
+.gx-hide {
+    display:none;
+}
+.gx-show {
+    display:block;
+}
+.gx-invisible{
+    visibility:hidden;
+}
+.gx-affix {
+    position:fixed;
+    top:0;
+}
+/*省略号*/
+.gx-ell {
+    text-overflow:ellipsis;
+    white-space:nowrap;
+     overflow:hidden;
+ }
+/*内联块*/
+.gx-inb {
+    display:inline-block;
+    vertical-align:middle;
+    *display:inline;
+    *zoom:1;
+}
+/*强制文本换行*/
+.gx-wrap {
+    word-wrap:break-word;
+    word-break:break-all;
+}
+.margin_top1{
+    margin-top: 70px;
+}
+.m-wrap{
+    width: 100%;
+    margin:0 auto;
+    min-width: 320px;
+    background: #FFF;
+    color: #333;
+    padding-top: 40px;
+}
+.gx-container{
+    padding: 0 20px;
+}
+.show-container{
+    background: #f0f0f0;
+    padding:40px 20px 30px 20px;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button{
+    -webkit-appearance:none!important;
+    margin: 0;
+}
+input[type="number"]{-moz-appearance:textfield;}
+

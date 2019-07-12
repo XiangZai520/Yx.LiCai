@@ -1,0 +1,88 @@
+﻿<div class="zpManage zpSh">
+    <h2 class="crumbs">
+        您所在位置：产品管理 > 售卖中
+    </h2>
+</div>
+<div class="cleanfix" style="margin:15px 15px 15px 15px">
+    <div class="tbstyle">
+        <div id="grid"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var popNotification = $("#popupNotification").kendoNotification({
+        position: {
+            pinned: true,
+            top: 30,
+            right: 80
+        },
+        autoHideAfter: 5000,
+        stacking: "down"
+    }).data("kendoNotification");
+</script>
+
+<script type="text/javascript">
+    require(['CRM/common.assets', 'CRM/product.assets'], function (common, product) {
+
+        var ds = product.onlineProductDs;
+        //columns
+        var columns = [
+            { field: "id", title: "产品ID", sortable: true },
+            { field: "name", title: "产品名称", sortable: true },
+            { field: "category", title: "产品类型", sortable: true },
+            { field: "amount", title: "产品金额(万元)", sortable: true },
+            { field: "amount_raised", title: "已投金额(万元)", sortable: true },
+            { field: "amount_available", title: "可投金额(万元)", sortable: true },
+            { field: "is_alert", title: "是否预警", sortable: true },
+            { field: "c_time", title: "创建时间", sortable: true },
+            { field: "enable_time", title: "上线时间", sortable: true },
+            {
+                command: [
+                    { text: "详情", click: function (e) { ShowDetail(this, e); } },
+                    { text: "下架", click: function (e) { DisableProduct(this, e); } }
+                ], title: "操作"
+            }
+        ];
+        //grid
+        $("#grid").kendoGrid({
+            sortable: true,
+            pageable: true,
+            dataSource: ds,
+            columns: columns
+        });
+        //产品下架
+        function DisableProduct(grid, e) {
+            e.preventDefault();
+            var dataItem = grid.dataItem($(e.currentTarget).closest("tr")),
+                pid = dataItem.id;
+
+            $.ajax({
+                type: "POST",
+                url: "/Product/DisableProduct",
+                data: { IdList: pid },
+                success: function (result) {
+                    
+                    if (result.Message === "抱歉，你不具有当前操作的权限") {
+                        alert(result.Message);
+                        return false;
+                    }
+                    if (result) {
+                       
+                        popNotification.show("产品下架成功", "info");
+                        window.location.href = window.location.href;
+                    }
+                    else {
+                        popNotification.show("产品下架失败", "error");
+                    }
+                }
+            });
+        }
+        //查看详情
+        function ShowDetail(grid, e) {
+            e.preventDefault();
+            var dataItem = grid.dataItem($(e.currentTarget).closest("tr")),
+                pid = dataItem.id;
+            window.location.href = "Detail/" + pid;
+        }
+    });
+</script>

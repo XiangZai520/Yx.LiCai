@@ -1,0 +1,213 @@
+/* invite show */
+.wx-wrap{
+    background: #e61127;
+    padding-bottom: 20px;
+    width: 100%;
+    min-width: 320px;
+    max-width: 750px;
+    margin: 0 auto;
+}
+.wx-wrap a:active,
+.wx-wrap a:visited{
+    color: #FFF;
+}
+.invite_income{
+    background: url(../images/inviteBanner.png) no-repeat;
+    background-size: 100%;
+    position: relative;
+}
+.inviteTitle img{
+    width: 100%;
+    background-size: 100%;
+}
+.invite-coupon{
+    padding: 0 70px;
+}
+.inviteBanner{
+    background: url(../images/inviteBanner.png) repeat-y;
+    background-size: 100%;
+    padding-bottom: 20px;
+}
+.inviteShadow img{
+    background-size: 100%;
+    width: 100%;
+    height: auto;
+    margin-top: -1px;
+}
+.invite-coupon img{
+    width: 100%;
+    background-size: 100%;
+}
+/* UI Button */
+.ui-btn-red{
+    padding: 10px 40px 0px 40px;
+}
+.ui-btn-red a{
+    display: block;
+    width: 100%;
+    height: 45px;
+    color: #fff;
+    line-height: 45px;
+    text-align: center;
+    font-size: 16px;
+    background: #e71d32;
+    box-shadow: 0 5px 0 #b7091b;
+    border-radius: 5px;
+}
+.wx-trust{
+    padding: 0 20px;
+}
+.wx-title{
+    height: 35px;
+    line-height: 35px;
+    margin-bottom: 20px;
+    position: relative;
+}
+.wx-title-ui-l{
+    position: absolute;
+    top:50%;
+    left: 0;
+    width: 80px;
+    height: 6px;
+    overflow: hidden;
+    margin-top: -3px;
+}
+.wx-title-ui-l:before{
+    content: "";
+    height: 1px;
+    width: 80px;
+    background: #fff444;
+    border-radius: 50%;
+    position: absolute;
+    top: 2.5px;
+    left: 0;
+    z-index: 1;
+}
+.wx-title-ui-l:after{
+    content: "";
+    height: 6px;
+    width: 6px;
+    background: #fff444;
+    border-radius: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 2;
+}
+.wx-title-ui-r{
+    position: absolute;
+    top:50%;
+    right: 0;
+    width: 80px;
+    height: 6px;
+    overflow: hidden;
+    margin-top: -3px;
+}
+.wx-title-ui-r:before{
+    content: "";
+    height: 1px;
+    width: 80px;
+    background: #fff444;
+    border-radius: 50%;
+    position: absolute;
+    top: 2.5px;
+    right: 0;
+    z-index: 1;
+}
+.wx-title-ui-r:after{
+    content: "";
+    height: 6px;
+    width: 6px;
+    background: #fff444;
+    border-radius: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+}
+.wx-title .wx-title-bg{
+    color: #e71d32;
+    background: #fff444;
+    box-shadow: 0 5px 0 #c8a01d;
+    border-radius: 5px;
+    width: 40%;
+    margin: 0 auto;
+}
+.wx-title h2{
+    font-size: 16px;
+    color: #FFF;
+    text-align: center;
+}
+@media (max-width: 320px) {
+    .wx-title h2{
+        font-size: 12px;
+    }
+}
+.ui-rightdrop{
+    width: 8px;
+    height: 40px;
+    background: url(../images/rightdrop.png) no-repeat center;
+    -webkit-background-size: contain;
+    background-size: contain;
+}
+.wx-user{
+    overflow: hidden;
+    width: 100%;
+    color: #fff;
+    border-bottom: 1px dotted #ec4d5d;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+.wx-user dt{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    float: left;
+    margin-right: 15px;
+}
+.wx-user dt img{
+    border-radius: 50%;
+    width: 100%;
+}
+.wx-user dd{
+    overflow: hidden;
+    zoom: 1;
+}
+.wx-user-name{
+    padding: 5px 0;
+}
+.wx-user-name strong{
+    font-weight: normal;
+    font-size: 14px;
+    display: inline-block;
+    margin-right: 20px;
+    color: #ffbfc6;
+}
+.wx-user-name span{
+    display: inline-block;
+    color: #fac73e;
+}
+.wx-user-msg{
+    font-size: 14px;
+}
+.wx-user-msg p{
+    height: 22px;
+    line-height: 22px;
+    overflow: hidden;
+    color: #ffbfc6;
+}
+.inviteShow-word span{
+    font-weight: bold;
+}
+.inviteShow-word{
+    color: #fac73e;
+    font-size: 12px;
+}
+
+
+
+
+
+
+

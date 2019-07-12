@@ -1,0 +1,58 @@
+﻿@using YxLiCai.Tools
+@model List<YxLiCai.Model.User.UserMessageModel>
+@{
+    ViewBag.Title = "会员消息中心";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "css/uc/setting_detail.css")">
+<div class="dope">
+        	<div class="dope-pic"></div>
+        	<ul class="dope-word" id="List">
+                 @{
+                     if (Model != null && Model.Count > 0)
+                     {
+                         foreach (var mod in Model)
+                         {
+                             <li class="J_dope hover">
+                                 <h2 id="@mod.id">
+                                     <b>@mod.title</b>
+                                     <span>
+        					<i>@mod.sendtime</i>
+        				</span>
+                                     <p>@(new HtmlString(mod.content))</p>
+                                 </h2>
+                                 <h3><i class="@(mod.isread == 1 ? "" : "hover")"></i>
+                                 </h3>
+                             </li>
+                         }
+
+                     }
+                     else
+                     {
+                         <li>暂无消息</li>
+                     }
+                 }
+                 
+        	</ul>
+        </div>   
+   @if(ViewBag.PageCount > 2)
+    {
+    <div class="loadmore">
+            <a  href="javascript:void(0);"></a>
+    </div>
+    }
+    <input type="hidden" name="CurrentPage" id="CurrentPage" autocomplete="off" value="1" />
+<!-- 浮动栏 -->
+<div class="yx-fixedBar">
+    <a class="yx-back" href="javasrcipt:void(0);">返回</a>
+    <a class="yx-home" href="/">首页</a>
+</div>
+<script>
+    seajs.use('fixed_bar'); 
+    seajs.use('user/uc/message')
+</script>
+
+<div class="dope-pup gx-hide">
+    	<h2 id="top_div"> 
+    	</h2>
+ </div>

@@ -1,0 +1,437 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{63D4A473-504D-468B-B8CB-9A2CCFA7EF0C}</ProjectGuid>
+    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>YxLiCai.Static</RootNamespace>
+    <AssemblyName>YxLiCai.Static</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <MvcProjectUpgradeChecked>true</MvcProjectUpgradeChecked>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>4.0</OldToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.6\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20710.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20710.0\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20710.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.20710.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.20710.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="buy\add_bank.html" />
+    <Content Include="buy\add_coupon.html" />
+    <Content Include="buy\buy_product.html" />
+    <Content Include="buy\buy_setting_id.html" />
+    <Content Include="buy\buy_succeed.html" />
+    <Content Include="buy\buy_use_status.html" />
+    <Content Include="css\account.css" />
+    <Content Include="css\agreement.css" />
+    <Content Include="css\atone.css" />
+    <Content Include="css\bring_up.css" />
+    <Content Include="css\buy.css" />
+    <Content Include="css\dialog_ui.css" />
+    <Content Include="css\global_x.css" />
+    <Content Include="css\invite.css" />
+    <Content Include="css\invite_show.css" />
+    <Content Include="css\m_base.css" />
+    <Content Include="css\safety.css" />
+    <Content Include="css\show.css" />
+    <Content Include="css\uc.css" />
+    <Content Include="css\uc\invest_base.css" />
+    <Content Include="css\uc\setting_detail.css" />
+    <Content Include="css\uc\uc_matter.css" />
+    <Content Include="css\ui.css" />
+    <Content Include="doc\lixiaoming.txt" />
+    <Content Include="doc\pingyang.html" />
+    <Content Include="footer.html" />
+    <Content Include="Global.asax" />
+    <Content Include="header.html" />
+    <Content Include="html\invest_serveAgreement.html" />
+    <Content Include="html\invite.html" />
+    <Content Include="html\invite_show.html" />
+    <Content Include="html\PointerIncome_Agreement.html" />
+    <Content Include="html\safety.html" />
+    <Content Include="html\user_account_asset.html" />
+    <Content Include="html\user_agreement.html" />
+    <Content Include="images\account.jpg" />
+    <Content Include="images\activity\share_hb.png" />
+    <Content Include="images\add-money.jpg" />
+    <Content Include="images\append.png" />
+    <Content Include="images\back_icon.png" />
+    <Content Include="images\bank_h.png" />
+    <Content Include="images\bank_icon.png" />
+    <Content Include="images\bank_s.png" />
+    <Content Include="images\bg_agm.png" />
+    <Content Include="images\bottom_datail.png" />
+    <Content Include="images\bottom_red.png" />
+    <Content Include="images\bubble_bg.png" />
+    <Content Include="images\burse.png" />
+    <Content Include="images\buy_bg_ash.png" />
+    <Content Include="images\buy_bg_blue.png" />
+    <Content Include="images\buy_day.png" />
+    <Content Include="images\buy_right.png" />
+    <Content Include="images\buy_time.png" />
+    <Content Include="images\cd_time_bg.png" />
+    <Content Include="images\code_bg.png" />
+    <Content Include="images\counter_icon.png" />
+    <Content Include="images\coupon.png" />
+    <Content Include="images\dong.png" />
+    <Content Include="images\fail.jpg" />
+    <Content Include="images\fail.png" />
+    <Content Include="images\fench-man.png" />
+    <Content Include="images\fench_bg.png" />
+    <Content Include="images\gx_man.png" />
+    <Content Include="images\home_icon.png" />
+    <Content Include="images\icbc.jpg" />
+    <Content Include="images\income-bg.png" />
+    <Content Include="images\infor_icon.png" />
+    <Content Include="images\infor_icon_r.png" />
+    <Content Include="images\infor_icon_y.png" />
+    <Content Include="images\inviteBanner.png" />
+    <Content Include="images\inviteShadow.png" />
+    <Content Include="images\inviteShow.png" />
+    <Content Include="images\invite_income.png" />
+    <Content Include="images\invite_title.jpg" />
+    <Content Include="images\lm_icon.png" />
+    <Content Include="images\man.png" />
+    <Content Include="images\man_icon.png" />
+    <Content Include="images\money.png" />
+    <Content Include="images\money_icon.png" />
+    <Content Include="images\month.png" />
+    <Content Include="images\msg_icon.png" />
+    <Content Include="images\note.jpg" />
+    <Content Include="images\pic.png" />
+    <Content Include="images\pic1.png" />
+    <Content Include="images\pic2.png" />
+    <Content Include="images\pic3.png" />
+    <Content Include="images\pic4.png" />
+    <Content Include="images\pic5.png" />
+    <Content Include="images\pic6.png" />
+    <Content Include="images\pwd1_icon.png" />
+    <Content Include="images\pwd2_icon.png" />
+    <Content Include="images\pwd_icon.png" />
+    <Content Include="images\pwd_icon_c.png" />
+    <Content Include="images\qq_room.png" />
+    <Content Include="images\record-img.jpg" />
+    <Content Include="images\right-s.png" />
+    <Content Include="images\rightdrop.png" />
+    <Content Include="images\rush_icon.png" />
+    <Content Include="images\rush_icon1.png" />
+    <Content Include="images\samil.png" />
+    <Content Include="images\season_bg.png" />
+    <Content Include="images\season_pic.png" />
+    <Content Include="images\shares-man.png" />
+    <Content Include="images\shares.png" />
+    <Content Include="images\SysBankImg\abc.jpg" />
+    <Content Include="images\SysBankImg\bcm.jpg" />
+    <Content Include="images\SysBankImg\boc.jpg" />
+    <Content Include="images\SysBankImg\ccb.jpg" />
+    <Content Include="images\SysBankImg\ceb.jpg" />
+    <Content Include="images\SysBankImg\cib.jpg" />
+    <Content Include="images\SysBankImg\citic.jpg" />
+    <Content Include="images\SysBankImg\cmb.jpg" />
+    <Content Include="images\SysBankImg\cmbc.jpg" />
+    <Content Include="images\SysBankImg\gcb.jpg" />
+    <Content Include="images\SysBankImg\gdb.jpg" />
+    <Content Include="images\SysBankImg\hxb.jpg" />
+    <Content Include="images\SysBankImg\icbc.jpg" />
+    <Content Include="images\SysBankImg\picc.jpg" />
+    <Content Include="images\SysBankImg\post.jpg" />
+    <Content Include="images\SysBankImg\spdb.jpg" />
+    <Content Include="images\sy_man.png" />
+    <Content Include="images\tips_icon.png" />
+    <Content Include="images\triangle.png" />
+    <Content Include="images\uc_datail.png" />
+    <Content Include="images\uc_matter_left.png" />
+    <Content Include="images\uc_matter_right.png" />
+    <Content Include="images\uc_setting_bank.png" />
+    <Content Include="images\uc_showPic.jpg" />
+    <Content Include="images\uc_s_bank.png" />
+    <Content Include="images\uc_s_bank1.png" />
+    <Content Include="images\uc_s_bank2.png" />
+    <Content Include="images\uc_s_bank3.png" />
+    <Content Include="images\ui-btn_s.png" />
+    <Content Include="images\ui_btn_s.png" />
+    <Content Include="images\use-bank.png" />
+    <Content Include="images\use-matter-left.png" />
+    <Content Include="images\userIncome-Monthpic.png" />
+    <Content Include="images\userIncome-pic.png" />
+    <Content Include="images\wave_bg1.png" />
+    <Content Include="images\wave_bg2.png" />
+    <Content Include="images\wave_bg3.png" />
+    <Content Include="images\wave_bg4.png" />
+    <Content Include="images\wave_bg5.png" />
+    <Content Include="images\wave_bg6.png" />
+    <Content Include="images\wechat.png" />
+    <Content Include="images\winnower.png" />
+    <Content Include="images\wrong.png" />
+    <Content Include="images\wx_banner.png" />
+    <Content Include="images\w_bg01.png" />
+    <Content Include="images\w_bg02.png" />
+    <Content Include="images\w_bg03.png" />
+    <Content Include="images\w_bg04.png" />
+    <Content Include="images\w_bg05.png" />
+    <Content Include="images\w_bg06.png" />
+    <Content Include="images\w_bg1.png" />
+    <Content Include="images\w_bg2.png" />
+    <Content Include="images\year.png" />
+    <Content Include="images\yixiu_boy.png" />
+    <Content Include="images\yixiu_man.png" />
+    <Content Include="images\yx_signet.png" />
+    <Content Include="index.html" />
+    <Content Include="js\Atone.js" />
+    <Content Include="js\buy.js" />
+    <Content Include="js\countdown.js" />
+    <Content Include="js\countdownproduct.js" />
+    <Content Include="js\dialog\gxdialog.js" />
+    <Content Include="js\fixed_bar.js" />
+    <Content Include="js\gx-input-click.js" />
+    <Content Include="js\gxtabs.js" />
+    <Content Include="js\gx_chart.js" />
+    <Content Include="js\invite.js" />
+    <Content Include="js\lib\fastclick.js" />
+    <Content Include="js\lib\jquery.cookie.js" />
+    <Content Include="js\lib\jquery.js" />
+    <Content Include="js\lib\jquery.validate.js" />
+    <Content Include="js\lib\jweixin-1.0.0.js" />
+    <Content Include="js\lib\spin.js" />
+    <Content Include="js\lib\zepto.js" />
+    <Content Include="js\loader\sea-config.js" />
+    <Content Include="js\loader\sea-debug.js" />
+    <Content Include="js\loader\sea.js" />
+    <Content Include="js\loadmore.js" />
+    <Content Include="js\load_dev.js" />
+    <Content Include="js\main.js" />
+    <Content Include="js\mod\mod1.js" />
+    <Content Include="js\mod\mod2.js" />
+    <Content Include="js\more.js" />
+    <Content Include="js\product\caculate.js" />
+    <Content Include="js\product\product.js" />
+    <Content Include="js\register.js" />
+    <Content Include="js\swipe.js" />
+    <Content Include="js\test.js" />
+    <Content Include="js\uc_show.js" />
+    <Content Include="js\UserAssets.js" />
+    <Content Include="js\User\LoginOrRegister\forget_pwd.js" />
+    <Content Include="js\User\LoginOrRegister\Login.js" />
+    <Content Include="js\User\LoginOrRegister\register.js" />
+    <Content Include="js\User\LoginOrRegister\RegisteredOrLogin.js" />
+    <Content Include="js\User\LoginOrRegister\setting_pwd.js" />
+    <Content Include="js\User\UC\add_interest.js" />
+    <Content Include="js\User\UC\buy_product.js" />
+    <Content Include="js\User\UC\message.js" />
+    <Content Include="js\User\UC\Plus_income.js" />
+    <Content Include="js\User\UC\special_assets.js" />
+    <Content Include="js\User\UserCommen.js" />
+    <Content Include="js\User\UserSetting\add_bank.js" />
+    <Content Include="js\User\UserSetting\fetch_pwd_modify.js" />
+    <Content Include="js\User\UserSetting\fetch_pwd_setting.js" />
+    <Content Include="js\User\UserSetting\forget_SPFist_pwd.js" />
+    <Content Include="js\User\UserSetting\forget_SP_pwd.js" />
+    <Content Include="js\User\UserSetting\Index.js" />
+    <Content Include="js\User\UserSetting\invite.js" />
+    <Content Include="js\User\UserSetting\uc_setting_status.js" />
+    <Content Include="js\User\UC\buy.js" />
+    <Content Include="js\User\UC\withdrawals.js" />
+    <Content Include="js\User\UserSetting\user_setting_pwd.js" />
+    <Content Include="js\yixiu.js" />
+    <Content Include="js\User_record.js" />
+    <Content Include="js\login\forget_pwd.html" />
+    <Content Include="js\login\login.html" />
+    <Content Include="js\login\register_step1.html" />
+    <Content Include="js\login\register_step2.html" />
+    <Content Include="js\login\setting_pwd.html" />
+    <Content Include="show.html" />
+    <Content Include="test.html" />
+    <Content Include="uc\assets_own.html" />
+    <Content Include="uc\assets_special.html" />
+    <Content Include="uc\atone_detail.html" />
+    <Content Include="uc\atone_list.html" />
+    <Content Include="uc\atone_succeed.html" />
+    <Content Include="uc\fetch\fetch_add_bank.html" />
+    <Content Include="uc\fetch\fetch_index.html" />
+    <Content Include="uc\fetch\fetch_succeed.html" />
+    <Content Include="uc\fetch\trade_pwd.html" />
+    <Content Include="uc\money_compose.html" />
+    <Content Include="uc\money_flow.html" />
+    <Content Include="uc\show_month_product.html" />
+    <Content Include="uc\show_sixSeason_product.html" />
+    <Content Include="uc\show_threeSeason_product.html" />
+    <Content Include="uc\show_year_product.html" />
+    <Content Include="uc\uc_index.html" />
+    <Content Include="uc\userSetting\fetch_pwd_modify.html" />
+    <Content Include="uc\userSetting\fetch_pwd_setting.html" />
+    <Content Include="uc\userSetting\find_pwd_step1.html" />
+    <Content Include="uc\userSetting\find_pwd_step2.html" />
+    <Content Include="uc\userSetting\user_gold_coupon.html" />
+    <Content Include="uc\userSetting\user_list_coupon.html" />
+    <Content Include="uc\userSetting\user_message.html" />
+    <Content Include="uc\userSetting\user_no_coupon.html" />
+    <Content Include="uc\userSetting\user_setting.html" />
+    <Content Include="uc\userSetting\user_setting_bank.html" />
+    <Content Include="uc\userSetting\user_setting_id.html" />
+    <Content Include="uc\userSetting\user_setting_pwd.html" />
+    <Content Include="uc\user_income.html" />
+    <Content Include="uc\user_record.html" />
+    <Content Include="uc\user_rule_income.html" />
+    <Content Include="uc\yx_about.html" />
+    <Content Include="uc\yx_docs_coupon.html" />
+    <Content Include="uc\yx_issue.html" />
+    <Content Include="uc\yx_protocol.html" />
+    <Content Include="uc\yx_rule_coupon.html" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="assets\" />
+    <Folder Include="Controllers\" />
+    <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="doc\HYX.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="data\more.json" />
+    <None Include="Properties\PublishProfiles\img.pubxml" />
+    <Content Include="sass\test.scss" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <SaveServerSettingsInUserFile>True</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

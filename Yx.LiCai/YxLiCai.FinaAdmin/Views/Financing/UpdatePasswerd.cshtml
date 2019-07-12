@@ -1,0 +1,105 @@
+﻿<div class="zpManage zpSh">
+    <h2 class="crumbs">您所在位置：融资机构->个人中心->修改登录密码
+    </h2>
+</div>
+<div class="gx-textitem">
+    <table>
+        <tr>
+            <td>
+                <label class="gx-texttitle">原始密码：</label></td>
+            <td>
+                <input id="oldpwd" type="password" placeholder="请输入原始密码" style="width: 200px" maxlength="16" /></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>
+                <label class="gx-texttitle">新密码：</label></td>
+            <td>
+                <input id="newpwd" type="password" placeholder="请输入6-16位数字、字母或下划线" style="width: 200px" maxlength="16" /></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>
+                <label class="gx-texttitle">确认密码：</label></td>
+            <td>
+                <input id="conpwd" type="password" placeholder="请输入6-16位数字、字母或下划线" maxlength="16" style="width: 200px" /></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td colspan="3" style="text-align: center; color: red; font-size: larger">
+                <p id="message"></p>
+        </tr>
+
+        <tr>
+            <td colspan="3">
+                <div class="SearchMd">
+                    <input type="button" id="updatepw" value="修改" class="searchBtn" />&nbsp;&nbsp;&nbsp;
+                    <input type="button" id="canclebt" value="取消" class="searchBtn" onclick="javascript: window.location.href = 'Index'" />
+                </div>
+                <td>
+        </tr>
+    </table>
+</div>
+
+<div style="position: fixed; display: none; width: 500px; background-color: #a5D771;" id="JoinBlacklistDiv" class="add-openbox add-form">
+    <div style="text-align: center;">
+        <p>登录密码修改成功：<i id="tt" style="color: red"></i></p>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#updatepw").click(function () {
+
+            var oldpwd = $("#oldpwd").val().replace(/[ ]/g, "");
+            var newpwd = $("#newpwd").val().replace(/[ ]/g, "");
+            var conpwd = $("#conpwd").val().replace(/[ ]/g, "");
+
+            if (oldpwd == "") { $("#message").html("请输入原始密码"); return; } else { $("#message").empty(); }
+            if (newpwd == "") { $("#message").html("请输入新密码"); return; } else { $("#message").empty(); }
+            if (conpwd == "") { $("#message").html("请输入确认密码"); return; } else { $("#message").empty(); }
+            if (!pcheckPassword(newpwd)) { $("#message").html("新密码格式不正确，请重新输入"); return; } else { $("#message").empty(); }
+            if (!pcheckPassword(conpwd)) { $("#message").html("确认密码格式不正确，请重新输入"); return; } else { $("#message").empty(); }
+            if (conpwd != newpwd) { $("#message").html("两次密码输入不一致，请重新输入"); return; } else { $("#message").empty(); }
+            $.ajax({
+                type: "POST",
+                async: false,
+                url: "/Financing/UpdatePassword",
+                data: { Passwerd: newpwd, OldPasswerd: oldpwd },
+                success: function (data) {
+                    if (data.Status == 1) {
+                        $("#updatepw").attr("disabled", "true");
+                        $("#canclebt").attr("disabled", "true");
+                        $("#JoinBlacklistDiv").show();
+                        var URL = "Index";
+                        Load(URL);
+                    } else {
+                        $("#message").html(data.Message);
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                },
+            });
+        });
+    });
+    function Load(url) {
+        var secs = 3; //倒计时的秒数 
+        URL = url;
+        for (var i = secs; i >= 0; i--) {
+            window.setTimeout('doUpdate(' + i + ')', (secs - i) * 1000);
+        }
+    }
+    function doUpdate(num) {
+        document.getElementById('tt').innerHTML = '将在' + num + '秒后自动跳转到登录页面';
+        if (num == 0) { window.location = URL; }
+    }
+
+    ///检测密码（）
+    function pcheckPassword(str) {
+        var reg = /^[0-9a-zA-Z_/]{6,16}$/;
+        if (!reg.test(str)) {
+            return false;
+        } else {
+            return true;
+        }
+    };
+</script>

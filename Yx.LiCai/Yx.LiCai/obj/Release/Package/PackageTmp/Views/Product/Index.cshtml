@@ -1,0 +1,422 @@
+﻿@{
+    ViewBag.Title = "商品详情";
+}
+<link href="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "css/show.css")" rel="stylesheet">
+<link href="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "css/account.css")" rel="stylesheet">
+
+<input type="hidden" id="proID" value="@ViewBag.ID" />
+
+<div id="tab-pagination" class="ui-tab swipe-pagination">
+    <ul class="ui-tab-nav">
+        <li class="current"><a href="javascript://">月月盈</a></li>
+        <li><a href="javascript://">季季享</a></li>
+        <li><a href="javascript://">年年丰</a></li>
+    </ul>
+</div>
+<div id='tab-box' class='swipe'>
+    <div class="swipe-wrap">
+        <!-- begin 月月盈 -->
+        <div id="item-month" class="swipe-conts">
+            <!--利率-->
+            <div class="show-season">
+                <span><strong>@ViewBag.Month_PurchasedMemberSum</strong>人已加入</span>
+                <div class="interest">
+                    <p class="interest-month"></p>
+                    <b class="interest-num-month">7<em>%</em>-12<em>%</em></b>
+                </div>
+            </div>
+            <!--导航-->
+            <div class="mod-nav">
+                <!-- 导航列表 -->
+                <div class="nav-list">
+                    <ol>
+                        <li>
+                            <span class="nav-list-left">流动性</span>
+                            <span class="nav-list-right">
+                                随存随取
+                            </span>
+                        </li>
+                        <li>
+                            <span class="nav-list-left">预期年化收益率</span>
+                            <span class="nav-list-right">7%起，逐月涨0.5%</span>
+                        </li>
+                        <li>
+                            <a class="clearfix" href="/Home/Protocol">
+                                <span class="nav-list-left">安全保障</span>
+                                <span class="nav-list-right"><img src="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "images/triangle.png")" height="27" width="9"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="clearfix" href="/Product/_DetailMonth">
+                                <span class="nav-list-left">查看详情</span>
+                                <span class="nav-list-right"><img src="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "images/triangle.png")" height="27" width="9"></span>
+                            </a>
+                        </li>
+                    </ol>
+                    <div class="do-btn" id="itemType_1">
+                        <input type="hidden" id="id_1" value="@ViewBag.Month_Id" />
+                    </div>
+                </div>
+            </div>
+            <!-- 一休理财投资优势 -->
+            <div class="gl-financing">
+                <div class="gl-line1"></div>
+                <div class="gl-line2">一休理财投资优势</div>
+                <div class="gl-line3"></div>
+            </div>
+            <div class="gl-financing-list">
+                <dl class="gl-financing-list1">
+                    <dt><img src="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "images/money.png")"></dt>
+                    <dd>门槛低收益高</dd>
+                    <dd>年化收益最高15%</dd>
+                </dl>
+                <dl class="gl-financing-list2">
+                    <dt><img src="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "images/dong.png")"></dt>
+                    <dd>低风险有保障</dd>
+                    <dd>六道风控严格把关</dd>
+                </dl>
+                <dl class="gl-financing-list3">
+                    <dt><img src="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "images/winnower.png")"></dt>
+                    <dd>自由投灵活赎</dd>
+                    <dd>保理机制自由赎回</dd>
+                </dl>
+            </div>
+        </div>
+        <!-- end 月月盈 -->
+        <!-- begin 季季享 -->
+        <div id="item-quarter" class="swipe-conts">
+            <!--利率-->
+            <div class="show-season">
+                <span><strong id="purchasedAmount">@ViewBag.Quarter3_PurchasedMemberSum</strong>人已加入</span>
+                <input type="hidden" id="q3_MemberSum" value="@ViewBag.Quarter3_PurchasedMemberSum" />
+                <div class="interest">
+                    <p class="interest-season"></p>
+                    <b class="interest-num-season" id="yiledBase">9.00<em>%</em></b>
+                    <input type="hidden" id="q3_YieldBase" value="9.00" />
+                </div>
+            </div>
+            <!--导航-->
+            <div class="mod-nav J_gxtabs">
+                <div class="J_gxtabs_nav">
+                    <ul class="nav-season">
+                        <li id="quarter3Touch" class="active quarterEvent">3个月<b class="triangle-top-sb1"></b></li>
+                        <li class="quarterEvent">6个月<b class="triangle-top-sb1"></b></li>
+                    </ul>
+                </div>
+                <!-- 导航列表 -->
+                <div class="nav-list J_gxtabs_container">
+                    <!-- begin 季季享3个月 -->
+                    <div class="J_gxtabs_item">
+                        <ol>
+                            <li>
+                                <a href="javascript://" class="nav-list-left">流动性</a>
+                                <a href="javascript://" class="nav-list-right">支持提前赎回</a>
+                            </li>
+                            <li>
+                                <a href="javascript://" class="nav-list-left">预期年化收益率</a>
+                                <a href="javascript://" class="nav-list-right">9.00%</a>
+                            </li>
+                            <li>
+                                <a class="clearfix" href="/Home/Protocol">
+                                    <span class="nav-list-left">安全保障</span>
+                                    <span class="nav-list-right"><img src="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "images/triangle.png")" height="27" width="9"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="clearfix" href="/Product/_DetailQ3">
+                                    <span class="nav-list-left">查看详情</span>
+                                    <span class="nav-list-right"><img src="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "images/triangle.png")" height="27" width="9"></span>
+                                </a>
+                            </li>
+                        </ol>
+                        <div class="do-btn" id="itemType_2">
+                            <input type="hidden" id="id_2" value="@ViewBag.Quarter3_Id" />
+                        </div>
+
+                    </div>
+                    <!-- end 季季享3个月 -->
+                    <!-- begin 季季享6个月 -->
+                    <div class="J_gxtabs_item gx-hide">
+                        <input type="hidden" id="q6_MemberSum" value="@ViewBag.Quarter6_PurchasedMemberSum" />
+                        <input type="hidden" id="q6_YieldBase" value="11.00" />
+                        @*<input type="hidden" id="id_3" value="@Model.Last().Id" />*@
+                        <ol>
+                            <li>
+                                <a href="javascript://" class="nav-list-left">流动性</a>
+                                <a href="javascript://" class="nav-list-right">支持提前赎回</a>
+                            </li>
+                            <li>
+                                <a href="javascript://" class="nav-list-left">预期年化收益率</a>
+                                <a href="javascript://" class="nav-list-right">11.00%</a>
+                            </li>
+                            <li>
+                                <a class="clearfix" href="/Home/Protocol">
+                                    <span class="nav-list-left">安全保障</span>
+                                    <span class="nav-list-right"><img src="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "images/triangle.png")" height="27" width="9"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="clearfix" href="/Product/_DetailQ6">
+                                    <span class="nav-list-left">查看详情</span>
+                                    <span class="nav-list-right"><img src="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "images/triangle.png")" height="27" width="9"></span>
+                                </a>
+                            </li>
+                        </ol>
+                        <div class="do-btn" id="itemType_3">
+                            <input type="hidden" id="id_3" value="@ViewBag.Quarter6_Id" />
+                        </div>
+
+                    </div>
+                    <!-- end 季季享6个月 -->
+                </div>
+                <!-- 一休理财投资优势 -->
+                <div class="gl-financing">
+                    <div class="gl-line1"></div>
+                    <div class="gl-line2">一休理财投资优势</div>
+                    <div class="gl-line3"></div>
+                </div>
+                <div class="gl-financing-list">
+                    <dl class="gl-financing-list1">
+                        <dt><img src="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "images/money.png")"></dt>
+                        <dd>门槛低收益高</dd>
+                        <dd>年化收益最高15%</dd>
+                    </dl>
+                    <dl class="gl-financing-list2">
+                        <dt><img src="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "images/dong.png")"></dt>
+                        <dd>低风险有保障</dd>
+                        <dd>六道风控严格把关</dd>
+                    </dl>
+                    <dl class="gl-financing-list3">
+                        <dt><img src="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "images/winnower.png")"></dt>
+                        <dd>自由投灵活赎</dd>
+                        <dd>保理机制自由赎回</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+        <!-- end 季季享 -->
+        <!-- begin 年年丰 -->
+        <div id="item-year" class="swipe-conts">
+            <!--利率-->
+            <div class="show-season">
+                <span><strong>@ViewBag.Year_PurchasedMemberSum</strong>人已加入</span>
+                <div class="interest">
+                    <p class="interest-year"></p>
+                    <b class="interest-num-year">13.00<em>%</em></b>
+                </div>
+            </div>
+            <!--导航-->
+            <div class="mod-nav">
+                <!-- 导航列表 -->
+                <div class="nav-list">
+                    <ol>
+                        <li>
+                            <span class="nav-list-left">流动性</span>
+                            <span class="nav-list-right">
+                                支持提前赎回
+                            </span>
+                        </li>
+                        <li>
+                            <span class="nav-list-left">预期年化收益率</span>
+                            <span class="nav-list-right">13.00%</span>
+                        </li>
+                        <li>
+                            <a class="clearfix" href="/Home/Protocol">
+                                <span class="nav-list-left">安全保障</span>
+                                <span class="nav-list-right"><img src="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "images/triangle.png")" height="27" width="9"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="clearfix" href="/Product/_DetailYear">
+                                <span class="nav-list-left">查看详情</span>
+                                <span class="nav-list-right"><img src="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "images/triangle.png")" height="27" width="9"></span>
+                            </a>
+                        </li>
+                    </ol>
+                    <div class="do-btn" id="itemType_4">
+                        <input type="hidden" id="id_4" value="@ViewBag.Year_Id" />
+                    </div>
+                </div>
+            </div>
+            <!-- 一休理财投资优势 -->
+            <div class="gl-financing">
+                <div class="gl-line1"></div>
+                <div class="gl-line2">一休理财投资优势</div>
+                <div class="gl-line3"></div>
+            </div>
+            <div class="gl-financing-list">
+                <dl class="gl-financing-list1">
+                    <dt><img src="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "images/money.png")"></dt>
+                    <dd>门槛低收益高</dd>
+                    <dd>年化收益最高15%</dd>
+                </dl>
+                <dl class="gl-financing-list2">
+                    <dt><img src="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "images/dong.png")"></dt>
+                    <dd>低风险有保障</dd>
+                    <dd>六道风控严格把关</dd>
+                </dl>
+                <dl class="gl-financing-list3">
+                    <dt><img src="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "images/winnower.png")"></dt>
+                    <dd>自由投灵活赎</dd>
+                    <dd>保理机制自由赎回</dd>
+                </dl>
+            </div>
+        </div>
+        <!-- end 年年丰 -->
+    </div>
+</div>
+<!-- 底部 -->
+<div class="product-do">
+    <div class="counter-tools">
+        <img src="@YxLiCai.HttpPageHelper.GetRemoteNetURL(YxLiCai.SystemSiteEnum.StaticResourceMallWeb, "images/counter_icon.png")" alt="" />
+    </div>
+    <div class="product-btn">
+        @{
+            if (Yx.LiCai.App_Start.UserContext.simpleUserInfoModel.Id > 0)
+            {
+                if (ViewBag.Month_Id != 0)
+                {
+                    if (ViewBag.Month_EnableDate > DateTime.Now)
+                    {
+                        <div class="next-time">
+                            距下期开售时间：<span class="t_d"></span>天 <span class="t_h"></span>时<span class="t_m"></span>分<span class="t_s"></span>秒
+                        </div>
+                        <a class="ui-btn ui-btn-gray" href="javascript:;">已售罄</a>
+                    }
+                    else
+                    {
+                        <a class="ui-btn buy" href="javascript:void(0)" onclick="buyNow()">立即买入</a>
+                    }
+                }
+                else
+                {
+                    <a class="ui-btn ui-btn-gray" href="javascript:;">已售罄</a>
+                }
+            }
+            else
+            {
+                <a class="ui-btn" href="/Login/RegisteredOrLogin">立即买入</a>
+            }
+        }
+    </div>
+</div>
+<input type="hidden" id="IsRealCard" value="@ViewBag.IsRealCard" />
+
+<!-- begin 计算器 -->
+<div id="J_account" class="account gx-hide">
+    <ul class="account-title J_gxtabs_nav">
+        <li>月月盈</li>
+        <li>季季享</li>
+        <li>年年丰</li>
+    </ul>
+    <div class="account-main J_gxtabs_container">
+        <!-- 月月盈 -->
+        <div id="account-month" class="account-month J_gxtabs_item" style="display:block;">
+            <div class="account-income">
+                <h2>预期收益:</h2>
+                <b>973.97</b>
+            </div>
+            <div class="acconnt-list">
+                <div class="buy-money">
+                    <h2>买入金额</h2>
+                    <div class="account-word">
+                        <p>元</p>
+                        <input id="amountBymonth" type="number" value="10000" class="account-money invest-amount" maxlength="10" min="100">
+                    </div>
+                </div>
+            </div>
+            <div class="acconnt-list">
+                <div class="buy-money">
+                    <h2>买入时间</h2>
+                    <div class="account-word">
+                        <p>天</p>
+                        <input type="tel" value="365" class="account-money month-duration" maxlength="10" min="0">
+                    </div>
+                </div>
+            </div>
+            <p class="income-num">收益率：12%+<span>0%</span></p>
+            <div class="income-account"><a href="#" class="ui-btn" id="month">计算</a></div>
+        </div>
+        <!-- 季季享 -->
+        <div id="account-quarter" class="account-month J_gxtabs_item">
+            <div class="account-income">
+                <h2>预期收益:</h2>
+                <b>221.91</b>
+            </div>
+            <div class="acconnt-list">
+                <div class="buy-money">
+                    <h2>买入金额</h2>
+                    <div class="account-word">
+                        <p>元</p>
+                        <input id="amountByquarter" type="number" value="10000" class="account-money invest-amount" maxlength="10" min="100">
+                    </div>
+                </div>
+            </div>
+            <div class="acconnt-list other-list">
+                <div class="buy-money">
+                    <h2>买入时间</h2>
+                    <div class="account-word-s">
+                        <span class="quarter-duration"><b>3</b>个月</span>
+                        <ul>
+                            <li><b>3</b>个月</li>
+                            <li><b>6</b>个月</li>
+                            <li><i></i></li>
+                        </ul>
+                        <i></i>
+                    </div>
+                </div>
+            </div>
+            <p class="income-num">收益率：9%+<span>0%</span></p>
+            <div class="income-account"><a href="#" class="ui-btn" id="quarter">计算</a></div>
+        </div>
+        <!-- 年年丰 -->
+        <div id="account-year" class="account-month J_gxtabs_item">
+            <div class="account-income">
+                <h2>预期收益:</h2>
+                <b>1300.00</b>
+            </div>
+            <div class="acconnt-list">
+                <div class="buy-money">
+                    <h2>买入金额</h2>
+                    <div class="account-word">
+                        <p>元</p>
+                        <input id="amountByyear" type="number" value="10000" class="account-money invest-amount" min="100">
+                    </div>
+                </div>
+            </div>
+            <div class="acconnt-list">
+                <div class="buy-money">
+                    <h2>买入时间</h2>
+                    <div class="account-word">
+                        <p>月</p>
+                        <div class="account-money">12</div>
+                    </div>
+                </div>
+            </div>
+            <p class="income-num">收益率：13%+<span>0%</span></p>
+            <div class="income-account"><a href="#" class="ui-btn" id="year">计算</a></div>
+        </div>
+    </div>
+</div>
+<!-- end 计算器 -->
+<script>   
+    localStorage.removeItem("NowTimeValue");
+    localStorage.setItem("NowTimeValue", "@ViewBag.NowTime");
+    var totalTouchTab = 0;
+    var totalJgxtab = 0;
+
+    var EndTime1 = '@ViewBag.Month_EnableDate';
+    var EndTime2 = '@ViewBag.Quarter3_EnableDate';
+    var EndTime3 = '@ViewBag.Quarter6_EnableDate';
+    var EndTime4 = '@ViewBag.Year_EnableDate';
+
+    var et1 = new Date(EndTime1).getTime();
+    var et2 = new Date(EndTime2).getTime();
+    var et3 = new Date(EndTime3).getTime();
+    var et4 = new Date(EndTime4).getTime();
+
+    seajs.use('product/product');
+    seajs.use('gx-input-click');
+    seajs.use('product/caculate');
+    seajs.use('countdownproduct');
+</script>

@@ -1,0 +1,21 @@
+﻿@model YxLiCai.Admin.Models.KendoTextBoxViewModel
+<div class="form-group">
+    <label class="control-label col-sm-6" for="@Model.Id">@Model.Content</label>
+    <div class="col-sm-6 col-md-6">
+        <input id="@Model.Id" readonly="@Model.Readonly" value="@Model.Value" class="k-textbox" maxlength="100"/>
+        @if (Model.Id == "ProjectName")
+        {
+            <v style="color: red">*(不超过60字符)</v>
+        }
+        else if (Model.Id == "OrderNumber")
+        {
+            <v style="color: red">*(不超过16字符)</v>
+        }
+        else if (Model.Id == "Borrower")
+        {
+            <v style="color: red">*(不超过60字符)</v>
+        }
+
+
+    </div>
+</div>

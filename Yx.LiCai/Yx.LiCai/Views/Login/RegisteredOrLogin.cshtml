@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "输入手机号";
+} 
+ <div class="reg-list">
+                <dl>
+                    <dt>+86</dt>
+                    <dd>
+                        <input type="tel" maxlength="11" class="input-txt phone" id="number" name="number" placeholder="请输入手机号" />
+                    </dd>
+                    <dd class="yx-tips"><a href="uc_look">查看用户协议</a></dd>
+                    <dd class="warm-tips Validedate_check"></dd>
+                </dl>
+            </div>
+            <div class="do-btn">              
+                <a class="ui-btn ui-btn-gray" id="btnNext">下一步</a>
+                <a class="ui-btn" id="btnNextok" style="display:none">下一步</a>
+                <p class="yx-safety">您的隐私是用来让一小休保护的</p>
+            </div>
+<input id="inviteCode" type="hidden" value="@ViewBag.inviteCode" />
+<script>
+    seajs.use('register.js');
+    seajs.use('User/LoginOrRegister/RegisteredOrLogin.js');</script>
+
+
